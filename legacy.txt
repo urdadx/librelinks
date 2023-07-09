@@ -1,0 +1,14 @@
+  // const handleAddLink = useCallback(async () => {
+  //     if(title.trim() === "" || url.trim() === ""){
+  //        toast.error("Please fill the form");
+  //        return;
+  //     }
+  //     await toast.promise(
+  //       axios.post("/api/links", { title, url }),
+  //       {
+  //         loading: "Adding link",
+  //         success: "Link added successfully",
+  //         error: "An error occured"
+  //       }
+  //     );
+  // }, [title, url])

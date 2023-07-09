@@ -5,6 +5,7 @@ import useCurrentUser from "@/hooks/useCurrentUser";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { siteConfig } from "@/config/site";
+import { Balancer } from "react-wrap-balancer";
 
 const ShareModal = () => {
   const { data: currentUser } = useCurrentUser();
@@ -59,6 +60,7 @@ const ShareModal = () => {
                 </a>{" "}
                 bio 🚀
               </h3>
+
             </div>
             <div className="mb-6">
               <div className="relative mb-4">

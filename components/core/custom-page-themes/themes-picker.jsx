@@ -1,10 +1,10 @@
-import { useCallback, useEffect, useState } from 'react';
-import { themes } from '@/utils/themes';
-import { CheckMark } from '@/components/utils/checkmark';
-import useCurrentUser from '@/hooks/useCurrentUser';
-import axios from 'axios';
+import { useEffect, useState } from "react";
+import { themes } from "@/utils/themes";
+import { CheckMark } from "@/components/utils/checkmark";
+import useCurrentUser from "@/hooks/useCurrentUser";
+import axios from "axios";
 import toast from "react-hot-toast";
-import { mutate } from 'swr';
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 const ThemesPicker = () => {
   const { data: currentUser } = useCurrentUser();
@@ -13,8 +13,12 @@ const ThemesPicker = () => {
   const [selectedTheme, setSelectedTheme] = useState(null);
   const themeFromDB = currentUser?.themePalette.name;
 
+  const queryClient = useQueryClient();
+
   useEffect(() => {
-  const storedTheme = themeFromDB ? themeFromDB : localStorage.getItem('selectedTheme');
+    const storedTheme = themeFromDB
+      ? themeFromDB
+      : localStorage.getItem("selectedTheme");
     if (storedTheme) {
       const theme = themes.find((t) => t.name === storedTheme);
       if (theme) {
@@ -33,19 +37,29 @@ const ThemesPicker = () => {
     setShowAll(false);
   };
 
-  const handleThemeSelect = useCallback( async (theme) => {
-    await toast.promise(
-        axios.patch("/api/customize", { themePalette: theme }),
-        {
-            loading: "Applying theme",
-            success: "Theme applied successfully",
-            error: "An error occured"
-        }
-    )
+  const mutateTheme = useMutation(
+    async (theme) => {
+      await axios.patch("/api/customize", {
+        themePalette: theme,
+      });
+    },
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries("users");
+      },
+    }
+  );
+
+  const handleThemeSelect = async (theme) => {
+    await toast.promise(mutateTheme.mutateAsync(theme), {
+      loading: "Changing theme",
+      success: "New theme applied",
+      error: "An error occured",
+    });    
     setSelectedTheme(theme);
-    mutate(`/api/users/${currentUser?.handle}`);
-    localStorage.setItem('selectedTheme', theme.name);
-  }, [selectedTheme])
+    localStorage.setItem("selectedTheme", theme.name);
+  };
+
 
   return (
     <>
@@ -56,13 +70,19 @@ const ThemesPicker = () => {
             <div
               key={theme.name}
               className={`rounded-2xl overflow-hidden cursor-pointer relative z-0 duration-200 w-full border-2 ${
-                selectedTheme === theme ? 'border-[2.5px] border-blue-500' : 'border-primary'
+                selectedTheme === theme
+                  ? "border-[2.5px] border-blue-500"
+                  : "border-primary"
               }`}
               onClick={() => handleThemeSelect(theme)}
             >
               <div className="grid grid-cols-4 h-24 md:h-28">
                 {theme.palette.map((color) => (
-                  <div key={color} className="h-full" style={{ background: color }} />
+                  <div
+                    key={color}
+                    className="h-full"
+                    style={{ background: color }}
+                  />
                 ))}
               </div>
               <span

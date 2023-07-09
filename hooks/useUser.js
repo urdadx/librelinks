@@ -1,25 +1,24 @@
-import useSWR from "swr";
-
-import fetcher from "@/lib/fetcher";
+import axios from "axios";
+import { useQuery } from "@tanstack/react-query";
+import { toast } from "react-hot-toast";
 
 const useUser = (handle) => {
-  const { data, error, isLoading, mutate } = useSWR(
-    handle ? `/api/users/${handle}` : null,
-    fetcher,
+  return useQuery(
+    ["users", handle],
+    async () => {
+      const response = await axios.get(`/api/users/${handle}`);
+      return response.data;
+    },
     {
-      revalidateOnFocus: true
+      enabled: handle !== null,
+      onError: (error) => {
+        toast.error(error?.response?.data.message || "An error occurred");
+      },
+      refetchInterval: 3000,
+      retryOnMount: true,
+      refetchOnWindowFocus: true,
     }
-    // {
-    //   refreshInterval: 2000,
-    // }
   );
-
-  return {
-    data,
-    error,
-    isLoading,
-    mutate,
-  };
 };
 
 export default useUser;

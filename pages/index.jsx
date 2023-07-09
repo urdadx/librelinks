@@ -4,13 +4,11 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { siteConfig } from "@/config/site";
 import Navbar from "@/components/layout/navbar/navbar";
-import { useSession } from "next-auth/react";
-import { useRouter } from "next/router";
+import { GridOverlay } from "@/components/utils/grid-overlay";
 
 const Home = () => {
+
   const [starCount, setStarCount] = useState(1);
-  const session = useSession();
-  const router = useRouter();
 
   const fetchStarCount = () => {
     axios
@@ -25,7 +23,6 @@ const Home = () => {
       });
   };
 
-  // fetch on load once
   useEffect(() => {
     fetchStarCount();
   }, []);
@@ -34,7 +31,6 @@ const Home = () => {
   return (
     <>
       <Navbar showName={true} />
-
       <div className="flex items-center justify-center h-auto min-h-[90vh] lg:h-[90vh] xl:h-[90vh] w-full flex-col lg:flex-row xl:flex-row overflow-hidden">
         <div className="w-full lg:w-6/12 xl:w-6/12 h-auto lg:h-full xl:h-full flex items-start justify-center flex-col pl-4 lg:pl-10 xl:pl-10 relative z-10 py-4 lg:py-0 xl:py-0 overflow-hidden">
           <h3 className="text-sm lg:text-base xl:text-base bg-text-gradient font-bold mb-2 uppercase tracking-wider">
@@ -74,7 +70,7 @@ const Home = () => {
           <div className="h-full w-full flex items-center justify-center">
             <div className="border-2 border-slate-500 p-4 rounded-md">
               <img
-                src="/assets/screenshot_home.png"
+                src="/assets/demo.png"
                 alt="screenshot"
                 className="w-full lg:w-[600px] xl:w-[600px] opacity-50 lg:opacity-100 xl:opacity-100"
               />

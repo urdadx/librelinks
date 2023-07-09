@@ -1,16 +1,20 @@
-import useSWR from 'swr';
-import fetcher from '@/lib/fetcher';
-
+import axios from "axios";
+import { useQuery } from "@tanstack/react-query";
+import { toast } from "react-hot-toast";
 
 const useCurrentUser = () => {
-const { data, error, isLoading, mutate } = useSWR('/api/current', fetcher);
-
-  return {
-    data,
-    error,
-    isLoading,
-    mutate
-  }
+  return useQuery(
+    ["users"],
+    async () => {
+      const response = await axios.get("/api/current");
+      return response.data;
+    },
+    {
+      onError: () => {
+        toast.error("An error occurred");
+      },
+    }
+  );
 };
 
 export default useCurrentUser;

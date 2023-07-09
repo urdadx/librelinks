@@ -10,7 +10,7 @@ const Customize = () => {
 
   return (
     <>
-      <Layout>  
+      <Layout>    
       <div className="w-full lg:w-3/5 pl-4 pr-4 border-r overflow-auto">
         <div>
           <ThemesPicker />

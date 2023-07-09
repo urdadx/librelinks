@@ -48,8 +48,8 @@ const Link = ({ id, title, url, archived, clicks, createdAt }) => {
                             <div className=" w-full row-start-1 col-start-1 items-center">
                                 <div target="_blank" className="flex items-center gap-4 max-w-full 
                                     rounded-[2px] outline-offset-2 outline-2">
-                                    <p className=" text-gray-500 text-sm
-                                        whitespace-nowrap overflow-hidden font-semibold w-auto sm:max-w-ful text-ellipsis">
+                                    <p className=" truncate w-[80px] text-gray-500 text-sm
+                                        whitespace-nowrap overflow-hidden font-semibold lg:max-w-full">
                                         {title}
                                     </p>
                                     

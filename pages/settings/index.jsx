@@ -1,7 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
-import Layout from "../../components/layout/_layout";
-import Preview from "../../components/shared/profile-preview/preview";
-import PreviewBtn from "../../components/shared/profile-preview/preview-btn";
+import { useEffect, useState } from "react";
 import useCurrentUser from "@/hooks/useCurrentUser";
 import axios from "axios";
 import toast from "react-hot-toast";
@@ -9,8 +6,13 @@ import * as Dialog from "@radix-ui/react-dialog";
 import UploadModal from "@/components/shared/modals/upload-modal";
 import { TinyLoader } from "@/components/utils/tiny-loader";
 import { useRouter } from "next/router";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import Layout from "@/components/layout/_layout";
+import Preview from "@/components/shared/profile-preview/preview";
+import PreviewBtn from "@/components/shared/profile-preview/preview-btn";
+import { Balancer } from "react-wrap-balancer";
 
-const settings = () => {  
+const settings = () => {
 
   const { data: currentUser } = useCurrentUser();
   const router = useRouter();
@@ -18,37 +20,69 @@ const settings = () => {
   const [username, setUsername] = useState("");
   const [bio, setBio] = useState("");
   const [image, setImage] = useState("");
-  const [handle, setHandle] = useState("")
+  const [handle, setHandle] = useState("");
+
+  const queryClient = useQueryClient();
+  const userId = currentUser?.id ?? null;
 
   useEffect(() => {
     setUsername(currentUser?.name);
     setBio(currentUser?.bio);
     setImage(currentUser?.image);
     setHandle(currentUser?.handle);
-  }, [currentUser?.name, currentUser?.bio, currentUser?.image, currentUser?.handle]);
+  }, [
+    currentUser?.name,
+    currentUser?.bio,
+    currentUser?.image,
+    currentUser?.handle,
+  ]);
 
-  const handleSubmit = useCallback(async () => {
-    toast.promise(
-      axios.patch("/api/edit", { bio, username, image, handle }),
-      {
-        loading: "Applying changes",
-        success: "Changes applied",
-        error: "An error occurred",
-      }
-    );
-  }, [username, bio, image]);
+  // edit profile details
+  const editMutation = useMutation(
+    async ({ bio, username, image, handle }) => {
+      await axios.patch("/api/edit", {
+        bio,
+        username,
+        image,
+        handle,
+      });
+    },
+    {
+      onError: () => {
+        toast.error("An error occurred");
+      },
+      onSuccess: () => {
+        queryClient.invalidateQueries({ queryKey: ["users", userId] });
+        toast.success("Changes applied");
+      },
+    }
+  );
 
-  const handleDeleteUser = useCallback(async () => {
-    await toast.promise(
-      axios.delete("/api/edit"),
-      {
-        loading: "Deleting your account",
-        success: "Account deleted",
-        error: "An error occurred",
-      }
-    );
-    router.push("/register");
-  }, [currentUser?.id]);
+  const handleSubmit = async () => {
+    toast.loading("Applying changes");
+    await editMutation.mutateAsync({ bio, username, image, handle });
+  };
+
+  // delete the user's account
+  const deleteMutation = useMutation(
+    async () => {
+      await axios.delete("/api/edit");
+    },
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries({ queryKey: ["users", userId] });
+        router.push("/register");
+      },
+    }
+  );
+
+  const handleDeleteUser = async () => {
+    await toast.promise(deleteMutation.mutateAsync(), {
+      loading: "Deleting your account",
+      success: "So long partner 🫡",
+      error: "An error occured",
+    });
+  };
 
   return (
     <>
@@ -85,8 +119,10 @@ const settings = () => {
                       />
                     </Dialog.Root>
                   </div>
-                  <button className="w-full lg:w-[490px] h-[45px] border border-[#aaa] 
-                      outline-none font-semibold text-slate-900 bg-white p-2 rounded-3xl hover:bg-gray-100">
+                  <button
+                    className="w-full lg:w-[490px] h-[45px] border border-[#aaa] 
+                      outline-none font-semibold text-slate-900 bg-white p-2 rounded-3xl hover:bg-gray-100"
+                  >
                     Remove
                   </button>
                 </div>
@@ -113,7 +149,12 @@ const settings = () => {
           </div>
 
           <div className="max-w-[690px] mx-auto my-10">
-            <h3 className="text-xl font-semibold mb-4">Danger Zone</h3>
+            <h3 className="text-xl font-semibold mb-1">Danger Zone</h3>
+              <h3 className="mb-4 text-gray-600 text-sm">
+                <Balancer>
+                  Deleting your account permanently deletes your page and all your data.
+                </Balancer>
+              </h3>
             <div className="w-full h-auto bg-white rounded-lg p-6">
               <button
                 onClick={handleDeleteUser}
@@ -125,7 +166,7 @@ const settings = () => {
             </div>
           </div>
 
-          <div className="h-[60px]"></div>
+          <div className="h-[60px]" />
         </div>
 
         <div className="hidden lg:block lg:my-auto lg:w-2/5 pl-4 overflow-hidden">

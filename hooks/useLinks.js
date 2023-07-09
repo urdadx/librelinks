@@ -1,19 +1,22 @@
-import useSWR from "swr";
-import fetcher from "@/lib/fetcher";
+import axios from "axios";
+import { useQuery } from "@tanstack/react-query";
+import { toast } from "react-hot-toast";
 
 const useLinks = (userId) => {
-  const { data, error, isLoading, mutate } = useSWR(
-    userId ? `/api/links?userId=${userId}` : null,
-    fetcher,
-
-  );
-
-  return {
-    data,
-    error,
-    isLoading,
-    mutate,
+  const fetchLinks = async () => {
+    const response = await axios.get(`/api/links?userId=${userId}`);
+    return response.data;
   };
+
+  return useQuery(["links", userId], fetchLinks, {
+    enabled: userId !== null,
+    onError: () => {
+      toast.error("An error occurred");
+    },
+    refetchInterval: 4000,
+    retryOnMount: true,
+    refetchOnWindowFocus: true,
+  });
 };
 
 export default useLinks;

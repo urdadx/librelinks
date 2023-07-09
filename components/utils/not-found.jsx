@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { GridOverlay } from "./grid-overlay";
 import { ErrorSVG } from "./404";
+import Balancer from "react-wrap-balancer";
 
 const NotFound = () => {
   return (
@@ -10,15 +11,17 @@ const NotFound = () => {
         <div className="flex justify-center">
           <ErrorSVG />
         </div>
-        <h3 className="text-lg lg:text-3xl font-medium text-center">
-          The page you're looking for doesn't exist
+        <h3 className="text-lg lg:text-3xl text-center">
+          <Balancer>The page you're looking for doesn't exist</Balancer>
         </h3>
-        <h3 className="text-sm lg:text-lg font-medium text-center">
-          Want this to be your handle?{" "}
-          <Link className="underline" href="/register">
-            Create your account now
-          </Link>
-          {""} 🚀
+        <h3 className="text-sm lg:text-lg text-center">
+          <Balancer>
+            Want this to be your handle?{" "}
+            <Link className="underline" href="/register">
+              Create your account now
+            </Link>
+            {""} 🚀
+          </Balancer>
         </h3>
       </div>
     </>
