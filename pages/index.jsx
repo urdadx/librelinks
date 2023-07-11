@@ -1,10 +1,10 @@
+/* eslint-disable @next/next/no-img-element */
 import Link from "next/link";
 import { FiGithub } from "react-icons/fi";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { siteConfig } from "@/config/site";
 import Navbar from "@/components/layout/navbar/navbar";
-import { GridOverlay } from "@/components/utils/grid-overlay";
 
 const Home = () => {
 

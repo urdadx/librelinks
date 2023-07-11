@@ -8,7 +8,7 @@ import { nanoid } from "nanoid";
 import { useRouter } from "next/router";
 import ConfettiExplosion from "confetti-explosion-react";
 
-const onboard = () => {
+const Onboard = () => {
 
   const [isLoading, setIsLoading] = useState(false);
   const [handle, setHandle] = useState("");
@@ -44,7 +44,7 @@ const onboard = () => {
   }, [handle, router]);
 
   const autoGenerateName = () => {
-    const generatedName = nanoid(10);
+    const generatedName = nanoid(7);
     setHandle(generatedName);
   };
 
@@ -88,6 +88,7 @@ const onboard = () => {
               </div>
               <div className="mt-2">
                 <input
+                  placeholder="@urdad"
                   value={handle}
                   onChange={handleOnChange}
                   type="text"
@@ -118,7 +119,7 @@ const onboard = () => {
               )}
             </button>
           </div>
-          <div className="w-full flex justify-center h-full mx-auto">
+          <div className="w-full hidden justify-center h-full mx-auto lg:flex">
             {isExploding && <ConfettiExplosion />}
           </div>
         </div>
@@ -127,4 +128,4 @@ const onboard = () => {
   );
 };
 
-export default onboard;
+export default Onboard;

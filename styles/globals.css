@@ -8,57 +8,8 @@
 * {
   font-family: "Inter", sans-serif;
 }
-
-.cl-internal-b3fm6y {
-  display: none !important;
-}
-
-/* hide management account and footer in clerk's userButton modal */
-.cl-userButtonPopoverActionButton__manageAccount {
-  display: none;
-}
-
-/* .cl-userButtonPopoverFooter{
-    display: none;
-} */
-
-/* END */
-
 body {
   overflow: hidden;
-}
-
-.cl-internal-hegiim {
-  display: none !important;
-}
-
-.cl-footer {
-  display: none;
-}
-
-.cl-navbar {
-  display: none;
-}
-
-.cl-page {
-  min-height: 10rem;
-}
-
-.cl-card {
-  box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
-  overflow: none;
-}
-
-.cl-internal-1e2qfpc {
-  --arrow-opacity: 0.5 !important;
-}
-
-.cl-pageScrollBox {
-  height: 10rem;
-}
-
-.cl-profilePage__security {
-  display: none;
 }
 
 /* Modal Animation */
@@ -95,7 +46,7 @@ body {
 
 /* SCROLL BAR */
 
-/* Hide scrollbar for Chrome, Safari and Opera */
+/* Hide scrollbar for Chrome, Safari and Opera etc */
 .no-scrollbar::-webkit-scrollbar {
   width: 2px !important;
 }

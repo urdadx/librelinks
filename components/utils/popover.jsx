@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useState } from "react";
 import * as Popover from "@radix-ui/react-popover";
 import ThreeDots from "./three-dots";
 import { Edit, Trash, Eye, EyeOff } from "lucide-react";
@@ -37,14 +37,27 @@ const InfoPopover = ({ id, title, url, archived }) => {
     setIsArchived(!isArchived);
   };
 
+  // delete the link
+  const deleteMutation = useMutation(
+    async () => {
+      await axios.delete(`/api/links/${id}`);
+    },
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries({ queryKey: ["links", userId] });
+      },
+    }
+  );
 
-  const handleDeleteLink = useCallback(async () => {
-    await toast.promise(axios.delete(`/api/links/${id}`), {
+  const handleDeleteLink = async () => {
+    await toast.promise(deleteMutation.mutateAsync(), {
       loading: "Deleting link",
       success: "Link deleted successfully",
       error: "An error occured",
     });
-  }, [id]);
+  };
+
+
 
   return (
     <Popover.Root>

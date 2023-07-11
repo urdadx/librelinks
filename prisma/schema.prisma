@@ -24,7 +24,7 @@ model User {
   updatedAt      DateTime  @updatedAt
   links          Link[]
   themePalette   Json?     @default("{\"name\": \"Light\", \"palette\": [\"#FFFFFF\", \"#F2F2F2\", \"#1F2937\", \"#6170F8\"]}")
-  buttonStyle    String    @default("rounded-full")
+  buttonStyle    String    @default("rounded-none shadow")
   accounts       Account[]
 }
 
@@ -57,6 +57,7 @@ model Link {
       title      String
       url        String
       archived   Boolean    @default(false)
+      order       Int
       // Link metadata
       clicks      Int       @default(0) // number of clicks
       createdAt   DateTime  @default(now())

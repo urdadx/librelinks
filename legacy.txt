@@ -12,3 +12,49 @@
   //       }
   //     );
   // }, [title, url])
+
+
+  const addLinkMutation = useMutation(
+  async ({ title, url }) => {
+    // Optimistic update: Add the new link immediately to the UI
+    queryClient.setQueryData(["links", userId], (oldData) => {
+      const newLink = { id: Date.now(), title, url };
+      return oldData ? [newLink,...oldData] : [newLink];
+    });
+
+    // Make the actual API request
+    await axios.post("/api/links", { title, url });
+  },
+  {
+    onError: (rollback) => {
+      // Revert the optimistic update if there's an error
+      rollback();
+      toast.error("An error occurred");
+    },
+    onSettled: () => {
+      // Refetch the queries after the mutation is settled
+      queryClient.invalidateQueries({ queryKey: ["links", userId] });
+      queryClient.invalidateQueries({ queryKey: ["users", userId] });
+    },
+  }
+);
+
+
+	const routes = [
+		{
+			name: "Links",
+			route: "/admin",
+		},
+		{
+			name: "Customize",
+			route: "/admin/customize",
+		},
+		{
+			name: "Analytics",
+			route: "/admin/analytics",
+		},
+		{
+			name: "Settings",
+			route: "/admin/settings",
+		},
+	]

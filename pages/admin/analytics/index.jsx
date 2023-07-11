@@ -1,9 +1,9 @@
-import PreviewBtn from "../../components/shared/profile-preview/preview-btn";
 import { AnalyticsDashboard } from "@/components/core/profile-analytics/dashboard";
 import Layout from "@/components/layout/_layout";
 import Footer from "@/components/layout/footer/footer";
+import PreviewBtn from "@/components/shared/profile-preview/preview-btn";
 
-const analytics = () => {
+const Analytics = () => {
 
     return (  
         <>
@@ -14,7 +14,7 @@ const analytics = () => {
                     <AnalyticsDashboard />
                 </div>
                 <Footer />
-                <div className="h-[60px]"></div>
+                <div className="h-[70px]"></div>
             </div>
 
             <PreviewBtn />
@@ -26,4 +26,4 @@ const analytics = () => {
     );
 }
  
-export default analytics;
+export default Analytics;

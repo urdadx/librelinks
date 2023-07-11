@@ -7,122 +7,123 @@ import { toast } from "react-hot-toast";
 import axios from "axios";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import useCurrentUser from "@/hooks/useCurrentUser";
-
+import useLinks from "@/hooks/useLinks";
 
 const AddLinkModal = () => {
+	const [title, setTitle] = useState("");
+	const [url, setUrl] = useState("");
+	const [urlError, setUrlError] = useState(false);
 
-  const [title, setTitle] = useState("");
-  const [url, setUrl] = useState("");
-  const [urlError, setUrlError] = useState(false);
+	const { data: currentUser } = useCurrentUser();
+	const userId = currentUser?.id ?? null;
+	const { data: userLinks } = useLinks(userId);
 
-  const { data: currentUser } = useCurrentUser();
-  const userId = currentUser?.id ?? null;
-  const queryClient = useQueryClient();
+	const queryClient = useQueryClient();
 
-  const addLinkMutation = useMutation(
-    async ({ title, url }) => {
-      await axios.post("/api/links", {
-        title,
-        url,
-      });
-    },
-    {
-      onSuccess: () => {
-        queryClient.invalidateQueries({ queryKey: ["links", userId] });
-        setTitle("");
-        setUrl("");
-      },
-    }
-  );
+	const order = userLinks?.length;
 
-  const submitLink = async () => {
-    if (title.trim() === "" || url.trim() === "") {
-      toast.error("Please fill the form");
-      return;
-    }
-    await toast.promise(addLinkMutation.mutateAsync({ title, url }), {
-      loading: "Adding link",
-      success: "Link added successfully",
-      error: "An error occured",
-    });
-  };
+	const addLinkMutation = useMutation(
+		async ({ title, url, order }) => {
+			await axios.post("/api/links", {
+				title,
+				url,
+				order,
+			});
+		},
+		{
+			onSuccess: () => {
+				queryClient.invalidateQueries({ queryKey: ["links", userId] });
+				queryClient.invalidateQueries({ queryKey: ["users", userId] });
+				setTitle("");
+				setUrl("");
+			},
+		}
+	);
 
-  const handleUrlChange = (event) => {
-    const urlValue = event.target.value;
-    const isValidUrl = validDomainRegex.test(urlValue);
+	const submitLink = async () => {
+		if (title.trim() === "" || url.trim() === "") {
+			toast.error("Please fill the form");
+			return;
+		}
+		await toast.promise(addLinkMutation.mutateAsync({ title, url, order }), {
+			loading: "Adding link",
+			success: "Link added successfully",
+			error: "An error occured",
+		});
+	};
 
-    setUrl(urlValue);
-    setUrlError(!isValidUrl);
-  };
+	const handleUrlChange = (event) => {
+		const urlValue = event.target.value;
+		const isValidUrl = validDomainRegex.test(urlValue);
 
-  return (
-    <>
-      <Dialog.Portal>
-        <Dialog.Overlay className="fixed inset-0 bg-gray-800 bg-opacity-50 sm:w-full" />
-        <Dialog.Content
-          className="contentShow fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 
+		setUrl(urlValue);
+		setUrlError(!isValidUrl);
+	};
+
+	return (
+		<>
+			<Dialog.Portal>
+				<Dialog.Overlay className="fixed inset-0 bg-gray-800 bg-opacity-50 sm:w-full" />
+				<Dialog.Content
+					className="contentShow fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 
                 rounded-2xl bg-white p-6 sm:p-8 lg:max-w-3xl w-[350px] sm:w-[500px] shadow-lg 
-                md:max-w-lg max-md:max-w-lg focus:outline-none"
-        >
-          <div className="flex flex-row justify-between items-center mb-4">
-            <Dialog.Title className="text-xl text-center font-medium mb-2 sm:mb-0 sm:mr-4">
-              Create new Link
-            </Dialog.Title>
-            <Dialog.Close className="flex flex-end justify-end">
-              <div className="p-2 rounded-full flex justify-center items-center bg-gray-100 hover:bg-gray-300">
-                <Image priority src={closeSVG} alt="close" />
-              </div>
-            </Dialog.Close>
-          </div>
-          <form name="add-link-form" className="mb-6">
-            <div className="relative mb-4">
-              <input
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
-                className="block w-full h-10 px-4 py-6 mb-2 leading-tight text-gray-700 border rounded-2xl appearance-none focus:outline-none focus:shadow-outline"
-                id="name"
-                type="text"
-                placeholder="Title"
-              />
-            </div>
-            <div className="relative">
-              <input
-                value={url}
-                onChange={handleUrlChange}
-                className={`block w-full h-10 px-4 py-6 mb-2 leading-tight text-gray-700 border rounded-2xl appearance-none focus:outline-none ${
-                  urlError ? "border-red-500" : "focus:shadow-outline"
-                }`}
-                id="url"
-                type="url"
-                placeholder="URL"
-              />
-              {urlError && (
-                <small className="text-red-500 text-sm">
-                  Enter a valid URL
-                </small>
-              )}
-            </div>
+                md:max-w-lg max-md:max-w-lg focus:outline-none">
+					<div className="flex flex-row justify-between items-center mb-4">
+						<Dialog.Title className="text-xl text-center font-medium mb-2 sm:mb-0 sm:mr-4">
+							Create new Link
+						</Dialog.Title>
+						<Dialog.Close className="flex flex-end justify-end">
+							<div className="p-2 rounded-full flex justify-center items-center bg-gray-100 hover:bg-gray-300">
+								<Image priority src={closeSVG} alt="close" />
+							</div>
+						</Dialog.Close>
+					</div>
+					<form name="add-link-form" className="mb-6">
+						<div className="relative mb-4">
+							<input
+								value={title}
+								onChange={(e) => setTitle(e.target.value)}
+								className="block w-full h-10 px-4 py-6 mb-2 leading-tight text-gray-700 border rounded-2xl appearance-none focus:outline-none focus:shadow-outline"
+								id="name"
+								type="text"
+								placeholder="Title"
+							/>
+						</div>
+						<div className="relative">
+							<input
+								value={url}
+								onChange={handleUrlChange}
+								className={`block w-full h-10 px-4 py-6 mb-2 leading-tight text-gray-700 border rounded-2xl appearance-none focus:outline-none ${
+									urlError
+										? "border-red-500"
+										: "focus:shadow-outline"
+								}`}
+								id="url"
+								type="url"
+								placeholder="URL"
+							/>
+							{urlError && (
+								<small className="text-red-500 text-sm">
+									Enter a valid URL
+								</small>
+							)}
+						</div>
 
-            <Dialog.Close asChild>
-              <button
-                onClick={submitLink}
-                disabled={urlError}
-                className={`inline-block w-full px-4 py-4 leading-none 
+						<Dialog.Close asChild>
+							<button
+								onClick={submitLink}
+								disabled={urlError}
+								className={`inline-block w-full px-4 py-4 leading-none 
                       text-lg mt-2 text-white rounded-3xl 
-                      ${
-                        !urlError
-                          ? "bg-slate-800 hover:bg-slate-900"
-                          : "bg-slate-500"
-                      }`}
-              >
-                Create Link ✨
-              </button>
-            </Dialog.Close>
-          </form>
-        </Dialog.Content>
-      </Dialog.Portal>
-    </>
-  );
+                      ${!urlError ? "bg-slate-800 hover:bg-slate-900" : "bg-slate-500"}`}>
+								Create Link ✨
+							</button>
+						</Dialog.Close>
+					</form>
+				</Dialog.Content>
+			</Dialog.Portal>
+		</>
+	);
 };
 
 export default AddLinkModal;
