@@ -6,6 +6,8 @@ import { getApexDomain } from "@/utils/helper-funcs";
 import { GOOGLE_FAVICON_URL } from "@/utils/constants";
 import Image from "next/image";
 import { useState } from "react";
+import StarSVG from "@/components/utils/star-svg";
+import Link from "next/link";
 
 const LinkStats = () => {
 	const { data: currentUser } = useCurrentUser();
@@ -72,8 +74,16 @@ const LinkStats = () => {
 									);
 								})
 							) : (
-								<div className="w-[200px] mx-auto py-6">
-									<h2>No links added yet 🥺</h2>
+								<div className="flex flex-col gap-2 w-[180px] mx-auto py-6">
+									<StarSVG />
+									<h2 className="text-center">
+										No links added yet🥺
+										<Link
+											className="font-semibold hover:underline underline-offset-1"
+											href="/admin">
+											Create one now
+										</Link>
+									</h2>
 								</div>
 							)}
 							{userLinks?.length > 3 && (

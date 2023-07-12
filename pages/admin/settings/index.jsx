@@ -13,7 +13,7 @@ import Preview from "@/components/shared/profile-preview/preview";
 import PreviewBtn from "@/components/shared/profile-preview/preview-btn";
 import { Balancer } from "react-wrap-balancer";
 import useUser from "@/hooks/useUser";
-import { UserAvatar } from "@/components/utils/avatar";
+import { UserAvatar, UserAvatarSetting } from "@/components/utils/avatar";
 import { refreshIframe } from "@/utils/helper-funcs";
 
 const Settings = () => {
@@ -96,10 +96,7 @@ const Settings = () => {
 							<div className="flex flex-col lg:flex-row gap-x-6 p-10">
 								<div className="w-[100px] h-[100px] pb-6 rounded-full flex items-center mx-auto">
 									{fetchedUser ? (
-										<UserAvatar
-											size={100}
-											hasBorder={false}
-										/>
+										<UserAvatarSetting />
 									) : (
 										<TinyLoader
 											color="black"
