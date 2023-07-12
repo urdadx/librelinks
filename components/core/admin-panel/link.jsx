@@ -57,7 +57,7 @@ const LinkCard = (props) => {
                     rounded-[2px] outline-offset-2 outline-2">
 										<p
 											className=" truncate w-[80px] text-gray-500 text-sm whitespace-nowrap 
-                        overflow-hidden font-semibold lg:w-auto">
+                        overflow-hidden font-semibold lg:max-w-min">
 											{props.title}
 										</p>
 

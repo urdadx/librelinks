@@ -1,12 +1,13 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import useCurrentUser from "@/hooks/useCurrentUser";
 import { useCallback, useState, useEffect } from "react";
 import axios from "axios";
-import useUser from "@/hooks/useUser";
+import toast from "react-hot-toast";
+import { refreshIframe } from "@/utils/helper-funcs";
 
 const ButtonSelector = () => {
 	const { data: currentUser } = useCurrentUser();
 	const [buttonStyle, setButtonStyle] = useState(null);
-	const { data: fetchedUser, isLoading } = useUser(currentUser?.handle);
 	const buttonFromDB = currentUser?.buttonStyle;
 
 	useEffect(() => {
