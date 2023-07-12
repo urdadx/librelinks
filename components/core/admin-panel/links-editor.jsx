@@ -66,7 +66,11 @@ const LinksEditor = () => {
 							</>
 						))
 					) : (
-						<Loader bgColor="black" textColor="text-slate-700" />
+						<Loader
+							bgColor="black"
+							textColor="text-slate-700"
+							message={"Fetching links..."}
+						/>
 					)}
 					{!isLoading && userLinks?.length === 0 && (
 						<div className="mt-4 w-[245px] h-auto flex flex-col mx-auto">

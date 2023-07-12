@@ -49,7 +49,7 @@ const ProfilePage = () => {
 	}, [fetchedUser, userLinks]);
 
 	if (isUserLoading) {
-		return <Loader bgColor="black" textColor="black" />;
+		return <Loader message={"Loading..."} bgColor="black" textColor="black" />;
 	}
 
 	if (!fetchedUser?.id) {
