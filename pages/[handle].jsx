@@ -8,15 +8,16 @@ import toast from "react-hot-toast";
 import useUser from "@/hooks/useUser";
 import Loader from "@/components/utils/loading-spinner";
 import NotFound from "@/components/utils/not-found";
+import useLinks from "@/hooks/useLinks";
 
 const ProfilePage = () => {
 	const router = useRouter();
 	const { handle } = router.query;
 
 	const { data: fetchedUser, isLoading: isUserLoading } = useUser(handle);
-	const [userLinks, setUserLinks] = useState([]);
 
-	// const { data: userLinks } = useLinks(fetchedUser?.id);
+	const { data: userLinks } = useLinks(fetchedUser?.id);
+
 	const queryClient = useQueryClient();
 	const [, setIsDataLoaded] = useState(false);
 
@@ -43,7 +44,6 @@ const ProfilePage = () => {
 
 	useEffect(() => {
 		if (fetchedUser && userLinks) {
-			setUserLinks(fetchedUser?.links);
 			setIsDataLoaded(true);
 		}
 	}, [fetchedUser, userLinks]);
@@ -88,18 +88,16 @@ const ProfilePage = () => {
 							{fetchedUser?.bio}
 						</p>
 					)}
-					{userLinks
-						?.map(({ id, ...link }) => (
-							<LinkCard
-								buttonStyle={buttonStyle}
-								theme={theme}
-								id={id}
-								key={id}
-								{...link}
-								registerClicks={() => handleRegisterClick(id)}
-							/>
-						))
-						.reverse()}
+					{userLinks?.map(({ id, ...link }) => (
+						<LinkCard
+							buttonStyle={buttonStyle}
+							theme={theme}
+							id={id}
+							key={id}
+							{...link}
+							registerClicks={() => handleRegisterClick(id)}
+						/>
+					))}
 
 					{userLinks?.length === 0 && (
 						<div className="flex justify-center">

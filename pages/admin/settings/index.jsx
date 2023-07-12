@@ -14,6 +14,7 @@ import PreviewBtn from "@/components/shared/profile-preview/preview-btn";
 import { Balancer } from "react-wrap-balancer";
 import useUser from "@/hooks/useUser";
 import { UserAvatar } from "@/components/utils/avatar";
+import { refreshIframe } from "@/utils/helper-funcs";
 
 const Settings = () => {
 	const { data: currentUser } = useCurrentUser();
@@ -25,7 +26,7 @@ const Settings = () => {
 	const [handle, setHandle] = useState("");
 
 	const queryClient = useQueryClient();
-	const userId = currentUser?.id ?? null;
+	const userHandle = currentUser?.handle ?? null;
 	const { data: fetchedUser } = useUser(currentUser?.handle);
 
 	useEffect(() => {
@@ -50,8 +51,11 @@ const Settings = () => {
 				toast.error("An error occurred");
 			},
 			onSuccess: () => {
-				queryClient.invalidateQueries({ queryKey: ["users", userId] });
+				queryClient.invalidateQueries({ queryKey: ["users", userHandle] });
 				toast.success("Changes applied");
+				setTimeout(() => {
+					refreshIframe();
+				}, 1000);
 			},
 		}
 	);

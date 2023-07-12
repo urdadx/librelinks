@@ -14,7 +14,6 @@ const useUser = (handle) => {
 			console.log(error);
 			toast.error(error?.response?.data.message || "An error occurred");
 		},
-		refetchInterval: 4000,
 		refetchOnWindowFocus: true,
 	});
 };

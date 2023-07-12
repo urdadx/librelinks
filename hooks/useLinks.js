@@ -16,7 +16,6 @@ const useLinks = (userId) => {
 			toast.error("An error occurred");
 		},
 		refetchOnMount: true,
-		// refetchInterval: 2000,
 	});
 };
 

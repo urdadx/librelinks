@@ -8,11 +8,16 @@ import axios from "axios";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import useCurrentUser from "@/hooks/useCurrentUser";
 import useLinks from "@/hooks/useLinks";
+import { refreshIframe } from "@/utils/helper-funcs";
 
 const AddLinkModal = () => {
 	const [title, setTitle] = useState("");
 	const [url, setUrl] = useState("");
 	const [urlError, setUrlError] = useState(false);
+
+	const refreshIframe = () => {
+		const iframe = (document.getElementById("preview").src += "");
+	};
 
 	const { data: currentUser } = useCurrentUser();
 	const userId = currentUser?.id ?? null;
@@ -33,9 +38,11 @@ const AddLinkModal = () => {
 		{
 			onSuccess: () => {
 				queryClient.invalidateQueries({ queryKey: ["links", userId] });
-				queryClient.invalidateQueries({ queryKey: ["users", userId] });
 				setTitle("");
 				setUrl("");
+				setTimeout(() => {
+					refreshIframe();
+				}, 1500);
 			},
 		}
 	);

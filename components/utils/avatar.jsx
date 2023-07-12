@@ -1,5 +1,5 @@
 import * as Avatar from "@radix-ui/react-avatar";
-import { getInitials } from "@/utils/helper-funcs";
+// import { getInitials } from "@/utils/helper-funcs";
 import useCurrentUser from "@/hooks/useCurrentUser";
 import useUser from "@/hooks/useUser";
 
@@ -7,7 +7,7 @@ export const UserAvatar = ({ size, hasBorder = true }) => {
 	const { data: currentUser } = useCurrentUser();
 	const { data: fetchedUser } = useUser(currentUser?.handle);
 
-	const usernameInitials = getInitials(currentUser ? currentUser.name : "@");
+	// const usernameInitials = getInitials(currentUser ? currentUser.name : "@");
 
 	return (
 		<>
@@ -24,9 +24,9 @@ export const UserAvatar = ({ size, hasBorder = true }) => {
 					alt="avatar"
 				/>
 				<Avatar.Fallback
-					className="text-violet11 leading-1 flex h-full w-full items-center justify-center bg-white text-[15px] font-medium"
+					className={`leading-1 flex h-full w-full items-center justify-center bg-white text-[15px] font-medium`}
 					delayMs={100}>
-					{usernameInitials ? usernameInitials : "@"}
+					@
 				</Avatar.Fallback>
 			</Avatar.Root>
 		</>

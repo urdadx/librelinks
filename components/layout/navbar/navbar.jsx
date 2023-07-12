@@ -33,7 +33,7 @@ const items = [
 	},
 ];
 
-const Navbar = ({ showName = false }) => {
+const Navbar = ({ showName = false, isHomePage = true }) => {
 	const session = useSession();
 
 	return (
@@ -45,20 +45,16 @@ const Navbar = ({ showName = false }) => {
 						<div className="hidden sm:flex sm:items-center sm:space-x-6">
 							{!showName ? (
 								items.map((item) => (
-									<>
-										<nav
-											key={item.title}
-											className="rounded-xl">
-											<Link href={item.href}>
-												<div className="bg-transparent p-2 flex space-x-2 items-center hover:bg-slate-100 rounded-xl">
-													{item.icon}
-													<span className="">
-														{item.title}
-													</span>
-												</div>
-											</Link>
-										</nav>
-									</>
+									<nav key={item.title} className="rounded-xl">
+										<Link href={item.href}>
+											<div className="bg-transparent p-2 flex space-x-2 items-center hover:bg-slate-100 rounded-xl">
+												{item.icon}
+												<span className="">
+													{item.title}
+												</span>
+											</div>
+										</Link>
+									</nav>
 								))
 							) : (
 								<SiteHeader />
@@ -89,24 +85,28 @@ const Navbar = ({ showName = false }) => {
 						)}
 					</div>
 				</div>
-				<div className="flex items-center justify-center border border-t-gray-200 lg:hidden md:hidden">
-					<div className="flex items-center space-x-6 p-1">
-						{items?.map((item) => (
-							<>
-								<nav key={item.title} className="rounded-xl">
-									<Link href={item.href}>
-										<div className="bg-transparent p-2 flex flex-col items-center hover:bg-slate-100 rounded-xl">
-											{item.icon}
-											<span className="text-sm">
-												{item.title}
-											</span>
-										</div>
-									</Link>
-								</nav>
-							</>
-						))}
+				{!session.status === "authenticated" || !isHomePage ? (
+					<div className="flex items-center justify-center border border-t-gray-200 lg:hidden md:hidden">
+						<div className="flex items-center space-x-6 p-1">
+							{items?.map((item) => (
+								<>
+									<nav key={item.title} className="rounded-xl">
+										<Link href={item.href}>
+											<div className="bg-transparent p-2 flex flex-col items-center hover:bg-slate-100 rounded-xl">
+												{item.icon}
+												<span className="text-sm">
+													{item.title}
+												</span>
+											</div>
+										</Link>
+									</nav>
+								</>
+							))}
+						</div>
 					</div>
-				</div>
+				) : (
+					""
+				)}
 			</header>
 		</>
 	);

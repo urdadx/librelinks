@@ -19,12 +19,13 @@ model User {
   image          String?  
   email          String?   @unique
   emailVerified  DateTime?
-  viewsCount     Int       @default(0)
+  totalViews     Int       @default(0)
   createdAt      DateTime  @default(now())
   updatedAt      DateTime  @updatedAt
   links          Link[]
+  profileViews   profileViews[]
   themePalette   Json?     @default("{\"name\": \"Light\", \"palette\": [\"#FFFFFF\", \"#F2F2F2\", \"#1F2937\", \"#6170F8\"]}")
-  buttonStyle    String    @default("rounded-none shadow")
+  buttonStyle    String    @default("rounded-md")
   accounts       Account[]
 }
 
@@ -65,6 +66,16 @@ model Link {
       userId      String    @db.ObjectId
       user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
       @@index(userId)
+}
+
+model profileViews {
+      id              String        @id @default(auto()) @map("_id") @db.ObjectId
+      recordedAt      DateTime      @default(now())
+      count           Int           @default(0)
+      userId          String        @db.ObjectId
+      user            User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+      @@index(userId)
+
 }
 
 
