@@ -1,5 +1,4 @@
 import { db } from "@/lib/db";
-import serverAuth from "@/lib/serverAuth";
 
 export default async function handler(req, res) {
   if (req.method !== "POST" && req.method !== "GET") {
@@ -10,15 +9,13 @@ export default async function handler(req, res) {
     const { id } = req.query;
 
     if (!id || typeof id !== "string") {
-      throw new Error("Invalid ID");
+      return res.status(404).end();
+      //   throw new Error("Invalid ID");
     }
 
     if (req.method == "GET") {
       const { filterOption, id } = req.query;
-      const viewsData = await getPageViewsByDuration(
-        id,
-        filterOption
-      );
+      const viewsData = await getPageViewsByDuration(id, filterOption);
 
       return res.status(200).json(viewsData);
     } else if (req.method == "POST") {

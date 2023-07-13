@@ -1,3 +1,4 @@
+import Loader from "@/components/utils/loading-spinner";
 import { BarChart as SimpleChart } from "lucide-react";
 import { Bar, BarChart, ResponsiveContainer, XAxis, YAxis } from "recharts";
 
@@ -47,23 +48,27 @@ const Chart = ({ analytics }) => {
           <SimpleChart />
         </div>
         <ResponsiveContainer width="100%" height={350}>
-          <BarChart data={analytics}>
-            <XAxis
-              dataKey="x"
-              stroke="#888888"
-              fontSize={12}
-              tickLine={false}
-              axisLine={false}
-            />
-            <YAxis
-              stroke="#888888"
-              fontSize={12}
-              tickLine={false}
-              axisLine={false}
-              tickFormatter={value => `${value}`}
-            />
-            <Bar dataKey="y" fill="#adfa1d" radius={[4, 4, 0, 0]} />
-          </BarChart>
+          {analytics ? (
+            <BarChart data={analytics}>
+              <XAxis
+                dataKey="x"
+                stroke="#888888"
+                fontSize={12}
+                tickLine={false}
+                axisLine={false}
+              />
+              <YAxis
+                stroke="#888888"
+                fontSize={12}
+                tickLine={false}
+                axisLine={false}
+                tickFormatter={value => `${value}`}
+              />
+              <Bar dataKey="y" fill="#adfa1d" radius={[4, 4, 0, 0]} />
+            </BarChart>
+          ) : (
+            <Loader message={"Fetching data"} />
+          )}
         </ResponsiveContainer>
       </div>
     </>
