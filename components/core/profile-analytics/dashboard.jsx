@@ -1,6 +1,9 @@
 import Chart from "./bar-chart";
 import Select from "react-select";
 import LinkStats from "./link-stats";
+import useCurrentUser from "@/hooks/useCurrentUser";
+import useAnalytics from "@/hooks/useAnalytics";
+import { useState } from "react";
 
 export function AnalyticsDashboard() {
   const options = [
