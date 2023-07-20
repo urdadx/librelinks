@@ -33,7 +33,7 @@ function calculateTotalViews(data) {
   let totalViews = 0;
 
   for (const item of data) {
-    totalViews += item.y;
+    totalViews += item.visits;
   }
 
   return totalViews;
@@ -51,7 +51,7 @@ const Chart = ({ analytics }) => {
           {analytics ? (
             <BarChart data={analytics}>
               <XAxis
-                dataKey="x"
+                dataKey="t"
                 stroke="#888888"
                 fontSize={12}
                 tickLine={false}
@@ -64,7 +64,7 @@ const Chart = ({ analytics }) => {
                 axisLine={false}
                 tickFormatter={value => `${value}`}
               />
-              <Bar dataKey="y" fill="#adfa1d" radius={[4, 4, 0, 0]} />
+              <Bar dataKey="visits" fill="#adfa1d" radius={[4, 4, 0, 0]} />
             </BarChart>
           ) : (
             <div>

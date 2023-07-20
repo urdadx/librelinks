@@ -7,17 +7,17 @@ import { useState } from "react";
 
 export function AnalyticsDashboard() {
   const options = [
-    // { value: "24h", label: "Last 24 hours" },
-    { value: "1hr", label: "Last hour" },
-    { value: "7d", label: "Last 7 days" },
+    { value: "last_24_hours", label: "Last 24 hours" },
+    { value: "last_hour", label: "Last hour" },
+    { value: "last_7_days", label: "Last 7 days" },
     // { value: "15d", label: "Last 15 days" },
-    { value: "30d", label: "Last 30 days" },
+    { value: "last_30_days", label: "Last 30 days" },
   ];
   const { data: currentUser } = useCurrentUser();
-  const [filter, setFilter] = useState("1hr");
+  const [filter, setFilter] = useState("last_24_hours");
   const { data: analytics, isLoading: analyticsLoading } = useAnalytics(
     filter,
-    currentUser?.id
+    currentUser?.handle
   );
   return (
     <>

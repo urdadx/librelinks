@@ -2,17 +2,17 @@ import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 import { toast } from "react-hot-toast";
 
-const useAnalytics = (filter, userId) => {
+const useAnalytics = (filter, handle) => {
   return useQuery(
     {
-      queryKey: ["analytics", userId, filter ],
+      queryKey: ["analytics", handle, filter ],
       queryFn: async () => {
         const response = await axios.get(
-          `/api/analytics/views/${userId}?filterOption=${filter}`
+          `/api/analytics/views?handle=${handle}&filter=${filter}`
         );
         return response.data;
       },
-      enabled: !!userId && !!filter,
+      enabled: !!handle && !!filter,
       onError: () => {
         toast.error("An error occurred");
       },
