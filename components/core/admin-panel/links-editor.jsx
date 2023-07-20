@@ -11,23 +11,46 @@ import { arrayMove, SortableContext, verticalListSortingStrategy } from "@dnd-ki
 import { restrictToVerticalAxis } from "@dnd-kit/modifiers";
 import useLinks from "@/hooks/useLinks";
 import React from "react";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import axios from "axios";
+import { signalIframe } from "@/utils/helper-funcs";
 
 const LinksEditor = () => {
 	const { data: currentUser } = useCurrentUser();
 	const userId = currentUser?.id ? currentUser.id : null;
 
 	const { data: userLinks, isLoading } = useLinks(userId);
+	const queryClient = useQueryClient()
 
-	const handleDragEnd = (event) => {
+	const handleDragEnd = async (event) => {
 		const { active, over } = event;
 
 		if (active.id !== over.id) {
 			const activeIndex = userLinks.findIndex((link) => link.id === active.id);
 			const overIndex = userLinks.findIndex((link) => link.id === over.id);
 			const newLinks = arrayMove(userLinks, activeIndex, overIndex);
-			// Add update link order logic here
+
+			queryClient.setQueryData(["links", currentUser?.id], () => (newLinks))
+			updateLinksOrderMutation.mutate(newLinks)
 		}
 	};
+
+	const updateLinksOrderMutation = useMutation(
+		async (newLinks) => {
+			await axios.put(
+			`/api/links`, {
+				links: newLinks
+			}
+			);
+		},
+		{
+		onSuccess: () => {
+			queryClient.invalidateQueries(["links", currentUser?.id]);
+			signalIframe()
+		},
+    }
+  );
+
 
 	return (
 		<DndContext

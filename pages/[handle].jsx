@@ -15,9 +15,9 @@ const ProfilePage = () => {
   const router = useRouter();
   const { handle } = router.query;
 
-  const { data: fetchedUser, isLoading: isUserLoading } = useUser(handle);
+  const { data: fetchedUser, isLoading: isUserLoading, isFetching: isUserFetching } = useUser(handle);
 
-  const { data: userLinks } = useLinks(fetchedUser?.id);
+  const { data: userLinks, isFetching: isLinksFetching} = useLinks(fetchedUser?.id);
 
   const queryClient = useQueryClient();
   const [, setIsDataLoaded] = useState(false);
@@ -46,12 +46,13 @@ const ProfilePage = () => {
   useEffect(() => {
       window.addEventListener('message', () => {
 				queryClient.invalidateQueries({ queryKey: ["links"] });
+        queryClient.invalidateQueries({ queryKey: ["users"] });
       })
 
       return () => {
         window.removeEventListener("message", () => {
-
   				queryClient.invalidateQueries({ queryKey: ["links"] });
+          queryClient.invalidateQueries({ queryKey: ["users"] });
         })
       }
   }, [])
@@ -102,6 +103,9 @@ const ProfilePage = () => {
         className="h-[100vh] w-[100vw] no-scrollbar overflow-auto"
       >
         <div className="flex items-center w-full mt-4 flex-col mx-auto max-w-3xl justify-center px-8 lg:mt-16">
+          {(isLinksFetching || isUserFetching ) && <div className="absolute -top-5 left-2">
+             <Loader width={15} height={15} bgColor={"white"}/>
+          </div>}
           <img
             loading="lazy"
             className="rounded-full w-[70px] h-[70px] lg:w-[96px] lg:h-[96px]"

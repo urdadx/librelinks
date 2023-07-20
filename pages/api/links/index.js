@@ -2,7 +2,7 @@ import serverAuth from "@/lib/serverAuth";
 import { db } from "@/lib/db";
 
 export default async function handler(req, res) {
-	if (req.method !== "POST" && req.method !== "GET") {
+	if (req.method !== "POST" && req.method !== "GET" && req.method != "PUT") {
 		return res.status(405).end();
 	}
 
@@ -37,12 +37,30 @@ export default async function handler(req, res) {
 						user: true,
 					},
 					orderBy: {
-						createdAt: "desc",
+						// createdAt: "desc",
+						order: 'asc'
 					},
 				});
 			}
 
 			return res.status(200).json(links);
+		}
+
+		if(req.method === "PUT"){
+			const { links } = req.body
+				
+			await Promise.all(
+					links.map(({ id }, index) =>
+						prisma.link.update({
+						where: {
+							id,
+						},
+						data: {
+							order: index,
+						},
+						})
+			));
+			res.status(200).json({msg: "link order updated"})
 		}
 	} catch (error) {
 		return res.status(400).end();

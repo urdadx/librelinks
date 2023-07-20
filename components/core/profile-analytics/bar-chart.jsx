@@ -67,7 +67,9 @@ const Chart = ({ analytics }) => {
               <Bar dataKey="y" fill="#adfa1d" radius={[4, 4, 0, 0]} />
             </BarChart>
           ) : (
-            <Loader message={"Fetching data"} />
+            <div>
+              <Loader message={"Fetching data"} />
+            </div>
           )}
         </ResponsiveContainer>
       </div>

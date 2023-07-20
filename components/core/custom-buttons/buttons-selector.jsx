@@ -3,7 +3,7 @@ import useCurrentUser from "@/hooks/useCurrentUser";
 import { useCallback, useState, useEffect } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
-import { refreshIframe } from "@/utils/helper-funcs";
+import { refreshIframe, signalIframe } from "@/utils/helper-funcs";
 
 const ButtonSelector = () => {
 	const { data: currentUser } = useCurrentUser();
@@ -25,9 +25,10 @@ const ButtonSelector = () => {
 			error: "An error occurred",
 		});
 		setButtonStyle(buttonCSS);
-		setTimeout(() => {
-			refreshIframe();
-		}, 1000);
+		signalIframe()
+		// setTimeout(() => {
+		// 	refreshIframe();
+		// }, 1000);
 		localStorage.setItem("button-style", buttonCSS);
 	}, []);
 
