@@ -10,6 +10,7 @@ import { DndContext, closestCenter } from "@dnd-kit/core";
 import { arrayMove, SortableContext, verticalListSortingStrategy } from "@dnd-kit/sortable";
 import { restrictToVerticalAxis } from "@dnd-kit/modifiers";
 import useLinks from "@/hooks/useLinks";
+import React from "react";
 
 const LinksEditor = () => {
 	const { data: currentUser } = useCurrentUser();
@@ -50,7 +51,7 @@ const LinksEditor = () => {
 				<div className="my-10 mx-4">
 					{!isLoading ? (
 						userLinks?.map(({ id, ...userLink }) => (
-							<>
+							<React.Fragment key={id}>
 								<motion.div
 									key={id}
 									initial={{ opacity: 0, y: -20 }}
@@ -63,7 +64,7 @@ const LinksEditor = () => {
 										<Link key={id} id={id} {...userLink} />
 									</SortableContext>
 								</motion.div>
-							</>
+							</React.Fragment>
 						))
 					) : (
 						<Loader

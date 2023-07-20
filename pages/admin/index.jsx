@@ -13,10 +13,6 @@ const Admin = () => {
 					<div className="h-[60px]" />
 				</div>
 
-				<div className="hidden lg:my-auto lg:block lg:w-2/5 pl-4 overflow-hidden">
-					<Preview />
-				</div>
-				<PreviewBtn />
 			</Layout>
 		</>
 	);

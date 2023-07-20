@@ -171,11 +171,11 @@ const Settings = () => {
 					<div className="h-[60px]" />
 				</div>
 
-				<div className="hidden lg:block lg:my-auto lg:w-2/5 pl-4 overflow-hidden">
+				{/* <div className="hidden lg:block lg:my-auto lg:w-2/5 pl-4 overflow-hidden">
 					<Preview />
-				</div>
+				</div> */}
 
-				<PreviewBtn />
+				{/* <PreviewBtn /> */}
 			</Layout>
 		</>
 	);

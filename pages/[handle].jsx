@@ -9,6 +9,7 @@ import useUser from "@/hooks/useUser";
 import Loader from "@/components/utils/loading-spinner";
 import NotFound from "@/components/utils/not-found";
 import useLinks from "@/hooks/useLinks";
+import Head from "next/head";
 
 const ProfilePage = () => {
   const router = useRouter();
@@ -43,6 +44,19 @@ const ProfilePage = () => {
   };
 
   useEffect(() => {
+      window.addEventListener('message', () => {
+				queryClient.invalidateQueries({ queryKey: ["links"] });
+      })
+
+      return () => {
+        window.removeEventListener("message", () => {
+
+  				queryClient.invalidateQueries({ queryKey: ["links"] });
+        })
+      }
+  }, [])
+
+  useEffect(() => {
     if (fetchedUser && userLinks) {
       setIsDataLoaded(true);
     }
@@ -51,7 +65,6 @@ const ProfilePage = () => {
   useEffect(() => {
     const trackVisit = async () => {
       try {
-        console.log(fetchedUser);
         await axios.post(`/api/analytics/views/${fetchedUser?.id}`);
       } catch (err) {}
     };
@@ -76,6 +89,14 @@ const ProfilePage = () => {
 
   return (
     <>
+      <Head>
+        <script
+          defer
+          src="https://unpkg.com/@tinybirdco/flock.js"
+          data-host="https://api.tinybird.co"
+          data-token="p.eyJ1IjogIjljZTA3ZWY3LTQwMWEtNDI4Ny04ZTQ0LTkzMDhjODY4YTJmNCIsICJpZCI6ICJjZWUzYjRmZS0zNTk1LTQzNjQtODAyOC1iYzZhYTJhZGZiYmUifQ.5GU8VusS9gjxLkZ-2UBcYiC6w5hxfTGT_0ij681VWos"
+        />
+      </Head>
       <section
         style={{ background: theme.primary }}
         className="h-[100vh] w-[100vw] no-scrollbar overflow-auto"

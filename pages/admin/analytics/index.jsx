@@ -17,7 +17,7 @@ const Analytics = () => {
                 <div className="h-[70px]"></div>
             </div>
 
-            <PreviewBtn />
+            {/* <PreviewBtn /> */}
 
 
         </Layout>

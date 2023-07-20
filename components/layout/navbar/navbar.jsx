@@ -7,6 +7,7 @@ import UserAccountNav from "@/components/utils/usernavbutton";
 import ShareButton from "@/components/utils/share-button";
 import SiteHeader from "./main-nav";
 import ShareModal from "@/components/shared/modals/share-modal";
+import React from "react";
 
 const items = [
 	{
@@ -89,7 +90,7 @@ const Navbar = ({ showName = false, isHomePage = true }) => {
 					<div className="flex items-center justify-center border border-t-gray-200 lg:hidden md:hidden">
 						<div className="flex items-center space-x-6 p-1">
 							{items?.map((item) => (
-								<>
+								<React.Fragment key={item.title}>
 									<nav key={item.title} className="rounded-xl">
 										<Link href={item.href}>
 											<div className="bg-transparent p-2 flex flex-col items-center hover:bg-slate-100 rounded-xl">
@@ -100,7 +101,7 @@ const Navbar = ({ showName = false, isHomePage = true }) => {
 											</div>
 										</Link>
 									</nav>
-								</>
+								</React.Fragment>
 							))}
 						</div>
 					</div>
