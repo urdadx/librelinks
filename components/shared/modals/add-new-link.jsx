@@ -19,6 +19,13 @@ const AddLinkModal = () => {
 		const iframe = (document.getElementById("preview").src += "");
 	};
 
+	const signalIframe = () => {
+		const iframe = document.getElementById('preview');
+		if (iframe) {
+			iframe.contentWindow.postMessage('', '*');
+		}
+	}
+
 	const { data: currentUser } = useCurrentUser();
 	const userId = currentUser?.id ?? null;
 	const { data: userLinks } = useLinks(userId);
@@ -40,9 +47,10 @@ const AddLinkModal = () => {
 				queryClient.invalidateQueries({ queryKey: ["links", userId] });
 				setTitle("");
 				setUrl("");
-				setTimeout(() => {
-					refreshIframe();
-				}, 1500);
+				signalIframe()
+				// setTimeout(() => {
+				// 	refreshIframe();
+				// }, 1500);
 			},
 		}
 	);

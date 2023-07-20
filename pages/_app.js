@@ -17,12 +17,12 @@ export default function App({ Component, pageProps }) {
   });
 
   // query client
-  const queryClient = new QueryClient();
+  const [queryClient] = useState(() => new QueryClient());
 
   // NProgress configuration
   useEffect(() => {
     const handleRouteChangeStart = () => {
-      setState((prevState) => ({
+      setState(prevState => ({
         ...prevState,
         isRouteChanging: true,
         loadingKey: prevState.loadingKey ^ 1,
@@ -30,7 +30,7 @@ export default function App({ Component, pageProps }) {
     };
 
     const handleRouteChangeEnd = () => {
-      setState((prevState) => ({
+      setState(prevState => ({
         ...prevState,
         isRouteChanging: false,
       }));
@@ -49,18 +49,18 @@ export default function App({ Component, pageProps }) {
 
   return (
     <>
+      <NProgress
+        isRouteChanging={state.isRouteChanging}
+        key={state.loadingKey}
+      />
       <QueryClientProvider client={queryClient}>
-        <ReactQueryDevtools initialIsOpen={false} />
-        <NProgress
-          isRouteChanging={state.isRouteChanging}
-          key={state.loadingKey}
-        />
         <Toaster toastOptions={{ duration: 2500 }} position="bottom-center" />
         <SessionProvider session={pageProps.session}>
           <Provider>
             <Component {...pageProps} />
           </Provider>
         </SessionProvider>
+        <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>
     </>
   );

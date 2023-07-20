@@ -5,19 +5,19 @@ import { toast } from "react-hot-toast";
 const useAnalytics = (filter, userId) => {
   return useQuery(
     {
-      queryKey: ["analytics", filter],
+      queryKey: ["analytics", userId, filter ],
       queryFn: async () => {
         const response = await axios.get(
           `/api/analytics/views/${userId}?filterOption=${filter}`
         );
         return response.data;
       },
+      enabled: !!userId && !!filter,
       onError: () => {
         toast.error("An error occurred");
       },
       refetchInterval: 2000,
     },
-    { enabled: !!userId && !! filter}
   );
 };
 

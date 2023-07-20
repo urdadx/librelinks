@@ -7,7 +7,7 @@ import axios from "axios";
 import { validDomainRegex } from "@/utils/helper-funcs";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import useCurrentUser from "@/hooks/useCurrentUser";
-import { refreshIframe } from "@/utils/helper-funcs";
+import { refreshIframe, signalIframe } from "@/utils/helper-funcs";
 
 const EditLinkModal = ({ id, title, url }) => {
 	const [newTitle, setNewTitle] = useState(title);
@@ -19,6 +19,7 @@ const EditLinkModal = ({ id, title, url }) => {
 	const queryClient = useQueryClient();
 	const userId = currentUser?.id ?? null;
 
+	
 	const editMutation = useMutation(
 		async ({ newTitle, newUrl }) => {
 			await axios.patch(`/api/links/${id}`, {
@@ -29,9 +30,10 @@ const EditLinkModal = ({ id, title, url }) => {
 		{
 			onSuccess: () => {
 				queryClient.invalidateQueries({ queryKey: ["links", userId] });
-				setTimeout(() => {
-					refreshIframe();
-				}, 1000);
+				signalIframe()
+				// setTimeout(() => {
+				// 	refreshIframe();
+				// }, 1000);
 			},
 		}
 	);

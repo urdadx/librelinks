@@ -10,23 +10,47 @@ import { DndContext, closestCenter } from "@dnd-kit/core";
 import { arrayMove, SortableContext, verticalListSortingStrategy } from "@dnd-kit/sortable";
 import { restrictToVerticalAxis } from "@dnd-kit/modifiers";
 import useLinks from "@/hooks/useLinks";
+import React from "react";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import axios from "axios";
+import { signalIframe } from "@/utils/helper-funcs";
 
 const LinksEditor = () => {
 	const { data: currentUser } = useCurrentUser();
 	const userId = currentUser?.id ? currentUser.id : null;
 
 	const { data: userLinks, isLoading } = useLinks(userId);
+	const queryClient = useQueryClient()
 
-	const handleDragEnd = (event) => {
+	const handleDragEnd = async (event) => {
 		const { active, over } = event;
 
 		if (active.id !== over.id) {
 			const activeIndex = userLinks.findIndex((link) => link.id === active.id);
 			const overIndex = userLinks.findIndex((link) => link.id === over.id);
 			const newLinks = arrayMove(userLinks, activeIndex, overIndex);
-			// Add update link order logic here
+
+			queryClient.setQueryData(["links", currentUser?.id], () => (newLinks))
+			updateLinksOrderMutation.mutate(newLinks)
 		}
 	};
+
+	const updateLinksOrderMutation = useMutation(
+		async (newLinks) => {
+			await axios.put(
+			`/api/links`, {
+				links: newLinks
+			}
+			);
+		},
+		{
+		onSuccess: () => {
+			queryClient.invalidateQueries(["links", currentUser?.id]);
+			signalIframe()
+		},
+    }
+  );
+
 
 	return (
 		<DndContext
@@ -50,7 +74,7 @@ const LinksEditor = () => {
 				<div className="my-10 mx-4">
 					{!isLoading ? (
 						userLinks?.map(({ id, ...userLink }) => (
-							<>
+							<React.Fragment key={id}>
 								<motion.div
 									key={id}
 									initial={{ opacity: 0, y: -20 }}
@@ -63,7 +87,7 @@ const LinksEditor = () => {
 										<Link key={id} id={id} {...userLink} />
 									</SortableContext>
 								</motion.div>
-							</>
+							</React.Fragment>
 						))
 					) : (
 						<Loader

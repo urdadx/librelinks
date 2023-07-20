@@ -22,11 +22,11 @@ const Customize = () => {
       </div>
 
 
-        <div className="hidden lg:block lg:my-auto lg:w-2/5 pl-4 overflow-hidden">
+        {/* <div className="hidden lg:block lg:my-auto lg:w-2/5 pl-4 overflow-hidden">
           <Preview />
-        </div>
+        </div> */}
 
-        <PreviewBtn />
+        {/* <PreviewBtn /> */}
       </Layout>
     </>
   );

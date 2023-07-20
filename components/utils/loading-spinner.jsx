@@ -1,13 +1,13 @@
 import React from "react";
 import { Oval } from "react-loader-spinner";
 
-const Loader = ({ bgColor, textColor, message }) => {
+const Loader = ({ bgColor, textColor, message, width, height }) => {
 	return (
 		<>
 			<div className="flex justify-center mt-10 mx-auto">
 				<Oval
-					height={70}
-					width={70}
+					height={height ? height :  70}
+					width={width ? width :  70}
 					color={bgColor}
 					wrapperStyle={{}}
 					wrapperClass=""

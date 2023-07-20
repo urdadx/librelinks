@@ -11,11 +11,11 @@ const useLinks = (userId) => {
 	return useQuery({
 		queryKey: ["links", userId],
 		queryFn: fetchLinks,
-		enabled: userId !== null,
+		enabled: !!userId,
 		onError: () => {
 			toast.error("An error occurred");
 		},
-		refetchOnMount: true,
+		// refetchOnMount: true,
 	});
 };
 
