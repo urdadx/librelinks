@@ -6,22 +6,65 @@ export default async function handler(req, res) {
   }
 
   try {
-    const {handle, filter} = req.query
-    const endpoint = 'https://api.tinybird.co/v0/pipes/libre_page_views.json'
-    
-    if (!handle|| typeof handle!== "string") {
+    const { handle, filter } = req.query;
+    const endpoint = "https://api.tinybird.co/v0/pipes/libre_page_views.json";
+
+    if (!handle || typeof handle !== "string") {
       return res.status(404).end();
     }
-    
-    const analytics = await axios.get(`${endpoint}?token=${process.env.ANALYTICS_TOKEN}&filter=${filter}&handle=/${handle}`)
-    
-    return res.status(200).json(analytics.data.data);
 
+    const analytics = await axios.get(
+      `${endpoint}?token=${process.env.ANALYTICS_TOKEN}&filter=${filter}&handle=/${handle}`
+    );
+
+    let analytics_formatted;
+
+    if (filter !== "last_24_hours" && filter !== "last_hour") {
+      analytics_formatted = analytics.data.data.map(({ t, visits }) => ({
+        t: formatDate(t),
+        visits,
+      }));
+    } else {
+      analytics_formatted = analytics.data.data.map(({ t, visits }) => ({
+        t: formatTime(t),
+        visits,
+      }));
+    }
+
+    return res.status(200).json(analytics_formatted);
   } catch (error) {
-    console.log(error)
+    console.log(error);
     return res.status(500).end();
   }
 }
+function formatDate(dateStr) {
+  const dateObj = new Date(dateStr);
+  const monthNames = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+  ];
+  const month = monthNames[dateObj.getMonth()];
+  const day = dateObj.getDate();
+  return `${month} ${day}`;
+}
+
+function formatTime(dateStr) {
+  const dateObj = new Date(dateStr);
+  const hours = dateObj.getHours().toString().padStart(2, "0");
+  const minutes = dateObj.getMinutes().toString().padStart(2, "0");
+  return `${hours}:${minutes}`;
+}
+
 //   if (req.method !== "POST" && req.method !== "GET") {
 //     return res.status(405).end();
 //   }
