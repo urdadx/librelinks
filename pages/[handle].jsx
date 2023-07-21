@@ -104,7 +104,7 @@ const ProfilePage = () => {
       >
         <div className="flex items-center w-full mt-4 flex-col mx-auto max-w-3xl justify-center px-8 lg:mt-16">
           {(isLinksFetching || isUserFetching ) && <div className="absolute -top-5 left-2">
-             <Loader width={15} height={15} bgColor={"white"}/>
+             <Loader strokeWidth={7} width={15} height={15} bgColor={theme.accent}/>
           </div>}
           <img
             loading="lazy"

@@ -1,8 +1,9 @@
+/* eslint-disable @next/next/no-img-element */
 import { BarChart } from "lucide-react";
 import useLinks from "@/hooks/useLinks";
 import useCurrentUser from "@/hooks/useCurrentUser";
 import Loader from "@/components/utils/loading-spinner";
-import { getApexDomain } from "@/utils/helper-funcs";
+import { getApexDomain } from "@/utils/helpers";
 import { GOOGLE_FAVICON_URL } from "@/utils/constants";
 import Image from "next/image";
 import { useState } from "react";
@@ -26,7 +27,7 @@ const LinkStats = () => {
 
 	return (
 		<>
-			<div className="mt-10 rounded-2xl border bg-white p-4 w-full h-auto">
+			<div className="mt-10 rounded-lg border bg-white p-4 w-full h-auto">
 				<div className="">
 					<h3 className="font-semibold text-md px-3 pb-1">Statistics</h3>
 					<p className="text-gray-500 text-sm px-3 mb-2">
@@ -41,18 +42,15 @@ const LinkStats = () => {
 									return (
 										<div
 											key={userLink.id}
-											className="flex items-center p-3 rounded-lg">
-											<div className="h-10 w-10">
-												<Image
+											className="flex items-center p-2 rounded-lg">
+											<div className="h-8 w-8">
+												<img
 													src={`${GOOGLE_FAVICON_URL}${getApexDomain(
 														userLink.url
 													)}`}
 													alt={userLink.title}
-													className="h-8 w-8 blur-0 rounded-full sm:h-10 sm:w-10"
-													unoptimized
-													width={25}
-													height={25}
-													priority
+													className="h-8 w-8 blur-0 rounded-full sm:h-8 lg:w-8"
+													loading="lazy"
 												/>
 											</div>
 											<div className="ml-4">
@@ -87,7 +85,7 @@ const LinkStats = () => {
 								</div>
 							)}
 							{userLinks?.length > 3 && (
-								<div className="flex justify-center mt-4">
+								<div className="flex justify-center mt-2">
 									{showAll ? (
 										<button
 											className="text-blue-500 font-medium"

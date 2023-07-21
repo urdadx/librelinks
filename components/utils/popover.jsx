@@ -8,7 +8,7 @@ import axios from "axios";
 import { toast } from "react-hot-toast";
 import useCurrentUser from "@/hooks/useCurrentUser";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { refreshIframe, signalIframe } from "@/utils/helper-funcs";
+import { refreshIframe, signalIframe } from "@/utils/helpers";
 
 const InfoPopover = ({ id, title, url, archived }) => {
 	const [isArchived, setIsArchived] = useState(archived);
@@ -24,7 +24,7 @@ const InfoPopover = ({ id, title, url, archived }) => {
 		{
 			onSuccess: () => {
 				queryClient.invalidateQueries({ queryKey: ["links", userId] });
-				signalIframe()
+				signalIframe();
 				// setTimeout(() => {
 				// 	refreshIframe();
 				// }, 1000);
@@ -49,7 +49,7 @@ const InfoPopover = ({ id, title, url, archived }) => {
 		{
 			onSuccess: () => {
 				queryClient.invalidateQueries({ queryKey: ["links", userId] });
-				signalIframe()
+				signalIframe();
 				// setTimeout(() => {
 				// 	refreshIframe();
 				// }, 1000);

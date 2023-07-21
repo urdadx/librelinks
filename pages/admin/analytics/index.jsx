@@ -9,8 +9,8 @@ const Analytics = () => {
         <>
         <Layout>
             <div className="w-full lg:w-[100vw] pl-4 pr-4 overflow-auto">
-               <div className="max-w-[800px] mx-auto my-10">
-                    
+               <div className="max-w-[700px] mx-auto my-10">
+                
                     <AnalyticsDashboard />
                 </div>
                 <Footer />

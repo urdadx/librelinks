@@ -2,7 +2,7 @@ import { GripVertical, BarChart, Copy } from "lucide-react";
 import InfoPopover from "../../utils/popover";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
-import { getApexDomain, timeAgo } from "@/utils/helper-funcs";
+import { getApexDomain, timeAgo } from "@/utils/helpers";
 import { GOOGLE_FAVICON_URL } from "@/utils/constants";
 import Image from "next/image";
 import Link from "next/link";

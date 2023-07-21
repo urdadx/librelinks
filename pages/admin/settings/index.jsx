@@ -9,12 +9,10 @@ import { TinyLoader } from "@/components/utils/tiny-loader";
 import { useRouter } from "next/router";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import Layout from "@/components/layout/_layout";
-import Preview from "@/components/shared/profile-preview/preview";
-import PreviewBtn from "@/components/shared/profile-preview/preview-btn";
 import { Balancer } from "react-wrap-balancer";
 import useUser from "@/hooks/useUser";
-import { UserAvatar, UserAvatarSetting } from "@/components/utils/avatar";
-import { refreshIframe } from "@/utils/helper-funcs";
+import { UserAvatarSetting } from "@/components/utils/avatar";
+import { signalIframe } from "@/utils/helpers";
 
 const Settings = () => {
 	const { data: currentUser } = useCurrentUser();
@@ -53,9 +51,7 @@ const Settings = () => {
 			onSuccess: () => {
 				queryClient.invalidateQueries({ queryKey: ["users", userHandle] });
 				toast.success("Changes applied");
-				setTimeout(() => {
-					refreshIframe();
-				}, 1000);
+				signalIframe();
 			},
 		}
 	);
@@ -124,7 +120,7 @@ const Settings = () => {
 									</div>
 									<button
 										className="w-full lg:w-[490px] h-[45px] border border-[#aaa] 
-                      outline-none font-semibold text-slate-900 bg-white p-2 rounded-3xl hover:bg-gray-100">
+                      						outline-none font-semibold text-slate-900 bg-white p-2 rounded-3xl hover:bg-gray-100">
 										Remove
 									</button>
 								</div>
@@ -144,7 +140,7 @@ const Settings = () => {
 									onBlur={handleSubmit}
 									placeholder="@Bio"
 									className="outline-none w-full p-4 h-[120px] rounded-lg border-2
-                     bg-gray-100 text-black focus:border-slate-900"
+                     			  bg-gray-100 text-black focus:border-slate-900"
 								/>
 							</div>
 						</div>
@@ -162,7 +158,7 @@ const Settings = () => {
 							<button
 								onClick={handleDeleteUser}
 								className="border-none w-full lg:w-[200px] rounded-lg h-auto p-3
-                 text-white bg-red-600 hover:bg-red-500">
+                 			  text-white bg-red-600 hover:bg-red-500">
 								Delete Account
 							</button>
 						</div>
@@ -170,12 +166,6 @@ const Settings = () => {
 
 					<div className="h-[60px]" />
 				</div>
-
-				{/* <div className="hidden lg:block lg:my-auto lg:w-2/5 pl-4 overflow-hidden">
-					<Preview />
-				</div> */}
-
-				{/* <PreviewBtn /> */}
 			</Layout>
 		</>
 	);

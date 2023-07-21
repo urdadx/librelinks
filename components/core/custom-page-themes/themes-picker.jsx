@@ -5,7 +5,7 @@ import useCurrentUser from "@/hooks/useCurrentUser";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { refreshIframe, signalIframe } from "@/utils/helper-funcs";
+import { signalIframe } from "@/utils/helpers";
 
 const ThemesPicker = () => {
 	const { data: currentUser } = useCurrentUser();
@@ -45,10 +45,7 @@ const ThemesPicker = () => {
 		{
 			onSuccess: () => {
 				queryClient.invalidateQueries("users");
-				signalIframe()
-				// setTimeout(() => {
-				// 	refreshIframe();
-				// }, 1000);
+				signalIframe();
 			},
 		}
 	);

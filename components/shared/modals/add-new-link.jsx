@@ -2,29 +2,18 @@ import * as Dialog from "@radix-ui/react-dialog";
 import { useState } from "react";
 import Image from "next/image";
 import closeSVG from "@/public/close_button.svg";
-import { validDomainRegex } from "@/utils/helper-funcs";
+import { validDomainRegex } from "@/utils/helpers";
 import { toast } from "react-hot-toast";
 import axios from "axios";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import useCurrentUser from "@/hooks/useCurrentUser";
 import useLinks from "@/hooks/useLinks";
-import { refreshIframe } from "@/utils/helper-funcs";
+import { signalIframe } from "@/utils/helpers";
 
 const AddLinkModal = () => {
 	const [title, setTitle] = useState("");
 	const [url, setUrl] = useState("");
 	const [urlError, setUrlError] = useState(false);
-
-	const refreshIframe = () => {
-		const iframe = (document.getElementById("preview").src += "");
-	};
-
-	const signalIframe = () => {
-		const iframe = document.getElementById('preview');
-		if (iframe) {
-			iframe.contentWindow.postMessage('', '*');
-		}
-	}
 
 	const { data: currentUser } = useCurrentUser();
 	const userId = currentUser?.id ?? null;
@@ -47,10 +36,7 @@ const AddLinkModal = () => {
 				queryClient.invalidateQueries({ queryKey: ["links", userId] });
 				setTitle("");
 				setUrl("");
-				signalIframe()
-				// setTimeout(() => {
-				// 	refreshIframe();
-				// }, 1500);
+				signalIframe();
 			},
 		}
 	);
