@@ -1,14 +1,16 @@
 import React, { useState } from "react";
 import * as Popover from "@radix-ui/react-popover";
 import ThreeDots from "./three-dots";
-import { Edit, Trash, Eye, EyeOff } from "lucide-react";
+import { Edit, Trash, Eye, EyeOff, ArchiveIcon } from "lucide-react";
 import * as Dialog from "@radix-ui/react-dialog";
 import EditLinkModal from "../shared/modals/edit-link";
 import axios from "axios";
 import { toast } from "react-hot-toast";
 import useCurrentUser from "@/hooks/useCurrentUser";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { refreshIframe, signalIframe } from "@/utils/helpers";
+import { signalIframe } from "@/utils/helpers";
+import * as AlertDialog from "@radix-ui/react-alert-dialog";
+import CustomAlert from "../shared/alerts/custom-alert";
 
 const InfoPopover = ({ id, title, url, archived }) => {
 	const [isArchived, setIsArchived] = useState(archived);
@@ -59,6 +61,22 @@ const InfoPopover = ({ id, title, url, archived }) => {
 		});
 	};
 
+	const deleteAlertProps = {
+		action: handleDeleteLink,
+		title: "Delete Link?",
+		desc: "Are you sure you want to delete this link? This action cannot be undone.",
+		confirmMsg: "Yes, delete link",
+	};
+
+	const archiveProps = {
+		action: handleToggleVisiblity,
+		title: !isArchived ? "Archive Link?" : "Unarchive Link?",
+		desc: !isArchived
+			? "Archived links will still work - they just won't show up on your main page."
+			: "By unarchiving this link, it will show up on your main page again.",
+		confirmMsg: !isArchived ? "Yes, archive link" : "Yes, unarchive",
+	};
+
 	return (
 		<Popover.Root>
 			<Popover.Trigger className="">
@@ -77,22 +95,27 @@ const InfoPopover = ({ id, title, url, archived }) => {
 						</Dialog.Trigger>
 						<EditLinkModal id={id} title={title} url={url} />
 					</Dialog.Root>
-					<button
-						onClick={handleToggleVisiblity}
-						className="group flex w-full items-center justify-between rounded-md p-3 text-sm font-medium text-gray-500 transition-all duration-75 hover:bg-gray-100">
-						<h4>Visibility</h4>
-						{!isArchived ? (
-							<Eye size={17} color="gray" />
-						) : (
-							<EyeOff size={17} color="gray" />
-						)}
-					</button>
-					<button
-						onClick={handleDeleteLink}
-						className="group flex w-full items-center justify-between rounded-md p-3 text-sm font-medium text-red-400 transition-all duration-75 hover:bg-red-500 hover:text-white">
-						<h4>Delete</h4>
-						<Trash size={17} className="text-b-400 hover:text-white" />
-					</button>
+					<AlertDialog.Root>
+						<AlertDialog.Trigger asChild>
+							<button className="group flex w-full items-center justify-between rounded-md p-3 text-sm font-medium text-gray-500 transition-all duration-75 hover:bg-gray-100">
+								<h4>{!isArchived ? "Archive" : "Unarchive"}</h4>
+								<ArchiveIcon size={17} color="gray" />
+							</button>
+						</AlertDialog.Trigger>
+						<CustomAlert {...archiveProps} />
+					</AlertDialog.Root>
+					<AlertDialog.Root>
+						<AlertDialog.Trigger asChild>
+							<button className="group flex w-full items-center justify-between rounded-md p-3 text-sm font-medium text-red-400 transition-all duration-75 hover:bg-red-500 hover:text-white">
+								<h4>Delete</h4>
+								<Trash
+									size={17}
+									className="text-b-400 hover:text-white"
+								/>
+							</button>
+						</AlertDialog.Trigger>
+						<CustomAlert {...deleteAlertProps} />
+					</AlertDialog.Root>
 				</Popover.Content>
 			</Popover.Portal>
 		</Popover.Root>

@@ -14,7 +14,7 @@ import useUser from "@/hooks/useUser";
 import { UserAvatarSetting } from "@/components/utils/avatar";
 import { signalIframe } from "@/utils/helpers";
 import * as AlertDialog from "@radix-ui/react-alert-dialog";
-import DeleteAlert from "@/components/shared/alerts/delete-alert";
+import CustomAlert from "@/components/shared/alerts/custom-alert";
 
 const Settings = () => {
 	const { data: currentUser } = useCurrentUser();
@@ -82,6 +82,13 @@ const Settings = () => {
 			success: "So long partner 🫡",
 			error: "An error occured",
 		});
+	};
+
+	const deleteAlertProps = {
+		action: handleDeleteUser,
+		title: "Are you absolutely sure?",
+		desc: "This action cannot be undone. This will permanently delete your account and remove your data from our servers.",
+		confirmMsg: "Yes, delete account",
 	};
 
 	return (
@@ -165,7 +172,7 @@ const Settings = () => {
 										Delete Account
 									</button>
 								</AlertDialog.Trigger>
-								<DeleteAlert action={handleDeleteUser} />
+								<CustomAlert {...deleteAlertProps} />
 							</AlertDialog.Root>
 						</div>
 					</div>
