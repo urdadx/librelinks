@@ -25,9 +25,6 @@ const InfoPopover = ({ id, title, url, archived }) => {
 			onSuccess: () => {
 				queryClient.invalidateQueries({ queryKey: ["links", userId] });
 				signalIframe();
-				// setTimeout(() => {
-				// 	refreshIframe();
-				// }, 1000);
 			},
 		}
 	);
@@ -50,9 +47,6 @@ const InfoPopover = ({ id, title, url, archived }) => {
 			onSuccess: () => {
 				queryClient.invalidateQueries({ queryKey: ["links", userId] });
 				signalIframe();
-				// setTimeout(() => {
-				// 	refreshIframe();
-				// }, 1000);
 			},
 		}
 	);

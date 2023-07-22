@@ -13,6 +13,8 @@ import { Balancer } from "react-wrap-balancer";
 import useUser from "@/hooks/useUser";
 import { UserAvatarSetting } from "@/components/utils/avatar";
 import { signalIframe } from "@/utils/helpers";
+import * as AlertDialog from "@radix-ui/react-alert-dialog";
+import DeleteAlert from "@/components/shared/alerts/delete-alert";
 
 const Settings = () => {
 	const { data: currentUser } = useCurrentUser();
@@ -155,12 +157,16 @@ const Settings = () => {
 							</Balancer>
 						</h3>
 						<div className="w-full h-auto bg-white rounded-lg p-6">
-							<button
-								onClick={handleDeleteUser}
-								className="border-none w-full lg:w-[200px] rounded-lg h-auto p-3
-                 			  text-white bg-red-600 hover:bg-red-500">
-								Delete Account
-							</button>
+							<AlertDialog.Root>
+								<AlertDialog.Trigger asChild>
+									<button
+										className="border-none w-full lg:w-[200px] rounded-lg h-auto p-3
+									text-white bg-red-600 hover:bg-red-500">
+										Delete Account
+									</button>
+								</AlertDialog.Trigger>
+								<DeleteAlert action={handleDeleteUser} />
+							</AlertDialog.Root>
 						</div>
 					</div>
 

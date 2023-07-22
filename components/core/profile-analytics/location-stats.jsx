@@ -2,9 +2,9 @@
 import COUNTRIES from "@/utils/constants/countries";
 
 const contryData = [
-	{ country: "United States", code: "840", visits: 14 },
-	{ country: "Pakistan", code: "586", visits: 5 },
-	{ country: "Ghana", code: "288", visits: 2 },
+	{ country: "US", visits: 14 },
+	{ country: "PK", visits: 5 },
+	{ country: "GH", visits: 2 },
 ];
 
 export const LocationStats = () => {
@@ -20,21 +20,21 @@ export const LocationStats = () => {
 						</p>
 					</div>
 					<div className="w-full h-auto">
-						{contryData?.map(({ country, code, visits }) => (
+						{contryData?.map(({ country, visits }) => (
 							<div
-								key={code}
+								key={country}
 								className="flex items-center p-2 rounded-lg">
 								<div className="h-8 w-8">
 									<img
-										src={`https://flag.vercel.app/m/${code}.svg`}
-										alt={"country"}
+										src={`https://flag.vercel.app/m/${country}.svg`}
+										alt={country}
 										className="h-8 w-8 blur-0 rounded-full sm:h-8 lg:w-8"
 										loading="lazy"
 									/>
 								</div>
 								<div className="ml-2">
 									<p className="truncate w-[150px] capitalize text-md text-slate-900 font-medium leading-none lg:w-auto">
-										{country}
+										{COUNTRIES[country]}
 									</p>
 								</div>
 								<div className="flex items-center ml-auto gap-2 font-medium">

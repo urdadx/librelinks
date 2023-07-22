@@ -58,7 +58,7 @@ const EditLinkModal = ({ id, title, url }) => {
 		<>
 			<div>
 				<Dialog.Portal>
-					<Dialog.Overlay className="fixed inset-0 bg-gray-800 bg-opacity-50 sm:w-full" />
+					<Dialog.Overlay className="fixed inset-0 backdrop-blur-sm bg-gray-800 bg-opacity-50 sm:w-full" />
 					<Dialog.Content
 						className=" contentShow fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 
                 		rounded-2xl bg-white p-6 sm:p-8 lg:max-w-3xl w-[350px] sm:w-[500px] shadow-lg 

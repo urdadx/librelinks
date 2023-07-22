@@ -14,6 +14,7 @@ import React from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import { signalIframe } from "@/utils/helpers";
+import toast from "react-hot-toast";
 
 const LinksEditor = () => {
 	const { data: currentUser } = useCurrentUser();
@@ -31,7 +32,11 @@ const LinksEditor = () => {
 			const newLinks = arrayMove(userLinks, activeIndex, overIndex);
 
 			queryClient.setQueryData(["links", currentUser?.id], () => newLinks);
-			updateLinksOrderMutation.mutate(newLinks);
+			await toast.promise(updateLinksOrderMutation.mutateAsync(newLinks), {
+				loading: "Applying changes",
+				success: "Changes applied",
+				error: "An error occured",
+			});
 		}
 	};
 
