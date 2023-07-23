@@ -11,6 +11,7 @@ import Loader from "@/components/utils/loading-spinner";
 import NotFound from "@/components/utils/not-found";
 import useLinks from "@/hooks/useLinks";
 import Script from "next/script";
+import { SocialCards } from "@/components/core/user-profile/social-cards";
 
 const ProfilePage = () => {
 	const router = useRouter();
@@ -99,7 +100,7 @@ const ProfilePage = () => {
 				defer
 				src="https://unpkg.com/@tinybirdco/flock.js"
 				data-host="https://api.tinybird.co"
-				data-token="p.eyJ1IjogIjljZTA3ZWY3LTQwMWEtNDI4Ny04ZTQ0LTkzMDhjODY4YTJmNCIsICJpZCI6ICJjZWUzYjRmZS0zNTk1LTQzNjQtODAyOC1iYzZhYTJhZGZiYmUifQ.5GU8VusS9gjxLkZ-2UBcYiC6w5hxfTGT_0ij681VWos"
+				data-token={process.env.DATA_TOKEN}
 			/>
 			<section
 				style={{ background: theme.primary }}
@@ -123,16 +124,28 @@ const ProfilePage = () => {
 					/>
 					<p
 						style={{ color: theme.accent }}
-						className="font-bold text-white text-center text-sm mt-4 mb-1 lg:text-xl lg:mt-4 lg:mb-1">
+						className="font-bold text-white text-center text-sm mt-4 mb-1 lg:text-xl lg:mt-4">
 						{fetchedUser?.name}
 					</p>
 					{fetchedUser?.bio && (
 						<p
 							style={{ color: theme.accent }}
-							className="w-[150px] truncate text-center text-sm mt-1 mb-4 lg:text-xl lg:mt-4 lg:mb-8 lg:w-[500px]">
+							className="w-[150px] truncate text-center text-sm mt-1 mb-2 lg:text-xl lg:mb-2 lg:w-[500px]">
 							{fetchedUser?.bio}
 						</p>
 					)}
+					<div className="min-w-max flex flex-wrap gap-2 mb-8 lg:w-fit lg:gap-4">
+						{userLinks?.map(({ title, url }) => {
+							return (
+								<SocialCards
+									key={title}
+									title={title}
+									url={url}
+									color={theme.accent}
+								/>
+							);
+						})}
+					</div>
 					{userLinks?.map(({ id, ...link }) => (
 						<LinkCard
 							buttonStyle={buttonStyle}
@@ -154,7 +167,8 @@ const ProfilePage = () => {
 						</div>
 					)}
 				</div>
-				<footer className="absolute left-1/2 bottom-10 transform -translate-x-1/2 w-[200px]">
+				<div className="my-10 lg:my-24" />
+				<footer className="relative left-1/2 bottom-2 transform -translate-x-1/2 w-[200px]">
 					<p className="text-sm text-black text-semibold text-center w lg:text-lg">
 						Made with{" "}
 						<Link

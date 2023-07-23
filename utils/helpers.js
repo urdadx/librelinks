@@ -46,24 +46,35 @@ export const getInitials = (name) => {
 	return initials.join("");
 };
 
-export const isMobileScreen = () => {
-	const mobileScreenThreshold = 768; // Set your desired threshold here (e.g., 768 pixels)
-
-	// Check the width of the screen
-	const screenWidth =
-		window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
-
-	// Return true if the screen width is below the threshold, indicating a mobile screen
-	return screenWidth < mobileScreenThreshold;
-};
-
-export const refreshIframe = () => {
-	const iframe = (document.getElementById("preview").src += "");
-};
-
 export const signalIframe = () => {
 	const iframe = document.getElementById("preview");
 	if (iframe) {
 		iframe.contentWindow.postMessage("", "*");
 	}
 };
+
+export const refreshIframe = () => {
+	const iframe = (document.getElementById("preview").src += "");
+};
+
+export const removeHashFromHexColor = (hexColor) => {
+  // Use a regular expression to match the # symbol at the beginning
+  return hexColor.replace(/^#/, '');
+}
+
+export const extractSiteFromUrl = (url) => {
+ const regex = /^(?:https?:\/\/)?(?:www\.)?([^./]+)\./i;
+  
+  // Use the exec method to find the match
+  const match = regex.exec(url);
+  
+  // If a match is found, return the captured group (website name)
+  if (match && match[1]) {
+    return match[1];
+  } else {
+    // If no match is found, return null or an appropriate value
+    return null;
+  }
+}
+
+

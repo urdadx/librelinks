@@ -13,7 +13,7 @@ const CustomAlert = ({ title, action, desc, confirmMsg }) => (
 			</AlertDialog.Description>
 			<div className="flex justify-end gap-[25px]">
 				<AlertDialog.Cancel asChild>
-					<button className="text-slate-900 bg-gray-50 hover:bg-gray-200 inline-flex h-[35px] items-center justify-center rounded-[4px] px-[15px] border-slate-900 font-medium leading-none outline-none focus:shadow-[0_0_0_2px]">
+					<button className="text-slate-900 bg-gray-50 hover:bg-gray-200 inline-flex h-[35px] items-center justify-center rounded-[4px] px-[15px] font-medium leading-none outline-none focus:shadow-[0_0_0_2px]">
 						Cancel
 					</button>
 				</AlertDialog.Cancel>
