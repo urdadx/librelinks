@@ -8,6 +8,7 @@ import Image from "next/image";
 import Link from "next/link";
 import toast from "react-hot-toast";
 import { ArchiveSVG } from "@/components/utils/archive-svg";
+import TooltipWrapper from "@/components/utils/tooltip";
 
 const LinkCard = (props) => {
 	const { attributes, listeners, setNodeRef, transform, transition } = useSortable({
@@ -49,7 +50,10 @@ const LinkCard = (props) => {
 						priority
 					/>
 				) : (
-					<ArchiveSVG />
+					<TooltipWrapper
+						title="This link has been archived by you"
+						component={<ArchiveSVG />}
+					/>
 				)}
 				<div className="flex-1 p-2 h-full relative">
 					<div className="flex">

@@ -33,8 +33,8 @@ const LinksEditor = () => {
 
 			queryClient.setQueryData(["links", currentUser?.id], () => newLinks);
 			await toast.promise(updateLinksOrderMutation.mutateAsync(newLinks), {
-				loading: "Applying changes",
-				success: "Changes applied",
+				loading: "Syncing changes",
+				success: "Synced",
 				error: "An error occured",
 			});
 		}
@@ -65,7 +65,7 @@ const LinksEditor = () => {
 						<div className="">
 							<button
 								className="bg-slate-900 w-full font-medium flex justify-center gap-1 
-                items-center h-12 px-8 rounded-3xl text-white hover:bg-slate-700">
+                				items-center h-12 px-8 rounded-3xl text-white hover:bg-slate-700">
 								<Plus /> Add link
 							</button>
 						</div>

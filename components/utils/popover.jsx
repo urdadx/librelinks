@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import * as Popover from "@radix-ui/react-popover";
 import ThreeDots from "./three-dots";
-import { Edit, Trash, Eye, EyeOff, ArchiveIcon } from "lucide-react";
+import { Edit, Trash, ArchiveIcon } from "lucide-react";
 import * as Dialog from "@radix-ui/react-dialog";
 import EditLinkModal from "../shared/modals/edit-link";
 import axios from "axios";
@@ -19,7 +19,7 @@ const InfoPopover = ({ id, title, url, archived }) => {
 	const queryClient = useQueryClient();
 	const userId = currentUser?.id ?? null;
 
-	const visibilityMutation = useMutation(
+	const archiveMutation = useMutation(
 		async () => {
 			await axios.patch(`/api/links/${id}`, { archived: !isArchived });
 		},
@@ -31,8 +31,8 @@ const InfoPopover = ({ id, title, url, archived }) => {
 		}
 	);
 
-	const handleToggleVisiblity = async () => {
-		await toast.promise(visibilityMutation.mutateAsync(), {
+	const handleToggleArchiving = async () => {
+		await toast.promise(archiveMutation.mutateAsync(), {
 			loading: "Applying changes",
 			success: "Changes applied successfully",
 			error: "An error occured",
@@ -40,7 +40,7 @@ const InfoPopover = ({ id, title, url, archived }) => {
 		setIsArchived(!isArchived);
 	};
 
-	// delete the link
+	// delete link
 	const deleteMutation = useMutation(
 		async () => {
 			await axios.delete(`/api/links/${id}`);
@@ -69,12 +69,12 @@ const InfoPopover = ({ id, title, url, archived }) => {
 	};
 
 	const archiveProps = {
-		action: handleToggleVisiblity,
+		action: handleToggleArchiving,
 		title: !isArchived ? "Archive Link?" : "Unarchive Link?",
 		desc: !isArchived
 			? "Archived links will still work - they just won't show up on your main page."
 			: "By unarchiving this link, it will show up on your main page again.",
-		confirmMsg: !isArchived ? "Yes, archive link" : "Yes, unarchive",
+		confirmMsg: !isArchived ? "Yes, archive" : "Yes, unarchive",
 	};
 
 	return (

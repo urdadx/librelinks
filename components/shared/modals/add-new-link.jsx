@@ -9,6 +9,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import useCurrentUser from "@/hooks/useCurrentUser";
 import useLinks from "@/hooks/useLinks";
 import { signalIframe } from "@/utils/helpers";
+import * as Switch from "@radix-ui/react-switch";
 
 const AddLinkModal = () => {
 	const [title, setTitle] = useState("");
@@ -105,6 +106,13 @@ const AddLinkModal = () => {
 									Enter a valid URL
 								</small>
 							)}
+						</div>
+
+						<div className="p-2 relative flex justify-between gap-2 text-gray-800 my-4">
+							<h3>Is this a social media link?</h3>
+							<Switch.Root className="w-[42px] h-[25px] bg-[#E4E4E7] rounded-full relative focus:shadow-black data-[state=checked]:bg-slate-900 outline-none cursor-default">
+								<Switch.Thumb className="block w-[21px] h-[21px] bg-white rounded-full shadow-[0_2px_2px] shadow-blackA7 transition-transform duration-100 translate-x-0.5 will-change-transform data-[state=checked]:translate-x-[19px]" />
+							</Switch.Root>
 						</div>
 
 						<Dialog.Close asChild>
