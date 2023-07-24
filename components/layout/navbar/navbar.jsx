@@ -39,7 +39,7 @@ const Navbar = ({ showName = false, isHomePage = true }) => {
 
 	return (
 		<>
-			<header className="sticky top-0 w-[100vw] border-b border-b-slate-200 bg-white">
+			<header className="sticky z-0 top-0 w-[100vw] border-b border-b-slate-200 bg-white">
 				<div className="flex items-center justify-between h-16 px-4 sm:px-6 lg:px-8">
 					<div className="flex gap-6 items-center">
 						<Wand color="black" size={30} />

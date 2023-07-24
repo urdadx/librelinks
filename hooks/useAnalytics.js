@@ -16,7 +16,7 @@ const useAnalytics = (filter, handle) => {
       onError: () => {
         toast.error("An error occurred");
       },
-      refetchInterval: 2000,
+      // refetchInterval: 2000,
     },
   );
 };

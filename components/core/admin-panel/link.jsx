@@ -2,11 +2,13 @@ import { GripVertical, BarChart, Copy } from "lucide-react";
 import InfoPopover from "../../utils/popover";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
-import { getApexDomain, timeAgo } from "@/utils/helper-funcs";
+import { getApexDomain, timeAgo } from "@/utils/helpers";
 import { GOOGLE_FAVICON_URL } from "@/utils/constants";
 import Image from "next/image";
 import Link from "next/link";
 import toast from "react-hot-toast";
+import { ArchiveSVG } from "@/components/utils/archive-svg";
+import TooltipWrapper from "@/components/utils/tooltip";
 
 const LinkCard = (props) => {
 	const { attributes, listeners, setNodeRef, transform, transition } = useSortable({
@@ -37,15 +39,22 @@ const LinkCard = (props) => {
 					{...listeners}>
 					<GripVertical color="grey" size={17} />
 				</div>
-				<Image
-					src={`${GOOGLE_FAVICON_URL}${apexDomain}`}
-					alt={apexDomain}
-					className="h-8 w-8 blur-0 rounded-full sm:h-10 sm:w-10"
-					unoptimized
-					width={20}
-					height={20}
-					priority
-				/>
+				{!props.archived ? (
+					<Image
+						src={`${GOOGLE_FAVICON_URL}${apexDomain}`}
+						alt={apexDomain}
+						className="h-8 w-8 blur-0 rounded-full sm:h-10 sm:w-10"
+						unoptimized
+						width={20}
+						height={20}
+						priority
+					/>
+				) : (
+					<TooltipWrapper
+						title="This link has been archived by you"
+						component={<ArchiveSVG />}
+					/>
+				)}
 				<div className="flex-1 p-2 h-full relative">
 					<div className="flex">
 						<div className="w-full pr-3">
@@ -53,11 +62,8 @@ const LinkCard = (props) => {
 								<div className=" w-full row-start-1 col-start-1 items-center">
 									<div
 										target="_blank"
-										className="flex items-center gap-4 max-w-full 
-                    rounded-[2px] outline-offset-2 outline-2">
-										<p
-											className=" truncate w-[80px] text-gray-500 text-sm whitespace-nowrap 
-                        overflow-hidden font-semibold lg:max-w-min">
+										className="flex items-center gap-4 max-w-full rounded-[2px] outline-offset-2 outline-2">
+										<p className=" truncate w-[80px] text-gray-500 text-sm whitespace-nowrap overflow-hidden font-semibold lg:max-w-min">
 											{props.title}
 										</p>
 

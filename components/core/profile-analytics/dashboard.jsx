@@ -4,6 +4,8 @@ import LinkStats from "./link-stats";
 import useCurrentUser from "@/hooks/useCurrentUser";
 import useAnalytics from "@/hooks/useAnalytics";
 import { useState } from "react";
+import { LocationStats } from "./location-stats";
+import { DeviceStats } from "./device-stats";
 
 export function AnalyticsDashboard() {
   const options = [
@@ -32,6 +34,8 @@ export function AnalyticsDashboard() {
       </div>
       <Chart analytics={analytics} />
       <LinkStats />
+      <DeviceStats />
+      <LocationStats />
     </>
   );
 }

@@ -8,7 +8,7 @@ const Layout = ({ children }) => {
   return (
     <>
       <Navbar showName={false} isHomePage={false} />
-      <main className="bg-[#F2F4F7] flex flex-row h-screen">
+      <main className="bg-[#F9FAFB] flex flex-row h-screen">
         {children}
         {router.pathname != "/admin/analytics" && (
           <div className="hidden lg:my-auto lg:block lg:w-2/5 pl-4 overflow-hidden">

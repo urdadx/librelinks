@@ -1,7 +1,7 @@
 import React from "react";
 import { Oval } from "react-loader-spinner";
 
-const Loader = ({ bgColor, textColor, message, width, height }) => {
+const Loader = ({ bgColor, textColor, message, width, height, strokeWidth }) => {
 	return (
 		<>
 			<div className="flex justify-center mt-10 mx-auto">
@@ -14,7 +14,7 @@ const Loader = ({ bgColor, textColor, message, width, height }) => {
 					visible={true}
 					ariaLabel="oval-loading"
 					secondaryColor={bgColor}
-					strokeWidth={2}
+					strokeWidth={strokeWidth ? strokeWidth : 2}
 					strokeWidthSecondary={2}
 				/>
 			</div>

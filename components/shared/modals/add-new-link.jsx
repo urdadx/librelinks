@@ -2,29 +2,19 @@ import * as Dialog from "@radix-ui/react-dialog";
 import { useState } from "react";
 import Image from "next/image";
 import closeSVG from "@/public/close_button.svg";
-import { validDomainRegex } from "@/utils/helper-funcs";
+import { validDomainRegex } from "@/utils/helpers";
 import { toast } from "react-hot-toast";
 import axios from "axios";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import useCurrentUser from "@/hooks/useCurrentUser";
 import useLinks from "@/hooks/useLinks";
-import { refreshIframe } from "@/utils/helper-funcs";
+import { signalIframe } from "@/utils/helpers";
+import * as Switch from "@radix-ui/react-switch";
 
 const AddLinkModal = () => {
 	const [title, setTitle] = useState("");
 	const [url, setUrl] = useState("");
 	const [urlError, setUrlError] = useState(false);
-
-	const refreshIframe = () => {
-		const iframe = (document.getElementById("preview").src += "");
-	};
-
-	const signalIframe = () => {
-		const iframe = document.getElementById('preview');
-		if (iframe) {
-			iframe.contentWindow.postMessage('', '*');
-		}
-	}
 
 	const { data: currentUser } = useCurrentUser();
 	const userId = currentUser?.id ?? null;
@@ -47,10 +37,7 @@ const AddLinkModal = () => {
 				queryClient.invalidateQueries({ queryKey: ["links", userId] });
 				setTitle("");
 				setUrl("");
-				signalIframe()
-				// setTimeout(() => {
-				// 	refreshIframe();
-				// }, 1500);
+				signalIframe();
 			},
 		}
 	);
@@ -78,11 +65,8 @@ const AddLinkModal = () => {
 	return (
 		<>
 			<Dialog.Portal>
-				<Dialog.Overlay className="fixed inset-0 bg-gray-800 bg-opacity-50 sm:w-full" />
-				<Dialog.Content
-					className="contentShow fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 
-                rounded-2xl bg-white p-6 sm:p-8 lg:max-w-3xl w-[350px] sm:w-[500px] shadow-lg 
-                md:max-w-lg max-md:max-w-lg focus:outline-none">
+				<Dialog.Overlay className="fixed inset-0 backdrop-blur-sm bg-gray-800 bg-opacity-50 sm:w-full" />
+				<Dialog.Content className="contentShow fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rounded-2xl bg-white p-6 sm:p-8 lg:max-w-3xl w-[350px] sm:w-[500px] shadow-lg md:max-w-lg max-md:max-w-lg focus:outline-none">
 					<div className="flex flex-row justify-between items-center mb-4">
 						<Dialog.Title className="text-xl text-center font-medium mb-2 sm:mb-0 sm:mr-4">
 							Create new Link
@@ -124,13 +108,20 @@ const AddLinkModal = () => {
 							)}
 						</div>
 
+						<div className="p-2 relative flex justify-between gap-2 text-gray-800 my-4">
+							<h3>Is this a social media link?</h3>
+							<Switch.Root className="w-[42px] h-[25px] bg-[#E4E4E7] rounded-full relative focus:shadow-black border border-slate-200 data-[state=checked]:bg-slate-900 outline-none cursor-default">
+								<Switch.Thumb className="block w-[21px] h-[21px] bg-white rounded-full shadow-[0_2px_2px] shadow-blackA7 transition-transform duration-100 translate-x-0.5 will-change-transform data-[state=checked]:translate-x-[19px]" />
+							</Switch.Root>
+						</div>
+
 						<Dialog.Close asChild>
 							<button
 								onClick={submitLink}
 								disabled={urlError}
 								className={`inline-block w-full px-4 py-4 leading-none 
-                      text-lg mt-2 text-white rounded-3xl 
-                      ${!urlError ? "bg-slate-800 hover:bg-slate-900" : "bg-slate-500"}`}>
+                     			 text-lg mt-2 text-white rounded-3xl 
+                      			${!urlError ? "bg-slate-800 hover:bg-slate-900" : "bg-slate-500"}`}>
 								Create Link ✨
 							</button>
 						</Dialog.Close>

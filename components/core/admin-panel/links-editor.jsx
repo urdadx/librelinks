@@ -13,14 +13,15 @@ import useLinks from "@/hooks/useLinks";
 import React from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
-import { signalIframe } from "@/utils/helper-funcs";
+import { signalIframe } from "@/utils/helpers";
+import toast from "react-hot-toast";
 
 const LinksEditor = () => {
 	const { data: currentUser } = useCurrentUser();
 	const userId = currentUser?.id ? currentUser.id : null;
 
 	const { data: userLinks, isLoading } = useLinks(userId);
-	const queryClient = useQueryClient()
+	const queryClient = useQueryClient();
 
 	const handleDragEnd = async (event) => {
 		const { active, over } = event;
@@ -30,27 +31,28 @@ const LinksEditor = () => {
 			const overIndex = userLinks.findIndex((link) => link.id === over.id);
 			const newLinks = arrayMove(userLinks, activeIndex, overIndex);
 
-			queryClient.setQueryData(["links", currentUser?.id], () => (newLinks))
-			updateLinksOrderMutation.mutate(newLinks)
+			queryClient.setQueryData(["links", currentUser?.id], () => newLinks);
+			await toast.promise(updateLinksOrderMutation.mutateAsync(newLinks), {
+				loading: "Syncing changes",
+				success: "Synced",
+				error: "An error occured",
+			});
 		}
 	};
 
 	const updateLinksOrderMutation = useMutation(
 		async (newLinks) => {
-			await axios.put(
-			`/api/links`, {
-				links: newLinks
-			}
-			);
+			await axios.put(`/api/links`, {
+				links: newLinks,
+			});
 		},
 		{
-		onSuccess: () => {
-			queryClient.invalidateQueries(["links", currentUser?.id]);
-			signalIframe()
-		},
-    }
-  );
-
+			onSuccess: () => {
+				queryClient.invalidateQueries(["links", currentUser?.id]);
+				signalIframe();
+			},
+		}
+	);
 
 	return (
 		<DndContext
@@ -63,7 +65,7 @@ const LinksEditor = () => {
 						<div className="">
 							<button
 								className="bg-slate-900 w-full font-medium flex justify-center gap-1 
-                items-center h-12 px-8 rounded-3xl text-white hover:bg-slate-700">
+                				items-center h-12 px-8 rounded-3xl text-white hover:bg-slate-700">
 								<Plus /> Add link
 							</button>
 						</div>
