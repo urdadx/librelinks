@@ -32,8 +32,10 @@ const Chart = ({ analytics }) => {
                 fontSize={12}
                 tickLine={false}
                 axisLine={false}
+                minTickGap={15}
               />
               <YAxis
+                allowDecimals={false}
                 stroke="#888888"
                 fontSize={12}
                 tickLine={false}

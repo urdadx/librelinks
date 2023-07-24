@@ -14,6 +14,7 @@ export const authOptions = {
     newUser: "/onboard",
     signIn: "/login",
     error: "/login"
+    
   },
 
   providers: [

@@ -69,14 +69,6 @@ const ProfilePage = () => {
 		}
 	}, [fetchedUser, userLinks]);
 
-	useEffect(() => {
-		const trackVisit = async () => {
-			try {
-				await axios.post(`/api/analytics/views/${fetchedUser?.id}`);
-			} catch (err) {}
-		};
-		trackVisit();
-	}, [fetchedUser]);
 
 	if (isUserLoading) {
 		return <Loader message={"Loading..."} bgColor="black" textColor="black" />;
@@ -100,7 +92,7 @@ const ProfilePage = () => {
 				defer
 				src="https://unpkg.com/@tinybirdco/flock.js"
 				data-host="https://api.tinybird.co"
-				data-token={process.env.DATA_TOKEN}
+				data-token={process.env.NEXT_PUBLIC_DATA_TOKEN}
 			/>
 			<section
 				style={{ background: theme.primary }}
@@ -134,8 +126,8 @@ const ProfilePage = () => {
 							{fetchedUser?.bio}
 						</p>
 					)}
-					<div className="min-w-max flex flex-wrap gap-2 mb-6 lg:w-fit lg:gap-4">
-						{userLinks?.map(({ title, url }) => {
+					<div className="min-w-max flex flex-wrap gap-2 mb-8 lg:w-fit lg:gap-4">
+						{userLinks?.filter((link) => link.isSocial && !link.archived ).map(({ title, url }) => {
 							return (
 								<SocialCards
 									key={title}
@@ -146,7 +138,7 @@ const ProfilePage = () => {
 							);
 						})}
 					</div>
-					{userLinks?.map(({ id, ...link }) => (
+					{userLinks?.filter((link) => !link.isSocial ).map(({ id, ...link }) => (
 						<LinkCard
 							buttonStyle={buttonStyle}
 							theme={theme}
