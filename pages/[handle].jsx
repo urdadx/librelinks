@@ -127,7 +127,7 @@ const ProfilePage = () => {
 						</p>
 					)}
 					<div className="min-w-max flex flex-wrap gap-2 mb-8 lg:w-fit lg:gap-4">
-						{userLinks?.filter((link) => link.isSocial ).map(({ title, url }) => {
+						{userLinks?.filter((link) => link.isSocial && !link.archived ).map(({ title, url }) => {
 							return (
 								<SocialCards
 									key={title}
