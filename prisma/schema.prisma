@@ -59,6 +59,7 @@ model Link {
       url        String
       archived   Boolean    @default(false)
       order       Int
+      isSocial   Boolean    @default(false)
       // Link metadata
       clicks      Int       @default(0) // number of clicks
       createdAt   DateTime  @default(now())

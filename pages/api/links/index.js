@@ -9,7 +9,7 @@ export default async function handler(req, res) {
 	try {
 		if (req.method === "POST") {
 			const { currentUser } = await serverAuth(req, res);
-			const { title, url, order } = req.body;
+			const { title, url, order, isSocial } = req.body;
 
 			const link = await db.link.create({
 				data: {
@@ -17,6 +17,7 @@ export default async function handler(req, res) {
 					url,
 					order,
 					userId: currentUser.id,
+					isSocial
 				},
 			});
 

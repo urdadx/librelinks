@@ -1,13 +1,13 @@
-import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
 import { toast } from "react-hot-toast";
 
-const useAnalytics = (filter, handle) => {
+const useDeviceAnalytics = (handle) => {
   return useQuery({
-    queryKey: ["analytics", handle, filter],
+    queryKey: ["device-analytics", handle ],
     queryFn: async () => {
       const response = await axios.get(
-        `/api/analytics/views?handle=${handle}&filter=${filter}`
+        `/api/analytics/views/device?handle=${handle}`
       );
       return response.data;
     },
@@ -19,4 +19,4 @@ const useAnalytics = (filter, handle) => {
   });
 };
 
-export default useAnalytics;
+export default useDeviceAnalytics;

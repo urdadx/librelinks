@@ -6,21 +6,27 @@ import useAnalytics from "@/hooks/useAnalytics";
 import { useState } from "react";
 import { LocationStats } from "./location-stats";
 import { DeviceStats } from "./device-stats";
+import useLocationAnalytics from "@/hooks/useLocationAnalytics";
+import useDeviceAnalytics from "@/hooks/useDeviceAnalytics";
 
 export function AnalyticsDashboard() {
   const options = [
-    { value: "last_24_hours", label: "Last 24 hours" },
     { value: "last_hour", label: "Last hour" },
+    { value: "last_24_hours", label: "Last 24 hours" },
     { value: "last_7_days", label: "Last 7 days" },
-    // { value: "15d", label: "Last 15 days" },
     { value: "last_30_days", label: "Last 30 days" },
   ];
   const { data: currentUser } = useCurrentUser();
-  const [filter, setFilter] = useState("last_24_hours");
-  const { data: analytics, isLoading: analyticsLoading } = useAnalytics(
-    filter,
-    currentUser?.handle
-  );
+  const [filter, setFilter] = useState("last_hour");
+  const { data: visitAnalytics, isLoading: visitAnalyticsLoading } =
+    useAnalytics(filter, currentUser?.handle);
+
+  const { data: locationAnalytics, isLoading: locationAnalyticsLoading } =
+    useLocationAnalytics(currentUser?.handle);
+
+  const { data: deviceAnalytics, isLoading: deviceAnalyticsLoading } =
+    useDeviceAnalytics(currentUser?.handle);
+
   return (
     <>
       <div className="flex w-full items-center justify-between">
@@ -32,10 +38,10 @@ export function AnalyticsDashboard() {
           options={options}
         />
       </div>
-      <Chart analytics={analytics} />
+      <Chart analytics={visitAnalytics} />
       <LinkStats />
-      <DeviceStats />
-      <LocationStats />
+      <DeviceStats analytics={deviceAnalytics}/>
+      <LocationStats analytics={locationAnalytics} />
     </>
   );
 }

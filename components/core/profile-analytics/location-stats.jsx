@@ -7,7 +7,7 @@ const contryData = [
 	{ country: "GH", visits: 2 },
 ];
 
-export const LocationStats = () => {
+export const LocationStats = ({analytics}) => {
 	return (
 		<>
 			<div className="mt-10 w-full">
@@ -20,21 +20,21 @@ export const LocationStats = () => {
 						</p>
 					</div>
 					<div className="w-full h-auto">
-						{contryData?.map(({ country, visits }) => (
+						{analytics?.map(({ location, visits }) => (
 							<div
-								key={country}
+								key={location}
 								className="flex items-center p-2 rounded-lg">
 								<div className="h-8 w-8">
 									<img
-										src={`https://flag.vercel.app/m/${country}.svg`}
-										alt={country}
+										src={`https://flag.vercel.app/m/${location}.svg`}
+										alt={location}
 										className="h-8 w-8 blur-0 rounded-full sm:h-8 lg:w-8"
 										loading="lazy"
 									/>
 								</div>
 								<div className="ml-2">
 									<p className="truncate w-[150px] capitalize text-md text-slate-900 font-medium leading-none lg:w-auto">
-										{COUNTRIES[country]}
+										{COUNTRIES[location]}
 									</p>
 								</div>
 								<div className="flex items-center ml-auto gap-2 font-medium">
