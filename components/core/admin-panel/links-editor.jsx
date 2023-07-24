@@ -4,7 +4,6 @@ import AddLinkModal from "../../shared/modals/add-new-link";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "./link";
-import Loader from "@/components/utils/loading-spinner";
 import useCurrentUser from "@/hooks/useCurrentUser";
 import { DndContext, closestCenter } from "@dnd-kit/core";
 import { arrayMove, SortableContext, verticalListSortingStrategy } from "@dnd-kit/sortable";
@@ -15,6 +14,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import { signalIframe } from "@/utils/helpers";
 import toast from "react-hot-toast";
+import LinkSkeleton from "./link-skeleton";
 
 const LinksEditor = () => {
 	const { data: currentUser } = useCurrentUser();
@@ -73,31 +73,33 @@ const LinksEditor = () => {
 					<AddLinkModal />
 				</Dialog.Root>
 
-				<div className="my-10 mx-4">
-					{!isLoading ? (
-						userLinks?.map(({ id, ...userLink }) => (
-							<React.Fragment key={id}>
-								<motion.div
-									key={id}
-									initial={{ opacity: 0, y: -20 }}
-									animate={{ opacity: 1, y: 0 }}
-									exit={{ opacity: 0, y: -20 }}
-									transition={{ duration: 0.5 }}>
-									<SortableContext
-										items={userLinks && userLinks}
-										strategy={verticalListSortingStrategy}>
-										<Link key={id} id={id} {...userLink} />
-									</SortableContext>
-								</motion.div>
-							</React.Fragment>
-						))
-					) : (
-						<Loader
-							bgColor="black"
-							textColor="text-slate-700"
-							message={"Fetching links..."}
-						/>
-					)}
+				<div className="my-10">
+					{!isLoading
+						? userLinks?.map(({ id, ...userLink }) => (
+								<React.Fragment key={id}>
+									<motion.div
+										key={id}
+										initial={{ opacity: 0, y: -20 }}
+										animate={{ opacity: 1, y: 0 }}
+										exit={{ opacity: 0, y: -20 }}
+										transition={{ duration: 0.5 }}>
+										<SortableContext
+											items={userLinks && userLinks}
+											strategy={
+												verticalListSortingStrategy
+											}>
+											<Link
+												key={id}
+												id={id}
+												{...userLink}
+											/>
+										</SortableContext>
+									</motion.div>
+								</React.Fragment>
+						  ))
+						: Array.from({ length: 4 }).map((_, i) => (
+								<LinkSkeleton key={i} />
+						  ))}
 					{!isLoading && userLinks?.length === 0 && (
 						<div className="mt-4 w-[245px] h-auto flex flex-col mx-auto">
 							<Image

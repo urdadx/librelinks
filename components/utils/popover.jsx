@@ -80,7 +80,7 @@ const InfoPopover = ({ id, title, url, archived }) => {
 	return (
 		<Popover.Root>
 			<Popover.Trigger className="">
-				<ThreeDots className="h-5 w-5 text-gray-500 absolute top-1/2 left-[97%] -translate-x-1/2 -translate-y-1/2" />
+				<ThreeDots className="h-5 w-5 text-gray-500 absolute top-1/2 left-[95%] -translate-x-1/2 -translate-y-1/2 lg:left-[97%] md:left-[97%]" />
 			</Popover.Trigger>
 			<Popover.Portal>
 				<Popover.Content

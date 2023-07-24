@@ -69,7 +69,7 @@ const AddLinkModal = () => {
 				<Dialog.Content className="contentShow fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rounded-2xl bg-white p-6 sm:p-8 lg:max-w-3xl w-[350px] sm:w-[500px] shadow-lg md:max-w-lg max-md:max-w-lg focus:outline-none">
 					<div className="flex flex-row justify-between items-center mb-4">
 						<Dialog.Title className="text-xl text-center font-medium mb-2 sm:mb-0 sm:mr-4">
-							Create new Link
+							Create a new Link
 						</Dialog.Title>
 						<Dialog.Close className="flex flex-end justify-end">
 							<div className="p-2 rounded-full flex justify-center items-center bg-gray-100 hover:bg-gray-300">
@@ -109,9 +109,9 @@ const AddLinkModal = () => {
 						</div>
 
 						<div className="p-2 relative flex justify-between gap-2 text-gray-800 my-4">
-							<h3>Is this a social media link?</h3>
+							<h3>Make this a social media link?</h3>
 							<Switch.Root className="w-[42px] h-[25px] bg-[#E4E4E7] rounded-full relative focus:shadow-black border border-slate-200 data-[state=checked]:bg-slate-900 outline-none cursor-default">
-								<Switch.Thumb className="block w-[21px] h-[21px] bg-white rounded-full shadow-[0_2px_2px] shadow-blackA7 transition-transform duration-100 translate-x-0.5 will-change-transform data-[state=checked]:translate-x-[19px]" />
+								<Switch.Thumb className="block w-[21px] h-[21px] bg-white rounded-full shadow-[0_2px_2px] transition-transform duration-100 translate-x-0.5 will-change-transform data-[state=checked]:translate-x-[19px]" />
 							</Switch.Root>
 						</div>
 

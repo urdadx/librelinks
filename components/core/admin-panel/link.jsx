@@ -32,7 +32,7 @@ const LinkCard = (props) => {
 			<div
 				ref={setNodeRef}
 				style={style}
-				className="flex bg-white items-center p-2 rounded-lg drop-shadow-md my-5">
+				className=" flex bg-white items-center p-2 rounded-lg drop-shadow-md my-5">
 				<div
 					className=" text-gray-400 text-sm hover:bg-blue-100 rounded-sm p-[3px]"
 					{...attributes}
@@ -62,8 +62,8 @@ const LinkCard = (props) => {
 								<div className=" w-full row-start-1 col-start-1 items-center">
 									<div
 										target="_blank"
-										className="flex items-center gap-4 max-w-full rounded-[2px] outline-offset-2 outline-2">
-										<p className=" truncate w-[80px] text-gray-500 text-sm whitespace-nowrap overflow-hidden font-semibold lg:max-w-min">
+										className="flex items-center max-w-full rounded-[2px] outline-offset-2 outline-2 lg:gap-4">
+										<p className=" truncate w-[80px] text-gray-500 text-sm whitespace-nowrap overflow-hidden font-semibold lg:w-fit">
 											{props.title}
 										</p>
 
