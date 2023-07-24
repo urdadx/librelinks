@@ -58,6 +58,7 @@ const Chart = ({ analytics }) => {
                 axisLine={false}
               />
               <YAxis
+                allowDecimals={false}
                 stroke="#888888"
                 fontSize={12}
                 tickLine={false}

@@ -60,9 +60,11 @@ function formatDate(dateStr) {
 
 function formatTime(dateStr) {
   const dateObj = new Date(dateStr);
-  const hours = dateObj.getHours().toString().padStart(2, "0");
+  let hours = dateObj.getHours();
   const minutes = dateObj.getMinutes().toString().padStart(2, "0");
-  return `${hours}:${minutes}`;
+  const amPM = hours >= 12 ? "PM" : "AM";
+  hours = (hours % 12) || 12; // Convert to 12-hour clock
+  return `${hours}:${minutes} ${amPM}`;
 }
 
 //   if (req.method !== "POST" && req.method !== "GET") {
