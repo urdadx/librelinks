@@ -3,7 +3,7 @@ import COUNTRIES from "@/utils/constants/countries";
 
 const contryData = [
 	{ country: "US", visits: 14 },
-	{ country: "PK", visits: 5 },
+	{ country: "CH", visits: 5 },
 	{ country: "GH", visits: 2 },
 ];
 
@@ -24,11 +24,11 @@ export const LocationStats = ({analytics}) => {
 							<div
 								key={location}
 								className="flex items-center p-2 rounded-lg">
-								<div className="h-8 w-8">
+								<div className="h-8 w-8 border rounded-full">
 									<img
 										src={`https://flag.vercel.app/m/${location}.svg`}
 										alt={location}
-										className="h-8 w-8 blur-0 rounded-full sm:h-8 lg:w-8"
+										className="h-8 w-8 blur-0 rounded-full lg:h-8 lg:w-8"
 										loading="lazy"
 									/>
 								</div>

@@ -116,13 +116,13 @@ const ProfilePage = () => {
 					/>
 					<p
 						style={{ color: theme.accent }}
-						className="font-bold text-white text-center text-sm mt-4 mb-1 lg:text-xl lg:mt-4">
+						className="font-bold text-white text-center text-sm mt-4 mb-2 lg:text-xl lg:mt-4">
 						{fetchedUser?.name}
 					</p>
 					{fetchedUser?.bio && (
 						<p
 							style={{ color: theme.accent }}
-							className="w-[150px] truncate text-center text-sm mt-1 mb-2 lg:text-xl lg:mb-2 lg:w-[500px]">
+							className="w-[150px] truncate text-center text-sm mt-1 mb-4 lg:text-xl lg:mb-4 lg:w-[500px]">
 							{fetchedUser?.bio}
 						</p>
 					)}
@@ -160,18 +160,23 @@ const ProfilePage = () => {
 					)}
 				</div>
 				<div className="my-10 lg:my-24" />
-				<footer className="relative left-1/2 bottom-2 transform -translate-x-1/2 w-[200px]">
-					<p className="text-sm text-black text-semibold text-center w lg:text-lg">
-						Made with{" "}
-						<Link
-							className="font-semibold"
+				{userLinks?.length > 0 ? (
+					<footer className="relative left-1/2 bottom-0 transform -translate-x-1/2 w-[200px]">
+						<p
 							style={{ color: theme.accent }}
-							target="_blank"
-							href="https://twitter.com/NerdyProgramme2">
-							Librelinks
-						</Link>
-					</p>
-				</footer>
+							className="text-sm text-semibold text-center w lg:text-lg">
+							Made with{" "}
+							<Link
+								className="font-semibold"
+								target="_blank"
+								href="https://twitter.com/NerdyProgramme2">
+								Librelinks
+							</Link>
+						</p>
+					</footer>
+				) : (
+					""
+				)}
 			</section>
 		</>
 	);
