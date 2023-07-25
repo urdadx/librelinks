@@ -101,13 +101,6 @@ const EditLinkModal = ({ id, title, url }) => {
 								)}
 							</div>
 
-							<div className="p-2 relative flex justify-between gap-2 text-gray-800 my-4">
-								<h3>Is this a social media link?</h3>
-								<Switch.Root className="w-[42px] h-[25px] bg-[#E4E4E7] rounded-full relative focus:shadow-black border border-slate-200 data-[state=checked]:bg-slate-900 outline-none cursor-default">
-									<Switch.Thumb className="block w-[21px] h-[21px] bg-white rounded-full shadow-[0_2px_2px] transition-transform duration-100 translate-x-0.5 will-change-transform data-[state=checked]:translate-x-[19px]" />
-								</Switch.Root>
-							</div>
-
 							<Dialog.Close asChild>
 								<button
 									onClick={handleEditLink}

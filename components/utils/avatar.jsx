@@ -1,13 +1,10 @@
 import * as Avatar from "@radix-ui/react-avatar";
-// import { getInitials } from "@/utils/helper-funcs";
 import useCurrentUser from "@/hooks/useCurrentUser";
 import useUser from "@/hooks/useUser";
 
 export const UserAvatar = () => {
 	const { data: currentUser } = useCurrentUser();
 	const { data: fetchedUser } = useUser(currentUser?.handle);
-
-	// const usernameInitials = getInitials(currentUser ? currentUser.name : "@");
 
 	return (
 		<>

@@ -14,7 +14,7 @@ const Preview = () => {
 							title="preview"
 							id="preview"
 							className="h-full w-full"
-							src={`http://localhost:3000/${currentUser?.handle}`}></iframe>
+							src={`http://localhost:3000/${currentUser?.handle}?isIframe=true`}></iframe>
 					)}
 				</div>
 			</div>

@@ -16,6 +16,9 @@ body {
 .contentShow {
 	animation: contentShow 150ms cubic-bezier(0.16, 1, 0.3, 1);
 }
+.slideBottom {
+	animation: slideBottom 150ms cubic-bezier(0.16, 1, 0.3, 1);
+}
 
 .footer{
 	left:calc(50% - 15px);
@@ -26,6 +29,16 @@ body {
 	from {
 		opacity: 0;
 		transform: translate(-50%, -48%) scale(0.7);
+	}
+	to {
+		opacity: 1;
+		transform: translate(-50%, -50%) scale(1);
+	}
+}
+@keyframes slideBottom {
+	from {
+		opacity: 0;
+		transform: translateY(-50%, -48%) scale(0.7);
 	}
 	to {
 		opacity: 1;

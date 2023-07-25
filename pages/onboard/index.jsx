@@ -81,9 +81,9 @@ const Onboard = () => {
 				<div className="mt-4 sm:mx-auto sm:w-full sm:max-w-sm">
 					<div className="space-y-6">
 						<div>
-							<div class="flex items-center justify-between">
+							<div className="flex items-center justify-between">
 								<label
-									for="password"
+									for="handle"
 									class="block text-sm font-medium leading-6 text-gray-700">
 									Claim handle
 								</label>
@@ -99,6 +99,7 @@ const Onboard = () => {
 							</div>
 							<div className="mt-2">
 								<input
+									id="handle"
 									placeholder="@urdad"
 									value={handle}
 									onChange={handleOnChange}

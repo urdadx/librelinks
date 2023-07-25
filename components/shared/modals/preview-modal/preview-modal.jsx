@@ -1,14 +1,12 @@
-import * as Dialog from "@radix-ui/react-dialog";
 import Preview from "../../profile-preview/preview";
-import modalStyles from "../preview-modal/Modal.module.css";
+import React from "react";
 
-const PreviewModal = () => {
+const PreviewModal = ({ close }) => {
 	return (
-		<Dialog.Portal>
-			<Dialog.Overlay className="fixed backdrop-blur-sm inset-0 bg-gray-800 bg-opacity-50" />
-			<Dialog.Content className={modalStyles.DialogContent}>
-				<Dialog.Trigger asChild>
-					<button className="absolute top-0 right-0 p-2">
+		<React.Fragment>
+			<div className="fixed  bg-gray-800 h-screen">
+				<div className=" bg-white rounded-xl fixed top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-screen p-6">
+					<button onClick={close} className="absolute top-0 right-0 p-2">
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
 							className="h-6 w-6"
@@ -23,11 +21,10 @@ const PreviewModal = () => {
 							/>
 						</svg>
 					</button>
-				</Dialog.Trigger>
-
-				<Preview />
-			</Dialog.Content>
-		</Dialog.Portal>
+					<Preview />
+				</div>
+			</div>
+		</React.Fragment>
 	);
 };
 

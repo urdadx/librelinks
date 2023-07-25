@@ -1,13 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import COUNTRIES from "@/utils/constants/countries";
 
-const contryData = [
-	{ country: "US", visits: 14 },
-	{ country: "CH", visits: 5 },
-	{ country: "GH", visits: 2 },
-];
-
-export const LocationStats = ({analytics}) => {
+export const LocationStats = ({ analytics }) => {
 	return (
 		<>
 			<div className="mt-10 w-full">

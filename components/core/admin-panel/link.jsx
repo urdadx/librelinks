@@ -1,5 +1,5 @@
 import { GripVertical, BarChart, Copy } from "lucide-react";
-import InfoPopover from "../../utils/popover";
+import InfoPopover from "../../utils/popover-desktop";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { getApexDomain, timeAgo } from "@/utils/helpers";
@@ -62,8 +62,8 @@ const LinkCard = (props) => {
 								<div className=" w-full row-start-1 col-start-1 items-center">
 									<div
 										target="_blank"
-										className="flex items-center max-w-full rounded-[2px] outline-offset-2 outline-2 lg:gap-4">
-										<p className=" truncate w-[80px] text-gray-500 text-sm whitespace-nowrap overflow-hidden font-semibold lg:w-fit">
+										className="flex items-center max-w-full rounded-[2px] outline-offset-2 outline-2 gap-2 lg:gap-4">
+										<p className="truncate w-fit max-w-[80px] text-gray-500 text-sm whitespace-nowrap overflow-hidden font-semibold lg:w-fit lg:max-w-[150px]">
 											{props.title}
 										</p>
 
@@ -119,12 +119,7 @@ const LinkCard = (props) => {
 								<small className="mr-8 hidden whitespace-nowrap text-sm text-gray-500 sm:block">
 									Added {timeAgo(props.createdAt, true)} ago
 								</small>
-								<InfoPopover
-									id={props.id}
-									title={props.title}
-									url={props.url}
-									archived={props.archived}
-								/>
+								<InfoPopover {...props} />
 							</div>
 						</button>
 					</div>

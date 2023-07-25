@@ -11,6 +11,9 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { signalIframe } from "@/utils/helpers";
 import * as AlertDialog from "@radix-ui/react-alert-dialog";
 import CustomAlert from "../shared/alerts/custom-alert";
+import useWindowSize from "@/hooks/use-window-size";
+import PopoverMobile from "./popover-mobile";
+import { Drawer } from "vaul";
 
 const InfoPopover = ({ id, title, url, archived }) => {
 	const [isArchived, setIsArchived] = useState(archived);
@@ -18,6 +21,8 @@ const InfoPopover = ({ id, title, url, archived }) => {
 	const { data: currentUser } = useCurrentUser();
 	const queryClient = useQueryClient();
 	const userId = currentUser?.id ?? null;
+
+	const { width } = useWindowSize();
 
 	const archiveMutation = useMutation(
 		async () => {
@@ -79,9 +84,18 @@ const InfoPopover = ({ id, title, url, archived }) => {
 
 	return (
 		<Popover.Root>
-			<Popover.Trigger className="">
-				<ThreeDots className="h-5 w-5 text-gray-500 absolute top-1/2 left-[95%] -translate-x-1/2 -translate-y-1/2 lg:left-[97%] md:left-[97%]" />
-			</Popover.Trigger>
+			{width > 640 ? (
+				<Popover.Trigger className="">
+					<ThreeDots />
+				</Popover.Trigger>
+			) : (
+				<Drawer.Root shouldScaleBackground>
+					<Drawer.Trigger>
+						<ThreeDots />
+					</Drawer.Trigger>
+					<PopoverMobile id={id} title={title} url={url} />
+				</Drawer.Root>
+			)}
 			<Popover.Portal>
 				<Popover.Content
 					className="w-[120px] items-center rounded-md border border-gray-200 mr-2 bg-white drop-shadow-lg md:block lg:w-[150px]"

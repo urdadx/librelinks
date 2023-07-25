@@ -1,6 +1,5 @@
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
-import { toast } from "react-hot-toast";
 
 const useCurrentUser = () => {
 	return useQuery({
@@ -9,10 +8,9 @@ const useCurrentUser = () => {
 			const response = await axios.get("/api/current");
 			return response.data;
 		},
-		onError: () => {
-			toast.error("An error occurred");
+		onError: (err) => {
+			console.error(err.message);
 		},
-		// refetchInterval: 2000,
 	});
 };
 

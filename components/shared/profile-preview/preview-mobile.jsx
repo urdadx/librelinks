@@ -1,46 +1,33 @@
 /* eslint-disable @next/next/no-img-element */
-import { useEffect, useState, useCallback, useMemo } from "react";
+import { useEffect, useState, useMemo } from "react";
 import LinkCard from "@/components/core/user-profile/links-card";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import axios from "axios";
-import toast from "react-hot-toast";
-import useUser from "@/hooks/useUser";
 import Loader from "@/components/utils/loading-spinner";
 import NotFound from "@/components/utils/not-found";
 import useLinks from "@/hooks/useLinks";
-import Script from "next/script";
 import { SocialCards } from "@/components/core/user-profile/social-cards";
+import useCurrentUser from "@/hooks/useCurrentUser";
+import { X } from "lucide-react";
 
-const ProfilePage = () => {
-	const { query } = useRouter();
-	const { handle } = query;
+const PreviewMobile = ({ close }) => {
+	const { back } = useRouter();
 	const [, setIsDataLoaded] = useState(false);
 
-	console.log(query.isIframe);
+	const { data: currentUser, isLoading: isUserLoading } = useCurrentUser();
 
-	const {
-		data: fetchedUser,
-		isLoading: isUserLoading,
-		isFetching: isUserFetching,
-	} = useUser(handle);
-
-	const { data: userLinks, isFetching: isLinksFetching } = useLinks(fetchedUser?.id);
-
-	const queryClient = useQueryClient();
+	const { data: userLinks } = useLinks(currentUser?.id);
 
 	const theme = useMemo(
 		() => ({
-			primary: fetchedUser?.themePalette.palette[0],
-			secondary: fetchedUser?.themePalette.palette[1],
-			accent: fetchedUser?.themePalette.palette[2],
-			neutral: fetchedUser?.themePalette.palette[3],
+			primary: currentUser?.themePalette.palette[0],
+			secondary: currentUser?.themePalette.palette[1],
+			accent: currentUser?.themePalette.palette[2],
+			neutral: currentUser?.themePalette.palette[3],
 		}),
-		[fetchedUser?.themePalette.palette]
+		[currentUser?.themePalette.palette]
 	);
 
-	// Memoizing the links to prevent expensive re-renders
 	const socialLinks = useMemo(
 		() => userLinks?.filter((link) => link.isSocial && !link.archived),
 		[userLinks]
@@ -51,101 +38,42 @@ const ProfilePage = () => {
 		[userLinks]
 	);
 
-	const mutation = useMutation(
-		async (id) => {
-			await axios.patch(`/api/analytics/clicks/${id}`);
-		},
-		{
-			onError: (error) => {
-				toast.error(
-					(error.response && error.response.data.message) || "An error occurred"
-				);
-			},
-			onSuccess: () => {
-				queryClient.invalidateQueries({ queryKey: ["links", fetchedUser?.id] });
-				queryClient.invalidateQueries({ queryKey: ["users", fetchedUser?.id] });
-			},
-		}
-	);
-
-	const handleRegisterClick = useCallback(
-		async (id) => {
-			await mutation.mutateAsync(id);
-		},
-		[mutation]
-	);
-
 	useEffect(() => {
-		const handleMessage = () => {
-			queryClient.invalidateQueries({ queryKey: ["links"] });
-			queryClient.invalidateQueries({ queryKey: ["users"] });
-		};
-
-		window.addEventListener("message", handleMessage);
-
-		return () => {
-			window.removeEventListener("message", handleMessage);
-		};
-	}, [queryClient]);
-
-	useEffect(() => {
-		if (fetchedUser && userLinks) {
+		if (currentUser && userLinks) {
 			setIsDataLoaded(true);
 		}
-	}, [fetchedUser, userLinks]);
+	}, [currentUser, userLinks]);
 
 	if (isUserLoading) {
 		return <Loader message={"Loading..."} bgColor="black" textColor="black" />;
 	}
 
-	if (!fetchedUser?.id) {
+	if (!currentUser?.id) {
 		return <NotFound />;
 	}
 
-	const buttonStyle = fetchedUser?.buttonStyle;
-
 	return (
 		<>
-			{!query.isIframe ? (
-				<Script
-					defer
-					src="https://unpkg.com/@tinybirdco/flock.js"
-					data-host="https://api.tinybird.co"
-					data-token={process.env.NEXT_PUBLIC_DATA_TOKEN}
-				/>
-			) : (
-				""
-			)}
 			<section
 				style={{ background: theme.primary }}
 				className="h-[100vh] w-[100vw] no-scrollbar overflow-auto">
 				<div className="flex items-center w-full mt-4 flex-col mx-auto max-w-3xl justify-center px-8 lg:mt-16">
-					{(isLinksFetching || isUserFetching) && (
-						<div className="absolute -top-5 left-2">
-							<Loader
-								strokeWidth={7}
-								width={15}
-								height={15}
-								bgColor={theme.accent}
-							/>
-						</div>
-					)}
 					<img
 						loading="lazy"
 						className="rounded-full w-[70px] h-[70px] lg:w-[96px] lg:h-[96px]"
-						alt={fetchedUser?.name}
-						src={fetchedUser?.image}
+						alt={currentUser?.name}
+						src={currentUser?.image}
 					/>
 					<p
 						style={{ color: theme.accent }}
 						className="font-bold text-white text-center text-sm mt-4 mb-2 lg:text-xl lg:mt-4">
-						{fetchedUser?.name}
+						{currentUser?.name}
 					</p>
-					{fetchedUser?.bio && (
+					{currentUser?.bio && (
 						<p
 							style={{ color: theme.accent }}
 							className="w-[150px] truncate text-center text-sm mt-1 mb-4 lg:text-xl lg:mb-4 lg:w-[500px]">
-							{fetchedUser?.bio}
+							{currentUser?.bio}
 						</p>
 					)}
 					<div className="min-w-max flex flex-wrap gap-2 mb-8 lg:w-fit lg:gap-4">
@@ -160,12 +88,11 @@ const ProfilePage = () => {
 					</div>
 					{nonSocialLinks?.map(({ id, ...link }) => (
 						<LinkCard
-							buttonStyle={buttonStyle}
+							buttonStyle={currentUser?.buttonStyle}
 							theme={theme}
 							id={id}
 							key={id}
 							{...link}
-							registerClicks={() => handleRegisterClick(id)}
 						/>
 					))}
 
@@ -195,9 +122,18 @@ const ProfilePage = () => {
 						</p>
 					</footer>
 				)}
+				<div className="rounded-full bottom-[1rem] fixed left-1/2 transform -translate-x-1/2 lg:hidden">
+					<button
+						onClick={close}
+						style={{ background: `${theme.neutral}` }}
+						className="flex justify-center items-center w-[45px] h-[45px] rounded-full bg-gray-500
+                          text-black text-center font-bold text-lg shadow-lg hover:bg-slate-600">
+						<X color={theme.primary} size={30} />
+					</button>
+				</div>
 			</section>
 		</>
 	);
 };
 
-export default ProfilePage;
+export default PreviewMobile;

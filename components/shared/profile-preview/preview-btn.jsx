@@ -1,25 +1,34 @@
-import * as Dialog from '@radix-ui/react-dialog';
-import PreviewModal from "../modals/preview-modal/preview-modal";
+import { useState } from "react";
+import Drawer from "react-modern-drawer";
+import "react-modern-drawer/dist/index.css";
+import PreviewMobile from "./preview-mobile";
 
 const PreviewBtn = () => {
-    return (
-        <>
-            <div className="fixed bottom-8 left-1/2 transform -translate-x-1/2 lg:hidden">
-                <Dialog.Root>
-                    <Dialog.Trigger asChild>
-                      <button 
-                         className="block py-2 px-6 rounded-full bg-slate-900
-                         text-white text-center font-bold text-lg shadow-lg hover:bg-slate-600"
-                        >
-                            Preview
-                      </button>
-                    </Dialog.Trigger>
-                    <PreviewModal />
-                </Dialog.Root>
+	const [isOpen, setIsOpen] = useState(false);
+	const toggleDrawer = () => {
+		setIsOpen((prevState) => !prevState);
+	};
+	return (
+		<>
+			<div className="fixed bottom-4 left-1/2 transform -translate-x-1/2 lg:hidden">
+				<button
+					onClick={toggleDrawer}
+					className="block py-2 px-6 rounded-full bg-slate-900 first-letter
+					text-white text-center font-bold text-lg shadow-lg hover:bg-slate-600">
+					Preview
+				</button>
+			</div>
 
-            </div>
-        </>
-    )
-}
+			<Drawer
+				open={isOpen}
+				onClose={toggleDrawer}
+				direction="bottom"
+				size={650}
+				className="overflow-auto ">
+				<PreviewMobile close={toggleDrawer} />
+			</Drawer>
+		</>
+	);
+};
 
 export default PreviewBtn;
