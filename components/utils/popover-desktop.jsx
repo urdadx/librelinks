@@ -82,6 +82,16 @@ const InfoPopover = ({ id, title, url, archived }) => {
 		confirmMsg: !isArchived ? "Yes, archive" : "Yes, unarchive",
 	};
 
+	const mobilePopOverProps = {
+		archiveProps,
+		deleteAlertProps,
+		title,
+		id,
+		url,
+		archived,
+		isArchived,
+	};
+
 	return (
 		<Popover.Root>
 			{width > 640 ? (
@@ -93,7 +103,7 @@ const InfoPopover = ({ id, title, url, archived }) => {
 					<Drawer.Trigger>
 						<ThreeDots />
 					</Drawer.Trigger>
-					<PopoverMobile id={id} title={title} url={url} />
+					<PopoverMobile {...mobilePopOverProps} />
 				</Drawer.Root>
 			)}
 			<Popover.Portal>
