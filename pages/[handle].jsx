@@ -18,8 +18,6 @@ const ProfilePage = () => {
 	const { handle } = query;
 	const [, setIsDataLoaded] = useState(false);
 
-	console.log(query.isIframe);
-
 	const {
 		data: fetchedUser,
 		isLoading: isUserLoading,
@@ -102,8 +100,6 @@ const ProfilePage = () => {
 		return <NotFound />;
 	}
 
-	const buttonStyle = fetchedUser?.buttonStyle;
-
 	return (
 		<>
 			{!query.isIframe ? (
@@ -160,7 +156,7 @@ const ProfilePage = () => {
 					</div>
 					{nonSocialLinks?.map(({ id, ...link }) => (
 						<LinkCard
-							buttonStyle={buttonStyle}
+							buttonStyle={fetchedUser?.buttonStyle}
 							theme={theme}
 							id={id}
 							key={id}

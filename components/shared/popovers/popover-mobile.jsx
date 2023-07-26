@@ -1,18 +1,26 @@
 import * as Dialog from "@radix-ui/react-dialog";
 import { Edit } from "lucide-react";
-import EditLinkModal from "../shared/modals/edit-link";
+import EditLinkModal from "../modals/edit-link";
 import * as AlertDialog from "@radix-ui/react-alert-dialog";
 import { Drawer } from "vaul";
 import { ArchiveIcon } from "lucide-react";
-import CustomAlert from "../shared/alerts/custom-alert";
+import CustomAlert from "../alerts/custom-alert";
 import { Trash } from "lucide-react";
 
-const PopoverMobile = ({ id, title, url, isArchived, archiveProps, deleteAlertProps }) => {
+const PopoverMobile = ({
+	id,
+	title,
+	url,
+	isArchived,
+	archiveProps,
+	deleteAlertProps,
+	closeDrawer,
+}) => {
 	return (
 		<>
 			<Drawer.Portal>
 				<Drawer.Overlay className="fixed inset-0 backdrop-blur-sm" />
-				<Drawer.Content className="bg-white p-2 rounded-3xl flex flex-col rounded-t-[10px] h-[30%] mt-24 fixed bottom-0 left-0 right-0">
+				<Drawer.Content className="bg-white p-2 flex flex-col rounded-t-xl h-[33%] mt-24 fixed bottom-0 left-0 right-0">
 					<div className="mx-auto mt-6 w-12 h-1.5 flex-shrink-0 rounded-full bg-zinc-300 mb-4" />
 					<Dialog.Root>
 						<Dialog.Trigger asChild>
@@ -21,7 +29,12 @@ const PopoverMobile = ({ id, title, url, isArchived, archiveProps, deleteAlertPr
 								<h3 className="text-lg">Edit</h3>
 							</button>
 						</Dialog.Trigger>
-						<EditLinkModal id={id} title={title} url={url} />
+						<EditLinkModal
+							close={closeDrawer}
+							id={id}
+							title={title}
+							url={url}
+						/>
 					</Dialog.Root>
 					<AlertDialog.Root>
 						<AlertDialog.Trigger asChild>
@@ -32,7 +45,7 @@ const PopoverMobile = ({ id, title, url, isArchived, archiveProps, deleteAlertPr
 								</h3>
 							</button>
 						</AlertDialog.Trigger>
-						<CustomAlert {...archiveProps} />
+						<CustomAlert close={closeDrawer} {...archiveProps} />
 					</AlertDialog.Root>
 					<AlertDialog.Root>
 						<AlertDialog.Trigger asChild>
@@ -44,7 +57,7 @@ const PopoverMobile = ({ id, title, url, isArchived, archiveProps, deleteAlertPr
 								<h3 className="text-lg">Delete</h3>
 							</button>
 						</AlertDialog.Trigger>
-						<CustomAlert {...deleteAlertProps} />
+						<CustomAlert close={closeDrawer} {...deleteAlertProps} />
 					</AlertDialog.Root>
 				</Drawer.Content>
 			</Drawer.Portal>

@@ -1,5 +1,4 @@
 import * as Dialog from "@radix-ui/react-dialog";
-import * as Switch from "@radix-ui/react-switch";
 import { useState } from "react";
 import closeSVG from "@/public/close_button.svg";
 import Image from "next/image";
@@ -10,7 +9,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import useCurrentUser from "@/hooks/useCurrentUser";
 import { signalIframe } from "@/utils/helpers";
 
-const EditLinkModal = ({ id, title, url }) => {
+const EditLinkModal = ({ id, title, url, close }) => {
 	const [newTitle, setNewTitle] = useState(title);
 	const [newUrl, setNewUrl] = useState(url);
 
@@ -37,9 +36,11 @@ const EditLinkModal = ({ id, title, url }) => {
 
 	const handleEditLink = async () => {
 		if (newTitle.trim() === "" || newUrl.trim() === "") {
+			close();
 			toast.error("Please fill the form");
 			return;
 		}
+		close(); // close drawer
 		await toast.promise(editMutation.mutateAsync({ newTitle, newUrl }), {
 			loading: "Editing link",
 			success: "Link edited successfully",
@@ -69,7 +70,9 @@ const EditLinkModal = ({ id, title, url }) => {
 								Edit Link
 							</Dialog.Title>
 							<Dialog.Close className="flex flex-end justify-end">
-								<div className="p-2 rounded-full flex justify-center items-center bg-gray-100 hover:bg-gray-300">
+								<div
+									onClick={close}
+									className="p-2 rounded-full flex justify-center items-center bg-gray-100 hover:bg-gray-300">
 									<Image priority src={closeSVG} alt="close" />
 								</div>
 							</Dialog.Close>

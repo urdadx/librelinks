@@ -13,6 +13,8 @@ const Preview = () => {
 							loading="lazy"
 							title="preview"
 							id="preview"
+							width="100%"
+							height="100%"
 							className="h-full w-full"
 							src={`http://localhost:3000/${currentUser?.handle}?isIframe=true`}></iframe>
 					)}

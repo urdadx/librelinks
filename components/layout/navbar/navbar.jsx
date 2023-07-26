@@ -3,7 +3,7 @@ import * as Dialog from "@radix-ui/react-dialog";
 import { Wand, Link2, BarChart, CircleDot, Settings2 } from "lucide-react";
 import { ArrowRight } from "lucide-react";
 import { useSession } from "next-auth/react";
-import UserAccountNav from "@/components/utils/usernavbutton";
+import UserAccountNavDesktop from "@/components/utils/usernavbutton-desktop";
 import ShareButton from "@/components/utils/share-button";
 import SiteHeader from "./main-nav";
 import ShareModal from "@/components/shared/modals/share-modal";
@@ -39,7 +39,7 @@ const Navbar = ({ showName = false, isHomePage = true }) => {
 
 	return (
 		<>
-			<header className="sticky z-0 top-0 w-[100vw] border-b border-b-slate-200 bg-white">
+			<header className="sticky top-0 w-[100vw] border-b border-b-slate-200 bg-white">
 				<div className="flex items-center justify-between h-16 px-4 sm:px-6 lg:px-8">
 					<div className="flex gap-6 items-center">
 						<Wand color="black" size={30} />
@@ -72,7 +72,7 @@ const Navbar = ({ showName = false, isHomePage = true }) => {
 									</Dialog.Trigger>
 									<ShareModal />
 								</Dialog.Root>
-								<UserAccountNav />
+								<UserAccountNavDesktop />
 							</div>
 						) : (
 							<div className="">

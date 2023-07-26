@@ -1,5 +1,5 @@
 import { GripVertical, BarChart, Copy } from "lucide-react";
-import InfoPopover from "../../utils/popover-desktop";
+import PopoverDesktop from "../../shared/popovers/popover-desktop";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { getApexDomain, timeAgo } from "@/utils/helpers";
@@ -119,7 +119,7 @@ const LinkCard = (props) => {
 								<small className="mr-8 hidden whitespace-nowrap text-sm text-gray-500 sm:block">
 									Added {timeAgo(props.createdAt, true)} ago
 								</small>
-								<InfoPopover {...props} />
+								<PopoverDesktop {...props} />
 							</div>
 						</button>
 					</div>

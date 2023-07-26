@@ -6,11 +6,16 @@ import { useRouter } from "next/router";
 import { toast } from "react-hot-toast";
 import Link from "next/link";
 import { User, LogOut, HomeIcon } from "lucide-react";
+import useWindowSize from "@/hooks/use-window-size";
+import { Drawer } from "vaul";
+import UserNavButtonMobile from "./usernavbutton-mobile";
 
-const UserAccountNav = () => {
+const UserAccountNavDesktop = () => {
 	const session = useSession();
 	const { data } = session;
 	const router = useRouter();
+
+	const { width } = useWindowSize();
 
 	const handleLogout = async () => {
 		try {
@@ -26,12 +31,22 @@ const UserAccountNav = () => {
 	return (
 		<>
 			<Popover.Root>
-				<Popover.Trigger className="">
-					<UserAvatar size={35} />
-				</Popover.Trigger>
+				{width > 640 ? (
+					<Popover.Trigger className="">
+						<UserAvatar size={35} />
+					</Popover.Trigger>
+				) : (
+					<Drawer.Root shouldScaleBackground>
+						<Drawer.Trigger>
+							<UserAvatar size={35} />
+						</Drawer.Trigger>
+						<UserNavButtonMobile data={data} logout={handleLogout} />
+					</Drawer.Root>
+				)}
+
 				<Popover.Portal>
 					<Popover.Content
-						className="w-[130px] mr-2 items-center rounded-md border border-gray-200 bg-white drop-shadow-lg md:block lg:w-[150px]"
+						className="z-50 w-[130px] mr-2 items-center rounded-md border border-gray-200 bg-white drop-shadow-lg md:block lg:w-[150px]"
 						sideOffset={4}>
 						<Link
 							href="/admin/settings"
@@ -61,4 +76,4 @@ const UserAccountNav = () => {
 	);
 };
 
-export default UserAccountNav;
+export default UserAccountNavDesktop;
