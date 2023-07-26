@@ -5,7 +5,15 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "./link";
 import useCurrentUser from "@/hooks/useCurrentUser";
-import { DndContext, closestCenter } from "@dnd-kit/core";
+import {
+	DndContext,
+	closestCenter,
+	useSensor,
+	useSensors,
+	MouseSensor,
+	TouchSensor,
+	KeyboardSensor,
+} from "@dnd-kit/core";
 import { arrayMove, SortableContext, verticalListSortingStrategy } from "@dnd-kit/sortable";
 import { restrictToVerticalAxis } from "@dnd-kit/modifiers";
 import useLinks from "@/hooks/useLinks";
@@ -19,6 +27,12 @@ import LinkSkeleton from "./link-skeleton";
 const LinksEditor = () => {
 	const { data: currentUser } = useCurrentUser();
 	const userId = currentUser?.id ? currentUser.id : null;
+
+	const mouseSensor = useSensor(MouseSensor);
+	const touchSensor = useSensor(TouchSensor);
+	const keyboardSensor = useSensor(KeyboardSensor);
+
+	const sensors = useSensors(mouseSensor, touchSensor, keyboardSensor);
 
 	const { data: userLinks, isLoading } = useLinks(userId);
 	const queryClient = useQueryClient();
@@ -34,7 +48,7 @@ const LinksEditor = () => {
 			queryClient.setQueryData(["links", currentUser?.id], () => newLinks);
 			await toast.promise(updateLinksOrderMutation.mutateAsync(newLinks), {
 				loading: "Syncing changes",
-				success: "Synced",
+				success: "Changes synced",
 				error: "An error occured",
 			});
 		}
@@ -56,6 +70,7 @@ const LinksEditor = () => {
 
 	return (
 		<DndContext
+			sensors={sensors}
 			collisionDetection={closestCenter}
 			onDragEnd={handleDragEnd}
 			modifiers={[restrictToVerticalAxis]}>

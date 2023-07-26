@@ -14,7 +14,7 @@ function calculateTotalViews(data) {
 const Chart = ({ analytics }) => {
 	return (
 		<>
-			<div className="mt-4 rounded-lg border bg-white py-4 px-2 w-full h-auto">
+			<div className="mt-4 rounded-xl border bg-white py-4 px-2 w-full h-auto">
 				<p className="font-semibold text-sm px-3 pb-2">Total views</p>
 				<div className="flex items-center gap-2 font-semibold text-2xl px-3 pb-2">
 					{analytics ? <h3>{calculateTotalViews(analytics)}</h3> : <h3>-</h3>}
@@ -42,7 +42,7 @@ const Chart = ({ analytics }) => {
 									tickFormatter={(value) => `${value}`}
 								/>
 								<Tooltip />
-								<Bar dataKey="views" fill="#adfa1d" />
+								<Bar dataKey="visits" fill="#adfa1d" />
 							</BarChart>
 						) : (
 							<div>

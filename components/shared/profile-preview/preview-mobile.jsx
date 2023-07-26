@@ -2,7 +2,6 @@
 import { useEffect, useState, useMemo } from "react";
 import LinkCard from "@/components/core/user-profile/links-card";
 import Link from "next/link";
-import { useRouter } from "next/router";
 import Loader from "@/components/utils/loading-spinner";
 import NotFound from "@/components/utils/not-found";
 import useLinks from "@/hooks/useLinks";
@@ -11,7 +10,6 @@ import useCurrentUser from "@/hooks/useCurrentUser";
 import { X } from "lucide-react";
 
 const PreviewMobile = ({ close }) => {
-	const { back } = useRouter();
 	const [, setIsDataLoaded] = useState(false);
 
 	const { data: currentUser, isLoading: isUserLoading } = useCurrentUser();

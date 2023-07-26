@@ -9,7 +9,13 @@ export const DeviceStats = ({ analytics }) => {
 		<>
 			<div className="mt-10 w-full">
 				<h3 className="text-xl font-semibold">Device Analytics</h3>
-				<div className="rounded-2xl mt-4 border bg-white h-auto pt-6">
+				<div className="rounded-xl mt-4 border bg-white h-auto p-4">
+					<div className="">
+						<h3 className="font-semibold text-md px-3 pb-1">Devices</h3>
+						<p className="text-gray-500 text-sm px-3 mb-2">
+							Insights on devices your audience use
+						</p>
+					</div>
 					<div className="flex items-center gap-x-4 justify-center lg:gap-x-10">
 						{analytics?.map(({ device, visits }, index) => (
 							<div key={device} className="flex flex-col gap-2">
@@ -34,8 +40,8 @@ export const DeviceStats = ({ analytics }) => {
 							</div>
 						))}
 					</div>
-					<div className=" mx-auto lg:w-[400px]">
-						{analytics && (
+					<div className=" mx-auto lg:w-[400px] md:w-[300px]">
+						{analytics?.length > 0 ? (
 							<PieChart width={width > 640 ? 400 : 350} height={250}>
 								<Tooltip
 									cursor={{ stroke: "red", strokeWidth: 2 }}
@@ -58,8 +64,7 @@ export const DeviceStats = ({ analytics }) => {
 									))}
 								</Pie>
 							</PieChart>
-						)}
-						{!analytics && (
+						) : (
 							<div className="my-6 flex justify-center">
 								<h3 className="text-center">No data available</h3>
 							</div>

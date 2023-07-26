@@ -13,7 +13,7 @@ const PreviewBtn = () => {
 			<div className="fixed bottom-4 left-1/2 transform -translate-x-1/2 lg:hidden">
 				<button
 					onClick={toggleDrawer}
-					className="block py-2 px-6 rounded-full bg-slate-900 first-letter
+					className="block py-2 px-6 rounded-full bg-slate-700 first-letter
 					text-white text-center font-bold text-lg shadow-lg hover:bg-slate-600">
 					Preview
 				</button>

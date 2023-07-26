@@ -12,7 +12,6 @@ const Footer = () => {
 						href="https://twitter.com/NerdyProgramme2">
 						@urdadx
 					</Link>{" "}
-					& 🤖
 				</p>
 			</footer>
 		</>

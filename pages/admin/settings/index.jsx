@@ -163,7 +163,7 @@ const Settings = () => {
 								and all your data.
 							</Balancer>
 						</h3>
-						<div className="w-full h-auto bg-white rounded-lg p-6">
+						<div className="w-full h-auto border bg-white rounded-lg p-6">
 							<AlertDialog.Root>
 								<AlertDialog.Trigger asChild>
 									<button
