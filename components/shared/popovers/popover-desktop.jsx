@@ -11,7 +11,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { signalIframe } from "@/utils/helpers";
 import * as AlertDialog from "@radix-ui/react-alert-dialog";
 import CustomAlert from "../alerts/custom-alert";
-import useWindowSize from "@/hooks/use-window-size";
+import useMediaQuery from "@/hooks/use-media-query";
 import PopoverMobile from "./popover-mobile";
 import { Drawer } from "vaul";
 
@@ -24,7 +24,7 @@ const PopoverDesktop = ({ id, title, url, archived }) => {
 	const queryClient = useQueryClient();
 	const userId = currentUser?.id ?? null;
 
-	const { width } = useWindowSize();
+	const { isMobile } = useMediaQuery();
 
 	const archiveMutation = useMutation(
 		async () => {
@@ -110,11 +110,7 @@ const PopoverDesktop = ({ id, title, url, archived }) => {
 
 	return (
 		<PopoverPrimitive.Root open={openPopover} onOpenChange={setOpenPopover}>
-			{width > 640 ? (
-				<PopoverPrimitive.Trigger className="">
-					<ThreeDots />
-				</PopoverPrimitive.Trigger>
-			) : (
+			{isMobile ? (
 				<Drawer.Root
 					open={openDrawer}
 					onOpenChange={setOpenDrawer}
@@ -124,6 +120,10 @@ const PopoverDesktop = ({ id, title, url, archived }) => {
 					</Drawer.Trigger>
 					<PopoverMobile {...mobilePopOverProps} />
 				</Drawer.Root>
+			) : (
+				<PopoverPrimitive.Trigger className="">
+					<ThreeDots />
+				</PopoverPrimitive.Trigger>
 			)}
 			<PopoverPrimitive.Portal>
 				<PopoverPrimitive.Content

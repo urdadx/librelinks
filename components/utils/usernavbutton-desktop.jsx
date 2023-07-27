@@ -6,7 +6,7 @@ import { useRouter } from "next/router";
 import { toast } from "react-hot-toast";
 import Link from "next/link";
 import { User, LogOut, HomeIcon } from "lucide-react";
-import useWindowSize from "@/hooks/use-window-size";
+import useMediaQuery from "@/hooks/use-media-query";
 import { Drawer } from "vaul";
 import UserNavButtonMobile from "./usernavbutton-mobile";
 
@@ -15,7 +15,7 @@ const UserAccountNavDesktop = () => {
 	const { data } = session;
 	const router = useRouter();
 
-	const { width } = useWindowSize();
+	const { isMobile } = useMediaQuery();
 
 	const handleLogout = async () => {
 		try {
@@ -31,17 +31,17 @@ const UserAccountNavDesktop = () => {
 	return (
 		<>
 			<Popover.Root>
-				{width > 640 ? (
-					<Popover.Trigger className="">
-						<UserAvatar size={35} />
-					</Popover.Trigger>
-				) : (
+				{isMobile ? (
 					<Drawer.Root shouldScaleBackground>
 						<Drawer.Trigger>
 							<UserAvatar size={35} />
 						</Drawer.Trigger>
 						<UserNavButtonMobile data={data} logout={handleLogout} />
 					</Drawer.Root>
+				) : (
+					<Popover.Trigger className="">
+						<UserAvatar size={35} />
+					</Popover.Trigger>
 				)}
 
 				<Popover.Portal>

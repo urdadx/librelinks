@@ -1,9 +1,9 @@
 import { PieChart, Tooltip, Pie, Cell } from "recharts";
-import useWindowSize from "@/hooks/use-window-size";
+import useMediaQuery from "@/hooks/use-media-query";
 
 export const DeviceStats = ({ analytics }) => {
 	const COLORS = ["#0088FE", "#00C49F", " #c84e89", "#FFBB28", "#FF8042"];
-	const { width } = useWindowSize();
+	const { isMobile } = useMediaQuery();
 
 	return (
 		<>
@@ -42,7 +42,7 @@ export const DeviceStats = ({ analytics }) => {
 					</div>
 					<div className=" mx-auto lg:w-[400px] md:w-[300px]">
 						{analytics?.length > 0 ? (
-							<PieChart width={width > 640 ? 400 : 350} height={250}>
+							<PieChart width={isMobile ? 350 : 400} height={250}>
 								<Tooltip
 									cursor={{ stroke: "red", strokeWidth: 2 }}
 								/>

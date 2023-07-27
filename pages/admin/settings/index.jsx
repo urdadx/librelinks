@@ -15,6 +15,7 @@ import { UserAvatarSetting } from "@/components/utils/avatar";
 import { signalIframe } from "@/utils/helpers";
 import * as AlertDialog from "@radix-ui/react-alert-dialog";
 import CustomAlert from "@/components/shared/alerts/custom-alert";
+import useMediaQuery from "@/hooks/use-media-query";
 
 const Settings = () => {
 	const { data: currentUser } = useCurrentUser();
@@ -24,6 +25,8 @@ const Settings = () => {
 	const [bio, setBio] = useState("");
 	const [image, setImage] = useState("");
 	const [handle, setHandle] = useState("");
+
+	const { isMobile } = useMediaQuery();
 
 	const queryClient = useQueryClient();
 	const userHandle = currentUser?.handle ?? null;
@@ -163,12 +166,12 @@ const Settings = () => {
 								and all your data.
 							</Balancer>
 						</h3>
-						<div className="w-full h-auto border bg-white rounded-lg p-6">
+						<div className="w-full h-auto border bg-white rounded-lg p-6 ">
 							<AlertDialog.Root>
 								<AlertDialog.Trigger asChild>
 									<button
 										className="border-none w-full lg:w-[200px] rounded-lg h-auto p-3
-									text-white bg-red-600 hover:bg-red-500">
+									  text-white bg-red-600 hover:bg-red-500">
 										Delete Account
 									</button>
 								</AlertDialog.Trigger>
@@ -176,8 +179,11 @@ const Settings = () => {
 							</AlertDialog.Root>
 						</div>
 					</div>
-
-					<div className="h-[60px]" />
+					{isMobile ? (
+						<div className="h-[100px] mb-24" />
+					) : (
+						<div className="h-[40px] mb-12" />
+					)}
 				</div>
 			</Layout>
 		</>

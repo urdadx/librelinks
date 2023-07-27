@@ -1,14 +1,17 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import useCurrentUser from "@/hooks/useCurrentUser";
-import { useCallback, useState, useEffect } from "react";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
-import { refreshIframe, signalIframe } from "@/utils/helpers";
+import { signalIframe } from "@/utils/helpers";
 
 const ButtonSelector = () => {
 	const { data: currentUser } = useCurrentUser();
 	const [buttonStyle, setButtonStyle] = useState(null);
 	const buttonFromDB = currentUser?.buttonStyle;
+
+	const queryClient = useQueryClient();
 
 	useEffect(() => {
 		const storedButton = buttonFromDB || localStorage.getItem("button-style");
@@ -18,19 +21,29 @@ const ButtonSelector = () => {
 		getThemeStyles();
 	}, [buttonFromDB]);
 
-	const handleChangeBtn = useCallback(async (buttonCSS) => {
-		await toast.promise(axios.patch("/api/customize", { buttonStyle: buttonCSS }), {
+	const mutateButtonStyle = useMutation(
+		async (buttonCSS) => {
+			await axios.patch("/api/customize", {
+				buttonStyle: buttonCSS,
+			});
+		},
+		{
+			onSuccess: () => {
+				queryClient.invalidateQueries("users");
+				signalIframe();
+			},
+		}
+	);
+
+	const handleChangeBtn = async (buttonCSS) => {
+		await toast.promise(mutateButtonStyle.mutateAsync(buttonCSS), {
 			loading: "Applying style",
-			success: "Style applied successfully",
-			error: "An error occurred",
+			success: "Styled applied successfully",
+			error: "An error occured",
 		});
 		setButtonStyle(buttonCSS);
-		signalIframe();
-		// setTimeout(() => {
-		// 	refreshIframe();
-		// }, 1000);
 		localStorage.setItem("button-style", buttonCSS);
-	}, []);
+	};
 
 	const getThemeStyles = (css) => {
 		if (buttonStyle === css) {

@@ -24,7 +24,7 @@ const PreviewBtn = () => {
 				onClose={toggleDrawer}
 				direction="bottom"
 				size={650}
-				className="overflow-auto ">
+				className="overflow-auto rounded-t-xl">
 				<PreviewMobile close={toggleDrawer} />
 			</Drawer>
 		</>

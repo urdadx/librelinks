@@ -135,6 +135,7 @@ const LinksEditor = () => {
 					)}
 				</div>
 			</div>
+			<div className="h-[40px] mb-12" />
 		</DndContext>
 	);
 };

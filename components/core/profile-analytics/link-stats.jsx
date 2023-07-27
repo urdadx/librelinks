@@ -5,7 +5,6 @@ import useCurrentUser from "@/hooks/useCurrentUser";
 import Loader from "@/components/utils/loading-spinner";
 import { getApexDomain } from "@/utils/helpers";
 import { GOOGLE_FAVICON_URL } from "@/utils/constants";
-import Image from "next/image";
 import { useState } from "react";
 import StarSVG from "@/components/utils/star-svg";
 import Link from "next/link";
@@ -58,7 +57,7 @@ const LinkStats = () => {
 													/>
 												</div>
 												<div className="ml-4">
-													<p className="truncate w-[150px] text-md text-slate-900 font-medium leading-none lg:w-auto">
+													<p className="truncate w-[100px] text-md text-slate-900 font-medium leading-none md:w-auto lg:w-auto">
 														{userLink.title}
 													</p>
 												</div>

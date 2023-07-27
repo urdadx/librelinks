@@ -104,12 +104,12 @@ const PreviewMobile = ({ close }) => {
 						</div>
 					)}
 				</div>
-				<div className="my-10 lg:my-24" />
+				<div className="mt-10" />
 				{nonSocialLinks?.length > 0 && (
 					<footer className="relative left-1/2 bottom-0 transform -translate-x-1/2 w-[200px]">
 						<p
 							style={{ color: theme.accent }}
-							className="text-sm text-semibold text-center w lg:text-lg">
+							className="text-sm text-semibold text-center lg:text-lg">
 							Made with{" "}
 							<Link
 								className="font-semibold"
@@ -120,12 +120,11 @@ const PreviewMobile = ({ close }) => {
 						</p>
 					</footer>
 				)}
-				<div className="rounded-full bottom-[1rem] fixed left-1/2 transform -translate-x-1/2 lg:hidden">
+				<div className="rounded-full bottom-[1rem] absolute left-1/2 transform -translate-x-1/2 lg:hidden">
 					<button
 						onClick={close}
 						style={{ background: `${theme.neutral}` }}
-						className="flex justify-center items-center w-[45px] h-[45px] rounded-full bg-gray-500
-                          text-black text-center font-bold text-lg shadow-lg hover:bg-slate-600">
+						className="flex justify-center items-center w-[45px] h-[45px] rounded-full bg-gray-500 text-black text-center font-bold text-lg shadow-lg hover:bg-slate-600">
 						<X color={theme.primary} size={30} />
 					</button>
 				</div>
