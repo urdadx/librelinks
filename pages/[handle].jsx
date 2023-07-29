@@ -1,8 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
-import { useEffect, useState, useCallback, useMemo } from "react";
 import LinkCard from "@/components/core/user-profile/links-card";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import toast from "react-hot-toast";
@@ -16,7 +16,6 @@ import { SocialCards } from "@/components/core/user-profile/social-cards";
 const ProfilePage = () => {
 	const { query } = useRouter();
 	const { handle } = query;
-	const [, setIsDataLoaded] = useState(false);
 
 	const {
 		data: fetchedUser,
@@ -27,27 +26,7 @@ const ProfilePage = () => {
 	const { data: userLinks, isFetching: isLinksFetching } = useLinks(fetchedUser?.id);
 
 	const queryClient = useQueryClient();
-
-	const theme = useMemo(
-		() => ({
-			primary: fetchedUser?.themePalette.palette[0],
-			secondary: fetchedUser?.themePalette.palette[1],
-			accent: fetchedUser?.themePalette.palette[2],
-			neutral: fetchedUser?.themePalette.palette[3],
-		}),
-		[fetchedUser?.themePalette.palette]
-	);
-
-	// Memoizing the links to prevent expensive re-renders
-	const socialLinks = useMemo(
-		() => userLinks?.filter((link) => link.isSocial && !link.archived),
-		[userLinks]
-	);
-
-	const nonSocialLinks = useMemo(
-		() => userLinks?.filter((link) => !link.isSocial),
-		[userLinks]
-	);
+	const [, setIsDataLoaded] = useState(false);
 
 	const mutation = useMutation(
 		async (id) => {
@@ -66,23 +45,21 @@ const ProfilePage = () => {
 		}
 	);
 
-	const handleRegisterClick = useCallback(
-		async (id) => {
-			await mutation.mutateAsync(id);
-		},
-		[mutation]
-	);
+	const handleRegisterClick = async (id) => {
+		await mutation.mutateAsync(id);
+	};
 
 	useEffect(() => {
-		const handleMessage = () => {
+		window.addEventListener("message", () => {
 			queryClient.invalidateQueries({ queryKey: ["links"] });
 			queryClient.invalidateQueries({ queryKey: ["users"] });
-		};
-
-		window.addEventListener("message", handleMessage);
+		});
 
 		return () => {
-			window.removeEventListener("message", handleMessage);
+			window.removeEventListener("message", () => {
+				queryClient.invalidateQueries({ queryKey: ["links"] });
+				queryClient.invalidateQueries({ queryKey: ["users"] });
+			});
 		};
 	}, [queryClient]);
 
@@ -99,6 +76,14 @@ const ProfilePage = () => {
 	if (!fetchedUser?.id) {
 		return <NotFound />;
 	}
+
+	const buttonStyle = fetchedUser?.buttonStyle;
+	const theme = {
+		primary: fetchedUser?.themePalette.palette[0],
+		secondary: fetchedUser?.themePalette.palette[1],
+		accent: fetchedUser?.themePalette.palette[2],
+		neutral: fetchedUser?.themePalette.palette[3],
+	};
 
 	return (
 		<>
@@ -145,27 +130,33 @@ const ProfilePage = () => {
 						</p>
 					)}
 					<div className="min-w-max flex flex-wrap gap-2 mb-8 lg:w-fit lg:gap-4">
-						{socialLinks?.map(({ title, url }) => (
-							<SocialCards
-								key={title}
-								title={title}
-								url={url}
-								color={theme.accent}
+						{userLinks
+							?.filter((link) => link.isSocial && !link.archived)
+							.map(({ title, url }) => {
+								return (
+									<SocialCards
+										key={title}
+										title={title}
+										url={url}
+										color={theme.accent}
+									/>
+								);
+							})}
+					</div>
+					{userLinks
+						?.filter((link) => !link.isSocial)
+						.map(({ id, ...link }) => (
+							<LinkCard
+								buttonStyle={buttonStyle}
+								theme={theme}
+								id={id}
+								key={id}
+								{...link}
+								registerClicks={() => handleRegisterClick(id)}
 							/>
 						))}
-					</div>
-					{nonSocialLinks?.map(({ id, ...link }) => (
-						<LinkCard
-							buttonStyle={fetchedUser?.buttonStyle}
-							theme={theme}
-							id={id}
-							key={id}
-							{...link}
-							registerClicks={() => handleRegisterClick(id)}
-						/>
-					))}
 
-					{nonSocialLinks?.length === 0 && socialLinks?.length === 0 && (
+					{userLinks?.length === 0 && (
 						<div className="flex justify-center">
 							<h3
 								style={{ color: theme.neutral }}
@@ -176,7 +167,7 @@ const ProfilePage = () => {
 					)}
 				</div>
 				<div className="my-10 lg:my-24" />
-				{nonSocialLinks?.length > 0 && (
+				{userLinks?.length > 0 ? (
 					<footer className="relative left-1/2 bottom-0 transform -translate-x-1/2 w-[200px]">
 						<p
 							style={{ color: theme.accent }}
@@ -190,6 +181,8 @@ const ProfilePage = () => {
 							</Link>
 						</p>
 					</footer>
+				) : (
+					""
 				)}
 			</section>
 		</>
