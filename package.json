@@ -30,6 +30,7 @@
     "eslint-config-next": "13.4.3",
     "framer-motion": "^10.12.16",
     "lucide-react": "^0.220.0",
+    "mini-svg-data-uri": "^1.4.4",
     "ms": "^2.1.3",
     "nanoid": "^4.0.2",
     "next": "13.4.3",

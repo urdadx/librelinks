@@ -19,10 +19,10 @@ const UploadModal = ({ onChange, value, submit }) => {
 	const handleDrop = useCallback(
 		(files) => {
 			const file = files[0];
-			const maxSize = 2 * 1024 * 1024; // 2MB
+			const maxSize = 5 * 1024 * 1024; // 5MB
 
 			if (file.size > maxSize) {
-				alert("Max file size exceeded. Please upload a file under 2MB.");
+				alert("Max file size exceeded. Please upload a file under 5MB.");
 				return;
 			}
 
@@ -90,7 +90,7 @@ const UploadModal = ({ onChange, value, submit }) => {
 										upload{" "}
 									</h3>
 									<h3 className="text-center">
-										(Max file size 2MB) ✨
+										(Max file size 5MB) ✨
 									</h3>
 								</div>
 								<div className=" my-6 absolute top-1/2 transform -translate-y-1/2">

@@ -7,8 +7,9 @@ import { TinyLoader } from "@/components/utils/tiny-loader";
 import { nanoid } from "nanoid";
 import { useRouter } from "next/router";
 import Confetti from "react-dom-confetti";
+import Balancer from "react-wrap-balancer";
 
-const Onboard = () => {
+const Onboarding = () => {
 	const [isLoading, setIsLoading] = useState(false);
 	const [handle, setHandle] = useState("");
 	const [handleTaken, setHandleTaken] = useState(false);
@@ -57,7 +58,7 @@ const Onboard = () => {
 	};
 
 	const autoGenerateName = () => {
-		const generatedName = nanoid(7);
+		const generatedName = nanoid(6);
 		setHandle(generatedName);
 	};
 
@@ -69,13 +70,13 @@ const Onboard = () => {
 		<>
 			<div
 				className="absolute inset-0 bg-[url(../public/grid.svg)] bg-center 
-        [mask-image:linear-gradient(180deg,rgba(255,255,255,0))]"
+       			[mask-image:linear-gradient(180deg,rgba(255,255,255,0))] bg-repeat"
 			/>
 			<div className="absolute w-full flex min-h-full flex-1 flex-col justify-center px-6 py-6 lg:px-8">
 				<div className="sm:mx-auto sm:w-full sm:max-w-sm">
 					<div className="mx-auto h-[30px] w-[30px] bg-slate-900 rounded-full" />
 					<h2 className="mt-4 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
-						Claim your unique handle ✨
+						<Balancer>Claim your unique handle ✨</Balancer>
 					</h2>
 				</div>
 				<div className="mt-4 sm:mx-auto sm:w-full sm:max-w-sm">
@@ -85,7 +86,7 @@ const Onboard = () => {
 								<label
 									for="handle"
 									class="block text-sm font-medium leading-6 text-gray-700">
-									Claim handle
+									Type your handle
 								</label>
 								<div className="text-sm">
 									<Link
@@ -97,10 +98,10 @@ const Onboard = () => {
 									</Link>
 								</div>
 							</div>
-							<div className="mt-2">
+							<div className="mt-2 flex justify-center">
 								<input
 									id="handle"
-									placeholder="@urdad"
+									placeholder="ex: naruto"
 									value={handle}
 									onChange={handleOnChange}
 									type="text"
@@ -136,7 +137,7 @@ const Onboard = () => {
 							)}
 						</button>
 					</div>
-					<div className="w-full hidden justify-center h-full mx-auto lg:flex">
+					<div className="w-full hidden justify-center h-full lg:flex">
 						<Confetti active={isExploding} config={config} />
 					</div>
 				</div>
@@ -145,4 +146,4 @@ const Onboard = () => {
 	);
 };
 
-export default Onboard;
+export default Onboarding;
