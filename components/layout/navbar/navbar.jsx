@@ -1,7 +1,6 @@
 import Link from "next/link";
 import * as Dialog from "@radix-ui/react-dialog";
 import { Wand, Link2, BarChart, CircleDot, Settings2 } from "lucide-react";
-import { ArrowRight } from "lucide-react";
 import { useSession } from "next-auth/react";
 import UserAccountNavDesktop from "@/components/utils/usernavbutton-desktop";
 import ShareButton from "@/components/utils/share-button";
@@ -39,7 +38,7 @@ const Navbar = ({ showName = false, isHomePage = true }) => {
 
 	return (
 		<>
-			<header className="sticky top-0 w-[100vw] border-b border-b-slate-200 bg-white">
+			<header className=" z-40 top-0 w-[100vw] border-b border-b-slate-200 bg-white">
 				<div className="flex items-center justify-between h-16 px-4 sm:px-6 lg:px-8">
 					<div className="flex gap-6 items-center">
 						<Wand color="black" size={30} />
@@ -64,7 +63,7 @@ const Navbar = ({ showName = false, isHomePage = true }) => {
 					</div>
 
 					<div className="flex items-center">
-						{session.status === "authenticated" ? (
+						{session.status === "authenticated" && (
 							<div className="flex items-center gap-2">
 								<Dialog.Root>
 									<Dialog.Trigger>
@@ -73,15 +72,6 @@ const Navbar = ({ showName = false, isHomePage = true }) => {
 									<ShareModal />
 								</Dialog.Root>
 								<UserAccountNavDesktop />
-							</div>
-						) : (
-							<div className="">
-								<Link href="/register">
-									<button className="flex items-center justify-center gap-2 text-white bg-slate-900 h-11 px-8 rounded-md hover:bg-slate-700">
-										Sign In{" "}
-										<ArrowRight size={18} color="white" />
-									</button>
-								</Link>
 							</div>
 						)}
 					</div>

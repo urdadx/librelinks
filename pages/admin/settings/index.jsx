@@ -8,7 +8,7 @@ import UploadModal from "@/components/shared/modals/upload-modal";
 import { TinyLoader } from "@/components/utils/tiny-loader";
 import { useRouter } from "next/router";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import Layout from "@/components/layout/_layout";
+import Layout from "@/components/layout/Layout";
 import { Balancer } from "react-wrap-balancer";
 import useUser from "@/hooks/useUser";
 import { UserAvatarSetting } from "@/components/utils/avatar";
@@ -16,6 +16,7 @@ import { signalIframe } from "@/utils/helpers";
 import * as AlertDialog from "@radix-ui/react-alert-dialog";
 import CustomAlert from "@/components/shared/alerts/custom-alert";
 import useMediaQuery from "@/hooks/use-media-query";
+import { signOut } from "next-auth/react";
 
 const Settings = () => {
 	const { data: currentUser } = useCurrentUser();
@@ -85,6 +86,7 @@ const Settings = () => {
 			success: "So long partner 🫡",
 			error: "An error occured",
 		});
+		await signOut();
 	};
 
 	const deleteAlertProps = {
@@ -97,7 +99,7 @@ const Settings = () => {
 	return (
 		<>
 			<Layout>
-				<div className="w-full lg:w-3/5 pl-4 pr-4 border-r overflow-scroll">
+				<div className="w-full lg:basis-3/5 pl-4 pr-4 border-r overflow-scroll">
 					<div className="max-w-[690px] mx-auto my-10">
 						<h3 className="text-xl font-semibold">Profile</h3>
 						<div className="mt-4 rounded-2xl border bg-white p-lg w-full h-auto pb-10">
@@ -139,7 +141,7 @@ const Settings = () => {
 							</div>
 							<div className="flex flex-col gap-4 max-w-[640px] mx-auto px-4">
 								<input
-									value={username}
+									value={username ?? ""}
 									onChange={(e) => setUsername(e.target.value)}
 									onBlur={handleSubmit}
 									placeholder="@Username"
@@ -147,7 +149,7 @@ const Settings = () => {
 								/>
 
 								<textarea
-									value={bio}
+									value={bio ?? ""}
 									onChange={(e) => setBio(e.target.value)}
 									onBlur={handleSubmit}
 									placeholder="@Bio"

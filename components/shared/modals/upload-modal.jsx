@@ -5,9 +5,12 @@ import Image from "next/image";
 import closeSVG from "@/public/close_button.svg";
 import { Upload } from "lucide-react";
 import { useDropzone } from "react-dropzone";
+import { useQueryClient } from "@tanstack/react-query";
+import useCurrentUser from "@/hooks/useCurrentUser";
 
 const UploadModal = ({ onChange, value, submit }) => {
 	const [base64, setBase64] = useState(value);
+	const { data: currentUser } = useCurrentUser();
 
 	const handleChange = useCallback(
 		(base64) => {
@@ -15,6 +18,8 @@ const UploadModal = ({ onChange, value, submit }) => {
 		},
 		[onChange]
 	);
+
+	const queryClient = useQueryClient();
 
 	const handleDrop = useCallback(
 		(files) => {
@@ -32,6 +37,7 @@ const UploadModal = ({ onChange, value, submit }) => {
 				handleChange(event.target.result);
 			};
 			reader.readAsDataURL(file);
+			queryClient.invalidateQueries(["users", currentUser?.handle]);
 		},
 		[handleChange]
 	);

@@ -1,5 +1,5 @@
 import LinksEditor from "../../components/core/admin-panel/links-editor";
-import Layout from "@/components/layout/_layout";
+import Layout from "@/components/layout/Layout";
 import useMediaQuery from "@/hooks/use-media-query";
 
 const Admin = () => {
@@ -8,7 +8,7 @@ const Admin = () => {
 	return (
 		<>
 			<Layout>
-				<div className="w-full lg:w-3/5 pl-4 pr-4 border-r overflow-scroll">
+				<div className="w-full lg:basis-3/5 pl-4 pr-4 border-r overflow-scroll">
 					<LinksEditor />
 					{isMobile && <div className="h-[40px] mb-24" />}
 				</div>

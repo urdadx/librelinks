@@ -11,6 +11,8 @@ const useCurrentUser = () => {
 		onError: (err) => {
 			console.error(err.message);
 		},
+		refetchOnMount: "always",
+		refetchOnWindowFocus: "always",
 	});
 };
 

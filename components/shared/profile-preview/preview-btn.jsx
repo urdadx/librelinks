@@ -20,6 +20,7 @@ const PreviewBtn = () => {
 			</div>
 
 			<Drawer
+				id="drawer"
 				open={isOpen}
 				onClose={toggleDrawer}
 				direction="bottom"

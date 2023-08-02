@@ -6,7 +6,13 @@ export default async function middleware(req) {
 	const path = req.nextUrl.pathname;
 
 	// A list of all protected pages
-	const protectedPaths = ["/admin", "/admin/customize", "/admin/analytics", "/admin/settings"];
+	const protectedPaths = [
+		"/admin",
+		"/admin/customize",
+		"/admin/analytics",
+		"/admin/settings",
+		"/onboarding",
+	];
 
 	// If it's the root path, just render it
 	if (path === "/") {
