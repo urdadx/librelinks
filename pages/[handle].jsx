@@ -132,13 +132,16 @@ const ProfilePage = () => {
 					<div className="min-w-max flex flex-wrap gap-2 mb-8 lg:w-fit lg:gap-4">
 						{userLinks
 							?.filter((link) => link.isSocial && !link.archived)
-							.map(({ title, url }) => {
+							.map(({ id, title, url }) => {
 								return (
 									<SocialCards
 										key={title}
 										title={title}
 										url={url}
 										color={theme.accent}
+										registerClicks={() =>
+											handleRegisterClick(id)
+										}
 									/>
 								);
 							})}

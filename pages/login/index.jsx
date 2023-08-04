@@ -8,7 +8,7 @@ import { GithubIcon } from "lucide-react";
 import GoogleIcon from "@/components/utils/google-icon";
 import { GridOverlay } from "@/components/utils/grid-overlay";
 
-export default function Login() {
+const Login = () => {
 	const [isLoading, setIsLoading] = useState(false);
 
 	const handleGoogleSignIn = useCallback(async () => {
@@ -41,11 +41,7 @@ export default function Login() {
 			<div className="absolute w-full flex min-h-full flex-1 flex-col justify-center px-6 py-6 lg:px-8">
 				<div className="sm:mx-auto sm:w-full sm:max-w-sm">
 					<div className="mx-auto h-[30px] w-[30px] rounded-full">
-						<img
-							className="w-auto cursor-pointer"
-							src="https://img.icons8.com/ios-filled/30/radish.png"
-							alt="logo"
-						/>
+						<div className="h-8 w-8 bg-slate-900 rounded-full" />
 					</div>
 
 					<h2 className="mt-4 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
@@ -117,4 +113,6 @@ export default function Login() {
 			</div>
 		</>
 	);
-}
+};
+
+export default Login;

@@ -80,11 +80,7 @@ const Home = () => {
 								<Link
 									className="flex items-center gap-2 font-bold text-xl"
 									href="/">
-									<img
-										className="w-auto cursor-pointer"
-										src="https://img.icons8.com/ios-filled/30/radish.png"
-										alt="logo"
-									/>
+									<div className="h-5 w-5 bg-slate-900 rounded-full" />
 									<h3 className="lg:block">Librelinks</h3>
 								</Link>
 
@@ -150,7 +146,7 @@ const Home = () => {
 						<div className="px-4 mx-auto max-w-7xl sm:px-6">
 							<Image
 								className="relative rounded-lg shadow-lg"
-								src="/assets/demo.png"
+								src="/assets/new_shot.png"
 								alt="App screenshot"
 								height={700}
 								width={1200}
