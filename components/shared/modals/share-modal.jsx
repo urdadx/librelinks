@@ -7,8 +7,10 @@ import toast from "react-hot-toast";
 import { siteConfig } from "@/config/site";
 
 const ShareModal = () => {
+	
 	const { data: currentUser } = useCurrentUser();
-	const userProfileLink = `http://localhost:3000/${currentUser?.handle}`;
+	const userProfileLink = process.env.NODE_ENV === "development" ? `http://localhost:3000/${currentUser?.handle}` : `https://librelinks.vercel.app/${currentUser?.handle}`;
+
 	const [isCopied, setIsCopied] = useState(false);
 
 	const goTo = siteConfig.redirects;

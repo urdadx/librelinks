@@ -1,7 +1,9 @@
 import useCurrentUser from "@/hooks/useCurrentUser";
 
 const Preview = () => {
+	
 	const { data: currentUser } = useCurrentUser();
+	const url = process.env.NODE_ENV === "development" ? `http://localhost:3000/${currentUser?.handle}?isIframe=true` : `https://librelinks.vercel.app/${currentUser?.handle}?isIframe=true`
 
 	return (
 		<>
@@ -14,7 +16,7 @@ const Preview = () => {
 							title="preview"
 							id="preview"
 							className="h-full w-full"
-							src={`http://localhost:3000/${currentUser?.handle}?isIframe=true`}></iframe>
+							src={url}></iframe>
 					)}
 				</div>
 			</div>
