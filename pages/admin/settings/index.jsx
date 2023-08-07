@@ -43,7 +43,7 @@ const Settings = () => {
 	// edit profile details
 	const editMutation = useMutation(
 		async ({ bio, username, image, handle }) => {
-			await axios.patch("/my_api/edit", {
+			await axios.patch("/api/edit", {
 				bio,
 				username,
 				image,
@@ -70,7 +70,7 @@ const Settings = () => {
 	// delete user's account
 	const deleteMutation = useMutation(
 		async () => {
-			await axios.delete("/my_api/edit");
+			await axios.delete("/api/edit");
 		},
 		{
 			onSuccess: () => {

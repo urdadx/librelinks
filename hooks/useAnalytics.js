@@ -7,7 +7,7 @@ const useAnalytics = (filter, handle) => {
     queryKey: ["analytics", handle, filter],
     queryFn: async () => {
       const response = await axios.get(
-        `/my_api/analytics/views?handle=${handle}&filter=${filter}`
+        `/api/analytics/views?handle=${handle}&filter=${filter}`
       );
       return response.data;
     },

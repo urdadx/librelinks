@@ -27,7 +27,7 @@ const AddLinkModal = () => {
 
 	const addLinkMutation = useMutation(
 		async ({ title, url, order }) => {
-			await axios.post("/my_api/links", {
+			await axios.post("/api/links", {
 				title,
 				url,
 				order,

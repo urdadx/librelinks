@@ -25,7 +25,7 @@ const Onboarding = () => {
 			return;
 		}
 		try {
-			const response = await axios.patch("/my_api/edit", { handle: handle });
+			const response = await axios.patch("/api/edit", { handle: handle });
 			setIsLoading(false);
 			if (response.status === 200) {
 				setIsExploding(true);

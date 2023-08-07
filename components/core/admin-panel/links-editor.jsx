@@ -56,7 +56,7 @@ const LinksEditor = () => {
 
 	const updateLinksOrderMutation = useMutation(
 		async (newLinks) => {
-			await axios.put(`/my_api/links`, {
+			await axios.put(`/api/links`, {
 				links: newLinks,
 			});
 		},

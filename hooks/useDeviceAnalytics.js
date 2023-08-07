@@ -7,7 +7,7 @@ const useDeviceAnalytics = (handle) => {
     queryKey: ["device-analytics", handle ],
     queryFn: async () => {
       const response = await axios.get(
-        `/my_api/analytics/views/device?handle=${handle}`
+        `/api/analytics/views/device?handle=${handle}`
       );
       return response.data;
     },
