@@ -4,7 +4,7 @@ import { toast } from "react-hot-toast";
 
 const useLinks = (userId) => {
 	const fetchLinks = async () => {
-		const response = await axios.get(`/api/links?userId=${userId}`);
+		const response = await axios.get(`/my_api/links?userId=${userId}`);
 		return response.data;
 	};
 

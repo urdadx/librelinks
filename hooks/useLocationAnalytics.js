@@ -7,7 +7,7 @@ const useLocationAnalytics = (handle) => {
     queryKey: ["location-analytics", handle ],
     queryFn: async () => {
       const response = await axios.get(
-        `/api/analytics/views/location?handle=${handle}`
+        `/my_api/analytics/views/location?handle=${handle}`
       );
       return response.data;
     },

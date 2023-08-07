@@ -21,7 +21,7 @@ const EditLinkModal = ({ id, title, url, close }) => {
 
 	const editMutation = useMutation(
 		async ({ newTitle, newUrl }) => {
-			await axios.patch(`/api/links/${id}`, {
+			await axios.patch(`/my_api/links/${id}`, {
 				newTitle,
 				newUrl,
 			});

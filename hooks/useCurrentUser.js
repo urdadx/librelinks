@@ -5,7 +5,7 @@ const useCurrentUser = () => {
 	return useQuery({
 		queryKey: ["users"],
 		queryFn: async () => {
-			const response = await axios.get("/api/current");
+			const response = await axios.get("/my_api/current");
 			return response.data;
 		},
 		onError: (err) => {

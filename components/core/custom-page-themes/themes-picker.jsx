@@ -38,7 +38,7 @@ const ThemesPicker = () => {
 
 	const mutateTheme = useMutation(
 		async (theme) => {
-			await axios.patch("/api/customize", {
+			await axios.patch("/my_api/customize", {
 				themePalette: theme,
 			});
 		},

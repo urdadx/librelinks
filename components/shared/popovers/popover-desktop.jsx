@@ -28,7 +28,7 @@ const PopoverDesktop = ({ id, title, url, archived }) => {
 
 	const archiveMutation = useMutation(
 		async () => {
-			await axios.patch(`/api/links/${id}`, { archived: !isArchived });
+			await axios.patch(`/my_api/links/${id}`, { archived: !isArchived });
 		},
 		{
 			onSuccess: () => {
@@ -51,7 +51,7 @@ const PopoverDesktop = ({ id, title, url, archived }) => {
 
 	const deleteMutation = useMutation(
 		async () => {
-			await axios.delete(`/api/links/${id}`);
+			await axios.delete(`/my_api/links/${id}`);
 		},
 		{
 			onSuccess: () => {

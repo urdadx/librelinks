@@ -30,7 +30,7 @@ const ProfilePage = () => {
 
 	const mutation = useMutation(
 		async (id) => {
-			await axios.patch(`/api/analytics/clicks/${id}`);
+			await axios.patch(`/my_api/analytics/clicks/${id}`);
 		},
 		{
 			onError: (error) => {
