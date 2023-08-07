@@ -39,7 +39,7 @@ const UploadModal = ({ onChange, value, submit }) => {
 			reader.readAsDataURL(file);
 			queryClient.invalidateQueries(["users", currentUser?.handle]);
 		},
-		[handleChange]
+		[currentUser?.handle, handleChange, queryClient]
 	);
 
 	const { getRootProps, getInputProps } = useDropzone({

@@ -12,15 +12,15 @@ const NotFound = () => {
           <ErrorSVG />
         </div>
         <h3 className="text-lg lg:text-3xl text-center">
-          <Balancer>The page you're looking for doesn't exist</Balancer>
+          <Balancer>The page you&apos;re looking for doesn&apos;t exist</Balancer>
         </h3>
         <h3 className="text-sm lg:text-lg text-center">
           <Balancer>
-            Want this to be your handle?{" "}
+            Want this to be your handle?
             <Link className="underline" href="/register">
               Create your account now
             </Link>
-            {""} 🚀
+             🚀
           </Balancer>
         </h3>
       </div>
