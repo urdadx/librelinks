@@ -11,7 +11,7 @@ export const authOptions = {
 	},
 	pages: {
 		newUser: "/onboarding",
-		signIn: "/login",
+		signIn: "/login",	
 		error: "/login",
 	},
 

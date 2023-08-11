@@ -4,9 +4,9 @@ import COUNTRIES from "@/utils/constants/countries";
 export const LocationStats = ({ analytics }) => {
 	return (
 		<>
-			<div className="mt-10 w-full">
+			<div className="max-w-[640px] mx-auto mt-10">
 				<h3 className="text-xl font-semibold">Top Locations</h3>
-				<div className="rounded-xl mt-4 border bg-white h-auto p-4">
+				<div className="mt-4 rounded-xl border bg-white p-4 w-full h-auto">
 					<div className="">
 						<h3 className="font-semibold text-md px-3 pb-1">Visitors</h3>
 						<p className="text-gray-500 text-sm px-3 mb-2">

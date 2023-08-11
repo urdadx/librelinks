@@ -1,10 +1,18 @@
 import Loader from "@/components/utils/loading-spinner";
 import { BarChart as SimpleChart } from "lucide-react";
-import { Bar, BarChart, ResponsiveContainer, XAxis, YAxis, Tooltip, CartesianGrid } from "recharts";
+import { 
+	Bar, 
+	BarChart,
+	ResponsiveContainer,
+	XAxis,
+	YAxis,
+	Tooltip,
+	CartesianGrid
+} from "recharts";
 
-function calculateTotalViews(data) {
+const calculateTotalViews = (data) => {
+
 	let totalViews = 0;
-
 	for (const item of data) {
 		totalViews += item.visits;
 	}
@@ -14,7 +22,8 @@ function calculateTotalViews(data) {
 const Chart = ({ analytics }) => {
 	return (
 		<>
-			<div className="mt-4 rounded-xl border bg-white py-4 px-2 w-full h-auto">
+			<div className="max-w-[640px] mx-auto mt-10">
+				<div className="mt-4 rounded-xl border bg-white p-4 w-full h-auto">
 				<p className="font-semibold text-sm px-3 pb-2">Total views</p>
 				<div className="flex items-center gap-2 font-semibold text-2xl px-3 pb-2">
 					{analytics ? <h3>{calculateTotalViews(analytics)}</h3> : <h3>-</h3>}
@@ -54,6 +63,7 @@ const Chart = ({ analytics }) => {
 						)}
 					</ResponsiveContainer>
 				</div>
+			</div>
 			</div>
 		</>
 	);

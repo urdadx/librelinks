@@ -8,6 +8,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { signalIframe } from "@/utils/helpers";
 
 const ThemesPicker = () => {
+	
 	const { data: currentUser } = useCurrentUser();
 	const [displayedThemes, setDisplayedThemes] = useState(themes.slice(0, 9));
 	const [showAll, setShowAll] = useState(false);

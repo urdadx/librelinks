@@ -25,6 +25,7 @@ import toast from "react-hot-toast";
 import LinkSkeleton from "./link-skeleton";
 
 const LinksEditor = () => {
+	
 	const { data: currentUser } = useCurrentUser();
 	const userId = currentUser?.id ? currentUser.id : null;
 

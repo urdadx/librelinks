@@ -10,6 +10,7 @@ import useLocationAnalytics from "@/hooks/useLocationAnalytics";
 import useDeviceAnalytics from "@/hooks/useDeviceAnalytics";
 
 export function AnalyticsDashboard() {
+
 	const options = [
 		{ value: "last_hour", label: "Last hour" },
 		{ value: "last_24_hours", label: "Last 24 hours" },

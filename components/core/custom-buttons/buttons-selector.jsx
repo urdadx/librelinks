@@ -130,7 +130,7 @@ const ButtonSelector = () => {
 	];
 
 	return (
-		<div className="max-w-[640px] mx-auto my-4">
+			<div className="max-w-[640px] mx-auto my-4">
 			<h3 className="text-xl font-semibold">Buttons</h3>
 			<div className="mt-4 rounded-2xl border bg-white p-4 w-full h-auto">
 				{buttonOptions?.map(({ category, buttonType }) => (
