@@ -18,7 +18,7 @@ export const UserAvatar = () => {
 					alt="avatar"
 				/>
 				<Avatar.Fallback
-					className="leading-1 flex h-full w-full items-center justify-center bg-white text-[15px] font-medium"
+					className="leading-1 flex h-full w-full items-center justify-center bg-slate-900 text-[15px] text-white font-medium"
 					delayMs={100}>
 					@
 				</Avatar.Fallback>

@@ -29,7 +29,7 @@ const PreviewBtn = () => {
 				open={isOpen}	
 				onClose={toggleDrawer}
 				direction="bottom"
-				size={"100vh"}
+				size={"90vh"}
 				className="overflow-auto h-[100vh]">
 				<PreviewMobile close={toggleDrawer} />
 			</Drawer>

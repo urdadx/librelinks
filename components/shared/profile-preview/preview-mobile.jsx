@@ -67,7 +67,7 @@ const PreviewMobile = ({ close }) => {
 							alt="avatar"
 						/>
 						<Avatar.Fallback
-							className="leading-1 flex h-full w-full items-center justify-center bg-white text-[15px] font-medium"
+							className="leading-1 flex h-full w-full items-center justify-center bg-slate-900 text-xl text-white font-medium"
 							delayMs={100}>
 							@
 						</Avatar.Fallback>
