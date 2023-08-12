@@ -1,8 +1,6 @@
 import { PieChart, Tooltip, Pie, Cell } from "recharts";
 import useMediaQuery from "@/hooks/use-media-query";
 
-// Import statements...
-
 export const DeviceStats = ({ analytics }) => {
 	const COLORS = ["#0088FE", "#00C49F", " #c84e89", "#FFBB28", "#FF8042"];
 	const { isMobile } = useMediaQuery();
@@ -17,7 +15,7 @@ export const DeviceStats = ({ analytics }) => {
 						Insights on devices your audience use
 					</p>
 				</div>
-				<div className={`flex flex-col ${isMobile ? 'items-center' : 'lg:flex-row justify-center lg:gap-x-10'}`}>
+				<div className={`flex flex-row gap-4 justify-center ${isMobile ? 'items-center' : 'lg:flex-row justify-center lg:gap-x-10'}`}>
 					{analytics?.map(({ device, visits }, index) => (
 						<div key={device} className="flex flex-col gap-2">
 							<div className="flex items-center gap-1">

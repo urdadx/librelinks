@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import { GithubIcon, GlobeIcon, TwitterIcon } from "lucide-react";
+import { Wand, GithubIcon, GlobeIcon, TwitterIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -80,10 +80,10 @@ const Home = () => {
 								<Link
 									className="flex items-center gap-2 font-bold text-xl"
 									href="/">
-									<div className="h-5 w-5 bg-slate-900 rounded-full" />
+									<Wand color="black" size={30} />
 									<h3 className="lg:block">Librelinks</h3>
 								</Link>
-
+		
 								<div className="relative items-center w-28 z-10 md:absolute md:inset-y-0 md:right-0">
 									<Link
 										className="group inline-flex items-center gap-2 px-4 text-sm  bg-slate-900 border rounded-3xl text-white w-[116px] h-[35px] justify-center font-semibold transition-colors hover:bg-slate-700"

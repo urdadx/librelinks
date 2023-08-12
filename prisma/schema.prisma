@@ -1,7 +1,6 @@
 
 generator client {
   provider = "prisma-client-js"
-  previewFeatures = ["fullTextSearch", "fullTextIndex", "jsonProtocol"]
 }
 
 datasource db {
@@ -23,6 +22,7 @@ model User {
   createdAt      DateTime  @default(now())
   updatedAt      DateTime  @updatedAt
   links          Link[]
+  linksLocation String?   @default("top")
   profileViews   profileViews[]
   themePalette   Json?     @default("{\"name\": \"Light\", \"palette\": [\"#FFFFFF\", \"#F2F2F2\", \"#1F2937\", \"#6170F8\"]}")
   buttonStyle    String    @default("rounded-md")
@@ -77,12 +77,6 @@ model profileViews {
       user            User          @relation(fields: [userId], references: [id], onDelete: Cascade)
       @@index(userId)
 
-}
-
-model PageView {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  userId    String   @db.ObjectId
-  timestamp DateTime @default(now())
 }
 
 

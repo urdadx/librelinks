@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import { useEffect, useState, useMemo } from "react";
+import * as Avatar from "@radix-ui/react-avatar";
 import LinkCard from "@/components/core/user-profile/links-card";
 import Link from "next/link";
 import Loader from "@/components/utils/loading-spinner";
@@ -55,13 +56,22 @@ const PreviewMobile = ({ close }) => {
 			<section
 				style={{ background: theme.primary }}
 				className="h-[100vh] w-[100vw] no-scrollbar overflow-auto">
-				<div className="flex items-center w-full mt-4 flex-col mx-auto max-w-3xl justify-center px-8 lg:mt-16">
-					<img
-						loading="lazy"
-						className="rounded-full w-[70px] h-[70px] lg:w-[96px] lg:h-[96px]"
-						alt={currentUser?.name}
-						src={currentUser?.image}
-					/>
+				<div className="flex items-center w-full mt-10 flex-col mx-auto max-w-3xl justify-center px-8 lg:mt-16">
+					<Avatar.Root
+						className="inline-flex h-[70px] w-[70px] border-2 border-blue-300
+						items-center justify-center overflow-hidden rounded-full align-middle lg:w-[96px] lg:h-[96px]">
+						<Avatar.Image
+							className="h-full w-full rounded-[inherit] object-cover"
+							src={currentUser && currentUser?.image}
+							referrerPolicy="no-referrer"
+							alt="avatar"
+						/>
+						<Avatar.Fallback
+							className="leading-1 flex h-full w-full items-center justify-center bg-white text-[15px] font-medium"
+							delayMs={100}>
+							@
+						</Avatar.Fallback>
+					</Avatar.Root>
 					<p
 						style={{ color: theme.accent }}
 						className="font-bold text-white text-center text-sm mt-4 mb-2 lg:text-xl lg:mt-4">

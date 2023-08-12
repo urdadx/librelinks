@@ -4,7 +4,7 @@ import { useState, useCallback } from "react";
 import { toast } from "react-hot-toast";
 import { TinyLoader } from "@/components/utils/tiny-loader";
 import Link from "next/link";
-import { GithubIcon } from "lucide-react";
+import { GithubIcon, Wand } from "lucide-react";
 import GoogleIcon from "@/components/utils/google-icon";
 import { GridOverlay } from "@/components/utils/grid-overlay";
 
@@ -41,7 +41,7 @@ export default function Register() {
 			<div className="absolute w-full flex min-h-full flex-1 flex-col justify-center px-6 py-6 lg:px-8">
 				<div className="sm:mx-auto sm:w-full sm:max-w-sm">
 					<div className="mx-auto h-[30px] w-[30px] rounded-full">
-						<div className="h-8 w-8 bg-slate-900 rounded-full" />
+						<Wand color="black" size={30} />
 					</div>
 					<h2 className="mt-4 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
 						Create a new account

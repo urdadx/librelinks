@@ -112,7 +112,7 @@ const AddLinkModal = () => {
 						</div>
 
 						<div className="p-2 relative flex justify-between gap-2 text-gray-800 my-4">
-							<h3 className="text-sm lg:text-lg">
+							<h3 className="text-md lg:text-lg">
 								Make this a social link?
 							</h3>
 							<Switch.Root

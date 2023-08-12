@@ -30,7 +30,6 @@ const Settings = () => {
 	const { isMobile } = useMediaQuery();
 
 	const queryClient = useQueryClient();
-	const userHandle = currentUser?.handle ?? null;
 	const { data: fetchedUser } = useUser(currentUser?.handle);
 
 	useEffect(() => {
@@ -55,7 +54,7 @@ const Settings = () => {
 				toast.error("An error occurred");
 			},
 			onSuccess: () => {
-				queryClient.invalidateQueries({ queryKey: ["users", userHandle] });
+				queryClient.invalidateQueries("users");
 				toast.success("Changes applied");
 				signalIframe();
 			},
@@ -65,7 +64,13 @@ const Settings = () => {
 	const handleSubmit = async () => {
 		toast.loading("Applying changes");
 		await editMutation.mutateAsync({ bio, username, image, handle });
-	};
+	}
+
+	// delete profile picture
+	const handleDeletePfp = async () => {
+		toast.loading("Applying changes");
+		await editMutation.mutateAsync({ bio, username, image: "", handle });
+	}
 
 	// delete user's account
 	const deleteMutation = useMutation(
@@ -133,6 +138,7 @@ const Settings = () => {
 										</Dialog.Root>
 									</div>
 									<button
+										onClick={handleDeletePfp}
 										className="w-full lg:w-[490px] h-[45px] border border-[#aaa] 
                       						outline-none font-semibold text-slate-900 bg-white p-2 rounded-3xl hover:bg-gray-100">
 										Remove

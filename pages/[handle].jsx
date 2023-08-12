@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import LinkCard from "@/components/core/user-profile/links-card";
+import * as Avatar from "@radix-ui/react-avatar";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
@@ -111,12 +112,21 @@ const ProfilePage = () => {
 							/>
 						</div>
 					)}
-					<img
-						loading="lazy"
-						className="rounded-full w-[70px] h-[70px] lg:w-[96px] lg:h-[96px]"
-						alt={fetchedUser?.name}
-						src={fetchedUser?.image}
-					/>
+					<Avatar.Root
+						className="inline-flex h-[70px] w-[70px] border-2 border-blue-300
+						items-center justify-center overflow-hidden rounded-full align-middle lg:w-[96px] lg:h-[96px]">
+						<Avatar.Image
+							className="h-full w-full rounded-[inherit] object-cover"
+							src={fetchedUser && fetchedUser?.image}
+							referrerPolicy="no-referrer"
+							alt="avatar"
+						/>
+						<Avatar.Fallback
+							className="leading-1 flex h-full w-full items-center justify-center bg-white text-[15px] font-medium"
+							delayMs={100}>
+							@
+						</Avatar.Fallback>
+					</Avatar.Root>
 					<p
 						style={{ color: theme.accent }}
 						className="font-bold text-white text-center text-sm mt-4 mb-2 lg:text-xl lg:mt-4">
