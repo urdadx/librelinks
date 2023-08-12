@@ -10,7 +10,8 @@ const PreviewBtn = () => {
 		setIsOpen((prevState) => !prevState);
 	};
 
-	const drawerHeight = typeof window !== "undefined" ? window.innerHeight - 100 : null;
+	// Get current screen height
+	const drawerHeight = typeof window !== "undefined" ? Math.max(document.documentElement.clientHeight, window.innerHeight || 0) : null;
 
 	return (
 		<>

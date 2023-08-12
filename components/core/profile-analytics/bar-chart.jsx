@@ -20,9 +20,9 @@ const Chart = ({ analytics }) => {
 					{analytics ? <h3>{calculateTotalViews(analytics)}</h3> : <h3>-</h3>}
 					<SimpleChart />
 				</div>
-				<div className="mr-8">
-					<ResponsiveContainer width="100%" height={250}>
-						{!analytics ? (
+				<div className="">
+					<ResponsiveContainer width="90%" height={300}>
+						{analytics ? (
 							<BarChart data={analytics}>
 								<CartesianGrid strokeDasharray="3 3" />
 								<XAxis
@@ -46,9 +46,10 @@ const Chart = ({ analytics }) => {
 							</BarChart>
 						) : (
 							<div>
-								<div className="top-1/2 translate-y-1/2 flex justify-center">
-									<h3 className="text-center">No data available</h3>
-								</div>
+								<Loader
+									bgColor={"black"}
+									message={"Fetching data"}
+								/>
 							</div>
 						)}
 					</ResponsiveContainer>
