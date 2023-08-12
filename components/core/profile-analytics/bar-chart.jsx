@@ -22,8 +22,8 @@ const calculateTotalViews = (data) => {
 const Chart = ({ analytics }) => {
 	return (
 		<>
-			<div className="max-w-[640px] mx-auto mt-10">
-				<div className="mt-4 rounded-xl border bg-white p-4 w-full h-auto">
+			<div className="max-w-[640px] mx-auto my-6">
+				<div className="rounded-xl border my-4 md:max-w-2xl lg:max-w-3xl p-4 mx-auto md:basis-3/5 w-full overflow-y-auto bg-white">
 				<p className="font-semibold text-sm px-3 pb-2">Total views</p>
 				<div className="flex items-center gap-2 font-semibold text-2xl px-3 pb-2">
 					{analytics ? <h3>{calculateTotalViews(analytics)}</h3> : <h3>-</h3>}

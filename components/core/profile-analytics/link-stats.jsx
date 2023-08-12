@@ -26,9 +26,9 @@ const LinkStats = () => {
 
 	return (
 		<>
-				<div className="max-w-[640px] mx-auto mt-10">
+				<div className="max-w-[640px] mx-auto my-6">
 				<h3 className="text-xl font-semibold">Top performing links</h3>
-				<div className="mt-4 rounded-xl border bg-white p-4 w-full h-auto">
+				<div className="rounded-xl border my-4 md:max-w-2xl lg:max-w-3xl p-4 mx-auto md:basis-3/5 w-full overflow-y-auto bg-white">
 					<div className="">
 						<h3 className="font-semibold text-md px-3 pb-1">My Links</h3>
 						<p className="text-gray-500 text-sm px-3 mb-2">
