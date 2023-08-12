@@ -4,11 +4,14 @@ import "react-modern-drawer/dist/index.css";
 import PreviewMobile from "./preview-mobile";
 
 const PreviewBtn = () => {
-	
+
 	const [isOpen, setIsOpen] = useState(false);
 	const toggleDrawer = () => {
 		setIsOpen((prevState) => !prevState);
 	};
+
+	const drawerHeight = typeof window !== "undefined" ? window.innerHeight - 100 : null;
+
 	return (
 		<>
 			<div className="fixed bottom-4 left-1/2 transform -translate-x-1/2 lg:hidden">
@@ -22,10 +25,10 @@ const PreviewBtn = () => {
 
 			<Drawer
 				id="drawer"
-				open={isOpen}
+				open={isOpen}	
 				onClose={toggleDrawer}
 				direction="bottom"
-				size={650}
+				size={drawerHeight}
 				className="overflow-auto rounded-t-xl">
 				<PreviewMobile close={toggleDrawer} />
 			</Drawer>

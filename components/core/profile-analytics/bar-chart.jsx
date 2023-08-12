@@ -1,18 +1,10 @@
 import Loader from "@/components/utils/loading-spinner";
 import { BarChart as SimpleChart } from "lucide-react";
-import { 
-	Bar, 
-	BarChart,
-	ResponsiveContainer,
-	XAxis,
-	YAxis,
-	Tooltip,
-	CartesianGrid
-} from "recharts";
+import { Bar, BarChart, ResponsiveContainer, XAxis, YAxis, Tooltip, CartesianGrid } from "recharts";
 
-const calculateTotalViews = (data) => {
-
+function calculateTotalViews(data) {
 	let totalViews = 0;
+
 	for (const item of data) {
 		totalViews += item.visits;
 	}
@@ -22,8 +14,7 @@ const calculateTotalViews = (data) => {
 const Chart = ({ analytics }) => {
 	return (
 		<>
-			<div className="max-w-[640px] mx-auto my-6">
-				<div className="rounded-xl border my-4 md:max-w-2xl lg:max-w-3xl p-4 mx-auto md:basis-3/5 w-full overflow-y-auto bg-white">
+			<div className="mt-4 rounded-xl border bg-white py-4 px-2 w-full h-auto">
 				<p className="font-semibold text-sm px-3 pb-2">Total views</p>
 				<div className="flex items-center gap-2 font-semibold text-2xl px-3 pb-2">
 					{analytics ? <h3>{calculateTotalViews(analytics)}</h3> : <h3>-</h3>}
@@ -31,7 +22,7 @@ const Chart = ({ analytics }) => {
 				</div>
 				<div className="mr-8">
 					<ResponsiveContainer width="100%" height={250}>
-						{analytics ? (
+						{!analytics ? (
 							<BarChart data={analytics}>
 								<CartesianGrid strokeDasharray="3 3" />
 								<XAxis
@@ -55,15 +46,13 @@ const Chart = ({ analytics }) => {
 							</BarChart>
 						) : (
 							<div>
-								<Loader
-									bgColor={"black"}
-									message={"Fetching data"}
-								/>
+								<div className="top-1/2 translate-y-1/2 flex justify-center">
+									<h3 className="text-center">No data available</h3>
+								</div>
 							</div>
 						)}
 					</ResponsiveContainer>
 				</div>
-			</div>
 			</div>
 		</>
 	);
