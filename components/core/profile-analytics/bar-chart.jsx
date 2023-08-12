@@ -1,14 +1,21 @@
 import Loader from "@/components/utils/loading-spinner";
 import { BarChart as SimpleChart } from "lucide-react";
-import { Bar, BarChart, ResponsiveContainer, XAxis, YAxis, Tooltip, CartesianGrid } from "recharts";
+import { 
+	Bar, 
+	BarChart, 
+	ResponsiveContainer, 
+	XAxis, 
+	YAxis, 
+	Tooltip, 
+	CartesianGrid 
+} from "recharts";
 
-function calculateTotalViews(data) {
+const calculateTotalViews = (data) => {
+
 	let totalViews = 0;
-
 	for (const item of data) {
 		totalViews += item.visits;
 	}
-
 	return totalViews;
 }
 const Chart = ({ analytics }) => {
@@ -21,7 +28,7 @@ const Chart = ({ analytics }) => {
 					<SimpleChart />
 				</div>
 				<div className="">
-					<ResponsiveContainer width="90%" height={300}>
+					<ResponsiveContainer width="95%" height={300}>
 						{analytics ? (
 							<BarChart data={analytics}>
 								<CartesianGrid strokeDasharray="3 3" />
