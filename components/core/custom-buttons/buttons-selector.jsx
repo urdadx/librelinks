@@ -38,7 +38,7 @@ const ButtonSelector = () => {
 	const handleChangeBtn = async (buttonCSS) => {
 		await toast.promise(mutateButtonStyle.mutateAsync(buttonCSS), {
 			loading: "Applying style",
-			success: "Styled applied successfully",
+			success: "Style applied successfully",
 			error: "An error occured",
 		});
 		setButtonStyle(buttonCSS);

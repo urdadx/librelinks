@@ -1,19 +1,23 @@
 import { UserAvatar } from "./avatar";
 import * as Popover from "@radix-ui/react-popover";
+import * as Dialog from "@radix-ui/react-dialog";
 import { useSession } from "next-auth/react";
 import { signOut } from "next-auth/react";
 import { useRouter } from "next/router";
 import { toast } from "react-hot-toast";
 import Link from "next/link";
-import { User, LogOut, HomeIcon } from "lucide-react";
+import { User, LogOut, MessageCircle } from "lucide-react";
 import useMediaQuery from "@/hooks/use-media-query";
 import { Drawer } from "vaul";
 import UserNavButtonMobile from "./usernavbutton-mobile";
+import FeebackForm from "../shared/feedback/feedback-form";
+import { useState } from "react";
 
 const UserAccountNavDesktop = () => {
 	const session = useSession();
 	const { data } = session;
 	const router = useRouter();
+	const [openPopover, setOpenPopover] = useState(false)
 
 	const { isMobile } = useMediaQuery();
 
@@ -28,9 +32,13 @@ const UserAccountNavDesktop = () => {
 		}
 	};
 
+	const closePopOver = () => {
+		setOpenPopover(false);
+	};
+
 	return (
 		<>
-			<Popover.Root>
+			<Popover.Root open={openPopover} onOpenChange={setOpenPopover}>
 				{isMobile ? (
 					<Drawer.Root shouldScaleBackground>
 						<Drawer.Trigger>
@@ -39,14 +47,14 @@ const UserAccountNavDesktop = () => {
 						<UserNavButtonMobile data={data} logout={handleLogout} />
 					</Drawer.Root>
 				) : (
-					<Popover.Trigger className="">
+					<Popover.Trigger >
 						<UserAvatar size={35} />
 					</Popover.Trigger>
 				)}
 
 				<Popover.Portal>
 					<Popover.Content
-						className="z-50 w-[130px] mr-2 items-center rounded-md border border-gray-200 bg-white drop-shadow-lg md:block lg:w-[150px]"
+						className="w-[130px] mr-2 items-center rounded-md border border-gray-200 bg-white drop-shadow-lg md:block lg:w-[150px]"
 						sideOffset={4}>
 						<Link
 							href="/admin/settings"
@@ -54,12 +62,17 @@ const UserAccountNavDesktop = () => {
 							<User size={17} color="gray" />
 							<h4 className="w-full truncate">{data.user.name}</h4>
 						</Link>
-						<Link
-							href="/admin"
-							className="group flex w-full items-center gap-2 rounded-md p-3 text-sm font-medium text-gray-500 transition-all duration-75 hover:bg-gray-100">
-							<HomeIcon size={17} color="gray" />
-							<h4>Admin 🧙</h4>
-						</Link>
+						<Dialog.Root>
+							<Dialog.Trigger asChild>
+								<Link
+									href="#"
+									className="group flex w-full items-center gap-2 rounded-md p-3 text-sm font-medium text-gray-500 transition-all duration-75 hover:bg-gray-100">
+									<MessageCircle size={17} color="gray" />
+									<h4>Feedback</h4>
+								</Link>
+							</Dialog.Trigger>
+							<FeebackForm close={closePopOver} />
+						</Dialog.Root>
 						<button
 							onClick={handleLogout}
 							className="group flex w-full items-center gap-2 rounded-md p-3 text-sm font-medium text-red-400 transition-all duration-75 hover:bg-red-500 hover:text-white">

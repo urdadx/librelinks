@@ -11,7 +11,7 @@ const Layout = ({ children }) => {
 			<Navbar showName={false} isHomePage={false} />
 			<main className="bg-[#F9FAFB] flex flex-row h-screen z-0 ">
 				{children}
-				{router.pathname != "/admin/analytics" && (
+				{router.pathname != "/admin/analytics" || router.pathname != "/feedback"  && (
 					<div className="hidden lg:my-auto lg:block lg:basis-2/5 pl-4">
 						<Preview />
 					</div>
