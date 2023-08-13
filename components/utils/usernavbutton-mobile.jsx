@@ -1,7 +1,6 @@
 import { Drawer } from "vaul";
 import Link from "next/link";
-import { User } from "lucide-react";
-import { HomeIcon } from "lucide-react";
+import { AlertCircle, User } from "lucide-react";
 import { LogOut } from "lucide-react";
 
 const UserNavButtonMobile = ({ data, logout }) => {
@@ -18,10 +17,11 @@ const UserNavButtonMobile = ({ data, logout }) => {
 						<h3 className="w-full truncate text-lg">{data.user.name}</h3>
 					</Link>
 					<Link
-						href="/admin"
+						target="_blank"
+						href="https://github.com/urdadx/librelinks/issues/new"
 						className="group flex w-full items-center gap-2 rounded-md p-3 text-sm font-medium text-gray-500 transition-all duration-75 hover:bg-gray-100">
-						<HomeIcon size={17} color="gray" />
-						<h3 className="text-lg">Admin 🧙</h3>
+						<AlertCircle size={17} color="gray" />
+						<h3 className="text-lg">Bug</h3>
 					</Link>
 					<button
 						onClick={logout}
