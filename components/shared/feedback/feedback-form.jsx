@@ -6,7 +6,7 @@ import { toast } from "react-hot-toast";
 import axios from "axios";
 import { useQueryClient, useMutation } from "@tanstack/react-query";
 
-const FeebackForm = ({ close }) => {
+const FeebackForm = () => {
 	
 	const [description, setDescription] = useState("");
 	const queryClient = useQueryClient();
@@ -26,7 +26,6 @@ const FeebackForm = ({ close }) => {
 	);
 
 	const submitFeedback = async () => {
-		close();
 		await toast.promise(addFeedback.mutateAsync({ description }), {
 			loading: "Adding feedback",
 			success: "Thank you for your feedback",
