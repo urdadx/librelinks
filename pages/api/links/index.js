@@ -49,6 +49,7 @@ export default async function handler(req, res) {
 
 		if(req.method === "PUT"){
 			const { links } = req.body
+			console.log("links", links)
 				
 			await Promise.all(links.map(({ id }, index) =>
 					prisma.link.update({
@@ -63,6 +64,7 @@ export default async function handler(req, res) {
 			res.status(200).json({ msg: "link order updated" })
 		}
 	} catch (error) {
-		return res.status(400).end();
+		console.log(error)
+		return res.status(500).end();
 	}
 }
