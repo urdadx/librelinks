@@ -2,7 +2,7 @@ import serverAuth from "@/lib/serverAuth";
 import { db } from "@/lib/db";
 
 export default async function handler(req, res) {
-	if (req.method !== "POST" && req.method !== "GET" && req.method != "PUT") {
+	if (req.method !== "POST" && req.method !== "GET" && req.method != "PATCH") {
 		return res.status(405).end();
 	}
 
