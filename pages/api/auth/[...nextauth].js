@@ -61,6 +61,7 @@ export const authOptions = {
 			};
 		},
 
+
 		redirect() {
 			return "/admin";
 		},
