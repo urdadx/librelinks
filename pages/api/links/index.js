@@ -47,7 +47,7 @@ export default async function handler(req, res) {
 			return res.status(200).json(links);
 		}
 
-		if(req.method === "PUT"){
+		if(req.method === "PATCH"){
 			const { links } = req.body
 				
 			await Promise.all(links.map(({ id }, index) =>
