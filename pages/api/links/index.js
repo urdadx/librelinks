@@ -52,7 +52,7 @@ export default async function handler(req, res) {
 			console.log("links", links)
 				
 			await Promise.all(links.map(({ id }, index) =>
-					prisma.link.update({
+					db.link.update({
 					where: {
 						id,
 					},
