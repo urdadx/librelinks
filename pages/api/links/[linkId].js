@@ -1,9 +1,9 @@
 import { db } from "@/lib/db";
 
 export default async function handler(req, res) {
-  if (req.method !== "PATCH" && req.method !== "DELETE") {
-    return res.status(405).end();
-  }
+  // if (req.method !== "PATCH" && req.method !== "DELETE") {
+  //   return res.status(405).end();
+  // }
 
   try {
     const { linkId } = req.query;
