@@ -21,7 +21,7 @@ Create and customize your link in bio in minutes✨
 
 ## ⭐ Features
 
-It has 5 Core Features:
+It has 4 Core Features:
 | <div style="width:285px">**Feature**</div> | **Description** |
 |---|---|
 | **1. Customize your page** | You can easily customize your page with beautiful themes and color palettes |
@@ -33,11 +33,11 @@ It has 5 Core Features:
 
 | <div style="width:140px">**Category**</div> | <div style="width:100px">**Choice**</div>                   | **Descriptions**                                                                                                                     |
 | ------------------------------------------- | ----------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
-| **Language**                                | [JavaScript](https://github.com/microsoft/TypeScript)       | JavaScript (JS) is a cross-platform, object-oriented programming language used by developers to make web pages interactivetime.                                     |
+| **Language**                                | [JavaScript](https://github.com/microsoft/TypeScript)       | JavaScript (JS) is a cross-platform, object-oriented programming language used by developers to make web pages interactive.                                     |
 | **UI Library**                              | [React](https://github.com/facebook/react)                  | React’s declarative syntax and component-based architecture make it simple to develop reactive reusable components.                  |
 | **CSS Framework**                           | [Tailwind CSS](https://github.com/tailwindlabs/tailwindcss) | Tailwind speeds up development by providing helpful css utilities and removing the need to context switch between jsx and css files. |
 | **Web Framework**                           | [NextJS 13](https://github.com/vercel/next.js)              | Next.js supports static site generation and helps build efficient React webpages that support SEO.                                   |
-| **Database**                           | [MongoDB & Prisma](https://www.mongodb.com/docs/manual/reference/program/mongod/)              | MongoDB is a source-available cross-platform document-oriented database program. Classified as a NoSQL database program, MongoDB uses JSON-like documents with optional schemas.                                    |
+| **Database**                           | [MongoDB & Prisma](https://www.mongodb.com/docs/manual/reference/program/mongod/)              | MongoDB is a source-available cross-platform document-oriented database program. Classified as a NoSQL database program, MongoDB uses JSON-like documents with optional schemas.|
 
 ## 📁 Project Structure
 
@@ -63,7 +63,7 @@ You need to have the following env variables in your ```.env``` file to make the
 
 ```GOOGLE_CLIENT_ID``` = XXXXXX
 
-``` GOOGLE_CLIENT_SECRET``` = XXXXXXXX
+```GOOGLE_CLIENT_SECRET``` = XXXXXXXX
 
 ```NODE_ENV``` = development
 
