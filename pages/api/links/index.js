@@ -2,7 +2,7 @@ import serverAuth from "@/lib/serverAuth";
 import { db } from "@/lib/db";
 
 export default async function handler(req, res) {
-	if (req.method !== "POST" && req.method !== "GET" && req.method != "PATCH") {
+	if (req.method !== "POST" && req.method !== "GET" && req.method != "PUT") {
 		return res.status(405).end();
 	}
 
@@ -47,7 +47,7 @@ export default async function handler(req, res) {
 			return res.status(200).json(links);
 		}
 
-		if(req.method === "PATCH"){
+		if(req.method === "PUT"){
 			const { links } = req.body
 				
 			await Promise.all(links.map(({ id }, index) =>
