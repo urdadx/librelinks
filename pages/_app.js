@@ -7,6 +7,8 @@ import NProgress from "@/components/utils/nprogress";
 import { Provider } from "react-wrap-balancer";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { Analytics } from '@vercel/analytics/react';
+
 
 export default function App({ Component, pageProps }) {
 	const router = useRouter();
@@ -50,6 +52,7 @@ export default function App({ Component, pageProps }) {
 	return (
 		<>
 			<NProgress isRouteChanging={state.isRouteChanging} key={state.loadingKey} />
+			<Analytics />
 			<QueryClientProvider client={queryClient}>
 				<Toaster toastOptions={{ duration: 2500 }} position="bottom-center" />
 				<SessionProvider session={pageProps.session}>

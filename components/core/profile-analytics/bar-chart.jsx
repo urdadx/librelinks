@@ -22,7 +22,7 @@ const Chart = ({ analytics }) => {
 	return (
 		<>
 			<div className="mt-4 rounded-xl border bg-white py-4 px-2 w-full h-auto">
-				<p className="font-semibold text-sm px-3 pb-2">Total views</p>
+				<p className="font-semibold text-sm px-3 pb-2">Total visits</p>
 				<div className="flex items-center gap-2 font-semibold text-2xl px-3 pb-2">
 					{analytics ? <h3>{calculateTotalViews(analytics)}</h3> : <h3><div className="mr-2 h-6 w-6 animate-pulse rounded-md bg-gray-200 lg:w-10 lg:h-10" /></h3>}
 					<SimpleChart />

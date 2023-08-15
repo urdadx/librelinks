@@ -34,7 +34,7 @@ const Onboarding = () => {
 					router.push("/admin");
 				}, 1500);
 			}
-		} catch (error) {
+		} catch (error) {g
 			setHandleTaken(true);
 			setTimeout(() => {
 				setHandleTaken(false);
