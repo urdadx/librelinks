@@ -50,11 +50,6 @@ model Account {
   @@unique([provider, providerAccountId])
 }
 
-model Feedback {
-    id              String  @id @default(cuid()) @map("_id")
-    description     String
-    email           String
-}
 
 model Link {
       id         String     @id @default(auto()) @map("_id") @db.ObjectId
