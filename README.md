@@ -82,7 +82,17 @@ You need to have the following env variables in your ```.env``` file to make the
 
 ## Contributing 🤝
 
-Anyone is free to contribute to this project. Open an issue on bugs/features or send a pull request for review.
+We love our contributors! Here's how you can contribute:
+
+- [Open an issue](https://github.com/urdadx/librelinks/issues) if you believe you've encountered a bug.
+- Make a [pull request](https://github.com/urdadx/librelinks/pull) to add new features/make quality-of-life improvements/fix bugs.
+
+<a href="https://github.com/urdadx/librelinks/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=urdadx/librelinks" />
+</a>
+
+## Repo Activity
+![Alt](https://repobeats.axiom.co/api/embed/90acd1b69cd45e69fdfe25c16187ea937c3e27c0.svg "Repobeats analytics image")
 
 ## Liscence 📝
 MIT 
