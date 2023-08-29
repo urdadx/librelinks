@@ -7,6 +7,7 @@ import Link from "next/link";
 import { GithubIcon, Wand } from "lucide-react";
 import GoogleIcon from "@/components/utils/google-icon";
 import { GridOverlay } from "@/components/utils/grid-overlay";
+import Head from "next/head";
 
 const Login = () => {
 	const [isLoading, setIsLoading] = useState(false);
@@ -37,6 +38,9 @@ const Login = () => {
 
 	return (
 		<>
+			<Head>
+				<title>Librelinks | Login</title>
+			</Head>
 			<GridOverlay />
 			<div className="absolute w-full flex min-h-full flex-1 flex-col justify-center px-6 py-6 lg:px-8">
 				<div className="sm:mx-auto sm:w-full sm:max-w-sm">
