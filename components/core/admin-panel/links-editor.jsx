@@ -39,8 +39,8 @@ const LinksEditor = () => {
 	const queryClient = useQueryClient();
 
 	const handleDragEnd = async (event) => {
-		const { active, over } = event;
 
+		const { active, over } = event;
 		if (active.id !== over.id) {
 			const activeIndex = userLinks.findIndex((link) => link.id === active.id);
 			const overIndex = userLinks.findIndex((link) => link.id === over.id);

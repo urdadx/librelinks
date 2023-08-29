@@ -15,7 +15,6 @@ const useLinks = (userId) => {
 		onError: () => {
 			toast.error("An error occurred");
 		},
-		// refetchOnMount: true,
 	});
 };
 

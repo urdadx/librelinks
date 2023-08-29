@@ -13,6 +13,7 @@ import NotFound from "@/components/utils/not-found";
 import useLinks from "@/hooks/useLinks";
 import Script from "next/script";
 import { SocialCards } from "@/components/core/user-profile/social-cards";
+import Head from "next/head";
 
 const ProfilePage = () => {
 	const { query } = useRouter();
@@ -88,6 +89,9 @@ const ProfilePage = () => {
 
 	return (
 		<>
+			<Head>
+				<title> @{handle} | Librelinks</title>
+			</Head>
 			{!query.isIframe ? (
 				<Script
 					defer

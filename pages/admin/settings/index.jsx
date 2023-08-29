@@ -17,6 +17,7 @@ import * as AlertDialog from "@radix-ui/react-alert-dialog";
 import CustomAlert from "@/components/shared/alerts/custom-alert";
 import useMediaQuery from "@/hooks/use-media-query";
 import { signOut } from "next-auth/react";
+import Head from "next/head";
 
 const Settings = () => {
 	const { data: currentUser } = useCurrentUser();
@@ -103,6 +104,9 @@ const Settings = () => {
 
 	return (
 		<>
+			<Head>
+				<title>Librelinks | Settings</title>
+			</Head>
 			<Layout>
 				<div className="w-full lg:basis-3/5 pl-4 pr-4 border-r overflow-scroll">
 					<div className="max-w-[690px] mx-auto my-10">

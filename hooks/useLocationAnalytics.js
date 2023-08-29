@@ -15,7 +15,6 @@ const useLocationAnalytics = (handle) => {
     onError: () => {
       toast.error("An error occurred");
     },
-    // refetchInterval: 2000,
   });
 };
 
