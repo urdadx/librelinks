@@ -10,8 +10,8 @@ import { GridOverlay } from "@/components/utils/grid-overlay";
 import Head from "next/head";
 
 export default function Register() {
-	const [isLoading, setIsLoading] = useState(false);
 
+	const [isLoading, setIsLoading] = useState(false);
 	const handleGoogleSignIn = useCallback(async () => {
 		try {
 			setIsLoading(true);

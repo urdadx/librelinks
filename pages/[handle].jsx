@@ -16,6 +16,7 @@ import { SocialCards } from "@/components/core/user-profile/social-cards";
 import Head from "next/head";
 
 const ProfilePage = () => {
+	
 	const { query } = useRouter();
 	const { handle } = query;
 

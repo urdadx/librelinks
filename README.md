@@ -2,7 +2,9 @@
 
 Librelinks is an open-source link in bio tool for everyone.
 
-The goal of Librelinks is to provide users with a platform that helps them manage their links and content created on any social media account through one simple link. Give us a star ⭐.
+The goal of Librelinks is to provide users with a platform that helps them manage their links and content created on social media through a single link. 
+
+Give us a star ⭐.
 
 
 Official site: [https://librelinks.vercel.app](https://librelinks.vercel.app)
@@ -27,7 +29,7 @@ It has 4 Core Features:
 | **1. Customize your page** | You can easily customize your page with beautiful themes and color palettes |
 | **2. Keep track of everything** | Get useful insights on your profile like the number of views, clicks, countries, devices etc.|
 | **3. Shareable links** | Share your profile everywhere with just one unique link tailor made for you |
-**4. Privacy centered** | All your links belong to you, we do not sell your data
+**4. Privacy centered** | All your links belong to you, we do not sell your data.
 
 ## 📚 Tech Stack
 
@@ -38,6 +40,7 @@ It has 4 Core Features:
 | **CSS Framework**                           | [Tailwind CSS](https://github.com/tailwindlabs/tailwindcss) | Tailwind speeds up development by providing helpful css utilities and removing the need to context switch between jsx and css files. |
 | **Web Framework**                           | [NextJS 13](https://github.com/vercel/next.js)              | Next.js supports static site generation and helps build efficient React webpages that support SEO.                                   |
 | **Database**                           | [MongoDB & Prisma](https://www.mongodb.com/docs/manual/reference/program/mongod/)              | MongoDB is a source-available cross-platform document-oriented database program. Classified as a NoSQL database program, MongoDB uses JSON-like documents with optional schemas.|
+| **Analytics**                           | [Tinybird](https://www.tinybird.co/)              | A realtime analytics platform for data and engineering teams.|
 
 ## 📁 Project Structure
 
