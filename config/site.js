@@ -9,7 +9,7 @@ export const siteConfig = {
 		github: "https://github.com/urdadx/librelinks",
 	},
 	redirects: {
-		twitter: "https://twitter.com/",
+		twitter: "",
 		instagram: "https://instagram.com/",
 		tiktok: "https://tiktok.com/",
 	},
