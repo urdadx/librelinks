@@ -2,14 +2,11 @@
 
 Librelinks is an open-source link in bio tool for everyone.
 
-The goal of Librelinks is to provide users with a platform that helps them manage their links and content created on social media through a single link. 
+The goal of Librelinks is to provide users with a platform that helps them manage their links and content created on social media through a single link.
 
 Give us a star ⭐.
 
-
 Official site: [https://librelinks.vercel.app](https://librelinks.vercel.app)
-
-
 
 ## ⚒️ Demo
 
@@ -33,48 +30,48 @@ It has 4 Core Features:
 
 ## 📚 Tech Stack
 
-| <div style="width:140px">**Category**</div> | <div style="width:100px">**Choice**</div>                   | **Descriptions**                                                                                                                     |
-| ------------------------------------------- | ----------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
-| **Language**                                | [JavaScript](https://github.com/microsoft/TypeScript)       | JavaScript (JS) is a cross-platform, object-oriented programming language used by developers to make web pages interactive.                                     |
-| **UI Library**                              | [React](https://github.com/facebook/react)                  | React’s declarative syntax and component-based architecture make it simple to develop reactive reusable components.                  |
-| **CSS Framework**                           | [Tailwind CSS](https://github.com/tailwindlabs/tailwindcss) | Tailwind speeds up development by providing helpful css utilities and removing the need to context switch between jsx and css files. |
-| **Web Framework**                           | [NextJS 13](https://github.com/vercel/next.js)              | Next.js supports static site generation and helps build efficient React webpages that support SEO.                                   |
-| **Database**                           | [MongoDB & Prisma](https://www.mongodb.com/docs/manual/reference/program/mongod/)              | MongoDB is a source-available cross-platform document-oriented database program. Classified as a NoSQL database program, MongoDB uses JSON-like documents with optional schemas.|
-| **Analytics**                           | [Tinybird](https://www.tinybird.co/)              | A realtime analytics platform for data and engineering teams.|
+| <div style="width:140px">**Category**</div> | <div style="width:100px">**Choice**</div>                                         | **Descriptions**                                                                                                                                                                 |
+| ------------------------------------------- | --------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Language**                                | [JavaScript](https://github.com/microsoft/TypeScript)                             | JavaScript (JS) is a cross-platform, object-oriented programming language used by developers to make web pages interactive.                                                      |
+| **UI Library**                              | [React](https://github.com/facebook/react)                                        | React’s declarative syntax and component-based architecture make it simple to develop reactive reusable components.                                                              |
+| **CSS Framework**                           | [Tailwind CSS](https://github.com/tailwindlabs/tailwindcss)                       | Tailwind speeds up development by providing helpful css utilities and removing the need to context switch between jsx and css files.                                             |
+| **Web Framework**                           | [NextJS 13](https://github.com/vercel/next.js)                                    | Next.js supports static site generation and helps build efficient React webpages that support SEO.                                                                               |
+| **Database**                                | [MongoDB & Prisma](https://www.mongodb.com/docs/manual/reference/program/mongod/) | MongoDB is a source-available cross-platform document-oriented database program. Classified as a NoSQL database program, MongoDB uses JSON-like documents with optional schemas. |
+| **Analytics**                               | [Tinybird](https://www.tinybird.co/)                                              | A realtime analytics platform for data and engineering teams.                                                                                                                    |
 
 ## 📁 Project Structure
 
 Librelinks is created with the NextJS web framework and follows its project structure.
 
-| <div style="width:115px">**Page Route**</div> | **Code Path**  | **Description**                                   |
-| --------------------------------------------- | -------------- | ------------------------------------------------- |
-| /                                             | /index.jsx     | Home page/ landing page |
-| /components                                   | /components    | Contains all the components used in the project   |
-| /admin                                     | /admin/index.jsx/ | The user's playground  |
-| /login and /register                                  | /login.jsx or /register.jsx | The pages for authenticating the user |
-| admin/[page]                                      | admin/[page]/index.jsx/  | Individual page for customizing your profile                 |
-
+| <div style="width:115px">**Page Route**</div> | **Code Path**               | **Description**                                 |
+| --------------------------------------------- | --------------------------- | ----------------------------------------------- |
+| /                                             | /index.jsx                  | Home page/ landing page                         |
+| /components                                   | /components                 | Contains all the components used in the project |
+| /admin                                        | /admin/index.jsx/           | The user's playground                           |
+| /login and /register                          | /login.jsx or /register.jsx | The pages for authenticating the user           |
+| admin/[page]                                  | admin/[page]/index.jsx/     | Individual page for customizing your profile    |
 
 ## Environment variables 🔑
-You need to have the following env variables in your ```.env``` file to make the application work properly
 
-```DATABASE_URL``` = XXXXXXX
+You need to have the following env variables in your `.env` file to make the application work properly
 
-```DEV_GITHUB_CLIENT_ID``` = XXXXXX
+`DATABASE_URL` = XXXXXXX
 
-```DEV_GITHUB_CLIENT_SECRET``` = XXXXXX
+`DEV_GITHUB_CLIENT_ID` = XXXXXX
 
-```GOOGLE_CLIENT_ID``` = XXXXXX
+`DEV_GITHUB_CLIENT_SECRET` = XXXXXX
 
-```GOOGLE_CLIENT_SECRET``` = XXXXXXXX
+`GOOGLE_CLIENT_ID` = XXXXXX
 
-```NODE_ENV``` = development
+`GOOGLE_CLIENT_SECRET` = XXXXXXXX
 
-```NEXTAUTH_JWT_SECRET``` = XXXXX
+`NODE_ENV` = development
 
-```NEXTAUTH_SECRET``` = XXXXX
+`NEXTAUTH_JWT_SECRET` = XXXXX
 
-Checkout the ```.env.example``` file to learn how to get started.
+`NEXTAUTH_SECRET` = XXXXX
+
+Checkout the `.env.example` file to learn how to get started.
 
 ## 💻 Local Development
 
@@ -96,9 +93,11 @@ We love our contributors! Here's how you can contribute:
 </a>
 
 ## Repo Activity
-![Alt](https://repobeats.axiom.co/api/embed/90acd1b69cd45e69fdfe25c16187ea937c3e27c0.svg "Repobeats analytics image")
+
+![Alt](https://repobeats.axiom.co/api/embed/90acd1b69cd45e69fdfe25c16187ea937c3e27c0.svg 'Repobeats analytics image')
 
 ## Liscence 📝
-MIT 
+
+MIT
 
 ## Give this repo a star ⭐.

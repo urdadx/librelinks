@@ -1,15 +1,15 @@
-import axios from "axios";
+import axios from 'axios';
 
 export default async function handler(req, res) {
-  if (req.method !== "GET") {
+  if (req.method !== 'GET') {
     return res.status(405).end();
   }
 
   try {
-    const { handle, filter } = req.query;
-    const endpoint = "https://api.tinybird.co/v0/pipes/libre_page_views.json";
+    const {handle, filter} = req.query;
+    const endpoint = 'https://api.tinybird.co/v0/pipes/libre_page_views.json';
 
-    if (!handle || typeof handle !== "string") {
+    if (!handle || typeof handle !== 'string') {
       return res.status(404).end();
     }
 
@@ -19,13 +19,13 @@ export default async function handler(req, res) {
 
     let analytics_formatted;
 
-    if (filter !== "last_24_hours" && filter !== "last_hour") {
-      analytics_formatted = analytics.data.data.map(({ t, visits }) => ({
+    if (filter !== 'last_24_hours' && filter !== 'last_hour') {
+      analytics_formatted = analytics.data.data.map(({t, visits}) => ({
         t: formatDate(t),
         visits,
       }));
     } else {
-      analytics_formatted = analytics.data.data.map(({ t, visits }) => ({
+      analytics_formatted = analytics.data.data.map(({t, visits}) => ({
         t: formatTime(t),
         visits,
       }));
@@ -40,18 +40,18 @@ export default async function handler(req, res) {
 function formatDate(dateStr) {
   const dateObj = new Date(dateStr);
   const monthNames = [
-    "Jan",
-    "Feb",
-    "Mar",
-    "Apr",
-    "May",
-    "Jun",
-    "Jul",
-    "Aug",
-    "Sep",
-    "Oct",
-    "Nov",
-    "Dec",
+    'Jan',
+    'Feb',
+    'Mar',
+    'Apr',
+    'May',
+    'Jun',
+    'Jul',
+    'Aug',
+    'Sep',
+    'Oct',
+    'Nov',
+    'Dec',
   ];
   const month = monthNames[dateObj.getMonth()];
   const day = dateObj.getDate();
@@ -61,9 +61,9 @@ function formatDate(dateStr) {
 function formatTime(dateStr) {
   const dateObj = new Date(dateStr);
   let hours = dateObj.getHours();
-  const minutes = dateObj.getMinutes().toString().padStart(2, "0");
-  const amPM = hours >= 12 ? "PM" : "AM";
-  hours = (hours % 12) || 12; // Convert to 12-hour clock
+  const minutes = dateObj.getMinutes().toString().padStart(2, '0');
+  const amPM = hours >= 12 ? 'PM' : 'AM';
+  hours = hours % 12 || 12; // Convert to 12-hour clock
   return `${hours}:${minutes} ${amPM}`;
 }
 

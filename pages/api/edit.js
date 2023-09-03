@@ -1,5 +1,5 @@
-import { db } from "@/lib/db";
-import serverAuth from "@/lib/serverAuth";
+import {db} from '@/lib/db';
+import serverAuth from '@/lib/serverAuth';
 
 export default async function handler(req, res) {
   if (req.method !== 'PATCH' && req.method !== 'DELETE') {
@@ -7,11 +7,11 @@ export default async function handler(req, res) {
   }
 
   try {
-    const { currentUser } = await serverAuth(req, res);
+    const {currentUser} = await serverAuth(req, res);
 
-    const { username, bio, image, handle } = req.body;
+    const {username, bio, image, handle} = req.body;
 
-    if (req.method === "PATCH") {
+    if (req.method === 'PATCH') {
       // Check if the handle already exists in the user table
       const existingUser = await db.user.findUnique({
         where: {
@@ -21,7 +21,7 @@ export default async function handler(req, res) {
 
       // If the handle exists and belongs to a different user, return an error
       if (existingUser && existingUser.id !== currentUser.id) {
-        return res.status(409).json({ error: 'Handle is already taken.' });
+        return res.status(409).json({error: 'Handle is already taken.'});
       }
 
       const updatedUser = await db.user.update({
@@ -32,21 +32,19 @@ export default async function handler(req, res) {
           name: username,
           bio: bio,
           image: image,
-          handle: handle
+          handle: handle,
         },
       });
 
       return res.status(200).json(updatedUser);
-
-    } else if (req.method === "DELETE") {
+    } else if (req.method === 'DELETE') {
       await db.user.delete({
         where: {
-          id: currentUser.id
-        }
+          id: currentUser.id,
+        },
       });
       return res.status(204).end();
     }
-
   } catch (error) {
     console.log(error);
     return res.status(400).end();
