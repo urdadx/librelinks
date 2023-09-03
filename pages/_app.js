@@ -54,7 +54,7 @@ export default function App({ Component, pageProps }) {
 			<NProgress isRouteChanging={state.isRouteChanging} key={state.loadingKey} />
 			<Analytics />
 			<QueryClientProvider client={queryClient}>
-				<Toaster position="bottom-center" />
+				<Toaster toastOptions={{ duration: 2500 }} position="bottom-center" />
 				<SessionProvider session={pageProps.session}>
 					<Provider>
 						<Component {...pageProps} />

@@ -74,6 +74,7 @@ You need to have the following env variables in your ```.env``` file to make the
 
 ```NEXTAUTH_SECRET``` = XXXXX
 
+Checkout the ```.env.example``` file to learn how to get started.
 
 ## 💻 Local Development
 
