@@ -1,4 +1,4 @@
-import {db} from '@/lib/db';
+import { db } from '@/lib/db';
 
 export default async function handler(req, res) {
   if (req.method !== 'PATCH') {
@@ -6,7 +6,7 @@ export default async function handler(req, res) {
   }
 
   try {
-    const {id} = req.query;
+    const { id } = req.query;
 
     if (!id || typeof id !== 'string') {
       throw new Error('Invalid ID');

@@ -1,6 +1,6 @@
-import {Oval} from 'react-loader-spinner';
+import { Oval } from 'react-loader-spinner';
 
-export const TinyLoader = ({color, size, stroke}) => {
+export const TinyLoader = ({ color, size, stroke }) => {
   return (
     <>
       <Oval

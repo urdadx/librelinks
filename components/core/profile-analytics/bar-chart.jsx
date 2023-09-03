@@ -1,5 +1,5 @@
 import Loader from '@/components/utils/loading-spinner';
-import {BarChart as SimpleChart} from 'lucide-react';
+import { BarChart as SimpleChart } from 'lucide-react';
 import {
   Bar,
   BarChart,
@@ -17,7 +17,7 @@ const calculateTotalViews = (data) => {
   }
   return totalViews;
 };
-const Chart = ({analytics}) => {
+const Chart = ({ analytics }) => {
   return (
     <>
       <div className="mt-4 rounded-xl border bg-white py-4 px-2 w-full h-auto">

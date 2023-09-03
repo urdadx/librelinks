@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
-import {extractSiteFromUrl, removeHashFromHexColor} from '@/utils/helpers';
-export const SocialCards = ({url, title, color, registerClicks}) => {
+import { extractSiteFromUrl, removeHashFromHexColor } from '@/utils/helpers';
+export const SocialCards = ({ url, title, color, registerClicks }) => {
   const validColor = removeHashFromHexColor(color);
   const validURL = extractSiteFromUrl(url);
 

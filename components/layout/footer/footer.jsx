@@ -2,7 +2,7 @@ import Link from 'next/link';
 import useMediaQuery from '@/hooks/use-media-query';
 
 const Footer = () => {
-  const {isMobile} = useMediaQuery();
+  const { isMobile } = useMediaQuery();
 
   return (
     <>

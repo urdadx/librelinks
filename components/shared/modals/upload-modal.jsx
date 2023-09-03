@@ -1,16 +1,16 @@
 /* eslint-disable @next/next/no-img-element */
 import * as Dialog from '@radix-ui/react-dialog';
-import {useState, useCallback} from 'react';
+import { useState, useCallback } from 'react';
 import Image from 'next/image';
 import closeSVG from '@/public/close_button.svg';
-import {Upload} from 'lucide-react';
-import {useDropzone} from 'react-dropzone';
-import {useQueryClient} from '@tanstack/react-query';
+import { Upload } from 'lucide-react';
+import { useDropzone } from 'react-dropzone';
+import { useQueryClient } from '@tanstack/react-query';
 import useCurrentUser from '@/hooks/useCurrentUser';
 
-const UploadModal = ({onChange, value, submit}) => {
+const UploadModal = ({ onChange, value, submit }) => {
   const [base64, setBase64] = useState(value);
-  const {data: currentUser} = useCurrentUser();
+  const { data: currentUser } = useCurrentUser();
 
   const handleChange = useCallback(
     (base64) => {
@@ -42,7 +42,7 @@ const UploadModal = ({onChange, value, submit}) => {
     [currentUser?.handle, handleChange, queryClient]
   );
 
-  const {getRootProps, getInputProps} = useDropzone({
+  const { getRootProps, getInputProps } = useDropzone({
     maxFiles: 1,
     onDrop: handleDrop,
     accept: {

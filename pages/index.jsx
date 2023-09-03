@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import GithubStar from '@/components/utils/github-star';
-import {GithubIcon, GlobeIcon, TwitterIcon} from 'lucide-react';
+import { GithubIcon, GlobeIcon, TwitterIcon } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import Head from 'next/head';

@@ -3,8 +3,8 @@ import useCurrentUser from '@/hooks/useCurrentUser';
 import useUser from '@/hooks/useUser';
 
 export const UserAvatar = () => {
-  const {data: currentUser} = useCurrentUser();
-  const {data: fetchedUser} = useUser(currentUser?.handle);
+  const { data: currentUser } = useCurrentUser();
+  const { data: fetchedUser } = useUser(currentUser?.handle);
 
   return (
     <>
@@ -30,8 +30,8 @@ export const UserAvatar = () => {
 };
 
 export const UserAvatarSetting = () => {
-  const {data: currentUser} = useCurrentUser();
-  const {data: fetchedUser} = useUser(currentUser?.handle);
+  const { data: currentUser } = useCurrentUser();
+  const { data: fetchedUser } = useUser(currentUser?.handle);
 
   return (
     <>

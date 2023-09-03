@@ -1,13 +1,13 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import useCurrentUser from '@/hooks/useCurrentUser';
-import {useMutation, useQueryClient} from '@tanstack/react-query';
-import {useState, useEffect} from 'react';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 import toast from 'react-hot-toast';
-import {signalIframe} from '@/utils/helpers';
+import { signalIframe } from '@/utils/helpers';
 
 const ButtonSelector = () => {
-  const {data: currentUser} = useCurrentUser();
+  const { data: currentUser } = useCurrentUser();
   const [buttonStyle, setButtonStyle] = useState(null);
   const buttonFromDB = currentUser?.buttonStyle;
 
@@ -133,11 +133,11 @@ const ButtonSelector = () => {
     <div className="max-w-[640px] mx-auto my-4">
       <h3 className="text-xl font-semibold">Buttons</h3>
       <div className="mt-4 rounded-2xl border bg-white p-4 w-full h-auto">
-        {buttonOptions?.map(({category, buttonType}) => (
+        {buttonOptions?.map(({ category, buttonType }) => (
           <div key={category} className="mb-6">
             <p className="text-inherit pb-2">{category}</p>
             <div className="inline-grid w-full grid-cols-[repeat(auto-fit,_minmax(130px,_1fr))] gap-4">
-              {buttonType?.map(({css, button}) => (
+              {buttonType?.map(({ css, button }) => (
                 <span
                   className="inline-flex items-center"
                   key={css}

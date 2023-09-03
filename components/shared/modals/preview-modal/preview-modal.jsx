@@ -1,7 +1,7 @@
 import Preview from '../../profile-preview/preview';
 import React from 'react';
 
-const PreviewModal = ({close}) => {
+const PreviewModal = ({ close }) => {
   return (
     <React.Fragment>
       <div className="fixed  bg-gray-800 h-screen">

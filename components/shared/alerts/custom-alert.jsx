@@ -1,7 +1,7 @@
 import React from 'react';
 import * as AlertDialog from '@radix-ui/react-alert-dialog';
 
-const CustomAlert = ({title, action, desc, confirmMsg, close}) => (
+const CustomAlert = ({ title, action, desc, confirmMsg, close }) => (
   <AlertDialog.Portal>
     <AlertDialog.Overlay className="fixed inset-0 backdrop-blur-sm bg-gray-800 bg-opacity-50 sm:w-full" />
     <AlertDialog.Content className="contentShow fixed top-[50%] left-[50%] max-h-[85vh] w-[90vw] max-w-[500px] translate-x-[-50%] translate-y-[-50%] rounded-xl bg-white p-[25px]">

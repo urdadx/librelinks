@@ -1,6 +1,6 @@
-import {useQuery} from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
-import {toast} from 'react-hot-toast';
+import { toast } from 'react-hot-toast';
 
 const useDeviceAnalytics = (handle) => {
   return useQuery({

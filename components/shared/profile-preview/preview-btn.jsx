@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import { useState } from 'react';
 import Drawer from 'react-modern-drawer';
 import 'react-modern-drawer/dist/index.css';
 import PreviewMobile from './preview-mobile';

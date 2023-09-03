@@ -1,7 +1,7 @@
-import {Plus} from 'lucide-react';
+import { Plus } from 'lucide-react';
 import * as Dialog from '@radix-ui/react-dialog';
 import AddLinkModal from '../../shared/modals/add-new-link';
-import {motion} from 'framer-motion';
+import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from './link';
 import useCurrentUser from '@/hooks/useCurrentUser';
@@ -19,17 +19,17 @@ import {
   SortableContext,
   verticalListSortingStrategy,
 } from '@dnd-kit/sortable';
-import {restrictToVerticalAxis} from '@dnd-kit/modifiers';
+import { restrictToVerticalAxis } from '@dnd-kit/modifiers';
 import useLinks from '@/hooks/useLinks';
 import React from 'react';
-import {useMutation, useQueryClient} from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
-import {signalIframe} from '@/utils/helpers';
+import { signalIframe } from '@/utils/helpers';
 import toast from 'react-hot-toast';
 import LinkSkeleton from './link-skeleton';
 
 const LinksEditor = () => {
-  const {data: currentUser} = useCurrentUser();
+  const { data: currentUser } = useCurrentUser();
   const userId = currentUser?.id ? currentUser.id : null;
 
   const mouseSensor = useSensor(MouseSensor);
@@ -38,11 +38,11 @@ const LinksEditor = () => {
 
   const sensors = useSensors(mouseSensor, touchSensor, keyboardSensor);
 
-  const {data: userLinks, isLoading} = useLinks(userId);
+  const { data: userLinks, isLoading } = useLinks(userId);
   const queryClient = useQueryClient();
 
   const handleDragEnd = async (event) => {
-    const {active, over} = event;
+    const { active, over } = event;
     if (active.id !== over.id) {
       const activeIndex = userLinks.findIndex((link) => link.id === active.id);
       const overIndex = userLinks.findIndex((link) => link.id === over.id);
@@ -95,14 +95,14 @@ const LinksEditor = () => {
 
         <div className="my-10">
           {!isLoading
-            ? userLinks?.map(({id, ...userLink}) => (
+            ? userLinks?.map(({ id, ...userLink }) => (
                 <React.Fragment key={id}>
                   <motion.div
                     key={id}
-                    initial={{opacity: 0, y: -20}}
-                    animate={{opacity: 1, y: 0}}
-                    exit={{opacity: 0, y: -20}}
-                    transition={{duration: 0.5}}
+                    initial={{ opacity: 0, y: -20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -20 }}
+                    transition={{ duration: 0.5 }}
                   >
                     <SortableContext
                       items={userLinks && userLinks}
@@ -113,7 +113,7 @@ const LinksEditor = () => {
                   </motion.div>
                 </React.Fragment>
               ))
-            : Array.from({length: 4}).map((_, i) => <LinkSkeleton key={i} />)}
+            : Array.from({ length: 4 }).map((_, i) => <LinkSkeleton key={i} />)}
           {!isLoading && userLinks?.length === 0 && (
             <div className="mt-4 w-[245px] h-auto flex flex-col mx-auto">
               <Image

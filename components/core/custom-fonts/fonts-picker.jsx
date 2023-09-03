@@ -1,5 +1,5 @@
-import {useState} from 'react';
-import {FontsModal} from '@/components/shared/modals/fonts-modal';
+import { useState } from 'react';
+import { FontsModal } from '@/components/shared/modals/fonts-modal';
 import * as Dialog from '@radix-ui/react-dialog';
 
 const FontPicker = () => {

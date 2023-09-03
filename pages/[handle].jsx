@@ -2,9 +2,9 @@
 import LinkCard from '@/components/core/user-profile/links-card';
 import * as Avatar from '@radix-ui/react-avatar';
 import Link from 'next/link';
-import {useRouter} from 'next/router';
-import {useEffect, useState} from 'react';
-import {useMutation, useQueryClient} from '@tanstack/react-query';
+import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 import useUser from '@/hooks/useUser';
@@ -12,12 +12,12 @@ import Loader from '@/components/utils/loading-spinner';
 import NotFound from '@/components/utils/not-found';
 import useLinks from '@/hooks/useLinks';
 import Script from 'next/script';
-import {SocialCards} from '@/components/core/user-profile/social-cards';
+import { SocialCards } from '@/components/core/user-profile/social-cards';
 import Head from 'next/head';
 
 const ProfilePage = () => {
-  const {query} = useRouter();
-  const {handle} = query;
+  const { query } = useRouter();
+  const { handle } = query;
 
   const {
     data: fetchedUser,
@@ -25,7 +25,7 @@ const ProfilePage = () => {
     isFetching: isUserFetching,
   } = useUser(handle);
 
-  const {data: userLinks, isFetching: isLinksFetching} = useLinks(
+  const { data: userLinks, isFetching: isLinksFetching } = useLinks(
     fetchedUser?.id
   );
 
@@ -43,8 +43,8 @@ const ProfilePage = () => {
         );
       },
       onSuccess: () => {
-        queryClient.invalidateQueries({queryKey: ['links', fetchedUser?.id]});
-        queryClient.invalidateQueries({queryKey: ['users', fetchedUser?.id]});
+        queryClient.invalidateQueries({ queryKey: ['links', fetchedUser?.id] });
+        queryClient.invalidateQueries({ queryKey: ['users', fetchedUser?.id] });
       },
     }
   );
@@ -55,14 +55,14 @@ const ProfilePage = () => {
 
   useEffect(() => {
     window.addEventListener('message', () => {
-      queryClient.invalidateQueries({queryKey: ['links']});
-      queryClient.invalidateQueries({queryKey: ['users']});
+      queryClient.invalidateQueries({ queryKey: ['links'] });
+      queryClient.invalidateQueries({ queryKey: ['users'] });
     });
 
     return () => {
       window.removeEventListener('message', () => {
-        queryClient.invalidateQueries({queryKey: ['links']});
-        queryClient.invalidateQueries({queryKey: ['users']});
+        queryClient.invalidateQueries({ queryKey: ['links'] });
+        queryClient.invalidateQueries({ queryKey: ['users'] });
       });
     };
   }, [queryClient]);
@@ -105,7 +105,7 @@ const ProfilePage = () => {
         ''
       )}
       <section
-        style={{background: theme.primary}}
+        style={{ background: theme.primary }}
         className="h-[100vh] w-[100vw] no-scrollbar overflow-auto"
       >
         <div className="flex items-center w-full mt-4 flex-col mx-auto max-w-3xl justify-center px-8 lg:mt-16">
@@ -137,14 +137,14 @@ const ProfilePage = () => {
             </Avatar.Fallback>
           </Avatar.Root>
           <p
-            style={{color: theme.accent}}
+            style={{ color: theme.accent }}
             className="font-bold text-white text-center text-sm mt-4 mb-2 lg:text-xl lg:mt-4"
           >
             {fetchedUser?.name}
           </p>
           {fetchedUser?.bio && (
             <p
-              style={{color: theme.accent}}
+              style={{ color: theme.accent }}
               className="w-[150px] truncate text-center text-sm mt-1 mb-4 lg:text-xl lg:mb-4 lg:w-[500px]"
             >
               {fetchedUser?.bio}
@@ -153,7 +153,7 @@ const ProfilePage = () => {
           <div className="min-w-max flex flex-wrap gap-2 mb-8 lg:w-fit lg:gap-4">
             {userLinks
               ?.filter((link) => link.isSocial && !link.archived)
-              .map(({id, title, url}) => {
+              .map(({ id, title, url }) => {
                 return (
                   <SocialCards
                     key={title}
@@ -167,7 +167,7 @@ const ProfilePage = () => {
           </div>
           {userLinks
             ?.filter((link) => !link.isSocial)
-            .map(({id, ...link}) => (
+            .map(({ id, ...link }) => (
               <LinkCard
                 buttonStyle={buttonStyle}
                 theme={theme}
@@ -181,7 +181,7 @@ const ProfilePage = () => {
           {userLinks?.length === 0 && (
             <div className="flex justify-center">
               <h3
-                style={{color: theme.neutral}}
+                style={{ color: theme.neutral }}
                 className="pt-8 text-md text-white font-semibold lg:text-2xl"
               >
                 Hello World 🚀
@@ -193,7 +193,7 @@ const ProfilePage = () => {
         {userLinks?.length > 0 ? (
           <footer className="relative left-1/2 bottom-0 transform -translate-x-1/2 w-[200px]">
             <p
-              style={{color: theme.accent}}
+              style={{ color: theme.accent }}
               className="text-sm text-semibold text-center w lg:text-lg"
             >
               Made with{' '}

@@ -1,7 +1,7 @@
 import React from 'react';
 import * as Tooltip from '@radix-ui/react-tooltip';
 
-const TooltipWrapper = ({component, title}) => {
+const TooltipWrapper = ({ component, title }) => {
   return (
     <Tooltip.Provider>
       <Tooltip.Root delayDuration={2} avoidCollisions={true}>

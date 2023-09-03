@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import * as Dialog from '@radix-ui/react-dialog';
-import {Wand, Link2, BarChart, CircleDot, Settings2} from 'lucide-react';
-import {useSession} from 'next-auth/react';
+import { Wand, Link2, BarChart, CircleDot, Settings2 } from 'lucide-react';
+import { useSession } from 'next-auth/react';
 import UserAccountNavDesktop from '@/components/utils/usernavbutton-desktop';
 import ShareButton from '@/components/utils/share-button';
 import SiteHeader from './main-nav';
@@ -33,7 +33,7 @@ const items = [
   },
 ];
 
-const Navbar = ({showName = false, isHomePage = true}) => {
+const Navbar = ({ showName = false, isHomePage = true }) => {
   const session = useSession();
 
   return (

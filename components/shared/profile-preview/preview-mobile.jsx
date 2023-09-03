@@ -1,21 +1,21 @@
 /* eslint-disable @next/next/no-img-element */
-import {useEffect, useState, useMemo} from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import * as Avatar from '@radix-ui/react-avatar';
 import LinkCard from '@/components/core/user-profile/links-card';
 import Link from 'next/link';
 import Loader from '@/components/utils/loading-spinner';
 import NotFound from '@/components/utils/not-found';
 import useLinks from '@/hooks/useLinks';
-import {SocialCards} from '@/components/core/user-profile/social-cards';
+import { SocialCards } from '@/components/core/user-profile/social-cards';
 import useCurrentUser from '@/hooks/useCurrentUser';
-import {X} from 'lucide-react';
+import { X } from 'lucide-react';
 
-const PreviewMobile = ({close}) => {
+const PreviewMobile = ({ close }) => {
   const [, setIsDataLoaded] = useState(false);
 
-  const {data: currentUser, isLoading: isUserLoading} = useCurrentUser();
+  const { data: currentUser, isLoading: isUserLoading } = useCurrentUser();
 
-  const {data: userLinks} = useLinks(currentUser?.id);
+  const { data: userLinks } = useLinks(currentUser?.id);
 
   const theme = useMemo(
     () => ({
@@ -54,7 +54,7 @@ const PreviewMobile = ({close}) => {
   return (
     <>
       <section
-        style={{background: theme.primary}}
+        style={{ background: theme.primary }}
         className="h-[100vh] w-[100vw] no-scrollbar overflow-auto"
       >
         <div className="flex items-center w-full mt-10 flex-col mx-auto max-w-3xl justify-center px-8 lg:mt-16">
@@ -76,21 +76,21 @@ const PreviewMobile = ({close}) => {
             </Avatar.Fallback>
           </Avatar.Root>
           <p
-            style={{color: theme.accent}}
+            style={{ color: theme.accent }}
             className="font-bold text-white text-center text-sm mt-4 mb-2 lg:text-xl lg:mt-4"
           >
             {currentUser?.name}
           </p>
           {currentUser?.bio && (
             <p
-              style={{color: theme.accent}}
+              style={{ color: theme.accent }}
               className="w-[150px] truncate text-center text-sm mt-1 mb-4 lg:text-xl lg:mb-4 lg:w-[500px]"
             >
               {currentUser?.bio}
             </p>
           )}
           <div className="min-w-max flex flex-wrap gap-2 mb-8 lg:w-fit lg:gap-4">
-            {socialLinks?.map(({title, url}) => (
+            {socialLinks?.map(({ title, url }) => (
               <SocialCards
                 key={title}
                 title={title}
@@ -99,7 +99,7 @@ const PreviewMobile = ({close}) => {
               />
             ))}
           </div>
-          {nonSocialLinks?.map(({id, ...link}) => (
+          {nonSocialLinks?.map(({ id, ...link }) => (
             <LinkCard
               buttonStyle={currentUser?.buttonStyle}
               theme={theme}
@@ -112,7 +112,7 @@ const PreviewMobile = ({close}) => {
           {nonSocialLinks?.length === 0 && socialLinks?.length === 0 && (
             <div className="flex justify-center">
               <h3
-                style={{color: theme.neutral}}
+                style={{ color: theme.neutral }}
                 className="pt-8 text-md text-white font-semibold lg:text-2xl"
               >
                 Hello World 🚀
@@ -124,7 +124,7 @@ const PreviewMobile = ({close}) => {
         {nonSocialLinks?.length > 0 && (
           <footer className="relative left-1/2 bottom-0 transform -translate-x-1/2 w-[200px]">
             <p
-              style={{color: theme.accent}}
+              style={{ color: theme.accent }}
               className="text-sm text-semibold text-center lg:text-lg"
             >
               Made with{' '}
@@ -141,7 +141,7 @@ const PreviewMobile = ({close}) => {
         <div className="rounded-full bottom-[1rem] absolute left-1/2 transform -translate-x-1/2 lg:hidden">
           <button
             onClick={close}
-            style={{background: `${theme.neutral}`}}
+            style={{ background: `${theme.neutral}` }}
             className="flex justify-center items-center w-[45px] h-[45px] rounded-full bg-gray-500 text-black text-center font-bold text-lg shadow-lg hover:bg-slate-600"
           >
             <X color={theme.primary} size={30} />

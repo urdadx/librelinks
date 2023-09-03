@@ -1,11 +1,11 @@
 import * as Dialog from '@radix-ui/react-dialog';
-import {Edit} from 'lucide-react';
+import { Edit } from 'lucide-react';
 import EditLinkModal from '../modals/edit-link';
 import * as AlertDialog from '@radix-ui/react-alert-dialog';
-import {Drawer} from 'vaul';
-import {ArchiveIcon} from 'lucide-react';
+import { Drawer } from 'vaul';
+import { ArchiveIcon } from 'lucide-react';
 import CustomAlert from '../alerts/custom-alert';
-import {Trash} from 'lucide-react';
+import { Trash } from 'lucide-react';
 
 const PopoverMobile = ({
   id,

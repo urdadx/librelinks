@@ -1,4 +1,4 @@
-import {Share2, GithubIcon} from 'lucide-react';
+import { Share2, GithubIcon } from 'lucide-react';
 import Link from 'next/link';
 import useMediaQuery from '@/hooks/use-media-query';
 

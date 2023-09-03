@@ -1,11 +1,11 @@
-import {useCallback, useState} from 'react';
+import { useCallback, useState } from 'react';
 import Link from 'next/link';
-import {Shuffle} from 'lucide-react';
+import { Shuffle } from 'lucide-react';
 import toast from 'react-hot-toast';
 import axios from 'axios';
-import {TinyLoader} from '@/components/utils/tiny-loader';
-import {nanoid} from 'nanoid';
-import {useRouter} from 'next/router';
+import { TinyLoader } from '@/components/utils/tiny-loader';
+import { nanoid } from 'nanoid';
+import { useRouter } from 'next/router';
 import Confetti from 'react-dom-confetti';
 import Balancer from 'react-wrap-balancer';
 
@@ -25,7 +25,7 @@ const Onboarding = () => {
       return;
     }
     try {
-      const response = await axios.patch('/api/edit', {handle: handle});
+      const response = await axios.patch('/api/edit', { handle: handle });
       setIsLoading(false);
       if (response.status === 200) {
         setIsExploding(true);

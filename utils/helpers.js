@@ -1,5 +1,5 @@
 import ccTLDs from './constants/ccltds';
-import {SECOND_LEVEL_DOMAINS, SPECIAL_APEX_DOMAINS} from './constants';
+import { SECOND_LEVEL_DOMAINS, SPECIAL_APEX_DOMAINS } from './constants';
 import ms from 'ms';
 
 export const getApexDomain = (url) => {

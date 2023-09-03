@@ -1,21 +1,21 @@
-import {UserAvatar} from './avatar';
+import { UserAvatar } from './avatar';
 import * as Popover from '@radix-ui/react-popover';
-import {useSession} from 'next-auth/react';
-import {signOut} from 'next-auth/react';
-import {useRouter} from 'next/router';
-import {toast} from 'react-hot-toast';
+import { useSession } from 'next-auth/react';
+import { signOut } from 'next-auth/react';
+import { useRouter } from 'next/router';
+import { toast } from 'react-hot-toast';
 import Link from 'next/link';
-import {User, LogOut, AlertCircle} from 'lucide-react';
+import { User, LogOut, AlertCircle } from 'lucide-react';
 import useMediaQuery from '@/hooks/use-media-query';
-import {Drawer} from 'vaul';
+import { Drawer } from 'vaul';
 import UserNavButtonMobile from './usernavbutton-mobile';
 
 const UserAccountNavDesktop = () => {
   const session = useSession();
-  const {data} = session;
+  const { data } = session;
   const router = useRouter();
 
-  const {isMobile} = useMediaQuery();
+  const { isMobile } = useMediaQuery();
 
   const handleLogout = async () => {
     try {

@@ -1,5 +1,5 @@
 import serverAuth from '@/lib/serverAuth';
-import {db} from '@/lib/db';
+import { db } from '@/lib/db';
 
 export default async function handler(req, res) {
   if (req.method !== 'POST' && req.method !== 'GET' && req.method !== 'PUT') {
@@ -8,8 +8,8 @@ export default async function handler(req, res) {
 
   try {
     if (req.method === 'POST') {
-      const {currentUser} = await serverAuth(req, res);
-      const {title, url, order, isSocial} = req.body;
+      const { currentUser } = await serverAuth(req, res);
+      const { title, url, order, isSocial } = req.body;
 
       const link = await db.link.create({
         data: {
@@ -25,7 +25,7 @@ export default async function handler(req, res) {
     }
 
     if (req.method === 'GET') {
-      const {userId} = req.query;
+      const { userId } = req.query;
 
       let links;
 
@@ -48,11 +48,11 @@ export default async function handler(req, res) {
     }
 
     if (req.method === 'PUT') {
-      const {links} = req.body;
+      const { links } = req.body;
       console.log('links', links);
 
       await Promise.all(
-        links.map(({id}, index) =>
+        links.map(({ id }, index) =>
           db.link.update({
             where: {
               id,
@@ -63,7 +63,7 @@ export default async function handler(req, res) {
           })
         )
       );
-      res.status(200).json({msg: 'link order updated'});
+      res.status(200).json({ msg: 'link order updated' });
     }
   } catch (error) {
     console.log(error);

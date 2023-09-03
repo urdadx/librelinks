@@ -1,4 +1,4 @@
-import {db} from '@/lib/db';
+import { db } from '@/lib/db';
 import serverAuth from '@/lib/serverAuth';
 
 export default async function handler(req, res) {
@@ -7,9 +7,9 @@ export default async function handler(req, res) {
   }
 
   try {
-    const {currentUser} = await serverAuth(req, res);
+    const { currentUser } = await serverAuth(req, res);
 
-    const {username, bio, image, handle} = req.body;
+    const { username, bio, image, handle } = req.body;
 
     if (req.method === 'PATCH') {
       // Check if the handle already exists in the user table
@@ -21,7 +21,7 @@ export default async function handler(req, res) {
 
       // If the handle exists and belongs to a different user, return an error
       if (existingUser && existingUser.id !== currentUser.id) {
-        return res.status(409).json({error: 'Handle is already taken.'});
+        return res.status(409).json({ error: 'Handle is already taken.' });
       }
 
       const updatedUser = await db.user.update({

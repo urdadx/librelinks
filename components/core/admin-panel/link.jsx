@@ -1,17 +1,17 @@
-import {GripVertical, BarChart, Copy} from 'lucide-react';
+import { GripVertical, BarChart, Copy } from 'lucide-react';
 import PopoverDesktop from '../../shared/popovers/popover-desktop';
-import {useSortable} from '@dnd-kit/sortable';
-import {CSS} from '@dnd-kit/utilities';
-import {getApexDomain, timeAgo} from '@/utils/helpers';
-import {GOOGLE_FAVICON_URL} from '@/utils/constants';
+import { useSortable } from '@dnd-kit/sortable';
+import { CSS } from '@dnd-kit/utilities';
+import { getApexDomain, timeAgo } from '@/utils/helpers';
+import { GOOGLE_FAVICON_URL } from '@/utils/constants';
 import Image from 'next/image';
 import Link from 'next/link';
 import toast from 'react-hot-toast';
-import {ArchiveSVG} from '@/components/utils/archive-svg';
+import { ArchiveSVG } from '@/components/utils/archive-svg';
 import TooltipWrapper from '@/components/utils/tooltip';
 
 const LinkCard = (props) => {
-  const {attributes, listeners, setNodeRef, transform, transition} =
+  const { attributes, listeners, setNodeRef, transform, transition } =
     useSortable({
       id: props.id,
     });

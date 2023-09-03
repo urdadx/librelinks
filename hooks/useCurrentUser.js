@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {useQuery} from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 
 const useCurrentUser = () => {
   return useQuery({

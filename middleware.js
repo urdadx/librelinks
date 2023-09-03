@@ -1,5 +1,5 @@
-import {getToken} from 'next-auth/jwt';
-import {NextResponse} from 'next/server';
+import { getToken } from 'next-auth/jwt';
+import { NextResponse } from 'next/server';
 
 export default async function middleware(req) {
   // Get the pathname of the request (e.g. /, /admin)

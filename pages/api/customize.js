@@ -1,4 +1,4 @@
-import {db} from '@/lib/db';
+import { db } from '@/lib/db';
 import serverAuth from '@/lib/serverAuth';
 
 export default async function handler(req, res) {
@@ -7,8 +7,8 @@ export default async function handler(req, res) {
   }
 
   try {
-    const {currentUser} = await serverAuth(req, res);
-    const {buttonStyle, themePalette} = req.body;
+    const { currentUser } = await serverAuth(req, res);
+    const { buttonStyle, themePalette } = req.body;
 
     const updatedCustomizations = await db.user.update({
       where: {

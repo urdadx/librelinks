@@ -3,26 +3,26 @@ import Select from 'react-select';
 import LinkStats from './link-stats';
 import useCurrentUser from '@/hooks/useCurrentUser';
 import useAnalytics from '@/hooks/useAnalytics';
-import {useState} from 'react';
-import {LocationStats} from './location-stats';
-import {DeviceStats} from './device-stats';
+import { useState } from 'react';
+import { LocationStats } from './location-stats';
+import { DeviceStats } from './device-stats';
 import useLocationAnalytics from '@/hooks/useLocationAnalytics';
 import useDeviceAnalytics from '@/hooks/useDeviceAnalytics';
 
 export function AnalyticsDashboard() {
   const options = [
-    {value: 'last_hour', label: 'Last hour'},
-    {value: 'last_24_hours', label: 'Last 24 hours'},
-    {value: 'last_7_days', label: 'Last 7 days'},
-    {value: 'last_30_days', label: 'Last 30 days'},
+    { value: 'last_hour', label: 'Last hour' },
+    { value: 'last_24_hours', label: 'Last 24 hours' },
+    { value: 'last_7_days', label: 'Last 7 days' },
+    { value: 'last_30_days', label: 'Last 30 days' },
   ];
 
-  const {data: currentUser} = useCurrentUser();
+  const { data: currentUser } = useCurrentUser();
   const [filter, setFilter] = useState('last_hour');
 
-  const {data: visitAnalytics} = useAnalytics(filter, currentUser?.handle);
-  const {data: locationAnalytics} = useLocationAnalytics(currentUser?.handle);
-  const {data: deviceAnalytics} = useDeviceAnalytics(currentUser?.handle);
+  const { data: visitAnalytics } = useAnalytics(filter, currentUser?.handle);
+  const { data: locationAnalytics } = useLocationAnalytics(currentUser?.handle);
+  const { data: deviceAnalytics } = useDeviceAnalytics(currentUser?.handle);
 
   return (
     <>

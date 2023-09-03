@@ -1,4 +1,4 @@
-import {db} from '@/lib/db';
+import { db } from '@/lib/db';
 
 export default async function handler(req, res) {
   // if (req.method !== "PATCH" && req.method !== "DELETE") {
@@ -6,14 +6,14 @@ export default async function handler(req, res) {
   // }
 
   try {
-    const {linkId} = req.query;
+    const { linkId } = req.query;
 
     if (!linkId || typeof linkId !== 'string') {
       throw new Error('Invalid ID');
     }
 
     if (req.method === 'PATCH') {
-      const {newTitle, newUrl, archived} = req.body;
+      const { newTitle, newUrl, archived } = req.body;
 
       const updatedLink = await db.link.update({
         where: {

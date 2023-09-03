@@ -1,7 +1,7 @@
-import {PrismaAdapter} from '@next-auth/prisma-adapter';
+import { PrismaAdapter } from '@next-auth/prisma-adapter';
 import GoogleProvider from 'next-auth/providers/google';
 import GitHubProvider from 'next-auth/providers/github';
-import {db} from '@/lib/db';
+import { db } from '@/lib/db';
 import NextAuth from 'next-auth/next';
 
 export const authOptions = {
@@ -35,7 +35,7 @@ export const authOptions = {
   ],
 
   callbacks: {
-    async session({token, session}) {
+    async session({ token, session }) {
       if (token) {
         session.user.id = token.id;
         session.user.name = token.name;
@@ -45,7 +45,7 @@ export const authOptions = {
       return session;
     },
 
-    async jwt({token, user}) {
+    async jwt({ token, user }) {
       const dbUser = await db.user.findFirst({
         where: {
           email: token.email,

@@ -6,7 +6,7 @@ export default async function handler(req, res) {
   }
 
   try {
-    const {handle, filter} = req.query;
+    const { handle, filter } = req.query;
     const endpoint = 'https://api.tinybird.co/v0/pipes/libre_page_views.json';
 
     if (!handle || typeof handle !== 'string') {
@@ -20,12 +20,12 @@ export default async function handler(req, res) {
     let analytics_formatted;
 
     if (filter !== 'last_24_hours' && filter !== 'last_hour') {
-      analytics_formatted = analytics.data.data.map(({t, visits}) => ({
+      analytics_formatted = analytics.data.data.map(({ t, visits }) => ({
         t: formatDate(t),
         visits,
       }));
     } else {
-      analytics_formatted = analytics.data.data.map(({t, visits}) => ({
+      analytics_formatted = analytics.data.data.map(({ t, visits }) => ({
         t: formatTime(t),
         visits,
       }));

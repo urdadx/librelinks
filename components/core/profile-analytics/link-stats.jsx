@@ -1,17 +1,17 @@
 /* eslint-disable @next/next/no-img-element */
-import {BarChart} from 'lucide-react';
+import { BarChart } from 'lucide-react';
 import useLinks from '@/hooks/useLinks';
 import useCurrentUser from '@/hooks/useCurrentUser';
 import Loader from '@/components/utils/loading-spinner';
-import {getApexDomain} from '@/utils/helpers';
-import {GOOGLE_FAVICON_URL} from '@/utils/constants';
-import {useState} from 'react';
+import { getApexDomain } from '@/utils/helpers';
+import { GOOGLE_FAVICON_URL } from '@/utils/constants';
+import { useState } from 'react';
 import StarSVG from '@/components/utils/star-svg';
 import Link from 'next/link';
 
 const LinkStats = () => {
-  const {data: currentUser} = useCurrentUser();
-  const {data: userLinks, isLoading} = useLinks(currentUser?.id);
+  const { data: currentUser } = useCurrentUser();
+  const { data: userLinks, isLoading } = useLinks(currentUser?.id);
   const [showAll, setShowAll] = useState(false);
 
   const displayedLinks = showAll ? userLinks : userLinks?.slice(0, 3);

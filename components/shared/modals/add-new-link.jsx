@@ -1,14 +1,14 @@
 import * as Dialog from '@radix-ui/react-dialog';
-import {useState} from 'react';
+import { useState } from 'react';
 import Image from 'next/image';
 import closeSVG from '@/public/close_button.svg';
-import {validDomainRegex} from '@/utils/helpers';
-import {toast} from 'react-hot-toast';
+import { validDomainRegex } from '@/utils/helpers';
+import { toast } from 'react-hot-toast';
 import axios from 'axios';
-import {useMutation, useQueryClient} from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import useCurrentUser from '@/hooks/useCurrentUser';
 import useLinks from '@/hooks/useLinks';
-import {signalIframe} from '@/utils/helpers';
+import { signalIframe } from '@/utils/helpers';
 import * as Switch from '@radix-ui/react-switch';
 
 const AddLinkModal = () => {
@@ -17,16 +17,16 @@ const AddLinkModal = () => {
   const [isSocial, setIsSocial] = useState(false);
   const [urlError, setUrlError] = useState(false);
 
-  const {data: currentUser} = useCurrentUser();
+  const { data: currentUser } = useCurrentUser();
   const userId = currentUser?.id ?? null;
-  const {data: userLinks} = useLinks(userId);
+  const { data: userLinks } = useLinks(userId);
 
   const queryClient = useQueryClient();
 
   const order = userLinks?.length;
 
   const addLinkMutation = useMutation(
-    async ({title, url, order}) => {
+    async ({ title, url, order }) => {
       await axios.post('/api/links', {
         title,
         url,
@@ -36,7 +36,7 @@ const AddLinkModal = () => {
     },
     {
       onSuccess: () => {
-        queryClient.invalidateQueries({queryKey: ['links', userId]});
+        queryClient.invalidateQueries({ queryKey: ['links', userId] });
         setTitle('');
         setUrl('');
         setIsSocial(false);
@@ -50,7 +50,7 @@ const AddLinkModal = () => {
       toast.error('Please fill the form');
       return;
     }
-    await toast.promise(addLinkMutation.mutateAsync({title, url, order}), {
+    await toast.promise(addLinkMutation.mutateAsync({ title, url, order }), {
       loading: 'Adding link',
       success: 'Link added successfully',
       error: 'An error occured',

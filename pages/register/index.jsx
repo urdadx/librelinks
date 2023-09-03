@@ -1,12 +1,12 @@
 /* eslint-disable @next/next/no-img-element */
-import {signIn} from 'next-auth/react';
-import {useState, useCallback} from 'react';
-import {toast} from 'react-hot-toast';
-import {TinyLoader} from '@/components/utils/tiny-loader';
+import { signIn } from 'next-auth/react';
+import { useState, useCallback } from 'react';
+import { toast } from 'react-hot-toast';
+import { TinyLoader } from '@/components/utils/tiny-loader';
 import Link from 'next/link';
-import {GithubIcon, Wand} from 'lucide-react';
+import { GithubIcon, Wand } from 'lucide-react';
 import GoogleIcon from '@/components/utils/google-icon';
-import {GridOverlay} from '@/components/utils/grid-overlay';
+import { GridOverlay } from '@/components/utils/grid-overlay';
 import Head from 'next/head';
 
 export default function Register() {

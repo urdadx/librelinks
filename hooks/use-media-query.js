@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react';
+import { useEffect, useState } from 'react';
 
 export default function useMediaQuery() {
   const [device, setDevice] = useState(null);
@@ -15,7 +15,7 @@ export default function useMediaQuery() {
       } else {
         setDevice('desktop');
       }
-      setDimensions({width: window.innerWidth, height: window.innerHeight});
+      setDimensions({ width: window.innerWidth, height: window.innerHeight });
     };
 
     // Initial detection

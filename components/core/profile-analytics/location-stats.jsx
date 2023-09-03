@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import COUNTRIES from '@/utils/constants/countries';
 
-export const LocationStats = ({analytics}) => {
+export const LocationStats = ({ analytics }) => {
   return (
     <>
       <div className="mt-10 w-full">
@@ -15,7 +15,7 @@ export const LocationStats = ({analytics}) => {
           </div>
           <div className="w-full h-auto">
             {analytics?.length > 0 ? (
-              analytics?.map(({location, visits}) => (
+              analytics?.map(({ location, visits }) => (
                 <div
                   key={location}
                   className="flex items-center p-2 rounded-lg"

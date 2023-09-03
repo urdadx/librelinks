@@ -1,26 +1,26 @@
 import * as Dialog from '@radix-ui/react-dialog';
-import {useState} from 'react';
+import { useState } from 'react';
 import closeSVG from '@/public/close_button.svg';
 import Image from 'next/image';
-import {toast} from 'react-hot-toast';
+import { toast } from 'react-hot-toast';
 import axios from 'axios';
-import {validDomainRegex} from '@/utils/helpers';
-import {useMutation, useQueryClient} from '@tanstack/react-query';
+import { validDomainRegex } from '@/utils/helpers';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import useCurrentUser from '@/hooks/useCurrentUser';
-import {signalIframe} from '@/utils/helpers';
+import { signalIframe } from '@/utils/helpers';
 
-const EditLinkModal = ({id, title, url, close}) => {
+const EditLinkModal = ({ id, title, url, close }) => {
   const [newTitle, setNewTitle] = useState(title);
   const [newUrl, setNewUrl] = useState(url);
 
   const [urlError, setUrlError] = useState(false);
 
-  const {data: currentUser} = useCurrentUser();
+  const { data: currentUser } = useCurrentUser();
   const queryClient = useQueryClient();
   const userId = currentUser?.id ?? null;
 
   const editMutation = useMutation(
-    async ({newTitle, newUrl}) => {
+    async ({ newTitle, newUrl }) => {
       await axios.patch(`/api/links/${id}`, {
         newTitle,
         newUrl,
@@ -28,7 +28,7 @@ const EditLinkModal = ({id, title, url, close}) => {
     },
     {
       onSuccess: () => {
-        queryClient.invalidateQueries({queryKey: ['links', userId]});
+        queryClient.invalidateQueries({ queryKey: ['links', userId] });
         signalIframe();
       },
     }
@@ -41,7 +41,7 @@ const EditLinkModal = ({id, title, url, close}) => {
       return;
     }
     close(); // close drawer
-    await toast.promise(editMutation.mutateAsync({newTitle, newUrl}), {
+    await toast.promise(editMutation.mutateAsync({ newTitle, newUrl }), {
       loading: 'Editing link',
       success: 'Link edited successfully',
       error: 'An error occured',

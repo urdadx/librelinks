@@ -1,6 +1,6 @@
 import Link from 'next/link';
-import {GridOverlay} from './grid-overlay';
-import {ErrorSVG} from './404';
+import { GridOverlay } from './grid-overlay';
+import { ErrorSVG } from './404';
 import Balancer from 'react-wrap-balancer';
 
 const NotFound = () => {

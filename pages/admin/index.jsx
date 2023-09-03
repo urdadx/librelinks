@@ -4,7 +4,7 @@ import useMediaQuery from '@/hooks/use-media-query';
 import Head from 'next/head';
 
 const Admin = () => {
-  const {isMobile} = useMediaQuery();
+  const { isMobile } = useMediaQuery();
 
   return (
     <>

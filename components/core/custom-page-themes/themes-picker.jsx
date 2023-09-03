@@ -1,14 +1,14 @@
-import {useEffect, useState} from 'react';
-import {themes} from '@/utils/themes';
-import {CheckMark} from '@/components/utils/checkmark';
+import { useEffect, useState } from 'react';
+import { themes } from '@/utils/themes';
+import { CheckMark } from '@/components/utils/checkmark';
 import useCurrentUser from '@/hooks/useCurrentUser';
 import axios from 'axios';
 import toast from 'react-hot-toast';
-import {useMutation, useQueryClient} from '@tanstack/react-query';
-import {signalIframe} from '@/utils/helpers';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { signalIframe } from '@/utils/helpers';
 
 const ThemesPicker = () => {
-  const {data: currentUser} = useCurrentUser();
+  const { data: currentUser } = useCurrentUser();
   const [displayedThemes, setDisplayedThemes] = useState(themes.slice(0, 9));
   const [showAll, setShowAll] = useState(false);
   const [selectedTheme, setSelectedTheme] = useState(null);
@@ -82,19 +82,19 @@ const ThemesPicker = () => {
                   <div
                     key={color}
                     className="h-full"
-                    style={{background: color}}
+                    style={{ background: color }}
                   />
                 ))}
               </div>
               <span
-                style={{color: theme.palette[2]}}
+                style={{ color: theme.palette[2] }}
                 className="absolute top-2 left-2 z-10 text-xs text-base-content/80"
               >
                 {theme.name}
               </span>
               {selectedTheme === theme && (
                 <span
-                  style={{color: theme.palette[0]}}
+                  style={{ color: theme.palette[0] }}
                   className="absolute top-2 right-2 z-10 text-xs text-base-content/80"
                 >
                   <CheckMark />

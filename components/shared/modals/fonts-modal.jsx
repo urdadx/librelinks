@@ -1,9 +1,9 @@
 import * as Dialog from '@radix-ui/react-dialog';
 import Image from 'next/image';
 import closeSVG from '@/public/close_button.svg';
-import {useState} from 'react';
+import { useState } from 'react';
 
-export const FontsModal = ({onSelectFont}) => {
+export const FontsModal = ({ onSelectFont }) => {
   const fonts = [
     'Epilogue',
     'Poppins',

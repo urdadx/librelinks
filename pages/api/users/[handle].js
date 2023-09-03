@@ -1,4 +1,4 @@
-import {db} from '@/lib/db';
+import { db } from '@/lib/db';
 
 export default async function handler(req, res) {
   if (req.method !== 'GET') {
@@ -6,7 +6,7 @@ export default async function handler(req, res) {
   }
 
   try {
-    const {handle} = req.query;
+    const { handle } = req.query;
 
     if (!handle || typeof handle !== 'string') {
       throw new Error('Invalid ID');
@@ -21,7 +21,7 @@ export default async function handler(req, res) {
       },
     });
 
-    return res.status(200).json({...existingUser});
+    return res.status(200).json({ ...existingUser });
   } catch (error) {
     return res.status(400).end();
   }

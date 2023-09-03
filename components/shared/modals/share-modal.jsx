@@ -1,15 +1,15 @@
-import {siteConfig} from '@/config/site';
+import { siteConfig } from '@/config/site';
 import closeSVG from '@/public/close_button.svg';
 import * as Dialog from '@radix-ui/react-dialog';
 import * as Tabs from '@radix-ui/react-tabs';
 import Image from 'next/image';
-import {QRCodeCanvas} from 'qrcode.react';
-import {useState} from 'react';
+import { QRCodeCanvas } from 'qrcode.react';
+import { useState } from 'react';
 import toast from 'react-hot-toast';
 import useCurrentUser from '@/hooks/useCurrentUser';
 
 const ShareModal = () => {
-  const {data: currentUser} = useCurrentUser();
+  const { data: currentUser } = useCurrentUser();
   const userProfileLink =
     process.env.NODE_ENV === 'development'
       ? `http://localhost:3000/${currentUser?.handle}`
@@ -32,6 +32,7 @@ const ShareModal = () => {
       setIsCopied(false);
     }, 2000);
   };
+
   const downloadQRCode = () => {
     const canvas = document.getElementById('qr-code');
     const pngUrl = canvas
@@ -46,6 +47,7 @@ const ShareModal = () => {
     downloadLink.click();
     document.body.removeChild(downloadLink);
   };
+
   return (
     <>
       <div>

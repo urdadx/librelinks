@@ -1,26 +1,26 @@
 /* eslint-disable @next/next/no-img-element */
-import {useEffect, useState} from 'react';
+import { useEffect, useState } from 'react';
 import useCurrentUser from '@/hooks/useCurrentUser';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 import * as Dialog from '@radix-ui/react-dialog';
 import UploadModal from '@/components/shared/modals/upload-modal';
-import {TinyLoader} from '@/components/utils/tiny-loader';
-import {useRouter} from 'next/router';
-import {useMutation, useQueryClient} from '@tanstack/react-query';
+import { TinyLoader } from '@/components/utils/tiny-loader';
+import { useRouter } from 'next/router';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import Layout from '@/components/layout/Layout';
-import {Balancer} from 'react-wrap-balancer';
+import { Balancer } from 'react-wrap-balancer';
 import useUser from '@/hooks/useUser';
-import {UserAvatarSetting} from '@/components/utils/avatar';
-import {signalIframe} from '@/utils/helpers';
+import { UserAvatarSetting } from '@/components/utils/avatar';
+import { signalIframe } from '@/utils/helpers';
 import * as AlertDialog from '@radix-ui/react-alert-dialog';
 import CustomAlert from '@/components/shared/alerts/custom-alert';
 import useMediaQuery from '@/hooks/use-media-query';
-import {signOut} from 'next-auth/react';
+import { signOut } from 'next-auth/react';
 import Head from 'next/head';
 
 const Settings = () => {
-  const {data: currentUser} = useCurrentUser();
+  const { data: currentUser } = useCurrentUser();
   const router = useRouter();
 
   const [username, setUsername] = useState('');
@@ -28,10 +28,10 @@ const Settings = () => {
   const [image, setImage] = useState('');
   const [handle, setHandle] = useState('');
 
-  const {isMobile} = useMediaQuery();
+  const { isMobile } = useMediaQuery();
 
   const queryClient = useQueryClient();
-  const {data: fetchedUser} = useUser(currentUser?.handle);
+  const { data: fetchedUser } = useUser(currentUser?.handle);
 
   useEffect(() => {
     setUsername(fetchedUser?.name);
@@ -47,7 +47,7 @@ const Settings = () => {
 
   // edit profile details
   const editMutation = useMutation(
-    async ({bio, username, image, handle}) => {
+    async ({ bio, username, image, handle }) => {
       await axios.patch('/api/edit', {
         bio,
         username,
@@ -69,13 +69,13 @@ const Settings = () => {
 
   const handleSubmit = async () => {
     toast.loading('Applying changes');
-    await editMutation.mutateAsync({bio, username, image, handle});
+    await editMutation.mutateAsync({ bio, username, image, handle });
   };
 
   // delete profile picture
   const handleDeletePfp = async () => {
     toast.loading('Applying changes');
-    await editMutation.mutateAsync({bio, username, image: '', handle});
+    await editMutation.mutateAsync({ bio, username, image: '', handle });
   };
 
   // delete user's account
