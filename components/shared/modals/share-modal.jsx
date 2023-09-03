@@ -6,6 +6,8 @@ import Image from 'next/image';
 import { QRCodeCanvas } from 'qrcode.react';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
+import useCurrentUser from '@/hooks/useCurrentUser';
+
 const ShareModal = () => {
 
   const { data: currentUser } = useCurrentUser();
