@@ -131,7 +131,7 @@ const Home = () => {
               </div>
               <div className="flex justify-center mt-6">
                 <div className="flex flex-col items-center">
-                  <span className="inline-flex rounded-md shadow ">
+                  <span className="inline-flex rounded-xl shadow">
                     <Link legacyBehavior href="/register">
                       <a className="inline-flex items-center px-4 py-2 font-medium text-lg gradient-btn border border-transparent rounded-xl text-white w-[190px] h-[50px] justify-center hover:shadow-lg">
                         Get started
