@@ -1,11 +1,9 @@
-import { useNProgress } from '@tanem/react-nprogress'
+import {useNProgress} from '@tanem/react-nprogress';
 
-const NProgress = ({
-  isRouteChanging,
-}) => {
-  const { animationDuration, isFinished, progress } = useNProgress({
+const NProgress = ({isRouteChanging}) => {
+  const {animationDuration, isFinished, progress} = useNProgress({
     isAnimating: isRouteChanging,
-  })
+  });
 
   return (
     <>
@@ -44,7 +42,7 @@ const NProgress = ({
         </div>
       </div>
     </>
-  )
-}
+  );
+};
 
 export default NProgress;

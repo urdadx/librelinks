@@ -1,10 +1,10 @@
-import axios from "axios";
-import { useQuery } from "@tanstack/react-query";
-import { toast } from "react-hot-toast";
+import axios from 'axios';
+import {useQuery} from '@tanstack/react-query';
+import {toast} from 'react-hot-toast';
 
 const useAnalytics = (filter, handle) => {
   return useQuery({
-    queryKey: ["analytics", handle, filter],
+    queryKey: ['analytics', handle, filter],
     queryFn: async () => {
       const response = await axios.get(
         `/api/analytics/views?handle=${handle}&filter=${filter}`
@@ -13,7 +13,7 @@ const useAnalytics = (filter, handle) => {
     },
     enabled: !!handle,
     onError: () => {
-      toast.error("An error occurred");
+      toast.error('An error occurred');
     },
     // refetchInterval: 2000,
   });

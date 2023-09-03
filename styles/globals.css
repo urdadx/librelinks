@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
 /* @import url("https://fonts.googleapis.com/css2?family=Fira+Sans&display=swap"); */
 
 @tailwind base;
@@ -6,104 +6,111 @@
 @tailwind utilities;
 
 * {
-	font-family: "Inter", sans-serif;
+  font-family: 'Inter', sans-serif;
 }
 
-
 .gradient-btn {
-	background: linear-gradient(
-		60deg,
-		#f79533,
-		#f37055,
-		#ef4e7b,
-		#a166ab,
-		#5073b8,
-		#1098ad,
-		#07b39b,
-		#6fba82
-	);
-	animation: animatedgradient 6s ease infinite alternate;
-	background-size: 300% 300%;
+  background: linear-gradient(
+    60deg,
+    #f79533,
+    #f37055,
+    #ef4e7b,
+    #a166ab,
+    #5073b8,
+    #1098ad,
+    #07b39b,
+    #6fba82
+  );
+  animation: animatedgradient 6s ease infinite alternate;
+  background-size: 300% 300%;
 }
 
 @keyframes animatedgradient {
-	0% {
-		background-position: 0% 50%;
-	}
-	50% {
-		background-position: 100% 50%;
-	}
-	100% {
-		background-position: 0% 50%;
-	}
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 .hero-title {
-	background: linear-gradient(60deg, #f79533, #f37055, #ef4e7b, #1098ad, #07b39b, #6fba82);
-	-webkit-background-clip: text;
-	background-clip: text;
-	-webkit-text-fill-color: transparent;
-	background-size: 300% 300%;
-	animation: textShine 6s ease-in-out infinite alternate;
+  background: linear-gradient(
+    60deg,
+    #f79533,
+    #f37055,
+    #ef4e7b,
+    #1098ad,
+    #07b39b,
+    #6fba82
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-size: 300% 300%;
+  animation: textShine 6s ease-in-out infinite alternate;
 }
 
 /* Modal Animation */
 .contentShow {
-	animation: contentShow 150ms cubic-bezier(0.16, 1, 0.3, 1);
+  animation: contentShow 150ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 .slideBottom {
-	animation: slideBottom 150ms cubic-bezier(0.16, 1, 0.3, 1);
+  animation: slideBottom 150ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.footer{
-	left:calc(50% - 15px);
-	bottom: 32px;
-	position: absolute;
+.footer {
+  left: calc(50% - 15px);
+  bottom: 32px;
+  position: absolute;
 }
 @keyframes contentShow {
-	from {
-		opacity: 0;
-		transform: translate(-50%, -48%) scale(0.7);
-	}
-	to {
-		opacity: 1;
-		transform: translate(-50%, -50%) scale(1);
-	}
-} 
+  from {
+    opacity: 0;
+    transform: translate(-50%, -48%) scale(0.7);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
 @keyframes slideBottom {
-	from {
-		opacity: 0;
-		transform: translateY(-50%, -48%) scale(0.7);
-	}
-	to {
-		opacity: 1;
-		transform: translate(-50%, -50%) scale(1);
-	}
+  from {
+    opacity: 0;
+    transform: translateY(-50%, -48%) scale(0.7);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
 }
 
 /* Preview modal box shadow */
 .box {
-	box-shadow: 4px 4px 0 0 black;
+  box-shadow: 4px 4px 0 0 black;
 }
 
 .slide-container {
-	position: relative;
-	height: 0;
-	overflow: hidden;
-	transition: height 0.5s;
+  position: relative;
+  height: 0;
+  overflow: hidden;
+  transition: height 0.5s;
 }
 
 .slide-container.slide-in {
-	height: 200px; /* Adjust the height based on your content */
+  height: 200px; /* Adjust the height based on your content */
 }
 
 /* SCROLL BAR */
 
 /* Hide scrollbar for Chrome, Safari and Opera etc */
 .no-scrollbar::-webkit-scrollbar {
-	width: 2px !important;
+  width: 2px !important;
 }
 
 .no-scrollbar::-webkit-scrollbar-thumb {
-	border-radius: 10px;
-	background-color: #f2f4f7;
+  border-radius: 10px;
+  background-color: #f2f4f7;
 }

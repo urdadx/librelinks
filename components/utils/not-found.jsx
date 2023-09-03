@@ -1,7 +1,7 @@
-import Link from "next/link";
-import { GridOverlay } from "./grid-overlay";
-import { ErrorSVG } from "./404";
-import Balancer from "react-wrap-balancer";
+import Link from 'next/link';
+import {GridOverlay} from './grid-overlay';
+import {ErrorSVG} from './404';
+import Balancer from 'react-wrap-balancer';
 
 const NotFound = () => {
   return (
@@ -12,7 +12,9 @@ const NotFound = () => {
           <ErrorSVG />
         </div>
         <h3 className="text-lg lg:text-3xl text-center">
-          <Balancer>The page you&apos;re looking for doesn&apos;t exist</Balancer>
+          <Balancer>
+            The page you&apos;re looking for doesn&apos;t exist
+          </Balancer>
         </h3>
         <h3 className="text-sm lg:text-lg text-center">
           <Balancer>
@@ -20,7 +22,7 @@ const NotFound = () => {
             <Link className="underline" href="/register">
               Create your account now
             </Link>
-             🚀
+            🚀
           </Balancer>
         </h3>
       </div>
