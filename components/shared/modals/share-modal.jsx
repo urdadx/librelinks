@@ -64,35 +64,10 @@ const ShareModal = () => {
                 </div>
               </Dialog.Close>
             </div>
-            <div className="mb-4">
-              <h3 className="text-sm">
-                Add this link to your{" "}
-                <a
-									target="_blank"
-									href={goTo.twitter}
-									className="underline">
-                  Twitter
-                </a>
-                ,{" "}
-                <a
-									target="_blank"
-									href={goTo.instagram}
-									className="underline">
-                  Instagram
-                </a>{" "}
-                or{" "}
-                <a
-									target="_blank"
-									href={goTo.tiktok}
-									className="underline">
-                  Tiktok
-                </a>{" "}
-                bio 🚀
-              </h3>
-            </div>
+
             <Tabs.Root
               defaultValue="link"
-              className="border border-gray-300 w-full rounded-lg"
+              className="border border-gray-300 w-full rounded-lg mt-4"
               onValueChange={handleTabClick}
             >
               <Tabs.List className="flex">
@@ -100,18 +75,18 @@ const ShareModal = () => {
                   value="link"
                   className={`flex-1 py-2 px-4 text-center ${
                     selectedTab === 'link'
-                      ? 'text-[#10172a] bg-gray-100 border-b border-[#10172a]'
-                      : 'text-gray-600 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 border-b'
+                      ? 'text-[#10172a] rounded-tl-lg bg-gray-100 border-b border-[#10172a]'
+                      : 'text-gray-600 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 border-b rounded-tl-lg'
                   }`}
                 >
-                  Link
+                  URL
                 </Tabs.Trigger>
                 <Tabs.Trigger
                   value="QR"
                   className={`flex-1 py-2 px-4 text-center ${
                     selectedTab === 'QR'
-                      ? 'text-[#10172a] bg-gray-100 border-b border-[#10172a]'
-                      : 'text-gray-600 hover:bg-gray-100 focus:outline-none focus:bg-gray-100'
+                      ? 'text-[#10172a] rounded-tr-lg bg-gray-100 border-b border-[#10172a]'
+                      : 'text-gray-600 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 rounded-tr-lg'
                   }`}
                 >
                   QR Code
@@ -121,10 +96,32 @@ const ShareModal = () => {
               <div className="p-4">
                 <Tabs.Content value="link">
                   <div className="mb-6">
-                    <p className="mb-2 text-gray-700">
-                      This is your user profile link. You can share it with
-                      others to connect with your profile.
-                    </p>
+                      <div className="mt-2 mb-4">
+                        <h3 className="text-sm">
+                          Add this link to your{" "}
+                          <a
+                            target="_blank"
+                            href={goTo.twitter}
+                            className="underline">
+                            Twitter
+                          </a>
+                          ,{" "}
+                          <a
+                            target="_blank"
+                            href={goTo.instagram}
+                            className="underline">
+                            Instagram
+                          </a>{" "}
+                          or{" "}
+                          <a
+                            target="_blank"
+                            href={goTo.tiktok}
+                            className="underline">
+                            Tiktok
+                          </a>{" "}
+                          bio 🚀
+                        </h3>
+                      </div>
                     <div className="relative mb-4">
                       <div className="flex justify-between items-center w-full h-6 px-4 py-[28px] mb-2 text-gray-700 border-2 rounded-2xl appearance-none focus:outline-none focus:shadow-outline">
                         <h2 className="truncate w-[250px] lg:w-full">
@@ -158,7 +155,7 @@ const ShareModal = () => {
                   </p>
                   <button
                     onClick={downloadQRCode}
-                    className="mt-4 w-full py-2 px-4 text-center text-white bg-[#334154] hover:bg-[#2c3e50]
+                    className="mt-4 w-full py-3 px-4 text-center text-white bg-slate-900 hover:bg-slate-700
 					 rounded-md focus:outline-none focus:shadow-outline-blue"
                   >
                     Download QR Code
