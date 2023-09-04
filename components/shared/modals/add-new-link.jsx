@@ -10,6 +10,7 @@ import useCurrentUser from '@/hooks/useCurrentUser';
 import useLinks from '@/hooks/useLinks';
 import { signalIframe } from '@/utils/helpers';
 import * as Switch from '@radix-ui/react-switch';
+import TooltipWrapper from '@/components/utils/tooltip';
 
 const AddLinkModal = () => {
   const [title, setTitle] = useState('');
@@ -110,7 +111,17 @@ const AddLinkModal = () => {
             </div>
 
             <div className="p-2 relative flex justify-between gap-2 text-gray-800 my-4">
-              <h3 className="text-md lg:text-lg">Make this a social link?</h3>
+              <TooltipWrapper
+                title="Twitter, Instagram, LinkedIn, etc"
+                component={
+                  <h3 className="text-md lg:text-lg">
+                    Make this a{' '}
+                    <a className="text-gray-600 font-medium underline cursor-pointer hover:text-gray-800">
+                      social link?
+                    </a>
+                  </h3>
+                }
+              />
               <Switch.Root
                 checked={isSocial}
                 onCheckedChange={() => setIsSocial(!isSocial)}

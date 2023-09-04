@@ -122,10 +122,10 @@ const ShareModal = () => {
                         or{' '}
                         <a
                           target="_blank"
-                          href={goTo.tiktok}
+                          href={goTo.linkedin}
                           className="underline"
                         >
-                          Tiktok
+                          LinkedIn
                         </a>{' '}
                         bio 🚀
                       </h3>
@@ -137,9 +137,7 @@ const ShareModal = () => {
                         </h2>
                         <button
                           onClick={handleCopyLink}
-                          className="w-[80px] p-[12px] leading-none 
-            text-md text-white bg-slate-900 hover:bg-slate-700 rounded-3xl 
-            focus:outline-none focus:shadow-outline-blue"
+                          className="w-[80px] p-[12px] leading-none text-md text-white bg-slate-900 hover:bg-slate-700 rounded-3xl focus:outline-none focus:shadow-outline-blue"
                         >
                           {isCopied ? 'Copied' : 'Copy'}
                         </button>
@@ -159,13 +157,13 @@ const ShareModal = () => {
                   />
 
                   <p className="mt-4 text-center text-gray-700">
-                    Share this QR code with others to provide access to your
-                    profile link.
+                    Share this QR code with your audience to provide access to
+                    your profile.
                   </p>
                   <button
                     onClick={downloadQRCode}
                     className="mt-4 w-full py-3 px-4 text-center text-white bg-slate-900 hover:bg-slate-700
-					 rounded-md focus:outline-none focus:shadow-outline-blue"
+					          rounded-md focus:outline-none focus:shadow-outline-blue"
                   >
                     Download QR Code
                   </button>

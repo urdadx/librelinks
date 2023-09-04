@@ -1,38 +1,38 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import * as PopoverPrimitive from '@radix-ui/react-popover';
 import ThreeDots from '../../utils/three-dots';
-import {Edit, Trash, ArchiveIcon} from 'lucide-react';
+import { Edit, Trash, ArchiveIcon } from 'lucide-react';
 import * as Dialog from '@radix-ui/react-dialog';
 import EditLinkModal from '../modals/edit-link';
 import axios from 'axios';
-import {toast} from 'react-hot-toast';
+import { toast } from 'react-hot-toast';
 import useCurrentUser from '@/hooks/useCurrentUser';
-import {useMutation, useQueryClient} from '@tanstack/react-query';
-import {signalIframe} from '@/utils/helpers';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { signalIframe } from '@/utils/helpers';
 import * as AlertDialog from '@radix-ui/react-alert-dialog';
 import CustomAlert from '../alerts/custom-alert';
 import useMediaQuery from '@/hooks/use-media-query';
 import PopoverMobile from './popover-mobile';
-import {Drawer} from 'vaul';
+import { Drawer } from 'vaul';
 
-const PopoverDesktop = ({id, title, url, archived}) => {
+const PopoverDesktop = ({ id, title, url, archived }) => {
   const [isArchived, setIsArchived] = useState(archived);
   const [openPopover, setOpenPopover] = useState(false);
   const [openDrawer, setOpenDrawer] = useState(false);
 
-  const {data: currentUser} = useCurrentUser();
+  const { data: currentUser } = useCurrentUser();
   const queryClient = useQueryClient();
   const userId = currentUser?.id ?? null;
 
-  const {isMobile} = useMediaQuery();
+  const { isMobile } = useMediaQuery();
 
   const archiveMutation = useMutation(
     async () => {
-      await axios.patch(`/api/links/${id}`, {archived: !isArchived});
+      await axios.patch(`/api/links/${id}`, { archived: !isArchived });
     },
     {
       onSuccess: () => {
-        queryClient.invalidateQueries({queryKey: ['links', userId]});
+        queryClient.invalidateQueries({ queryKey: ['links', userId] });
         signalIframe();
       },
     }
@@ -55,7 +55,7 @@ const PopoverDesktop = ({id, title, url, archived}) => {
     },
     {
       onSuccess: () => {
-        queryClient.invalidateQueries({queryKey: ['links', userId]});
+        queryClient.invalidateQueries({ queryKey: ['links', userId] });
         signalIframe();
       },
     }

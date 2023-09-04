@@ -72,7 +72,7 @@ export const extractSiteFromUrl = (url) => {
 
   // If a match is found, return the captured group (website name)
   if (match && match[1]) {
-    return match[1];
+    return match[1].toLowerCase();
   } else {
     // If no match is found, return null or an appropriate value
     return null;
