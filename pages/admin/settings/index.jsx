@@ -74,8 +74,13 @@ const Settings = () => {
 
   // delete profile picture
   const handleDeletePfp = async () => {
-    toast.loading('Applying changes');
-    await editMutation.mutateAsync({ bio, username, image: '', handle });
+    if (image === '') {
+      toast.error('There is nothing to delete');
+      return;
+    } else {
+      toast.loading('Applying changes');
+      await editMutation.mutateAsync({ bio, username, image: '', handle });
+    }
   };
 
   // delete user's account

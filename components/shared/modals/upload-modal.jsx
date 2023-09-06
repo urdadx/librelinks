@@ -7,6 +7,7 @@ import { Upload } from 'lucide-react';
 import { useDropzone } from 'react-dropzone';
 import { useQueryClient } from '@tanstack/react-query';
 import useCurrentUser from '@/hooks/useCurrentUser';
+import toast from 'react-hot-toast';
 
 const UploadModal = ({ onChange, value, submit }) => {
   const [base64, setBase64] = useState(value);
@@ -52,6 +53,17 @@ const UploadModal = ({ onChange, value, submit }) => {
       'image/png': [],
     },
   });
+
+  const handleUploadPfp = () => {
+    if (!disableUpload) {
+      submit();
+      setBase64('');
+      setDisableUpload(true);
+    } else {
+      toast.error('No file selected: Pick an image first');
+      return;
+    }
+  };
 
   return (
     <>
@@ -103,8 +115,8 @@ const UploadModal = ({ onChange, value, submit }) => {
             ) : (
               <>
                 <div className="mb-4">
-                  <h3 className="text-center">
-                    Drag and drop an image or click to upload{' '}
+                  <h3 className="text-center mb-2">
+                    Drag & drop or click here to upload an image{' '}
                   </h3>
                   <h3 className="text-center">
                     (Max file size 5MB){' '}
@@ -121,17 +133,8 @@ const UploadModal = ({ onChange, value, submit }) => {
           </div>
           <Dialog.Close asChild>
             <button
-              onClick={() => {
-                submit();
-                setBase64('');
-                setDisableUpload(true);
-              }}
-              disabled={disableUpload}
-              className={`${
-                disableUpload
-                  ? 'bg-slate-600 inline-block w-full px-4 py-4 leading-none text-lg mt-2 text-white rounded-3xl'
-                  : 'inline-block w-full px-4 py-4 bg-slate-900 leading-none text-lg mt-2 text-white rounded-3xl hover:bg-slate-700'
-              }`}
+              onClick={handleUploadPfp}
+              className="inline-block w-full px-4 py-4 bg-slate-900 leading-none text-lg mt-2 text-white rounded-3xl hover:bg-slate-700"
             >
               Upload image{' '}
               <span role="img" aria-label="rocket">

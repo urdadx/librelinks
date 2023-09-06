@@ -37,7 +37,7 @@ export const UserAvatarSetting = () => {
     <>
       <Avatar.Root
         className="inline-flex h-[100px] w-[100px] 
-				 items-center justify-center overflow-hidden rounded-full align-middle"
+				 items-center justify-center overflow-hidden rounded-full align-middle border-2 border-blue-400"
       >
         <Avatar.Image
           className="h-full w-full rounded-[inherit] object-cover"
