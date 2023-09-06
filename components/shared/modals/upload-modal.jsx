@@ -125,7 +125,7 @@ const UploadModal = ({ onChange, value, submit }) => {
                     </span>
                   </h3>
                 </div>
-                <div className=" my-6 absolute top-1/2 transform -translate-y-1/2">
+                <div className=" my-8 absolute top-1/2 transform -translate-y-1/2">
                   <Upload size={40} className="text-gray-400" />
                 </div>
               </>
