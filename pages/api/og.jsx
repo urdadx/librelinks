@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import { ImageResponse } from '@vercel/og';
 import Image from 'next/image';
 
@@ -7,7 +8,7 @@ export const config = {
 
 export default async function handler() {
   const imageData = await fetch(
-    new URL('/public/assets/og.png', import.meta.url)
+    new URL('/public/og.png', import.meta.url)
   ).then((res) => res.arrayBuffer());
 
   return new ImageResponse(
@@ -23,7 +24,7 @@ export default async function handler() {
           alignItems: 'center',
         }}
       >
-        <Image alt="librelinks og" width="256" height="256" src={imageData} />
+        <img alt="librelinks og" src={imageData} />
       </div>
     ),
     {
