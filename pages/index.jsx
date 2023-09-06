@@ -9,7 +9,11 @@ const Home = () => {
   return (
     <>
       <Head>
-        <title>Librelinks | A free and opensource link in bio tool</title>
+        <title>Librelinks | A free & opensource link in bio tool</title>
+          <meta
+            property="og:image"
+            content="https://librelinks.vercel.app/api/og"
+          />
       </Head>
       <div className="bg-white">
         <div className="relative overflow-hidden">

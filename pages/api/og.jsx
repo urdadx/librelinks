@@ -1,30 +1,68 @@
 /* eslint-disable @next/next/no-img-element */
 import { ImageResponse } from '@vercel/og';
-import Image from 'next/image';
 
 export const config = {
   runtime: 'edge',
 };
 
 export default async function handler() {
-  const imageData = await fetch(
-    new URL('/public/og.png', import.meta.url)
-  ).then((res) => res.arrayBuffer());
-
   return new ImageResponse(
     (
       <div
         style={{
           display: 'flex',
-          background: '#f6f6f6',
-          width: '100%',
           height: '100%',
-          flexDirection: 'column',
-          justifyContent: 'center',
+          width: '100%',
           alignItems: 'center',
+          justifyContent: 'center',
+          letterSpacing: '-.02em',
+          fontWeight: 700,
+          backgroundImage: 'linear-gradient(to bottom, #dbf4ff, #fff1f1)',
         }}
       >
-        <img alt="librelinks og" src={imageData} />
+        <div
+          style={{
+            left: 42,
+            top: 42,
+            position: 'absolute',
+            display: 'flex',
+            alignItems: 'center',
+          }}
+        >
+          <span
+            style={{
+              width: 24,
+              height: 24,
+              background: 'black',
+              borderRadius: 1000,
+            }}
+          />
+          <span
+            style={{
+              marginLeft: 8,
+              fontSize: 20,
+            }}
+          >
+            Librelinks
+          </span>
+        </div>
+        <div
+          style={{
+            display: 'flex',
+            flexWrap: 'wrap',
+            justifyContent: 'center',
+            padding: '20px 50px',
+            margin: '0 42px',
+            fontSize: 40,
+            width: 'auto',
+            maxWidth: 550,
+            textAlign: 'center',
+            color: 'black',
+            lineHeight: 1.4,
+          }}
+        >
+          <span>A free & opensource link in bio tool 🚀</span>
+        </div>
       </div>
     ),
     {
