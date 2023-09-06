@@ -29,6 +29,7 @@
     "@tanstack/react-query-devtools": "^4.29.19",
     "@tanstack/react-table": "^8.9.3",
     "@vercel/analytics": "^1.0.2",
+    "@vercel/og": "^0.5.13",
     "autoprefixer": "10.4.14",
     "axios": "^1.4.0",
     "eslint-config-next": "13.4.3",
@@ -57,11 +58,11 @@
     "zustand": "^4.3.9"
   },
   "devDependencies": {
-    "eslint-config-prettier": "^9.0.0",
     "eslint": "^8.48.0",
-    "prettier": "^3.0.3",
+    "eslint-config-prettier": "^9.0.0",
     "husky": "^8.0.3",
     "lint-staged": "^14.0.1",
+    "prettier": "^3.0.3",
     "prisma": "^4.15.0"
   },
   "lint-staged": {

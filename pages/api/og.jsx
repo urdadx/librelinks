@@ -1,4 +1,5 @@
 import { ImageResponse } from '@vercel/og';
+import Image from 'next/image';
 
 export const config = {
   runtime: 'edge',
@@ -22,7 +23,7 @@ export default async function handler() {
           alignItems: 'center',
         }}
       >
-        <img width="256" height="256" src={imageData} />
+        <Image alt="librelinks og" width="256" height="256" src={imageData} />
       </div>
     ),
     {
