@@ -11,10 +11,12 @@ import useCurrentUser from '@/hooks/useCurrentUser';
 const UploadModal = ({ onChange, value, submit }) => {
   const [base64, setBase64] = useState(value);
   const { data: currentUser } = useCurrentUser();
+  const [disableUpload, setDisableUpload] = useState(true);
 
   const handleChange = useCallback(
     (base64) => {
       onChange(base64);
+      setDisableUpload(false);
     },
     [onChange]
   );
@@ -82,13 +84,21 @@ const UploadModal = ({ onChange, value, submit }) => {
               {...getInputProps()}
             />
             {base64 ? (
-              <div className="">
-                <img
-                  alt="uploaded-image"
-                  loading="lazy"
-                  className="overflow-hidden object-cover w-[100px] h-[100px] rounded-full"
-                  src={base64}
-                />
+              <div className="flex flex-col">
+                <div className="">
+                  <img
+                    alt="uploaded-image"
+                    loading="lazy"
+                    className="overflow-hidden border-2 border-blue-500 object-cover w-[100px] h-[100px] rounded-full"
+                    src={base64}
+                  />
+                </div>
+                <a
+                  href="#"
+                  className="text-sm text-center text-blue-900 mt-4 hover:underline"
+                >
+                  Change photo
+                </a>
               </div>
             ) : (
               <>
@@ -96,7 +106,12 @@ const UploadModal = ({ onChange, value, submit }) => {
                   <h3 className="text-center">
                     Drag and drop an image or click to upload{' '}
                   </h3>
-                  <h3 className="text-center">(Max file size 5MB) ✨</h3>
+                  <h3 className="text-center">
+                    (Max file size 5MB){' '}
+                    <span role="img" aria-label="sparkle">
+                      ✨
+                    </span>
+                  </h3>
                 </div>
                 <div className=" my-6 absolute top-1/2 transform -translate-y-1/2">
                   <Upload size={40} className="text-gray-400" />
@@ -106,11 +121,22 @@ const UploadModal = ({ onChange, value, submit }) => {
           </div>
           <Dialog.Close asChild>
             <button
-              onClick={submit}
-              className="inline-block w-full px-4 py-4 bg-slate-900 leading-none 
-                            text-lg mt-2 text-white rounded-3xl hover:bg-slate-700"
+              onClick={() => {
+                submit();
+                setBase64('');
+                setDisableUpload(true);
+              }}
+              disabled={disableUpload}
+              className={`${
+                disableUpload
+                  ? 'bg-slate-600 inline-block w-full px-4 py-4 leading-none text-lg mt-2 text-white rounded-3xl'
+                  : 'inline-block w-full px-4 py-4 bg-slate-900 leading-none text-lg mt-2 text-white rounded-3xl hover:bg-slate-700'
+              }`}
             >
-              Upload image 🚀
+              Upload image{' '}
+              <span role="img" aria-label="rocket">
+                🚀
+              </span>
             </button>
           </Dialog.Close>
         </Dialog.Content>

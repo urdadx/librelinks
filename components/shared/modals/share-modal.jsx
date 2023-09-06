@@ -127,7 +127,10 @@ const ShareModal = () => {
                         >
                           LinkedIn
                         </a>{' '}
-                        bio 🚀
+                        bio{' '}
+                        <span role="img" aria-label="rocket">
+                          🚀
+                        </span>
                       </h3>
                     </div>
                     <div className="relative mb-4">

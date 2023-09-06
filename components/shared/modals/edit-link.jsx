@@ -113,7 +113,10 @@ const EditLinkModal = ({ id, title, url, close }) => {
                         			text-lg mt-2 text-white bg-slate-800 hover:bg-slate-900 rounded-3xl 
                         			focus:outline-none focus:shadow-outline-blue"
                 >
-                  Edit link ✨
+                  Edit link{' '}
+                  <span role="img" aria-label="sparkling star">
+                    ✨
+                  </span>
                 </button>
               </Dialog.Close>
             </form>

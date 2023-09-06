@@ -143,7 +143,7 @@ const Settings = () => {
                   <button
                     onClick={handleDeletePfp}
                     className="w-full lg:w-[490px] h-[45px] border border-[#aaa] 
-                      						outline-none font-semibold text-slate-900 bg-white p-2 rounded-3xl hover:bg-gray-100"
+                    outline-none font-semibold text-slate-900 bg-white p-2 rounded-3xl hover:bg-gray-100"
                   >
                     Remove
                   </button>
@@ -164,7 +164,7 @@ const Settings = () => {
                   onBlur={handleSubmit}
                   placeholder="@Bio"
                   className="outline-none w-full p-4 h-[120px] rounded-lg border-2
-                     			  bg-gray-100 text-black focus:border-slate-900"
+                bg-gray-100 text-black focus:border-slate-900"
                 />
               </div>
             </div>

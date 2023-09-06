@@ -143,7 +143,10 @@ const AddLinkModal = () => {
                                 : 'bg-slate-500'
                             }`}
               >
-                Create Link ✨
+                Create Link{' '}
+                <span role="img" aria-label="sparkling star">
+                  ✨
+                </span>
               </button>
             </Dialog.Close>
           </form>

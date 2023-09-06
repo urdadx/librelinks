@@ -73,7 +73,10 @@ const LinkStats = () => {
                   <div className="flex flex-col gap-2 w-[180px] mx-auto py-6">
                     <StarSVG />
                     <h2 className="text-center">
-                      No links added yet🥺
+                      No links added yet{' '}
+                      <span role="img" aria-label="face holding back tears">
+                        🥹
+                      </span>
                       <Link
                         className="font-semibold text-blue-600 hover:underline underline-offset-1"
                         href="/admin"
