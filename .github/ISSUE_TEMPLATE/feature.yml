@@ -1,0 +1,24 @@
+name: "🌟 Feature Request"
+description: "Propose a new feature."
+title: "[Feature]: <Brief feature name>"
+body:
+  - type: textarea
+    id: "3"
+    attributes:
+      label: "Description"
+      description: "Please describe your feature request concisely."
+    validations:
+      required: true
+  - type: textarea
+    id: "15"
+    attributes:
+      label: "Screenshots (if applicable)"
+  - type: checkboxes
+    id: "1"
+    attributes:
+      label: "Checklist"
+      options:
+        - label: "Checked existing issues"
+          required: true
+        - label: "Willing to contribute (optional)"
+          required: false
