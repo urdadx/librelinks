@@ -26,6 +26,8 @@ model User {
   themePalette   Json?     @default("{\"name\": \"Light\", \"palette\": [\"#FFFFFF\", \"#F2F2F2\", \"#1F2937\", \"#6170F8\"]}")
   buttonStyle    String    @default("rounded-md")
   accounts       Account[]
+
+  @@unique([handle, email])
 }
 
 

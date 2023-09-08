@@ -3,6 +3,7 @@ import GoogleProvider from 'next-auth/providers/google';
 import GitHubProvider from 'next-auth/providers/github';
 import { db } from '@/lib/db';
 import NextAuth from 'next-auth/next';
+import { nanoid } from 'nanoid';
 
 export const authOptions = {
   adapter: PrismaAdapter(db),
@@ -55,6 +56,17 @@ export const authOptions = {
       if (!dbUser) {
         token.id = user.id;
         return token;
+      }
+
+      if (!dbUser.handle) {
+        await db.user.update({
+          where: {
+            id: dbUser.id,
+          },
+          data: {
+            handle: nanoid(10),
+          },
+        });
       }
 
       return {
