@@ -7,7 +7,7 @@ import Head from 'next/head';
 
 export const metadata = {
   title: "Librelinks",
-  description: "A website where essential tools, prompts, and datasets are thoughtfully curated and combined in one place for your convenience.",
+  description: "Librelinks is an opensource link in bio tool that helps you easily manage your links, transforming your online presence.",
 };
 
 const Home = () => {
