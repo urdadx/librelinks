@@ -16,13 +16,8 @@ const ShareModal = () => {
       : `https://librelinks.vercel.app/${currentUser?.handle}`;
 
   const [isCopied, setIsCopied] = useState(false);
-  const [selectedTab, setSelectedTab] = useState('link');
 
   const goTo = siteConfig.redirects;
-
-  const handleTabClick = (value) => {
-    setSelectedTab(value);
-  };
 
   const handleCopyLink = () => {
     navigator.clipboard.writeText(userProfileLink);
@@ -71,38 +66,29 @@ const ShareModal = () => {
             </div>
 
             <Tabs.Root
-              defaultValue="link"
+              defaultValue="url"
               className="border border-gray-300 w-full rounded-lg mt-4"
-              onValueChange={handleTabClick}
             >
               <Tabs.List className="flex">
                 <Tabs.Trigger
-                  value="link"
-                  className={`flex-1 py-2 px-4 text-center ${
-                    selectedTab === 'link'
-                      ? 'text-[#10172a] rounded-tl-lg bg-gray-100 border-b border-[#10172a]'
-                      : 'text-gray-600 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 border-b rounded-tl-lg'
-                  }`}
+                  value="url"
+                  className="flex-1 py-2 px-4 text-center data-[state=active]:text-[#10172a] data-[state=active]:rounded-tl-lg data-[state=active]:bg-gray-100 data-[state=active]:border-b data-[state=active]:border-[#10172a] text-gray-600 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 rounded-tl-lg"
                 >
                   URL
                 </Tabs.Trigger>
                 <Tabs.Trigger
                   value="QR"
-                  className={`flex-1 py-2 px-4 text-center ${
-                    selectedTab === 'QR'
-                      ? 'text-[#10172a] rounded-tr-lg bg-gray-100 border-b border-[#10172a]'
-                      : 'text-gray-600 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 rounded-tr-lg'
-                  }`}
+                  className="flex-1 py-2 px-4 text-center data-[state=active]:text-[#10172a] data-[state=active]:rounded-tr-lg data-[state=active]:bg-gray-100 data-[state=active]:border-b data-[state=active]:border-[#10172a] text-gray-600 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 rounded-tr-lg"
                 >
                   QR Code
                 </Tabs.Trigger>
               </Tabs.List>
 
               <div className="p-4">
-                <Tabs.Content value="link">
+                <Tabs.Content value="url">
                   <div className="mb-6">
                     <div className="mt-2 mb-4">
-                      <h3 className="text-sm">
+                      <p className="text-sm">
                         Add this link to your{' '}
                         <a
                           target="_blank"
@@ -128,10 +114,10 @@ const ShareModal = () => {
                           LinkedIn
                         </a>{' '}
                         bio{' '}
-                        <span role="img" aria-label="rocket">
-                          🚀
+                        <span aria-label="rocket">
+                          to make it accessible from anywhere. 🚀
                         </span>
-                      </h3>
+                      </p>
                     </div>
                     <div className="relative mb-4">
                       <div className="flex justify-between items-center w-full h-6 px-4 py-[28px] mb-2 text-gray-700 border-2 rounded-2xl appearance-none focus:outline-none focus:shadow-outline">
