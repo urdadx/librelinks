@@ -116,7 +116,7 @@ const LinkCard = (props) => {
             <button className="flex justify-center items-center ">
               <div className="flex items-center">
                 <small className="mr-8 hidden whitespace-nowrap text-sm text-gray-500 sm:block">
-                  Added {timeAgo(props.createdAt, true)} ago
+                  Added {timeAgo(props.createdAt, true)}
                 </small>
                 <PopoverDesktop {...props} />
               </div>

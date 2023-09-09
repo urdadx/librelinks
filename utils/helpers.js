@@ -30,15 +30,37 @@ export const getApexDomain = (url) => {
 
 // Verify the URL entered by user
 export const validDomainRegex = new RegExp(
-  /^(https?:\/\/)?([\w-]+(\.[\w-]+)+\/?)([\w.,@?^=%&amp;:/~+#-]*[\w@?^=%&amp;/~+#-])?$/
+  /^([a-zA-Z0-9]([a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?\.)+[a-zA-Z]{2,}$/
 );
 
 // Get time link was added
-export const timeAgo = (timestamp, timeOnly) => {
-  if (!timestamp) return 'never';
-  return `${ms(Date.now() - new Date(timestamp).getTime())}${
-    timeOnly ? '' : ' ago'
-  }`;
+export const timeAgo = (timestamp) => {
+  if (!timestamp) return 'Just now';
+  const diff = Date.now() - new Date(timestamp).getTime();
+  if (diff < 60000) {
+    // less than 1 second
+    return 'Just now';
+  } else if (diff > 82800000) {
+    // more than 23 hours – similar to how Twitter displays timestamps
+    return new Date(timestamp).toLocaleDateString('en-US', {
+      month: 'short',
+      day: 'numeric',
+      year:
+        new Date(timestamp).getFullYear() !== new Date().getFullYear()
+          ? 'numeric'
+          : undefined,
+    });
+  }
+  return ms(diff);
+};
+
+export const isValidUrl = (url) => {
+  try {
+    new URL(url);
+    return true;
+  } catch (e) {
+    return false;
+  }
 };
 
 // courtesy of chatgpt
@@ -55,26 +77,7 @@ export const signalIframe = () => {
   }
 };
 
-export const refreshIframe = () => {
-  const iframe = (document.getElementById('preview').src += '');
-};
-
 export const removeHashFromHexColor = (hexColor) => {
   // Use a regular expression to match the # symbol at the beginning
   return hexColor.replace(/^#/, '');
-};
-
-export const extractSiteFromUrl = (url) => {
-  const regex = /^(?:https?:\/\/)?(?:www\.)?([^./]+)\./i;
-
-  // Use the exec method to find the match
-  const match = regex.exec(url);
-
-  // If a match is found, return the captured group (website name)
-  if (match && match[1]) {
-    return match[1].toLowerCase();
-  } else {
-    // If no match is found, return null or an appropriate value
-    return null;
-  }
 };

@@ -2,13 +2,12 @@ import * as Dialog from '@radix-ui/react-dialog';
 import { useState } from 'react';
 import Image from 'next/image';
 import closeSVG from '@/public/close_button.svg';
-import { validDomainRegex } from '@/utils/helpers';
+import { isValidUrl, signalIframe } from '@/utils/helpers';
 import { toast } from 'react-hot-toast';
 import axios from 'axios';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import useCurrentUser from '@/hooks/useCurrentUser';
 import useLinks from '@/hooks/useLinks';
-import { signalIframe } from '@/utils/helpers';
 import * as Switch from '@radix-ui/react-switch';
 import TooltipWrapper from '@/components/utils/tooltip';
 
@@ -60,10 +59,10 @@ const AddLinkModal = () => {
 
   const handleUrlChange = (event) => {
     const urlValue = event.target.value;
-    const isValidUrl = validDomainRegex.test(urlValue);
+    const URL = isValidUrl(urlValue);
 
     setUrl(urlValue);
-    setUrlError(!isValidUrl);
+    setUrlError(!URL);
   };
 
   return (
@@ -105,7 +104,7 @@ const AddLinkModal = () => {
               />
               {urlError && (
                 <small className="text-red-500 text-sm">
-                  Enter a valid URL
+                  Enter a valid URL (ex: https://hello.com)
                 </small>
               )}
             </div>
@@ -115,10 +114,7 @@ const AddLinkModal = () => {
                 title="Twitter, Instagram, LinkedIn, etc"
                 component={
                   <h3 className="text-md lg:text-lg">
-                    Make this a{' '}
-                    <a className="text-gray-600 font-medium underline cursor-pointer hover:text-gray-800">
-                      social link?
-                    </a>
+                    Add as a social media link?
                   </h3>
                 }
               />

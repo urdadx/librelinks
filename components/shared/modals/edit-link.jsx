@@ -4,10 +4,9 @@ import closeSVG from '@/public/close_button.svg';
 import Image from 'next/image';
 import { toast } from 'react-hot-toast';
 import axios from 'axios';
-import { validDomainRegex } from '@/utils/helpers';
+import { isValidUrl, signalIframe } from '@/utils/helpers';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import useCurrentUser from '@/hooks/useCurrentUser';
-import { signalIframe } from '@/utils/helpers';
 
 const EditLinkModal = ({ id, title, url, close }) => {
   const [newTitle, setNewTitle] = useState(title);
@@ -50,10 +49,10 @@ const EditLinkModal = ({ id, title, url, close }) => {
 
   const handleUrlChange = (event) => {
     const urlValue = event.target.value;
-    const isValidUrl = validDomainRegex.test(urlValue);
+    const URL = isValidUrl(urlValue);
 
     setNewUrl(urlValue);
-    setUrlError(!isValidUrl);
+    setUrlError(!URL);
   };
 
   return (

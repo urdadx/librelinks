@@ -200,7 +200,7 @@ const ProfilePage = () => {
               <Link
                 className="font-semibold"
                 target="_blank"
-                href="https://twitter.com/NerdyProgramme2"
+                href="https://librelinks.vercel.app/"
               >
                 Librelinks
               </Link>
