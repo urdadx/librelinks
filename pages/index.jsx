@@ -24,8 +24,18 @@ const Home = () => {
         <meta property="og:image" itemprop="image" content="https://librelinks.vercel.app/og.png" />
 
         {/* <!-- Twitter Card meta tags --> */}
-        <meta name="twitter:image" content="https://librelinks.vercel.app/og.png" />
         <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:site" content="@urdadx" />
+        <meta name="twitter:creator" content="@urdadx" />
+        <meta property="twitter:domain" content="https://librelinks.vercel.app/" />
+        <meta property="twitter:url" content="https://librelinks.vercel.app/" />
+        <meta name="twitter:title" content="Librelinks" />
+        <meta
+          name="twitter:description"
+          content="Librelinks is an opensource link in bio tool that helps you easily manage your links, transforming your online presence."
+        />
+        <meta name="twitter:image" content="https://librelinks.vercel.app/og.png" />
+        <meta data-rh="true" name="twitter:image:alt" content="Librelinks is an opensource link in bio tool that helps you easily manage your links, transforming your online presence." />
 
         {/* <!-- LinkedIn meta tags --> */}
         <meta property="og:linkedin:image" content="https://librelinks.vercel.app/og.png" />
