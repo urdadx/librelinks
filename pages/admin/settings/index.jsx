@@ -11,13 +11,17 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import Layout from '@/components/layout/Layout';
 import { Balancer } from 'react-wrap-balancer';
 import useUser from '@/hooks/useUser';
-import { UserAvatarSetting } from '@/components/utils/avatar';
+import {
+  UserAvatarSetting,
+  UserBannerSetting,
+} from '@/components/utils/avatar';
 import { signalIframe } from '@/utils/helpers';
 import * as AlertDialog from '@radix-ui/react-alert-dialog';
 import CustomAlert from '@/components/shared/alerts/custom-alert';
 import useMediaQuery from '@/hooks/use-media-query';
 import { signOut } from 'next-auth/react';
 import Head from 'next/head';
+import { CldUploadButton } from 'next-cloudinary';
 
 const Settings = () => {
   const { data: currentUser } = useCurrentUser();
@@ -26,6 +30,7 @@ const Settings = () => {
   const [username, setUsername] = useState('');
   const [bio, setBio] = useState('');
   const [image, setImage] = useState('');
+  const [banner, setBanner] = useState('');
   const [handle, setHandle] = useState('');
 
   const { isMobile } = useMediaQuery();
@@ -37,21 +42,24 @@ const Settings = () => {
     setUsername(fetchedUser?.name);
     setBio(fetchedUser?.bio);
     setImage(fetchedUser?.image);
+    setBanner(fetchedUser?.banner);
     setHandle(fetchedUser?.handle);
   }, [
     fetchedUser?.name,
     fetchedUser?.bio,
     fetchedUser?.image,
+    fetchedUser?.banner,
     fetchedUser?.handle,
   ]);
 
   // edit profile details
   const editMutation = useMutation(
-    async ({ bio, username, image, handle }) => {
+    async ({ bio, username, image, banner, handle }) => {
       await axios.patch('/api/edit', {
         bio,
         username,
         image,
+        banner,
         handle,
       });
     },
@@ -69,7 +77,7 @@ const Settings = () => {
 
   const handleSubmit = async () => {
     toast.loading('Applying changes');
-    await editMutation.mutateAsync({ bio, username, image, handle });
+    await editMutation.mutateAsync({ bio, username, image, banner, handle });
   };
 
   // delete profile picture
@@ -79,7 +87,30 @@ const Settings = () => {
       return;
     } else {
       toast.loading('Applying changes');
-      await editMutation.mutateAsync({ bio, username, image: '', handle });
+      await editMutation.mutateAsync({
+        bio,
+        username,
+        image: '',
+        banner,
+        handle,
+      });
+    }
+  };
+
+  // delete profile banner
+  const handleDeleteBanner = async () => {
+    if (banner === '') {
+      toast.error('There is nothing to delete');
+      return;
+    } else {
+      toast.loading('Applying changes');
+      await editMutation.mutateAsync({
+        bio,
+        username,
+        image,
+        banner: '',
+        handle,
+      });
     }
   };
 
@@ -132,21 +163,78 @@ const Settings = () => {
                 </div>
                 <div className="flex flex-col gap-2 pt-2">
                   <div className="relative overflow-hidden">
-                    <Dialog.Root>
-                      <Dialog.Trigger asChild>
-                        <button className="relative w-full lg:w-[490px] h-[45px] border rounded-3xl border-[#000] outline-none text-white bg-slate-900 p-2 hover:bg-slate-700">
-                          Pick an image
-                        </button>
-                      </Dialog.Trigger>
-                      <UploadModal
-                        value={image}
-                        onChange={(image) => setImage(image)}
-                        submit={handleSubmit}
-                      />
-                    </Dialog.Root>
+                    <CldUploadButton
+                      uploadPreset="e4nutyqs"
+                      onUpload={(res) => {
+                        if (
+                          res.event === 'success' &&
+                          typeof res.info === 'object' &&
+                          res.info
+                        ) {
+                          setImage(res.info.secure_url);
+                        }
+                      }}
+                      className="relative w-full lg:w-[490px] h-[45px] border rounded-3xl border-[#000] outline-none text-white bg-slate-900 p-2 hover:bg-slate-700"
+                      options={{
+                        publicId: fetchedUser?.handle,
+                        maxFiles: 1,
+                        maxFileSize: 10000000, // 10MB
+                        resourceType: 'image',
+                        autoMinimize: false,
+
+                        tags: ['avatar'],
+                      }}
+                      onClose={handleSubmit}
+                    >
+                      Pick an avatar image
+                    </CldUploadButton>
                   </div>
                   <button
                     onClick={handleDeletePfp}
+                    className="w-full lg:w-[490px] h-[45px] border border-[#aaa] 
+                    outline-none font-semibold text-slate-900 bg-white p-2 rounded-3xl hover:bg-gray-100"
+                  >
+                    Remove
+                  </button>
+                </div>
+              </div>
+              <div className="flex flex-col items-center gap-x-6 p-10">
+                <div className="w-[500px] h-[100px] pb-6 rounded-full flex items-center mx-auto">
+                  {fetchedUser ? (
+                    <UserBannerSetting />
+                  ) : (
+                    <TinyLoader color="black" stroke={1} size={100} />
+                  )}
+                </div>
+                <div className="flex flex-col gap-2 pt-2">
+                  <div className="relative overflow-hidden">
+                    <CldUploadButton
+                      uploadPreset="glcatigz"
+                      onUpload={(res) => {
+                        if (
+                          res.event === 'success' &&
+                          typeof res.info === 'object' &&
+                          res.info
+                        ) {
+                          setBanner(res.info.secure_url);
+                        }
+                      }}
+                      className="relative w-full lg:w-[490px] h-[45px] border rounded-3xl border-[#000] outline-none text-white bg-slate-900 p-2 hover:bg-slate-700"
+                      options={{
+                        publicId: fetchedUser?.handle,
+                        maxFiles: 1,
+                        maxFileSize: 20000000, // 10MB
+                        resourceType: 'image',
+                        autoMinimize: false,
+                        tags: ['banner'],
+                      }}
+                      onClose={handleSubmit}
+                    >
+                      Pick an banner image
+                    </CldUploadButton>
+                  </div>
+                  <button
+                    onClick={handleDeleteBanner}
                     className="w-full lg:w-[490px] h-[45px] border border-[#aaa] 
                     outline-none font-semibold text-slate-900 bg-white p-2 rounded-3xl hover:bg-gray-100"
                   >

@@ -9,7 +9,7 @@ export default async function handler(req, res) {
   try {
     const { currentUser } = await serverAuth(req, res);
 
-    const { username, bio, image, handle } = req.body;
+    const { username, bio, image, banner, handle } = req.body;
 
     if (req.method === 'PATCH') {
       try {
@@ -33,6 +33,7 @@ export default async function handler(req, res) {
             name: username,
             bio: bio,
             image: image,
+            banner: banner,
             handle: handle,
           },
         });
@@ -56,3 +57,11 @@ export default async function handler(req, res) {
     return res.status(400).end();
   }
 }
+
+export const config = {
+  api: {
+    bodyParser: {
+      sizeLimit: '35mb', // Set desired value here
+    },
+  },
+};

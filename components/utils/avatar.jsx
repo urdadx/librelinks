@@ -55,3 +55,30 @@ export const UserAvatarSetting = () => {
     </>
   );
 };
+
+export const UserBannerSetting = () => {
+  const { data: currentUser } = useCurrentUser();
+  const { data: fetchedUser } = useUser(currentUser?.handle);
+
+  return (
+    <>
+      <Avatar.Root
+        className="inline-flex h-[100px] w-[500px]
+         items-center justify-center overflow-hidden align-middle border-2 border-green-400"
+      >
+        <Avatar.Image
+          className="h-full w-full object-cover"
+          src={fetchedUser && fetchedUser?.banner}
+          referrerPolicy="no-referrer"
+          alt="avatar"
+        />
+        <Avatar.Fallback
+          className="leading-1 flex h-full w-full items-center justify-center bg-slate-900 text-[35px] text-white font-medium"
+          delayMs={100}
+        >
+          #
+        </Avatar.Fallback>
+      </Avatar.Root>
+    </>
+  );
+};

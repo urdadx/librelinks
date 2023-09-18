@@ -9,6 +9,7 @@ import useLinks from '@/hooks/useLinks';
 import { SocialCards } from '@/components/core/user-profile/social-cards';
 import useCurrentUser from '@/hooks/useCurrentUser';
 import { X } from 'lucide-react';
+import Image from 'next/image';
 
 const PreviewMobile = ({ close }) => {
   const [, setIsDataLoaded] = useState(false);
@@ -57,10 +58,29 @@ const PreviewMobile = ({ close }) => {
         style={{ background: theme.primary }}
         className="h-[100vh] w-[100vw] no-scrollbar overflow-auto"
       >
-        <div className="flex items-center w-full mt-10 flex-col mx-auto max-w-3xl justify-center px-8 lg:mt-16">
+        {currentUser && currentUser.banner && (
+          <div className="banner w-full h-32 md:h-48">
+            <Image
+              src={currentUser.banner}
+              alt="banner"
+              className="h-full w-full"
+              style={{ objectFit: 'cover' }}
+              width={1920}
+              height={1080}
+            />
+          </div>
+        )}
+
+        <div
+          className={
+            currentUser && currentUser.banner
+              ? 'flex items-center w-full -mt-10 flex-col mx-auto justify-center px-8 lg:-mt-16'
+              : 'flex items-center w-full mt-10 flex-col mx-auto justify-center px-8 lg:mt-16'
+          }
+        >
           <Avatar.Root
             className="inline-flex h-[70px] w-[70px] border-2 border-blue-300
-						items-center justify-center overflow-hidden rounded-full align-middle lg:w-[96px] lg:h-[96px]"
+             items-center justify-center overflow-hidden rounded-full align-middle lg:w-[116px] lg:h-[116px]"
           >
             <Avatar.Image
               className="h-full w-full rounded-[inherit] object-cover"

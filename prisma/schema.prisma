@@ -1,39 +1,37 @@
-
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "mongodb"
-  url      = env("DATABASE_URL")
+  provider     = "mongodb"
+  url          = env("DATABASE_URL")
   relationMode = "prisma"
-
 }
 
 model User {
-  id             String    @id @default(auto()) @map("_id") @db.ObjectId
-  name           String?
-  handle         String?   @unique
-  bio            String?
-  image          String?  
-  email          String?   @unique
-  emailVerified  DateTime?
-  totalViews     Int       @default(0)
-  createdAt      DateTime  @default(now())
-  updatedAt      DateTime  @updatedAt
-  links          Link[]
+  id            String    @id @default(auto()) @map("_id") @db.ObjectId
+  name          String?
+  handle        String?   @unique
+  bio           String?
+  image         String?
+  banner        String?
+  email         String?   @unique
+  emailVerified DateTime?
+  totalViews    Int       @default(0)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  links         Link[]
   linksLocation String?   @default("top")
-  themePalette   Json?     @default("{\"name\": \"Light\", \"palette\": [\"#FFFFFF\", \"#F2F2F2\", \"#1F2937\", \"#6170F8\"]}")
-  buttonStyle    String    @default("rounded-md")
-  accounts       Account[]
+  themePalette  Json?     @default("{\"name\": \"Light\", \"palette\": [\"#FFFFFF\", \"#F2F2F2\", \"#1F2937\", \"#6170F8\"]}")
+  buttonStyle   String    @default("rounded-md")
+  accounts      Account[]
 
   @@unique([handle, email])
 }
 
-
 model Account {
   id                 String  @id @default(cuid()) @map("_id")
-  userId             String @db.ObjectId
+  userId             String  @db.ObjectId
   type               String
   provider           String
   providerAccountId  String
@@ -52,21 +50,19 @@ model Account {
   @@unique([provider, providerAccountId])
 }
 
-
 model Link {
-      id         String     @id @default(auto()) @map("_id") @db.ObjectId
-      title      String
-      url        String
-      archived   Boolean    @default(false)
-      order       Int
-      isSocial   Boolean    @default(false)
-      // Link metadata
-      clicks      Int       @default(0) // number of clicks
-      createdAt   DateTime  @default(now())
-      updatedAt   DateTime  @updatedAt
-      userId      String    @db.ObjectId
-      user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
-      @@index(userId)
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  title     String
+  url       String
+  archived  Boolean  @default(false)
+  order     Int
+  isSocial  Boolean  @default(false)
+  // Link metadata
+  clicks    Int      @default(0) // number of clicks
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  userId    String   @db.ObjectId
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index(userId)
 }
-
-
