@@ -3,7 +3,7 @@ import * as Dialog from '@radix-ui/react-dialog';
 import { useState, useCallback } from 'react';
 import Image from 'next/image';
 import closeSVG from '@/public/close_button.svg';
-import { Upload } from 'lucide-react';
+import { Upload, UploadCloudIcon } from 'lucide-react';
 import { useDropzone } from 'react-dropzone';
 import { useQueryClient } from '@tanstack/react-query';
 import useCurrentUser from '@/hooks/useCurrentUser';
@@ -115,17 +115,14 @@ const UploadModal = ({ onChange, value, submit }) => {
             ) : (
               <>
                 <div className="mb-4">
-                  <h3 className="text-center mb-2">
-                    Drag & drop or click here to upload an image{' '}
+                  <h3 className="text-center text-slate-800 text-md font-semibold mb-2 sm:text-lg">
+                    Choose files or drag and drop
                   </h3>
-                  <h3 className="text-center">
-                    (Max file size 5MB){' '}
-                    <span role="img" aria-label="sparkle">
-                      ✨
-                    </span>
+                  <h3 className="text-center text-slate-800">
+                    (Max file size 5MB)
                   </h3>
                 </div>
-                <div className=" my-8 absolute top-1/2 transform -translate-y-1/2">
+                <div className="my-10 absolute top-1/2 transform -translate-y-1/2 lg:my-6">
                   <Upload size={40} className="text-gray-400" />
                 </div>
               </>

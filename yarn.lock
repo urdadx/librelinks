@@ -1462,6 +1462,11 @@ binary-extensions@^2.0.0:
   resolved "https://registry.npmjs.org/binary-extensions/-/binary-extensions-2.2.0.tgz"
   integrity sha512-jDctJ/IVQbZoJykoeHbhXpOlNBqGNcwXJKJog42E5HDPUwQTSdjCHdihjj0DlnheQ7blbT6dHOafNAiS8ooQKA==
 
+boring-avatars@^1.10.1:
+  version "1.10.1"
+  resolved "https://registry.npmjs.org/boring-avatars/-/boring-avatars-1.10.1.tgz"
+  integrity sha512-WcgHDeLrazCR03CDPEvCchLsUecZAZvs4F6FnMiGlTEjyQQf15Q5TRl4EUaAQ1dacvhPq7lC9EOTWkCojQ6few==
+
 bplist-parser@^0.2.0:
   version "0.2.0"
   resolved "https://registry.npmjs.org/bplist-parser/-/bplist-parser-0.2.0.tgz"

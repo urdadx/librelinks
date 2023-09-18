@@ -145,7 +145,7 @@ const ProfilePage = () => {
           {fetchedUser?.bio && (
             <p
               style={{ color: theme.accent }}
-              className="w-[150px] truncate text-center text-sm mt-1 mb-4 lg:text-xl lg:mb-4 lg:w-[500px]"
+              className="w-[150px] truncate text-center text-sm mt-1 mb-4 lg:text-xl lg:mb-4 lg:w-[600px] "
             >
               {fetchedUser?.bio}
             </p>

@@ -65,20 +65,17 @@ const ShareModal = () => {
               </Dialog.Close>
             </div>
 
-            <Tabs.Root
-              defaultValue="url"
-              className="border border-gray-300 w-full rounded-lg mt-4"
-            >
-              <Tabs.List className="flex">
+            <Tabs.Root defaultValue="url" className="w-full rounded-md mt-4">
+              <Tabs.List className="flex h-10 items-center rounded-md bg-gray-100 p-1 text-slate-900">
                 <Tabs.Trigger
                   value="url"
-                  className="flex-1 py-2 px-4 text-center data-[state=active]:text-[#10172a] data-[state=active]:rounded-tl-lg data-[state=active]:bg-gray-100 data-[state=active]:border-b data-[state=active]:border-[#10172a] text-gray-600 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 rounded-tl-lg"
+                  className="flex-1 py-1 px-4 rounded-md text-center data-[state=active]:text-slate-900 data-[state=active]:font-medium data-[state=active]:bg-white text-gray-600"
                 >
                   URL
                 </Tabs.Trigger>
                 <Tabs.Trigger
                   value="QR"
-                  className="flex-1 py-2 px-4 text-center data-[state=active]:text-[#10172a] data-[state=active]:rounded-tr-lg data-[state=active]:bg-gray-100 data-[state=active]:border-b data-[state=active]:border-[#10172a] text-gray-600 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 rounded-tr-lg"
+                  className="flex-1 py-1 px-4 rounded-md text-center data-[state=active]:text-slate-900 data-[state=active]:font-medium  data-[state=active]:bg-white text-gray-600"
                 >
                   QR Code
                 </Tabs.Trigger>
@@ -115,7 +112,7 @@ const ShareModal = () => {
                         </a>{' '}
                         bio{' '}
                         <span aria-label="rocket">
-                          to make it accessible from anywhere. 🚀
+                          to make it accessible from anywhere.
                         </span>
                       </p>
                     </div>

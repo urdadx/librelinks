@@ -39,8 +39,10 @@ const LinkStats = () => {
             {!isLoading ? (
               <>
                 {displayedLinks?.length > 0 ? (
-                  displayedLinks?.map((userLink) => {
-                    return (
+                  displayedLinks
+                    .slice()
+                    .sort((a, b) => b.clicks - a.clicks)
+                    .map((userLink) => (
                       <div
                         key={userLink.id}
                         className="flex items-center p-2 rounded-lg"
@@ -67,8 +69,7 @@ const LinkStats = () => {
                           </h4>
                         </div>
                       </div>
-                    );
-                  })
+                    ))
                 ) : (
                   <div className="flex flex-col gap-2 w-[180px] mx-auto py-6">
                     <StarSVG />

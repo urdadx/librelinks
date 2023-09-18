@@ -19,7 +19,7 @@ export const UserAvatar = () => {
           alt="avatar"
         />
         <Avatar.Fallback
-          className="leading-1 flex h-full w-full items-center justify-center bg-slate-900 text-[15px] text-white font-medium"
+          className="leading-1 text-slate-900 flex h-full w-full items-center justify-center bg-white text-[15px] font-medium"
           delayMs={100}
         >
           @
@@ -46,7 +46,7 @@ export const UserAvatarSetting = () => {
           alt="avatar"
         />
         <Avatar.Fallback
-          className="leading-1 flex h-full w-full items-center justify-center bg-slate-900 text-[35px] text-white font-medium"
+          className="leading-1 flex h-full w-full items-center justify-center bg-white text-slate-900 text-[35px] font-medium"
           delayMs={100}
         >
           @

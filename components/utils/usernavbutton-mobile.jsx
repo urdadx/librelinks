@@ -1,9 +1,9 @@
-import {Drawer} from 'vaul';
+import { Drawer } from 'vaul';
 import Link from 'next/link';
-import {AlertCircle, User} from 'lucide-react';
-import {LogOut} from 'lucide-react';
+import { AlertCircle, User } from 'lucide-react';
+import { LogOut } from 'lucide-react';
 
-const UserNavButtonMobile = ({data, logout}) => {
+const UserNavButtonMobile = ({ data, logout }) => {
   return (
     <>
       <Drawer.Portal>
@@ -19,7 +19,7 @@ const UserNavButtonMobile = ({data, logout}) => {
           </Link>
           <Link
             target="_blank"
-            href="https://github.com/urdadx/librelinks/issues/new"
+            href="https://github.com/urdadx/librelinks/issues/new/choose"
             className="group flex w-full items-center gap-2 rounded-md p-3 text-sm font-medium text-gray-500 transition-all duration-75 hover:bg-gray-100"
           >
             <AlertCircle size={17} color="gray" />
