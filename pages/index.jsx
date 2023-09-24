@@ -22,6 +22,8 @@ const Home = () => {
         <title>Librelinks | A free & opensource link in bio tool</title>
         {/* <!-- Open Graph (OG) meta tags --> */}
         <meta property="og:url" content="https://librelinks.vercel.app/" />
+        <meta property="og:url" content="https://librelinks.me/" />
+        <meta property="og:url" content="https://www.librelinks.me/" />
         <meta property="og:type" content="website" />
         <meta
           property="og:site_name"
@@ -37,6 +39,16 @@ const Home = () => {
           itemprop="image"
           content="https://librelinks.vercel.app/og.png"
         />
+        <meta
+          property="og:image"
+          itemprop="image"
+          content="https://librelinks.me/og.png"
+        />
+        <meta
+          property="og:image"
+          itemprop="image"
+          content="https://www.librelinks.me/og.png"
+        />
 
         {/* <!-- Twitter Card meta tags --> */}
         <meta name="twitter:card" content="summary_large_image" />
@@ -46,6 +58,8 @@ const Home = () => {
           property="twitter:domain"
           content="https://librelinks.vercel.app/"
         />
+        <meta property="twitter:domain" content="https://librelinks.me/" />
+        <meta property="twitter:domain" content="https://www.librelinks.me/" />
         <meta property="twitter:url" content="https://librelinks.vercel.app/" />
         <meta name="twitter:title" content="Librelinks" />
         <meta
@@ -56,6 +70,8 @@ const Home = () => {
           name="twitter:image"
           content="https://librelinks.vercel.app/og.png"
         />
+        <meta name="twitter:image" content="https://librelinks.me/og.png" />
+        <meta name="twitter:image" content="https://www.librelinks.me/og.png" />
         <meta
           data-rh="true"
           name="twitter:image:alt"
@@ -66,6 +82,14 @@ const Home = () => {
         <meta
           property="og:linkedin:image"
           content="https://librelinks.vercel.app/og.png"
+        />
+        <meta
+          property="og:linkedin:image"
+          content="https://librelinks.me/og.png"
+        />
+        <meta
+          property="og:linkedin:image"
+          content="https://www.librelinks.me/og.png"
         />
         <meta property="og:linkedin:title" content="Librelinks" />
         <meta
@@ -78,6 +102,14 @@ const Home = () => {
           property="og:facebook:image"
           content="https://librelinks.vercel.app/og.png"
         />
+        <meta
+          property="og:facebook:image"
+          content="https://librelinks.me/og.png"
+        />
+        <meta
+          property="og:facebook:image"
+          content="https://www.librelinks.me/og.png"
+        />
         <meta property="og:facebook:title" content="Librelinks" />
         <meta
           property="og:facebook:description"
@@ -89,6 +121,14 @@ const Home = () => {
           property="og:instagram:image"
           content="https://librelinks.vercel.app/og.png"
         />
+        <meta
+          property="og:instagram:image"
+          content="https://librelinks.me/og.png"
+        />
+        <meta
+          property="og:instagram:image"
+          content="https://www.librelinks.me/og.png"
+        />
         <meta property="og:instagram:title" content="Librelinks" />
         <meta
           property="og:instagram:description"
@@ -99,6 +139,14 @@ const Home = () => {
         <meta
           property="og:pinterest:image"
           content="https://librelinks.vercel.app/og.png"
+        />
+        <meta
+          property="og:pinterest:image"
+          content="https://librelinks.me/og.png"
+        />
+        <meta
+          property="og:pinterest:image"
+          content="https://www.librelinks.me/og.png"
         />
         <meta property="og:pinterest:title" content="Librelinks" />
         <meta

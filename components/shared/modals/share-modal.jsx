@@ -13,7 +13,7 @@ const ShareModal = () => {
   const userProfileLink =
     process.env.NODE_ENV === 'development'
       ? `http://localhost:3000/${currentUser?.handle}`
-      : `https://librelinks.vercel.app/${currentUser?.handle}`;
+      : `https://librelinks.me/${currentUser?.handle}`;
 
   const [isCopied, setIsCopied] = useState(false);
 
@@ -140,6 +140,14 @@ const ShareModal = () => {
                     includeMargin={true}
                     level="H"
                     value={userProfileLink}
+                    imageSettings={{
+                      src: `${currentUser?.image}`,
+                      x: undefined,
+                      y: undefined,
+                      height: 40,
+                      width: 40,
+                      excavate: true,
+                    }}
                   />
 
                   <p className="mt-4 text-center text-gray-700">

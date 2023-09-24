@@ -59,7 +59,8 @@ const Onboarding = () => {
   };
 
   const handleOnChange = (event) => {
-    setHandle(event.target.value);
+    const value = event.target.value;
+    setHandle(value);
     setHandleTaken(false);
   };
   return (

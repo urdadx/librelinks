@@ -3,7 +3,7 @@ import * as Dialog from '@radix-ui/react-dialog';
 import { useState, useCallback } from 'react';
 import Image from 'next/image';
 import closeSVG from '@/public/close_button.svg';
-import { Upload, UploadCloudIcon } from 'lucide-react';
+import { Upload } from 'lucide-react';
 import { useDropzone } from 'react-dropzone';
 import { useQueryClient } from '@tanstack/react-query';
 import useCurrentUser from '@/hooks/useCurrentUser';

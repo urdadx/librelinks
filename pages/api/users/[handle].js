@@ -9,7 +9,7 @@ export default async function handler(req, res) {
     const { handle } = req.query;
 
     if (!handle || typeof handle !== 'string') {
-      throw new Error('Invalid ID');
+      throw new Error('Invalid Handle');
     }
 
     const existingUser = await db.user.findUnique({

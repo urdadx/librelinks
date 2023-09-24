@@ -6,7 +6,7 @@ The goal of Librelinks is to provide users with a platform that helps them manag
 
 Give us a star ⭐.
 
-Official site: [https://librelinks.vercel.app](https://librelinks.vercel.app)
+Official site: [https://librelinks.me](https://librelinks.me)
 
 ## ⚒️ Demo
 

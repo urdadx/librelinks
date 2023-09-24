@@ -5,7 +5,7 @@ const Preview = () => {
   const url =
     process.env.NODE_ENV === 'development'
       ? `http://localhost:3000/${currentUser?.handle}?isIframe=true`
-      : `https://librelinks.vercel.app/${currentUser?.handle}?isIframe=true`;
+      : `https://librelinks.me/${currentUser?.handle}?isIframe=true`;
 
   return (
     <>
