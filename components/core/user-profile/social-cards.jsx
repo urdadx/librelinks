@@ -32,7 +32,7 @@ export const SocialCards = ({ url, title, color, registerClicks }) => {
         onClick={registerClicks}
         target="_blank"
         href={url}
-        className="hover:scale-125 transition-all w-[30px] h-[30px] rounded-full px-2 lg:w-[42px] lg:h-[42px]"
+        className="hover:scale-125 transition-all w-[30px] h-[30px]  md:h-[35px] md:w-[35px] rounded-full px-2 lg:w-[42px] lg:h-[42px]"
       >
         <img
           loading="lazy"
