@@ -54,7 +54,7 @@ const Login = () => {
         </div>
         <div className="mt-4 sm:mx-auto sm:w-full sm:max-w-sm">
           <div className="space-y-6">
-            <div>
+            {/* <div>
               <button
                 onClick={handleGithubSignIn}
                 className="flex w-full justify-center rounded-md bg-slate-900 px-3 py-2.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-slate-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-600"
@@ -72,13 +72,13 @@ const Login = () => {
                   </span>
                 )}
               </button>
-            </div>
+            </div> */}
           </div>
 
           <div className="mt-4">
             <button
               onClick={handleGoogleSignIn}
-              className="flex w-full justify-center rounded-md bg-white px-3 py-2.5 text-sm font-semibold leading-6 text-slate-900  outline-none border-2 hover:bg-gray-100 hover:border-slate-700"
+              className="flex w-full justify-center rounded-md bg-slate-900 px-3 py-2.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-slate-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-600"
             >
               {isLoading ? (
                 <>
