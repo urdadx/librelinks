@@ -23,14 +23,8 @@ export const authOptions = {
       allowDangerousEmailAccountLinking: true,
     }),
     GitHubProvider({
-      clientId:
-        process.env.NODE_ENV === 'production'
-          ? process.env.GITHUB_CLIENT_ID
-          : process.env.DEV_GITHUB_CLIENT_ID,
-      clientSecret:
-        process.env.NODE_ENV === 'production'
-          ? process.env.GITHUB_CLIENT_SECRET
-          : process.env.DEV_GITHUB_CLIENT_SECRET,
+      clientId: process.env.GITHUB_CLIENT_ID,
+      clientSecret: process.env.GITHUB_CLIENT_SECRET,
       allowDangerousEmailAccountLinking: true,
     }),
   ],
