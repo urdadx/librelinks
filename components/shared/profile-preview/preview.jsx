@@ -1,11 +1,10 @@
 import useCurrentUser from '@/hooks/useCurrentUser';
+import { getCurrentBaseURL } from '@/utils/helpers';
 
 const Preview = () => {
   const { data: currentUser } = useCurrentUser();
-  const url =
-    process.env.NODE_ENV === 'development'
-      ? `http://localhost:3000/${currentUser?.handle}?isIframe=true`
-      : `https://librelinks.me/${currentUser?.handle}?isIframe=true`;
+  const baseURL = getCurrentBaseURL();
+  const url = `${baseURL}/${currentUser?.handle}?isIframe=true`;
 
   return (
     <>

@@ -7,13 +7,12 @@ import { QRCodeCanvas } from 'qrcode.react';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
 import useCurrentUser from '@/hooks/useCurrentUser';
+import { getCurrentBaseURL } from '@/utils/helpers';
 
 const ShareModal = () => {
   const { data: currentUser } = useCurrentUser();
-  const userProfileLink =
-    process.env.NODE_ENV === 'development'
-      ? `http://localhost:3000/${currentUser?.handle}`
-      : `https://librelinks.me/${currentUser?.handle}`;
+  const baseURL = getCurrentBaseURL();
+  const userProfileLink = `${baseURL}/${currentUser?.handle}`;
 
   const [isCopied, setIsCopied] = useState(false);
 

@@ -81,3 +81,10 @@ export const removeHashFromHexColor = (hexColor) => {
   // Use a regular expression to match the # symbol at the beginning
   return hexColor.replace(/^#/, '');
 };
+
+export const getCurrentBaseURL = () => {
+  if (typeof window !== 'undefined') {
+    const baseURL = window.location.origin;
+    return baseURL;
+  }
+};
