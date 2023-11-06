@@ -2,10 +2,14 @@ import Link from 'next/link';
 import Form from '@/components/shared/form/form';
 import { Wand } from 'lucide-react';
 import { GridOverlay } from '@/components/utils/grid-overlay';
+import Head from 'next/head';
 
 export default function Login() {
   return (
     <>
+      <Head>
+        <title>Librelinks | Login</title>
+      </Head>
       <GridOverlay />
       <div className="flex h-screen w-screen items-center justify-center bg-gray-50">
         <div className="z-10 w-full max-w-md overflow-hidden rounded-2xl border border-gray-100 shadow-xl">
