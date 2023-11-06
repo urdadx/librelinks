@@ -1,113 +1,26 @@
-/* eslint-disable @next/next/no-img-element */
-import { signIn } from 'next-auth/react';
-import { useState, useCallback } from 'react';
-import { toast } from 'react-hot-toast';
-import { TinyLoader } from '@/components/utils/tiny-loader';
 import Link from 'next/link';
-import { GithubIcon, Wand } from 'lucide-react';
-import GoogleIcon from '@/components/utils/google-icon';
+import Form from '@/components/shared/form/form';
+import { Wand } from 'lucide-react';
 import { GridOverlay } from '@/components/utils/grid-overlay';
-import Head from 'next/head';
 
-const Login = () => {
-  const [isLoading, setIsLoading] = useState(false);
-
-  const handleGoogleSignIn = useCallback(async () => {
-    try {
-      setIsLoading(true);
-      signIn('google');
-    } catch (error) {
-      toast.error('An error occured');
-      console.log(error);
-    } finally {
-      setIsLoading(false);
-    }
-  }, []);
-
-  const handleGithubSignIn = useCallback(async () => {
-    try {
-      setIsLoading(true);
-      signIn('github');
-    } catch (error) {
-      toast.error('An error occured');
-      console.log(error);
-    } finally {
-      setIsLoading(false);
-    }
-  }, []);
-
+export default function Login() {
   return (
     <>
-      <Head>
-        <title>Librelinks | Login</title>
-      </Head>
       <GridOverlay />
-      <div className="absolute w-full flex min-h-full flex-1 flex-col justify-center px-6 py-6 lg:px-8">
-        <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-          <div className="mx-auto h-[30px] w-[30px] rounded-full">
-            <Wand color="black" size={30} />
-          </div>
-
-          <h2 className="mt-4 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
-            Welcome back ✨
-          </h2>
-        </div>
-        <div className="mt-4 sm:mx-auto sm:w-full sm:max-w-sm">
-          <div className="space-y-6">
-            {/* <div>
-              <button
-                onClick={handleGithubSignIn}
-                className="flex w-full justify-center rounded-md bg-slate-900 px-3 py-2.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-slate-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-600"
-              >
-                {isLoading ? (
-                  <>
-                    <div className="flex justify-center w-[100px]">
-                      <TinyLoader color="white" size={20} stroke={2} />
-                    </div>
-                  </>
-                ) : (
-                  <span className="flex items-center gap-2">
-                    <GithubIcon size={17} />{' '}
-                    <span className="text-md">Continue with Github</span>
-                  </span>
-                )}
-              </button>
-            </div> */}
-          </div>
-
-          <div className="mt-4">
-            <button
-              onClick={handleGoogleSignIn}
-              className="flex w-full justify-center rounded-md bg-slate-900 px-3 py-2.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-slate-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-600"
-            >
-              {isLoading ? (
-                <>
-                  <div className="flex justify-center w-[100px]">
-                    <TinyLoader color="white" size={20} stroke={2} />
-                  </div>
-                </>
-              ) : (
-                <span className="flex items-center gap-2">
-                  <GoogleIcon />{' '}
-                  <span className="text-md">Continue with Google</span>
-                </span>
-              )}
-            </button>
-          </div>
-
-          <p className="mt-10 text-center text-sm text-gray-500">
-            Don&apos;t have an account?{' '}
-            <Link
-              href="/register"
-              className="font-semibold leading-6 text-slate-600 hover:text-slate-500"
-            >
-              Sign Up
+      <div className="flex h-screen w-screen items-center justify-center bg-gray-50">
+        <div className="z-10 w-full max-w-md overflow-hidden rounded-2xl border border-gray-100 shadow-xl">
+          <div className="flex flex-col items-center justify-center space-y-3 border-b border-gray-200 bg-white px-4 py-6 pt-8 text-center sm:px-16">
+            <Link href="/">
+              <Wand color="black" size={30} />
             </Link>
-          </p>
+            <h3 className="text-xl font-semibold">Sign in to your account</h3>
+            <p className="text-sm text-gray-500">
+              Start transforming your online presence✨
+            </p>
+          </div>
+          <Form type="login" />
         </div>
       </div>
     </>
   );
-};
-
-export default Login;
+}

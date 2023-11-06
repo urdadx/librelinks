@@ -8,6 +8,8 @@ Give us a star ⭐.
 
 Official site: [https://librelinks.me](https://librelinks.me)
 
+An example Librelinks page: [https://librelinks.me/maayez](https://librelinks.me/maayez)
+
 ## ⚒️ Demo
 
 Create and customize your link in bio in minutes✨
