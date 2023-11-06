@@ -4,6 +4,7 @@ import LoadingDots from '@/components/utils/loading-dots';
 import Link from 'next/link';
 import GoogleIcon from '@/components/utils/google-icon';
 import { useSearchParams } from 'next/navigation';
+import toast from 'react-hot-toast';
 
 export default function Form({ type }) {
   const [isLoading, setIsLoading] = useState(false);
