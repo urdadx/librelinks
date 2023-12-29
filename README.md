@@ -2,9 +2,7 @@
 
 Librelinks is an open-source link in bio tool for everyone.
 
-The goal of Librelinks is to provide users with a platform that helps them manage their links and content created on social media through a single link.
-
-Give us a star ⭐.
+The goal of Librelinks is to provide users with a platform that helps them to connect to their audience through a single link.
 
 Official site: [https://librelinks.me](https://librelinks.me)
 
@@ -58,10 +56,6 @@ Librelinks is created with the NextJS web framework and follows its project stru
 You need to have the following env variables in your `.env` file to make the application work properly
 
 `DATABASE_URL` = XXXXXXX
-
-`DEV_GITHUB_CLIENT_ID` = XXXXXX
-
-`DEV_GITHUB_CLIENT_SECRET` = XXXXXX
 
 `GOOGLE_CLIENT_ID` = XXXXXX
 
