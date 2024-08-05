@@ -1,12 +1,12 @@
-# Librelinks
+# HYPME
 
-Librelinks is an open-source link in bio tool for everyone.
+HYPME is an open-source link in bio tool for everyone.
 
-The goal of Librelinks is to provide users with a platform that helps them to connect to their audience through a single link.
+The goal of HYPME is to provide users with a platform that helps them to connect to their audience through a single link.
 
 Official site: [https://librelinks.me](https://librelinks.me)
 
-An example Librelinks page: [https://librelinks.me/maayez](https://librelinks.me/maayez)
+An example HYPME page: [https://librelinks.me/maayez](https://librelinks.me/maayez)
 
 ## ⚒️ Demo
 
@@ -14,7 +14,7 @@ Create and customize your link in bio in minutes✨
 
 <div style="width: 600px;">
 
-![Librelinks Demo](.github/demo.gif)
+![HYPME Demo](.github/demo.gif)
 
 </div>
 
@@ -41,7 +41,7 @@ It has 4 Core Features:
 
 ## 📁 Project Structure
 
-Librelinks is created with the NextJS web framework and follows its project structure.
+HYPME is created with the NextJS web framework and follows its project structure.
 
 | <div style="width:115px">**Page Route**</div> | **Code Path**               | **Description**                                 |
 | --------------------------------------------- | --------------------------- | ----------------------------------------------- |
@@ -75,7 +75,7 @@ Checkout the `.env.example` file to learn how to get started.
 2. Change the directory `cd librelinks`
 3. Install the dependency `npm install`
 4. Start a development server `npm run dev`
-5. Open your browser and visit [http://localhost:3000](http://localhost:3000) to see Librelinks live
+5. Open your browser and visit [http://localhost:3000](http://localhost:3000) to see HYPME live
 
 ## Contributing 🤝
 

@@ -9,7 +9,7 @@ const Admin = () => {
   return (
     <>
       <Head>
-        <title>Librelinks | Admin</title>
+        <title>HYPME | Admin</title>
       </Head>
       <Layout>
         <div className="w-full lg:basis-3/5 pl-4 pr-4 border-r overflow-scroll">

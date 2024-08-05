@@ -12,7 +12,7 @@ const Footer = () => {
           <Link
             className="text-blue-800"
             target="_blank"
-            href="https://twitter.com/NerdyProgramme2"
+            href="https://hypme.vercel.me"
           >
             @urdadx
           </Link>

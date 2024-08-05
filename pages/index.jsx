@@ -7,9 +7,9 @@ import Head from 'next/head';
 import { useSession } from 'next-auth/react';
 
 export const metadata = {
-  title: 'Librelinks',
+  title: 'HYPME',
   description:
-    'Librelinks is an opensource link in bio tool that helps you easily manage your links, transforming your online presence.',
+    'HYPME is an opensource link in bio tool that helps you easily manage your links, transforming your online presence.',
 };
 
 const Home = () => {
@@ -19,7 +19,7 @@ const Home = () => {
   return (
     <>
       <Head>
-        <title>Librelinks | A free & opensource link in bio tool</title>
+        <title>HYPME | A free & opensource link in bio tool</title>
         {/* <!-- Open Graph (OG) meta tags --> */}
         <meta property="og:url" content="https://librelinks.vercel.app/" />
         <meta property="og:url" content="https://librelinks.me/" />
@@ -27,12 +27,12 @@ const Home = () => {
         <meta property="og:type" content="website" />
         <meta
           property="og:site_name"
-          content="Librelinks - The free & opensource link in bio tool"
+          content="HYPME - The free & opensource link in bio tool"
         />
-        <meta property="og:title" content="Librelinks" />
+        <meta property="og:title" content="HYPME" />
         <meta
           property="og:description"
-          content="Librelinks is an opensource link in bio tool that helps you easily manage your links, transforming your online presence."
+          content="HYPME is an opensource link in bio tool that helps you easily manage your links, transforming your online presence."
         />
         <meta
           property="og:image"
@@ -61,10 +61,10 @@ const Home = () => {
         <meta property="twitter:domain" content="https://librelinks.me/" />
         <meta property="twitter:domain" content="https://www.librelinks.me/" />
         <meta property="twitter:url" content="https://librelinks.vercel.app/" />
-        <meta name="twitter:title" content="Librelinks" />
+        <meta name="twitter:title" content="HYPME" />
         <meta
           name="twitter:description"
-          content="Librelinks is an opensource link in bio tool that helps you easily manage your links, transforming your online presence."
+          content="HYPME is an opensource link in bio tool that helps you easily manage your links, transforming your online presence."
         />
         <meta
           name="twitter:image"
@@ -75,7 +75,7 @@ const Home = () => {
         <meta
           data-rh="true"
           name="twitter:image:alt"
-          content="Librelinks is an opensource link in bio tool that helps you easily manage your links, transforming your online presence."
+          content="HYPME is an opensource link in bio tool that helps you easily manage your links, transforming your online presence."
         />
 
         {/* <!-- LinkedIn meta tags --> */}
@@ -91,10 +91,10 @@ const Home = () => {
           property="og:linkedin:image"
           content="https://www.librelinks.me/og.png"
         />
-        <meta property="og:linkedin:title" content="Librelinks" />
+        <meta property="og:linkedin:title" content="HYPME" />
         <meta
           property="og:linkedin:description"
-          content="Librelinks is an opensource link in bio tool that helps you easily manage your links, transforming your online presence."
+          content="HYPME is an opensource link in bio tool that helps you easily manage your links, transforming your online presence."
         />
 
         {/* <!-- Facebook meta tags --> */}
@@ -110,10 +110,10 @@ const Home = () => {
           property="og:facebook:image"
           content="https://www.librelinks.me/og.png"
         />
-        <meta property="og:facebook:title" content="Librelinks" />
+        <meta property="og:facebook:title" content="HYPME" />
         <meta
           property="og:facebook:description"
-          content="Librelinks is an opensource link in bio tool that helps you easily manage your links, transforming your online presence."
+          content="HYPME is an opensource link in bio tool that helps you easily manage your links, transforming your online presence."
         />
 
         {/* <!-- Instagram meta tags --> */}
@@ -129,10 +129,10 @@ const Home = () => {
           property="og:instagram:image"
           content="https://www.librelinks.me/og.png"
         />
-        <meta property="og:instagram:title" content="Librelinks" />
+        <meta property="og:instagram:title" content="HYPME" />
         <meta
           property="og:instagram:description"
-          content="Librelinks is an opensource link in bio tool that helps you easily manage your links, transforming your online presence."
+          content="HYPME is an opensource link in bio tool that helps you easily manage your links, transforming your online presence."
         />
 
         {/* <!-- Pinterest meta tags --> */}
@@ -148,10 +148,10 @@ const Home = () => {
           property="og:pinterest:image"
           content="https://www.librelinks.me/og.png"
         />
-        <meta property="og:pinterest:title" content="Librelinks" />
+        <meta property="og:pinterest:title" content="HYPME" />
         <meta
           property="og:pinterest:description"
-          content="Librelinks is an opensource link in bio tool that helps you easily manage your links, transforming your online presence."
+          content="HYPME is an opensource link in bio tool that helps you easily manage your links, transforming your online presence."
         />
       </Head>
       <div className="absolute inset-0 -z-10 h-full w-full bg-white bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px]">
@@ -170,7 +170,7 @@ const Home = () => {
                   className="flex items-center gap-2 font-bold text-xl"
                   href="/"
                 >
-                  <h3 className="lg:block">Librelinks</h3>
+                  <h3 className="lg:block">HYPME</h3>
                 </Link>
 
                 <div className="relative items-center w-28 z-10 md:absolute md:inset-y-0 md:right-0">
@@ -204,7 +204,7 @@ const Home = () => {
                   <span className="hero-title block ">link in bio tool</span>
                 </h1>
                 <p className="max-w-md mx-auto mt-3 text-base text-gray-500 sm:text-lg md:mt-5 md:text-xl md:max-w-3xl">
-                  Librelinks is an opensource link in bio tool that helps you
+                  HYPME is an opensource link in bio tool that helps you
                   easily manage your links, transforming your online presence.
                 </p>
               </div>
@@ -245,7 +245,7 @@ const Home = () => {
                 className="hover:text-emerald-500"
                 target="_blank"
                 rel="noopener noreferrer"
-                href="https://twitter.com/NerdyProgramme2"
+                href="https://hypme.vercel.me"
               >
                 @urdadx
               </a>
