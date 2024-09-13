@@ -131,9 +131,9 @@ const PreviewMobile = ({ close }) => {
               <Link
                 className="font-semibold"
                 target="_blank"
-                href="https://hypme.tr"
+                href="https://HYPME!.tr"
               >
-                HYPME
+                HYPME!
               </Link>
             </p>
           </footer>

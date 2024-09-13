@@ -12,9 +12,9 @@ const Footer = () => {
           <Link
             className="text-blue-800"
             target="_blank"
-            href="https://hypme.tr"
+            href="https://HYPME!.tr"
           >
-            HYPME
+            HYPME!
           </Link>
         </p>
       </footer>

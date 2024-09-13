@@ -92,7 +92,7 @@ const ProfilePage = () => {
   return (
     <>
       <Head>
-        <title> @{handle} | HYPME</title>
+        <title> @{handle} | HYPME!</title>
       </Head>
       {!query.isIframe ? (
         <Script
@@ -200,9 +200,9 @@ const ProfilePage = () => {
               <Link
                 className="font-semibold"
                 target="_blank"
-                href="https://hypme.tr"
+                href="https://HYPME!.tr"
               >
-                HYPME
+                HYPME!
               </Link>
             </p>
           </footer>

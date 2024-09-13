@@ -43,7 +43,7 @@ export default async function handler() {
               fontSize: 20,
             }}
           >
-            HYPME
+            HYPME!
           </span>
         </div>
         <div

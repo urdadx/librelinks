@@ -7,7 +7,7 @@ import Head from 'next/head';
 import { useSession } from 'next-auth/react';
 
 export const metadata = {
-  title: 'HYPME',
+  title: 'HYPME!',
   description:
     '',
 };

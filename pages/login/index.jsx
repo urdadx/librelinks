@@ -7,7 +7,7 @@ export default function Login() {
   return (
     <>
       <Head>
-        <title>HYPME | Login</title>
+        <title>HYPME! | Login</title>
       </Head>
       <div className="absolute inset-0 -z-10 h-full w-full bg-white bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px] flex  items-center justify-center ">
         <div className="z-10 w-full max-w-md overflow-hidden rounded-2xl border border-gray-100 shadow-xl">

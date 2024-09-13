@@ -7,7 +7,7 @@ const Analytics = () => {
   return (
     <>
       <Head>
-        <title>HYPME | Analytics</title>
+        <title>HYPME! | Analytics</title>
       </Head>
       <Layout>
         <div className="w-full lg:w-[100vw] pl-4 pr-4 overflow-auto">
