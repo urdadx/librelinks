@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 import GithubStar from '@/components/utils/github-star';
 import { GithubIcon, GlobeIcon, TwitterIcon } from 'lucide-react';
 import Image from 'next/image';
@@ -26,3 +25,9 @@ const Home = () => {
 };
 
 export default Home;
+/* eslint-disable @next/next/no-img-element 
+import { page } from '@/components/index';
+
+export default function Home() {
+  return <page />;
+}*/
