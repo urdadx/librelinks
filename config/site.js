@@ -5,7 +5,7 @@ export const siteConfig = {
   description: ' Open Source Linktree Alternative for developers',
   mainNav: [],
   links: {
-    twitter: 'https://hypme.vercel.me',
+    twitter: 'https://hypme.tr',
     github: 'https://github.com/urdadx/librelinks',
   },
   redirects: {

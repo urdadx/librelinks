@@ -127,11 +127,11 @@ const PreviewMobile = ({ close }) => {
               style={{ color: theme.accent }}
               className="text-sm text-semibold text-center lg:text-lg"
             >
-              Made by{' '}
+              © 2024{' '}
               <Link
                 className="font-semibold"
                 target="_blank"
-                href="https://hypme.vercel.me"
+                href="https://hypme.tr"
               >
                 HYPME
               </Link>

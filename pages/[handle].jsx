@@ -196,11 +196,11 @@ const ProfilePage = () => {
               style={{ color: theme.accent }}
               className="text-sm text-semibold text-center w lg:text-lg"
             >
-              Made by{' '}
+              © 2024{' '}
               <Link
                 className="font-semibold"
                 target="_blank"
-                href="https://librelinks.vercel.app/"
+                href="https://hypme.tr"
               >
                 HYPME
               </Link>
