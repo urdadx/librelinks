@@ -6,7 +6,6 @@ export const siteConfig = {
   mainNav: [],
   links: {
     twitter: 'https://hypme.tr',
-    github: 'https://github.com/urdadx/librelinks',
   },
   redirects: {
     twitter:
