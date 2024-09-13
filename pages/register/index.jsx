@@ -23,7 +23,6 @@ export default function Register() {
               {route === '/register' ? 'Create your account' : 'Welcome back'}
             </h3>
             <p className="text-sm text-gray-500">
-              Get started for free. No credit card required
             </p>
           </div>
           <Form type="register" />
