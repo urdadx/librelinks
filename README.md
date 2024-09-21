@@ -4,9 +4,9 @@ Librelinks is an open-source link in bio tool for everyone.
 
 The goal of Librelinks is to provide users with a platform that helps them to connect to their audience through a single link.
 
-Official site: [https://librelinks.me](https://librelinks.me)
+Official site: [https://librelinks.vercel.app](https://librelinks.vercel.app)
 
-An example Librelinks page: [https://librelinks.me/maayez](https://librelinks.me/maayez)
+An example Librelinks page: [https://librelinks.vercel.app/maayez](https://librelinks.vercel.app/maayez)
 
 ## ⚒️ Demo
 
