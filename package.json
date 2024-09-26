@@ -31,6 +31,7 @@
     "@tanstack/react-table": "^8.9.3",
     "@vercel/analytics": "^1.0.2",
     "@vercel/og": "^0.5.13",
+    "@vercel/speed-insights": "^1.0.12",
     "autoprefixer": "10.4.14",
     "axios": "^1.4.0",
     "boring-avatars": "^1.10.1",

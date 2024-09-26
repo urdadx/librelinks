@@ -5,6 +5,7 @@ import { TinyLoader } from '@/components/utils/tiny-loader';
 import { useRouter } from 'next/router';
 import Confetti from 'react-dom-confetti';
 import Balancer from 'react-wrap-balancer';
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 const Onboarding = () => {
   const [isLoading, setIsLoading] = useState(false);
