@@ -36,7 +36,7 @@
     "boring-avatars": "^1.10.1",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
-    "eslint-config-next": "13.4.3",
+    "eslint-config-next": "^14.2.13",
     "framer-motion": "^10.12.16",
     "lucide-react": "^0.441.0",
     "mini-svg-data-uri": "^1.4.4",
@@ -64,7 +64,7 @@
     "zustand": "^4.3.9"
   },
   "devDependencies": {
-    "eslint": "^8.48.0",
+    "eslint": "^9.11.1",
     "eslint-config-prettier": "^9.0.0",
     "husky": "^8.0.3",
     "lint-staged": "^14.0.1",
