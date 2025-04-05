@@ -18,7 +18,7 @@ const Home = () => {
   return (
     <>
       <Head>
-        <meta http-equiv='refresh' content='0; URL=https://www.instagram.com/merecord_/' />
+        <meta http-equiv='refresh' content='0; URL=https://www.instagram.com/hypme__/' />
       </Head>
     </>
   );
