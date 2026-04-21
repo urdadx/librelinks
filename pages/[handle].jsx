@@ -17,6 +17,7 @@ import Head from 'next/head';
 import { Drawer } from 'vaul';
 import useMediaQuery from '@/hooks/use-media-query';
 import { siteConfig } from '@/config/site';
+import { db } from '@/lib/db';
 
 const LOCAL_LOCATION_FALLBACK = {
   countryCode: 'GH',
@@ -24,6 +25,48 @@ const LOCAL_LOCATION_FALLBACK = {
 };
 
 const DEFAULT_MADE_WITH_URL = 'https://urdadx.com/';
+
+function escapeRegex(value) {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+async function doesHandleExist(handle) {
+  const existingUser = await db.user.findUnique({
+    where: {
+      handle,
+    },
+    select: {
+      id: true,
+    },
+  });
+
+  if (existingUser?.id) {
+    return true;
+  }
+
+  const matchingUsers = await db.user.aggregateRaw({
+    pipeline: [
+      {
+        $match: {
+          handle: {
+            $regex: `^\\s*${escapeRegex(handle)}\\s*$`,
+            $options: 'i',
+          },
+        },
+      },
+      {
+        $project: {
+          _id: 1,
+        },
+      },
+      {
+        $limit: 1,
+      },
+    ],
+  });
+
+  return typeof matchingUsers[0]?._id === 'string' || !!matchingUsers[0]?._id?.$oid;
+}
 
 const ProfilePage = () => {
   const { query } = useRouter();
@@ -172,7 +215,7 @@ const ProfilePage = () => {
     : fetchedUser;
 
   const buttonStyle = displayUser?.buttonStyle;
-  const madeWithUrl = getCurrentApexUrl();
+  const madeWithUrl = getCurrentUrl();
   const pageTitle = `@${displayUser?.handle || normalizedHandle} | Librelinks`;
   const pageDescription =
     displayUser?.bio ||
@@ -258,7 +301,7 @@ const ProfilePage = () => {
               <p
                 ref={bioRef}
                 style={{ color: theme.accent }}
-                className="w-[150px] truncate text-center text-sm mt-1 lg:text-xl lg:w-[600px]"
+                className="w-[270px] truncate text-center text-sm mt-1 lg:text-xl lg:w-[600px]"
               >
                 {displayUser?.bio}
               </p>
@@ -352,7 +395,7 @@ const ProfilePage = () => {
                 style={{ color: theme.neutral }}
                 className="pt-8 text-md text-white font-semibold lg:text-2xl"
               >
-                Hello World 🚀
+                No links added yet
               </h3>
             </div>
           )}
@@ -415,26 +458,13 @@ function getBrowserTrackingPayload() {
   };
 }
 
-function getCurrentApexUrl() {
+function getCurrentUrl() {
   if (typeof window === 'undefined') {
     return DEFAULT_MADE_WITH_URL;
   }
 
-  const { protocol, hostname } = window.location;
-
-  if (
-    hostname === 'localhost' ||
-    hostname === '127.0.0.1' ||
-    hostname === '::1' ||
-    hostname.endsWith('.local')
-  ) {
-    return `${protocol}//${hostname}/`;
-  }
-
-  const parts = hostname.split('.');
-  const apexHostname = parts.length > 2 ? parts.slice(-2).join('.') : hostname;
-
-  return `${protocol}//${apexHostname}/`;
+  const { protocol, host } = window.location;
+  return `${protocol}//${host}`;
 }
 
 export default ProfilePage;
@@ -443,10 +473,14 @@ export async function getServerSideProps(context) {
   const incomingHandle = context?.params?.handle;
 
   if (typeof incomingHandle !== 'string') {
-    return { props: {} };
+    return { notFound: true };
   }
 
   const canonicalHandle = incomingHandle.trim().toLowerCase();
+
+  if (!canonicalHandle) {
+    return { notFound: true };
+  }
 
   if (incomingHandle !== canonicalHandle) {
     const query = { ...context.query };
@@ -459,6 +493,12 @@ export async function getServerSideProps(context) {
         permanent: true,
       },
     };
+  }
+
+  const handleExists = await doesHandleExist(canonicalHandle);
+
+  if (!handleExists) {
+    return { notFound: true };
   }
 
   return { props: {} };
