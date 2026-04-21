@@ -5,11 +5,11 @@ import Image from 'next/image';
 import Link from 'next/link';
 import Head from 'next/head';
 import { useSession } from '@/lib/auth-client';
+import { siteConfig } from '@/config/site';
 
 export const metadata = {
   title: 'Librelinks',
-  description:
-    'Librelinks is an opensource link in bio tool that helps you easily manage your links, transforming your online presence.',
+  description: siteConfig.description,
 };
 
 const Home = () => {
@@ -19,139 +19,32 @@ const Home = () => {
   return (
     <>
       <Head>
-        <title>Librelinks | A free & opensource link in bio tool</title>
-        {/* <!-- Open Graph (OG) meta tags --> */}
-        <meta property="og:url" content="https://librelinks.vercel.app/" />
-        <meta property="og:url" content="https://librelinks.me/" />
-        <meta property="og:url" content="https://www.librelinks.me/" />
+        <title>{siteConfig.title}</title>
+        <meta name="description" content={siteConfig.description} />
+        <link rel="canonical" href={siteConfig.url} />
         <meta property="og:type" content="website" />
+        <meta property="og:url" content={siteConfig.url} />
         <meta
           property="og:site_name"
-          content="Librelinks - The free & opensource link in bio tool"
+          content="Librelinks"
         />
-        <meta property="og:title" content="Librelinks" />
-        <meta
-          property="og:description"
-          content="Librelinks is an opensource link in bio tool that helps you easily manage your links, transforming your online presence."
-        />
-        <meta
-          property="og:image"
-          itemprop="image"
-          content="https://librelinks.vercel.app/og.png"
-        />
-        <meta
-          property="og:image"
-          itemprop="image"
-          content="https://librelinks.me/og.png"
-        />
-        <meta
-          property="og:image"
-          itemprop="image"
-          content="https://www.librelinks.me/og.png"
-        />
-
-        {/* <!-- Twitter Card meta tags --> */}
+        <meta property="og:title" content={siteConfig.title} />
+        <meta property="og:description" content={siteConfig.description} />
+        <meta property="og:image" content={siteConfig.ogImage} />
+        <meta property="og:image:secure_url" content={siteConfig.ogImage} />
+        <meta property="og:image:alt" content={siteConfig.description} />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:site" content="@urdadx" />
-        <meta name="twitter:creator" content="@urdadx" />
-        <meta
-          property="twitter:domain"
-          content="https://librelinks.vercel.app/"
-        />
-        <meta property="twitter:domain" content="https://librelinks.me/" />
-        <meta property="twitter:domain" content="https://www.librelinks.me/" />
-        <meta property="twitter:url" content="https://librelinks.vercel.app/" />
-        <meta name="twitter:title" content="Librelinks" />
-        <meta
-          name="twitter:description"
-          content="Librelinks is an opensource link in bio tool that helps you easily manage your links, transforming your online presence."
-        />
-        <meta
-          name="twitter:image"
-          content="https://librelinks.vercel.app/og.png"
-        />
-        <meta name="twitter:image" content="https://librelinks.me/og.png" />
-        <meta name="twitter:image" content="https://www.librelinks.me/og.png" />
+        <meta name="twitter:site" content={siteConfig.twitterHandle} />
+        <meta name="twitter:creator" content={siteConfig.twitterHandle} />
+        <meta property="twitter:domain" content="links.urdadx.com" />
+        <meta property="twitter:url" content={siteConfig.url} />
+        <meta name="twitter:title" content={siteConfig.title} />
+        <meta name="twitter:description" content={siteConfig.description} />
+        <meta name="twitter:image" content={siteConfig.ogImage} />
         <meta
           data-rh="true"
           name="twitter:image:alt"
-          content="Librelinks is an opensource link in bio tool that helps you easily manage your links, transforming your online presence."
-        />
-
-        {/* <!-- LinkedIn meta tags --> */}
-        <meta
-          property="og:linkedin:image"
-          content="https://librelinks.vercel.app/og.png"
-        />
-        <meta
-          property="og:linkedin:image"
-          content="https://librelinks.me/og.png"
-        />
-        <meta
-          property="og:linkedin:image"
-          content="https://www.librelinks.me/og.png"
-        />
-        <meta property="og:linkedin:title" content="Librelinks" />
-        <meta
-          property="og:linkedin:description"
-          content="Librelinks is an opensource link in bio tool that helps you easily manage your links, transforming your online presence."
-        />
-
-        {/* <!-- Facebook meta tags --> */}
-        <meta
-          property="og:facebook:image"
-          content="https://librelinks.vercel.app/og.png"
-        />
-        <meta
-          property="og:facebook:image"
-          content="https://librelinks.me/og.png"
-        />
-        <meta
-          property="og:facebook:image"
-          content="https://www.librelinks.me/og.png"
-        />
-        <meta property="og:facebook:title" content="Librelinks" />
-        <meta
-          property="og:facebook:description"
-          content="Librelinks is an opensource link in bio tool that helps you easily manage your links, transforming your online presence."
-        />
-
-        {/* <!-- Instagram meta tags --> */}
-        <meta
-          property="og:instagram:image"
-          content="https://librelinks.vercel.app/og.png"
-        />
-        <meta
-          property="og:instagram:image"
-          content="https://librelinks.me/og.png"
-        />
-        <meta
-          property="og:instagram:image"
-          content="https://www.librelinks.me/og.png"
-        />
-        <meta property="og:instagram:title" content="Librelinks" />
-        <meta
-          property="og:instagram:description"
-          content="Librelinks is an opensource link in bio tool that helps you easily manage your links, transforming your online presence."
-        />
-
-        {/* <!-- Pinterest meta tags --> */}
-        <meta
-          property="og:pinterest:image"
-          content="https://librelinks.vercel.app/og.png"
-        />
-        <meta
-          property="og:pinterest:image"
-          content="https://librelinks.me/og.png"
-        />
-        <meta
-          property="og:pinterest:image"
-          content="https://www.librelinks.me/og.png"
-        />
-        <meta property="og:pinterest:title" content="Librelinks" />
-        <meta
-          property="og:pinterest:description"
-          content="Librelinks is an opensource link in bio tool that helps you easily manage your links, transforming your online presence."
+          content={siteConfig.description}
         />
       </Head>
       <div className="absolute inset-0 -z-10 h-full w-full bg-white bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px]">

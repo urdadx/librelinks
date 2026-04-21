@@ -16,6 +16,7 @@ import { SocialCards } from '@/components/core/user-profile/social-cards';
 import Head from 'next/head';
 import { Drawer } from 'vaul';
 import useMediaQuery from '@/hooks/use-media-query';
+import { siteConfig } from '@/config/site';
 
 const LOCAL_LOCATION_FALLBACK = {
   countryCode: 'GH',
@@ -172,6 +173,11 @@ const ProfilePage = () => {
 
   const buttonStyle = displayUser?.buttonStyle;
   const madeWithUrl = getCurrentApexUrl();
+  const pageTitle = `@${displayUser?.handle || normalizedHandle} | Librelinks`;
+  const pageDescription =
+    displayUser?.bio ||
+    `${displayUser?.name || `@${displayUser?.handle || normalizedHandle}`}'s Librelinks page.`;
+  const canonicalUrl = `${siteConfig.url}/${displayUser?.handle || normalizedHandle}`;
   const theme = {
     primary: displayUser?.themePalette.palette[0],
     secondary: displayUser?.themePalette.palette[1],
@@ -182,7 +188,32 @@ const ProfilePage = () => {
   return (
     <>
       <Head>
-        <title> @{displayUser?.handle || normalizedHandle} | Librelinks</title>
+        <title>{pageTitle}</title>
+        <meta name="description" content={pageDescription} />
+        <link rel="canonical" href={canonicalUrl} />
+        <meta property="og:type" content="profile" />
+        <meta property="og:site_name" content="Librelinks" />
+        <meta property="og:title" content={pageTitle} />
+        <meta property="og:description" content={pageDescription} />
+        <meta property="og:url" content={canonicalUrl} />
+        <meta
+          property="og:image"
+          content={displayUser?.image || siteConfig.ogImage}
+        />
+        <meta
+          property="og:image:secure_url"
+          content={displayUser?.image || siteConfig.ogImage}
+        />
+        <meta property="og:image:alt" content={pageTitle} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:site" content={siteConfig.twitterHandle} />
+        <meta name="twitter:creator" content={siteConfig.twitterHandle} />
+        <meta name="twitter:title" content={pageTitle} />
+        <meta name="twitter:description" content={pageDescription} />
+        <meta
+          name="twitter:image"
+          content={displayUser?.image || siteConfig.ogImage}
+        />
       </Head>
       <section
         style={{ background: theme.primary }}
