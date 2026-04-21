@@ -8,15 +8,17 @@ RUN apt-get update && apt-get install -y --no-install-recommends openssl ca-cert
 FROM base AS deps
 
 ENV HUSKY=0
+ENV PRISMA_CLIENT_ENGINE_TYPE=library
 
 COPY package.json package-lock.json ./
 COPY prisma ./prisma
-RUN npm ci --legacy-peer-deps --no-audit --no-fund
+RUN npm ci --legacy-peer-deps --no-audit --no-fund && npx prisma generate
 
 FROM base AS builder
 
 ENV NODE_ENV=production
 ENV HUSKY=0
+ENV PRISMA_CLIENT_ENGINE_TYPE=library
 
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
@@ -29,10 +31,11 @@ ENV NODE_ENV=production
 ENV PORT=3000
 ENV HOSTNAME=0.0.0.0
 ENV HUSKY=0
+ENV PRISMA_CLIENT_ENGINE_TYPE=library
 
 COPY package.json package-lock.json ./
 COPY prisma ./prisma
-RUN npm ci --include=dev --legacy-peer-deps --no-audit --no-fund && npm prune --omit=dev --legacy-peer-deps && npm cache clean --force
+RUN npm ci --include=dev --legacy-peer-deps --no-audit --no-fund && npx prisma generate && npm prune --omit=dev --legacy-peer-deps && npm cache clean --force
 
 COPY --from=builder --chown=node:node /app/.next ./.next
 COPY --from=builder --chown=node:node /app/public ./public
