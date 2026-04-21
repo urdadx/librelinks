@@ -1,5 +1,11 @@
 import { NextResponse } from 'next/server';
 
+const SESSION_COOKIE_NAMES = [
+  'better-auth.session_token',
+  '__Secure-better-auth.session_token',
+  '__Host-better-auth.session_token',
+];
+
 export default async function middleware(req) {
   // Get the pathname of the request (e.g. /, /admin)
   const path = req.nextUrl.pathname;
@@ -18,7 +24,9 @@ export default async function middleware(req) {
     return NextResponse.next();
   }
 
-  const session = req.cookies.get('better-auth.session_token')?.value;
+  const session = SESSION_COOKIE_NAMES.find(
+    (cookieName) => req.cookies.get(cookieName)?.value
+  );
 
   if (!session && protectedPaths.includes(path)) {
     return NextResponse.redirect(new URL('/login', req.url));
