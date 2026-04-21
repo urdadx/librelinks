@@ -11,10 +11,11 @@ ENV HUSKY=0
 
 COPY package.json package-lock.json ./
 COPY prisma ./prisma
-RUN npm ci --legacy-peer-deps
+RUN npm ci --legacy-peer-deps --no-audit --no-fund
 
 FROM base AS builder
 
+ENV NODE_ENV=production
 ENV HUSKY=0
 
 COPY --from=deps /app/node_modules ./node_modules
@@ -30,14 +31,17 @@ ENV HOSTNAME=0.0.0.0
 ENV HUSKY=0
 
 COPY package.json package-lock.json ./
-COPY --from=deps /app/node_modules ./node_modules
-COPY --from=builder /app/.next ./.next
-COPY --from=builder /app/public ./public
-COPY --from=builder /app/prisma ./prisma
-COPY --from=builder /app/next.config.js ./next.config.js
+COPY prisma ./prisma
+RUN npm ci --omit=dev --legacy-peer-deps --no-audit --no-fund && npm cache clean --force
 
-RUN npm prune --omit=dev --legacy-peer-deps
+COPY --from=builder --chown=node:node /app/.next ./.next
+COPY --from=builder --chown=node:node /app/public ./public
+COPY --from=builder --chown=node:node /app/next.config.js ./next.config.js
+
+RUN chown -R node:node /app
+
+USER node
 
 EXPOSE 3000
 
-CMD ["npm", "start"]
+CMD ["sh", "-c", "NODE_ENV=production npm start"]
