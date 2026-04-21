@@ -31,11 +31,11 @@ export default async function handler(req, res) {
       userId: user.id,
       startDate,
       select: {
-        location: true,
+        referrer: true,
       },
     });
 
-    return res.status(200).json(countByKey(visits, 'location'));
+    return res.status(200).json(countByKey(visits, 'referrer'));
   } catch {
     return res.status(500).end();
   }

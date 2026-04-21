@@ -1,6 +1,53 @@
 import { db } from '@/lib/db';
 import serverAuth from '@/lib/serverAuth';
 
+const HANDLE_REGEX = /^[a-z0-9._-]+$/;
+
+function normalizeHandle(handle) {
+  if (typeof handle !== 'string') {
+    return undefined;
+  }
+
+  return handle.trim().toLowerCase();
+}
+
+async function deleteUserData(userId) {
+  const links = await db.link.findMany({
+    where: { userId },
+    select: { id: true },
+  });
+
+  const linkIds = links.map((link) => link.id);
+
+  if (linkIds.length > 0) {
+    await db.linkClick.deleteMany({
+      where: {
+        linkId: { in: linkIds },
+      },
+    });
+  }
+
+  await db.account.deleteMany({
+    where: { userId },
+  });
+
+  await db.session.deleteMany({
+    where: { userId },
+  });
+
+  await db.pageVisit.deleteMany({
+    where: { userId },
+  });
+
+  await db.link.deleteMany({
+    where: { userId },
+  });
+
+  await db.user.delete({
+    where: { id: userId },
+  });
+}
+
 export default async function handler(req, res) {
   if (req.method !== 'PATCH' && req.method !== 'DELETE') {
     return res.status(405).end();
@@ -10,15 +57,31 @@ export default async function handler(req, res) {
     const { currentUser } = await serverAuth(req, res);
 
     const { username, bio, image, handle } = req.body;
+    const normalizedHandle = normalizeHandle(handle);
 
     if (req.method === 'PATCH') {
       try {
+        if (typeof handle === 'string') {
+          if (!normalizedHandle) {
+            return res.status(400).json({ error: 'Handle cannot be empty.' });
+          }
+
+          if (!HANDLE_REGEX.test(normalizedHandle)) {
+            return res.status(400).json({
+              error:
+                'Handle can only contain lowercase letters, numbers, dots, underscores, and hyphens.',
+            });
+          }
+        }
+
         // Check if the handle already exists in the user table
-        const existingUser = await db.user.findUnique({
-          where: {
-            handle: handle,
-          },
-        });
+        const existingUser = normalizedHandle
+          ? await db.user.findUnique({
+              where: {
+                handle: normalizedHandle,
+              },
+            })
+          : null;
 
         // If the handle exists and belongs to a different user, return an error
         if (existingUser && existingUser.id !== currentUser.id) {
@@ -33,7 +96,7 @@ export default async function handler(req, res) {
             name: username,
             bio: bio,
             image: image,
-            handle: handle,
+            handle: normalizedHandle,
           },
         });
 
@@ -44,15 +107,10 @@ export default async function handler(req, res) {
         });
       }
     } else if (req.method === 'DELETE') {
-      await db.user.delete({
-        where: {
-          id: currentUser.id,
-        },
-      });
+      await deleteUserData(currentUser.id);
       return res.status(204).end();
     }
-  } catch (error) {
-    console.log(error);
+  } catch {
     return res.status(400).end();
   }
 }

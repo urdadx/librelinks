@@ -1,25 +1,24 @@
-import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
+import { useQuery } from '@tanstack/react-query';
 import { toast } from 'react-hot-toast';
 
-const useDeviceAnalytics = (filter, handle) => {
+const useLinkAnalytics = (filter, userId) => {
   return useQuery({
-    queryKey: ['device-analytics', handle, filter],
+    queryKey: ['link-analytics', userId, filter],
     queryFn: async () => {
       const response = await axios.get(
-        `/api/analytics/views/device?handle=${handle}&filter=${filter}`
+        `/api/analytics/views/links?userId=${userId}&filter=${filter}`
       );
       return response.data;
     },
-    enabled: !!handle,
+    enabled: !!userId,
     staleTime: 30 * 1000,
     refetchOnWindowFocus: false,
     keepPreviousData: true,
     onError: () => {
       toast.error('An error occurred');
     },
-    // refetchInterval: 2000,
   });
 };
 
-export default useDeviceAnalytics;
+export default useLinkAnalytics;

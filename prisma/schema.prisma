@@ -11,45 +11,95 @@ datasource db {
 }
 
 model User {
-  id             String    @id @default(auto()) @map("_id") @db.ObjectId
-  name           String?
-  handle         String?   @unique
-  bio            String?
-  image          String?  
-  email          String?   @unique
-  emailVerified  DateTime?
-  totalViews     Int       @default(0)
-  createdAt      DateTime  @default(now())
-  updatedAt      DateTime  @updatedAt
-  links          Link[]
+  id                      String    @id @default(auto()) @map("_id") @db.ObjectId
+  name                    String?
+  handle                  String?   @unique
+  bio                     String?
+  image                   String?
+  email                   String?   @unique
+  emailVerified           DateTime?
+  betterAuthEmailVerified Boolean?  @default(false)
+  totalViews              Int       @default(0)
+  createdAt               DateTime  @default(now())
+  updatedAt               DateTime  @updatedAt
+  links                   Link[]
   linksLocation String?   @default("top")
-  themePalette   Json?     @default("{\"name\": \"Light\", \"palette\": [\"#FFFFFF\", \"#F2F2F2\", \"#1F2937\", \"#6170F8\"]}")
-  buttonStyle    String    @default("rounded-md")
-  accounts       Account[]
+  themePalette            Json?     @default("{\"name\": \"Light\", \"palette\": [\"#FFFFFF\", \"#F2F2F2\", \"#1F2937\", \"#6170F8\"]}")
+  buttonStyle             String    @default("rounded-md")
+  accounts                Account[]
+  sessions                Session[]
+  pageVisits              PageVisit[]
 
   @@unique([handle, email])
 }
 
+model PageVisit {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  viewedAt  DateTime @default(now())
+  location  String?
+  city      String?
+  device    String?
+  referrer  String?
+  userId    String   @db.ObjectId
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, viewedAt])
+  @@index([userId, location])
+  @@index([userId, device])
+  @@index([userId, referrer])
+}
+
 
 model Account {
-  id                 String  @id @default(cuid()) @map("_id")
-  userId             String @db.ObjectId
-  type               String
-  provider           String
-  providerAccountId  String
-  refresh_token      String?
-  access_token       String?
-  expires_at         Int?
-  token_type         String?
-  scope              String?
-  id_token           String?
-  session_state      String?
-  oauth_token_secret String?
-  oauth_token        String?
+  id                    String    @id @default(cuid()) @map("_id")
+  userId                String    @db.ObjectId
+  accountId             String
+  providerId            String
+  type                  String?
+  provider              String?
+  providerAccountId     String?
+  refreshToken          String?
+  accessToken           String?
+  accessTokenExpiresAt  DateTime?
+  refreshTokenExpiresAt DateTime?
+  refresh_token         String?
+  access_token          String?
+  expires_at            Int?
+  token_type            String?
+  scope                 String?
+  idToken               String?
+  id_token              String?
+  password              String?
+  session_state         String?
+  oauth_token_secret    String?
+  oauth_token           String?
+  createdAt             DateTime? @default(now())
+  updatedAt             DateTime? @updatedAt
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  @@unique([provider, providerAccountId])
+  @@unique([providerId, accountId])
+}
+
+model Session {
+  id        String    @id @default(cuid()) @map("_id")
+  expiresAt DateTime
+  token     String    @unique
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  ipAddress String?
+  userAgent String?
+  userId    String    @db.ObjectId
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Verification {
+  id         String    @id @default(cuid()) @map("_id")
+  identifier String
+  value      String
+  expiresAt  DateTime
+  createdAt  DateTime? @default(now())
+  updatedAt  DateTime? @updatedAt
 }
 
 
@@ -66,7 +116,15 @@ model Link {
       updatedAt   DateTime  @updatedAt
       userId      String    @db.ObjectId
       user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+      linkClicks  LinkClick[]
       @@index(userId)
 }
 
+model LinkClick {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  clickedAt DateTime @default(now())
+  linkId     String   @db.ObjectId
+  link       Link     @relation(fields: [linkId], references: [id], onDelete: Cascade)
 
+  @@index([linkId, clickedAt])
+}

@@ -28,20 +28,28 @@ const ButtonSelector = () => {
       });
     },
     {
-      onSuccess: () => {
-        queryClient.invalidateQueries('users');
+      onSuccess: (_, nextButtonStyle) => {
+        queryClient.setQueryData(['current-user'], (previousUser) =>
+          previousUser
+            ? {
+                ...previousUser,
+                buttonStyle: nextButtonStyle,
+              }
+            : previousUser
+        );
         signalIframe();
       },
     }
   );
 
   const handleChangeBtn = async (buttonCSS) => {
+    setButtonStyle(buttonCSS);
+    signalIframe({ buttonStyle: buttonCSS });
     await toast.promise(mutateButtonStyle.mutateAsync(buttonCSS), {
       loading: 'Applying style',
       success: 'Style applied successfully',
       error: 'An error occured',
     });
-    setButtonStyle(buttonCSS);
     localStorage.setItem('button-style', buttonCSS);
   };
 

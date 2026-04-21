@@ -1,4 +1,3 @@
-import { getToken } from 'next-auth/jwt';
 import { NextResponse } from 'next/server';
 
 export default async function middleware(req) {
@@ -19,10 +18,7 @@ export default async function middleware(req) {
     return NextResponse.next();
   }
 
-  const session = await getToken({
-    req,
-    secret: process.env.NEXTAUTH_SECRET,
-  });
+  const session = req.cookies.get('better-auth.session_token')?.value;
 
   if (!session && protectedPaths.includes(path)) {
     return NextResponse.redirect(new URL('/login', req.url));

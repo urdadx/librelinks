@@ -1,4 +1,5 @@
-import axios from 'axios';
+import { countByKey, getAnalyticsRange, listPageVisits } from '@/lib/analytics';
+import { db } from '@/lib/db';
 
 export default async function handler(req, res) {
   if (req.method !== 'GET') {
@@ -6,21 +7,36 @@ export default async function handler(req, res) {
   }
 
   try {
-    const {handle} = req.query;
-    const endpoint =
-      'https://api.tinybird.co/v0/pipes/libre_device_tracking.json';
+    const { handle, filter } = req.query;
 
     if (!handle || typeof handle !== 'string') {
       return res.status(404).end();
     }
 
-    const analytics = await axios.get(
-      `${endpoint}?token=${process.env.DEVICE_ANALYTICS_TOKEN}&handle=/${handle}`
+    const user = await db.user.findUnique({
+      where: { handle },
+      select: { id: true },
+    });
+
+    if (!user) {
+      return res.status(200).json([]);
+    }
+
+    const range = getAnalyticsRange(filter);
+    const startDate = new Date(
+      Date.now() - range.bucketSizeMs * (range.bucketCount - 1)
     );
 
-    return res.status(200).json(analytics.data.data);
-  } catch (error) {
-    console.log(error);
+    const visits = await listPageVisits(db, {
+      userId: user.id,
+      startDate,
+      select: {
+        device: true,
+      },
+    });
+
+    return res.status(200).json(countByKey(visits, 'device'));
+  } catch {
     return res.status(500).end();
   }
 }

@@ -43,17 +43,26 @@ const LinksEditor = () => {
 
   const handleDragEnd = async (event) => {
     const { active, over } = event;
+    if (!over || active.id === over.id) {
+      return;
+    }
+
     if (active.id !== over.id) {
       const activeIndex = userLinks.findIndex((link) => link.id === active.id);
       const overIndex = userLinks.findIndex((link) => link.id === over.id);
       const newLinks = arrayMove(userLinks, activeIndex, overIndex);
+      const previousLinks = queryClient.getQueryData(['links', currentUser?.id]);
 
       queryClient.setQueryData(['links', currentUser?.id], () => newLinks);
-      await toast.promise(updateLinksOrderMutation.mutateAsync(newLinks), {
-        loading: 'Syncing changes',
-        success: 'Changes synced',
-        error: 'An error occured',
-      });
+      try {
+        await toast.promise(updateLinksOrderMutation.mutateAsync(newLinks), {
+          loading: 'Syncing changes',
+          success: 'Changes synced',
+          error: 'An error occured',
+        });
+      } catch (error) {
+        queryClient.setQueryData(['links', currentUser?.id], previousLinks);
+      }
     }
   };
 
@@ -65,7 +74,6 @@ const LinksEditor = () => {
     },
     {
       onSuccess: () => {
-        queryClient.invalidateQueries(['links', currentUser?.id]);
         signalIframe();
       },
     }
@@ -127,7 +135,7 @@ const LinksEditor = () => {
                 You don&apos;t have any links yet
               </h3>
               <p className="text-sm text-[#555] text-center px-3">
-                Please click on the button above to add your first link 🚀
+                Please click on the button above to add your first link 
               </p>
             </div>
           )}

@@ -27,7 +27,18 @@ const EditLinkModal = ({ id, title, url, close }) => {
     },
     {
       onSuccess: () => {
-        queryClient.invalidateQueries({ queryKey: ['links', userId] });
+        queryClient.setQueryData(['links', userId], (previousLinks = []) =>
+          previousLinks.map((link) =>
+            link.id === id
+              ? {
+                  ...link,
+                  title: newTitle,
+                  url: newUrl,
+                }
+              : link
+          )
+        );
+        queryClient.invalidateQueries({ queryKey: ['link-analytics', userId] });
         signalIframe();
       },
     }
@@ -114,7 +125,7 @@ const EditLinkModal = ({ id, title, url, close }) => {
                 >
                   Edit link{' '}
                   <span role="img" aria-label="sparkling star">
-                    ✨
+                    
                   </span>
                 </button>
               </Dialog.Close>

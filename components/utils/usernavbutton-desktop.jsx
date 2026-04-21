@@ -1,7 +1,6 @@
 import { UserAvatar } from './avatar';
 import * as Popover from '@radix-ui/react-popover';
-import { useSession } from 'next-auth/react';
-import { signOut } from 'next-auth/react';
+import { signOut, useSession } from '@/lib/auth-client';
 import { useRouter } from 'next/router';
 import { toast } from 'react-hot-toast';
 import Link from 'next/link';
@@ -11,20 +10,23 @@ import { Drawer } from 'vaul';
 import UserNavButtonMobile from './usernavbutton-mobile';
 
 const UserAccountNavDesktop = () => {
-  const session = useSession();
-  const { data } = session;
+  const { data } = useSession();
   const router = useRouter();
 
   const { isMobile } = useMediaQuery();
 
   const handleLogout = async () => {
     try {
-      await signOut();
+      await signOut({
+        fetchOptions: {
+          onSuccess: () => {
+            router.push('/login');
+          },
+        },
+      });
       toast.success('You logged out');
     } catch (error) {
       toast.error('An error occurred');
-    } finally {
-      router.push('/login');
     }
   };
 
@@ -54,7 +56,7 @@ const UserAccountNavDesktop = () => {
               className="group flex w-full items-center gap-2 rounded-md p-3 text-sm font-medium text-gray-500 transition-all duration-75 hover:bg-gray-100"
             >
               <User size={17} color="gray" />
-              <h4 className="w-full truncate">{data.user.name}</h4>
+                <h4 className="w-full truncate">{data?.user?.name}</h4>
             </Link>
             <Link
               target="_blank"

@@ -45,20 +45,28 @@ const ThemesPicker = () => {
       });
     },
     {
-      onSuccess: () => {
-        queryClient.invalidateQueries('users');
+      onSuccess: (_, theme) => {
+        queryClient.setQueryData(['current-user'], (previousUser) =>
+          previousUser
+            ? {
+                ...previousUser,
+                themePalette: theme,
+              }
+            : previousUser
+        );
         signalIframe();
       },
     }
   );
 
   const handleThemeSelect = async (theme) => {
+    setSelectedTheme(theme);
+    signalIframe({ themePalette: theme });
     await toast.promise(mutateTheme.mutateAsync(theme), {
       loading: 'Changing theme',
       success: 'New theme applied',
       error: 'An error occured',
     });
-    setSelectedTheme(theme);
     localStorage.setItem('selectedTheme', theme.name);
   };
 

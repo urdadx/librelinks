@@ -12,6 +12,8 @@ const useLinks = (userId) => {
     queryKey: ['links', userId],
     queryFn: fetchLinks,
     enabled: !!userId,
+    staleTime: 30 * 1000,
+    refetchOnWindowFocus: false,
     onError: () => {
       toast.error('An error occurred');
     },

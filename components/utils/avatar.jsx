@@ -1,10 +1,8 @@
 import * as Avatar from '@radix-ui/react-avatar';
 import useCurrentUser from '@/hooks/useCurrentUser';
-import useUser from '@/hooks/useUser';
 
 export const UserAvatar = () => {
   const { data: currentUser } = useCurrentUser();
-  const { data: fetchedUser } = useUser(currentUser?.handle);
 
   return (
     <>
@@ -14,7 +12,7 @@ export const UserAvatar = () => {
       >
         <Avatar.Image
           className="h-full w-full rounded-[inherit] object-cover"
-          src={fetchedUser && fetchedUser?.image}
+          src={currentUser?.image}
           referrerPolicy="no-referrer"
           alt="avatar"
         />
@@ -31,7 +29,6 @@ export const UserAvatar = () => {
 
 export const UserAvatarSetting = () => {
   const { data: currentUser } = useCurrentUser();
-  const { data: fetchedUser } = useUser(currentUser?.handle);
 
   return (
     <>
@@ -41,7 +38,7 @@ export const UserAvatarSetting = () => {
       >
         <Avatar.Image
           className="h-full w-full rounded-[inherit] object-cover"
-          src={fetchedUser && fetchedUser?.image}
+          src={currentUser?.image}
           referrerPolicy="no-referrer"
           alt="avatar"
         />

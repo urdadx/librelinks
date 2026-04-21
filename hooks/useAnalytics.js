@@ -12,6 +12,9 @@ const useAnalytics = (filter, handle) => {
       return response.data;
     },
     enabled: !!handle,
+    staleTime: 30 * 1000,
+    refetchOnWindowFocus: false,
+    keepPreviousData: true,
     onError: () => {
       toast.error('An error occurred');
     },

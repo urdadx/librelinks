@@ -8,8 +8,10 @@ const useLink = (linkId) => {
     return response.data;
   };
 
-  return useQuery(['links', linkId], fetchLinks, {
-    enabled: linkId !== null,
+  return useQuery(['link', linkId], fetchLinks, {
+    enabled: !!linkId,
+    staleTime: 30 * 1000,
+    refetchOnWindowFocus: false,
     onError: () => {
       toast.error('An error occurred');
     },

@@ -10,13 +10,12 @@ import { useRouter } from 'next/router';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import Layout from '@/components/layout/Layout';
 import { Balancer } from 'react-wrap-balancer';
-import useUser from '@/hooks/useUser';
 import { UserAvatarSetting } from '@/components/utils/avatar';
 import { signalIframe } from '@/utils/helpers';
 import * as AlertDialog from '@radix-ui/react-alert-dialog';
 import CustomAlert from '@/components/shared/alerts/custom-alert';
 import useMediaQuery from '@/hooks/use-media-query';
-import { signOut } from 'next-auth/react';
+import { signOut } from '@/lib/auth-client';
 import Head from 'next/head';
 
 const Settings = () => {
@@ -31,18 +30,17 @@ const Settings = () => {
   const { isMobile } = useMediaQuery();
 
   const queryClient = useQueryClient();
-  const { data: fetchedUser } = useUser(currentUser?.handle);
 
   useEffect(() => {
-    setUsername(fetchedUser?.name);
-    setBio(fetchedUser?.bio);
-    setImage(fetchedUser?.image);
-    setHandle(fetchedUser?.handle);
+    setUsername(currentUser?.name || '');
+    setBio(currentUser?.bio || '');
+    setImage(currentUser?.image || '');
+    setHandle(currentUser?.handle || '');
   }, [
-    fetchedUser?.name,
-    fetchedUser?.bio,
-    fetchedUser?.image,
-    fetchedUser?.handle,
+    currentUser?.name,
+    currentUser?.bio,
+    currentUser?.image,
+    currentUser?.handle,
   ]);
 
   // edit profile details
@@ -56,11 +54,32 @@ const Settings = () => {
       });
     },
     {
-      onError: () => {
-        toast.error('An error occurred');
+      onError: (error) => {
+        toast.error(error?.response?.data?.error || 'An error occurred');
       },
       onSuccess: () => {
-        queryClient.invalidateQueries('users');
+        queryClient.setQueryData(['current-user'], (previousUser) =>
+          previousUser
+            ? {
+                ...previousUser,
+                name: username,
+                bio,
+                image,
+                handle,
+              }
+            : previousUser
+        );
+        queryClient.setQueryData(['user', handle], (previousUser) =>
+          previousUser
+            ? {
+                ...previousUser,
+                name: username,
+                bio,
+                image,
+                handle,
+              }
+            : previousUser
+        );
         toast.success('Changes applied');
         signalIframe();
       },
@@ -90,7 +109,7 @@ const Settings = () => {
     },
     {
       onSuccess: () => {
-        queryClient.invalidateQueries('users');
+        queryClient.removeQueries({ queryKey: ['current-user'] });
         router.push('/register');
       },
     }
@@ -103,6 +122,7 @@ const Settings = () => {
       error: 'An error occured',
     });
     await signOut();
+    window.location.href = '/register';
   };
 
   const deleteAlertProps = {
@@ -124,7 +144,7 @@ const Settings = () => {
             <div className="mt-4 rounded-2xl border bg-white p-lg w-full h-auto pb-10">
               <div className="flex flex-col lg:flex-row gap-x-6 p-10">
                 <div className="w-[100px] h-[100px] pb-6 rounded-full flex items-center mx-auto">
-                  {fetchedUser ? (
+                  {currentUser ? (
                     <UserAvatarSetting />
                   ) : (
                     <TinyLoader color="black" stroke={1} size={100} />
@@ -155,22 +175,57 @@ const Settings = () => {
                 </div>
               </div>
               <div className="flex flex-col gap-4 max-w-[640px] mx-auto px-4">
-                <input
-                  value={username ?? ''}
-                  onChange={(e) => setUsername(e.target.value)}
-                  onBlur={handleSubmit}
-                  placeholder="@Username"
-                  className="outline-none w-full p-4 h-[50px] rounded-lg border-2 bg-gray-100 text-black focus:border-slate-900"
-                />
+                <div className="flex flex-col gap-2">
+                  <label
+                    htmlFor="handle"
+                    className="text-sm font-medium text-gray-700"
+                  >
+                    Username / handle
+                  </label>
+                  <input
+                    id="handle"
+                    value={handle ?? ''}
+                    onChange={(e) => setHandle(e.target.value.toLowerCase())}
+                    onBlur={handleSubmit}
+                    placeholder="@handle"
+                    className="outline-none w-full p-4 h-[50px] rounded-lg border-2 bg-gray-100 text-black focus:border-slate-900"
+                  />
+                </div>
 
-                <textarea
-                  value={bio ?? ''}
-                  onChange={(e) => setBio(e.target.value)}
-                  onBlur={handleSubmit}
-                  placeholder="@Bio"
-                  className="outline-none w-full p-4 h-[120px] rounded-lg border-2
+                <div className="flex flex-col gap-2">
+                  <label
+                    htmlFor="displayName"
+                    className="text-sm font-medium text-gray-700"
+                  >
+                    Display name
+                  </label>
+                  <input
+                    id="displayName"
+                    value={username ?? ''}
+                    onChange={(e) => setUsername(e.target.value)}
+                    onBlur={handleSubmit}
+                    placeholder="Display name"
+                    className="outline-none w-full p-4 h-[50px] rounded-lg border-2 bg-gray-100 text-black focus:border-slate-900"
+                  />
+                </div>
+
+                <div className="flex flex-col gap-2">
+                  <label
+                    htmlFor="bio"
+                    className="text-sm font-medium text-gray-700"
+                  >
+                    Bio
+                  </label>
+                  <textarea
+                    id="bio"
+                    value={bio ?? ''}
+                    onChange={(e) => setBio(e.target.value)}
+                    onBlur={handleSubmit}
+                    placeholder="Tell people about yourself"
+                    className="outline-none w-full p-4 h-[120px] rounded-lg border-2
                 bg-gray-100 text-black focus:border-slate-900"
-                />
+                  />
+                </div>
               </div>
             </div>
           </div>

@@ -70,10 +70,16 @@ export const getInitials = (name) => {
   return initials.join('');
 };
 
-export const signalIframe = () => {
+export const signalIframe = (payload = {}) => {
   const iframe = document.getElementById('preview');
   if (iframe) {
-    iframe.contentWindow.postMessage('', '*');
+    iframe.contentWindow.postMessage(
+      {
+        type: 'preview-update',
+        payload,
+      },
+      '*'
+    );
   }
 };
 

@@ -2,12 +2,12 @@ import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import { toast } from 'react-hot-toast';
 
-const useDeviceAnalytics = (filter, handle) => {
+const useReferrerAnalytics = (filter, handle) => {
   return useQuery({
-    queryKey: ['device-analytics', handle, filter],
+    queryKey: ['referrer-analytics', handle, filter],
     queryFn: async () => {
       const response = await axios.get(
-        `/api/analytics/views/device?handle=${handle}&filter=${filter}`
+        `/api/analytics/views/referrers?handle=${handle}&filter=${filter}`
       );
       return response.data;
     },
@@ -18,8 +18,7 @@ const useDeviceAnalytics = (filter, handle) => {
     onError: () => {
       toast.error('An error occurred');
     },
-    // refetchInterval: 2000,
   });
 };
 
-export default useDeviceAnalytics;
+export default useReferrerAnalytics;

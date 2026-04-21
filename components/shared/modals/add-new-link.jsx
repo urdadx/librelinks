@@ -10,6 +10,7 @@ import useCurrentUser from '@/hooks/useCurrentUser';
 import useLinks from '@/hooks/useLinks';
 import * as Switch from '@radix-ui/react-switch';
 import TooltipWrapper from '@/components/utils/tooltip';
+import { AlertCircle } from 'lucide-react';
 
 const AddLinkModal = () => {
   const [title, setTitle] = useState('');
@@ -36,7 +37,10 @@ const AddLinkModal = () => {
     },
     {
       onSuccess: () => {
-        queryClient.invalidateQueries({ queryKey: ['links', userId] });
+        queryClient.invalidateQueries({
+          queryKey: ['links', userId],
+          refetchType: 'active',
+        });
         setTitle('');
         setUrl('');
         setIsSocial(false);
@@ -71,8 +75,8 @@ const AddLinkModal = () => {
         <Dialog.Overlay className="fixed inset-0 backdrop-blur-sm bg-gray-800 bg-opacity-50 w-full" />
         <Dialog.Content className="contentShow fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rounded-2xl bg-white p-6 sm:p-8 lg:max-w-3xl w-[350px] sm:w-[500px] shadow-lg md:max-w-lg max-md:max-w-lg focus:outline-none">
           <div className="flex flex-row justify-between items-center mb-4">
-            <Dialog.Title className="text-xl text-center font-medium mb-2 sm:mb-0 sm:mr-4">
-              Create a new Link
+            <Dialog.Title className="text-xl  text-center font-medium mb-2 sm:mb-0 sm:mr-4">
+              Create a New Link
             </Dialog.Title>
             <Dialog.Close className="flex flex-end justify-end">
               <div className="p-2 rounded-full flex justify-center items-center bg-gray-100 hover:bg-gray-300">
@@ -110,14 +114,20 @@ const AddLinkModal = () => {
             </div>
 
             <div className="p-2 relative flex justify-between gap-2 text-gray-800 my-4">
-              <TooltipWrapper
-                title="Twitter, Instagram, LinkedIn, etc"
-                component={
-                  <h3 className="text-md lg:text-lg">
-                    Add as a social media link?
-                  </h3>
-                }
-              />
+              <div className="flex items-center gap-2">
+                <h3 className="text-md lg:text-lg">Add as a social media link?</h3>
+                <TooltipWrapper
+                  title="Marking as a social media link would display it as an icon on your page."
+                  component={
+                    <span
+                      className="inline-flex cursor-help text-gray-500 hover:text-slate-900"
+                      aria-label="Social media link help"
+                    >
+                      <AlertCircle size={16} />
+                    </span>
+                  }
+                />
+              </div>
               <Switch.Root
                 checked={isSocial}
                 onCheckedChange={() => setIsSocial(!isSocial)}
@@ -141,7 +151,7 @@ const AddLinkModal = () => {
               >
                 Create Link{' '}
                 <span role="img" aria-label="sparkling star">
-                  ✨
+                  
                 </span>
               </button>
             </Dialog.Close>

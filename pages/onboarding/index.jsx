@@ -1,10 +1,12 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import axios from 'axios';
+import { useQueryClient } from '@tanstack/react-query';
 import { TinyLoader } from '@/components/utils/tiny-loader';
 import { useRouter } from 'next/router';
 import Confetti from 'react-dom-confetti';
 import Balancer from 'react-wrap-balancer';
+import useCurrentUser from '@/hooks/useCurrentUser';
 
 const Onboarding = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -13,27 +15,48 @@ const Onboarding = () => {
   const [isExploding, setIsExploding] = useState(false);
 
   const router = useRouter();
+  const queryClient = useQueryClient();
+  const { data: currentUser, isLoading: isCurrentUserLoading } = useCurrentUser();
+
+  useEffect(() => {
+    if (!isCurrentUserLoading && currentUser?.handle) {
+      router.replace('/admin');
+    }
+  }, [currentUser?.handle, isCurrentUserLoading, router]);
 
   const handleAddHandle = useCallback(
     async (e) => {
       e.preventDefault();
       setIsLoading(true);
-      if (!handle || handle.trim() === '') {
+      const normalizedHandle = handle?.trim().toLowerCase();
+
+      if (!normalizedHandle) {
         toast.error('Please fill the form');
         setIsLoading(false);
         return;
       }
       try {
-        const response = await axios.patch('/api/edit', { handle: handle });
+        const response = await axios.patch('/api/edit', {
+          handle: normalizedHandle,
+        });
         setIsLoading(false);
         if (response.status === 200) {
+          queryClient.setQueryData(['current-user'], (previousUser) =>
+            previousUser
+              ? {
+                  ...previousUser,
+                  ...response.data,
+                }
+              : response.data
+          );
           setIsExploding(true);
-          toast.success(`${handle} is yours 🎉`);
+          toast.success(`${normalizedHandle} is yours 🎉`);
           setTimeout(() => {
-            router.push('/admin');
+            router.replace('/admin');
           }, 1500);
         }
       } catch (error) {
+        toast.error(error?.response?.data?.error || 'Handle is not available');
         setHandleTaken(true);
         setTimeout(() => {
           setHandleTaken(false);
@@ -41,7 +64,7 @@ const Onboarding = () => {
         setIsLoading(false);
       }
     },
-    [handle, router]
+    [handle, queryClient, router]
   );
 
   const config = {
@@ -60,9 +83,14 @@ const Onboarding = () => {
 
   const handleOnChange = (event) => {
     const value = event.target.value;
-    setHandle(value);
+    setHandle(value.toLowerCase());
     setHandleTaken(false);
   };
+
+  if (isCurrentUserLoading || currentUser?.handle) {
+    return <TinyLoader color="black" size={28} stroke={2} />;
+  }
+
   return (
     <>
       <div
@@ -73,7 +101,7 @@ const Onboarding = () => {
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <div className="mx-auto h-[30px] w-[30px] bg-slate-900 rounded-full" />
           <h2 className="mt-4 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
-            <Balancer>Claim your unique handle ✨</Balancer>
+            <Balancer>Claim your unique handle </Balancer>
           </h2>
         </div>
         <div className="mt-4 sm:mx-auto sm:w-full sm:max-w-sm">
@@ -111,7 +139,6 @@ const Onboarding = () => {
             <div className="mt-4">
               <button
                 disabled={isLoading}
-                onClick={handleAddHandle}
                 className="flex w-full justify-center rounded-md bg-slate-900 px-3 py-2.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-slate-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-600"
               >
                 {isLoading ? (
@@ -121,7 +148,7 @@ const Onboarding = () => {
                     </div>
                   </>
                 ) : (
-                  <span className="text-md">Submit 🚀</span>
+                  <span className="text-md">Submit </span>
                 )}
               </button>
             </div>

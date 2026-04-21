@@ -1,20 +1,27 @@
 /* eslint-disable @next/next/no-img-element */
 import { BarChart } from 'lucide-react';
-import useLinks from '@/hooks/useLinks';
 import useCurrentUser from '@/hooks/useCurrentUser';
 import Loader from '@/components/utils/loading-spinner';
 import { getApexDomain } from '@/utils/helpers';
 import { GOOGLE_FAVICON_URL } from '@/utils/constants';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import StarSVG from '@/components/utils/star-svg';
 import Link from 'next/link';
+import useLinkAnalytics from '@/hooks/useLinkAnalytics';
 
-const LinkStats = () => {
+const LinkStats = ({ filter }) => {
   const { data: currentUser } = useCurrentUser();
-  const { data: userLinks, isLoading } = useLinks(currentUser?.id);
+  const { data: linkAnalytics, isLoading } = useLinkAnalytics(
+    filter,
+    currentUser?.id
+  );
   const [showAll, setShowAll] = useState(false);
 
-  const displayedLinks = showAll ? userLinks : userLinks?.slice(0, 3);
+  useEffect(() => {
+    setShowAll(false);
+  }, [filter]);
+
+  const displayedLinks = showAll ? linkAnalytics : linkAnalytics?.slice(0, 3);
 
   const handleShowMore = () => {
     setShowAll(true);
@@ -87,7 +94,7 @@ const LinkStats = () => {
                     </h2>
                   </div>
                 )}
-                {userLinks?.length > 3 && (
+                {linkAnalytics?.length > 3 && (
                   <div className="flex justify-center mt-2">
                     {showAll ? (
                       <button

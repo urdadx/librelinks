@@ -52,7 +52,13 @@ export const DeviceStats = ({ analytics }) => {
         <div className="mx-auto mt-6 w-full md:w-[300px] lg:w-[400px]">
           {analytics?.length > 0 ? (
             <PieChart width={isMobile ? 300 : 400} height={250}>
-              <Tooltip cursor={{ stroke: 'red', strokeWidth: 2 }} />
+              <Tooltip
+                cursor={{ stroke: 'red', strokeWidth: 2 }}
+                formatter={(value, _name, entry) => [
+                  `${value} visits`,
+                  entry?.payload?.device || 'Device',
+                ]}
+              />
               <Pie
                 dataKey="visits"
                 data={analytics}

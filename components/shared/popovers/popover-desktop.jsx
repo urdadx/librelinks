@@ -32,7 +32,16 @@ const PopoverDesktop = ({ id, title, url, archived }) => {
     },
     {
       onSuccess: () => {
-        queryClient.invalidateQueries({ queryKey: ['links', userId] });
+        queryClient.setQueryData(['links', userId], (previousLinks = []) =>
+          previousLinks.map((link) =>
+            link.id === id
+              ? {
+                  ...link,
+                  archived: !isArchived,
+                }
+              : link
+          )
+        );
         signalIframe();
       },
     }
@@ -55,7 +64,9 @@ const PopoverDesktop = ({ id, title, url, archived }) => {
     },
     {
       onSuccess: () => {
-        queryClient.invalidateQueries({ queryKey: ['links', userId] });
+        queryClient.setQueryData(['links', userId], (previousLinks = []) =>
+          previousLinks.filter((link) => link.id !== id)
+        );
         signalIframe();
       },
     }

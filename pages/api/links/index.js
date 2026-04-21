@@ -34,11 +34,7 @@ export default async function handler(req, res) {
           where: {
             userId,
           },
-          include: {
-            user: true,
-          },
           orderBy: {
-            // createdAt: "desc",
             order: 'asc',
           },
         });
@@ -48,8 +44,30 @@ export default async function handler(req, res) {
     }
 
     if (req.method === 'PUT') {
+      const { currentUser } = await serverAuth(req, res);
       const { links } = req.body;
-      console.log('links', links);
+
+      if (!Array.isArray(links)) {
+        return res.status(400).json({ error: 'Invalid links payload.' });
+      }
+
+      const requestedLinkIds = links
+        .map((link) => link?.id)
+        .filter((id) => typeof id === 'string');
+
+      const ownedLinks = await db.link.findMany({
+        where: {
+          id: { in: requestedLinkIds },
+          userId: currentUser.id,
+        },
+        select: { id: true },
+      });
+
+      if (ownedLinks.length !== requestedLinkIds.length) {
+        return res
+          .status(403)
+          .json({ error: 'You can only reorder your own links.' });
+      }
 
       await Promise.all(
         links.map(({ id }, index) =>
@@ -65,8 +83,7 @@ export default async function handler(req, res) {
       );
       res.status(200).json({ msg: 'link order updated' });
     }
-  } catch (error) {
-    console.log(error);
+  } catch {
     return res.status(500).end();
   }
 }

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { signIn } from 'next-auth/react';
+import { signIn } from '@/lib/auth-client';
 import LoadingDots from '@/components/utils/loading-dots';
 import Link from 'next/link';
 import GoogleIcon from '@/components/utils/google-icon';
@@ -21,8 +21,11 @@ export default function Form({ type }) {
       <button
         onClick={() => {
           setIsLoading(true);
-          signIn('google', {
-            ...(next && next.length > 0 ? { callbackUrl: next } : {}),
+          signIn.social({
+            provider: 'google',
+            callbackURL: next && next.length > 0 ? next : '/admin',
+            newUserCallbackURL: '/onboarding',
+            errorCallbackURL: type === 'login' ? '/login' : '/register',
           });
         }}
         className={`${

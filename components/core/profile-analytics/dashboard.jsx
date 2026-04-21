@@ -6,8 +6,10 @@ import useAnalytics from '@/hooks/useAnalytics';
 import { useState } from 'react';
 import { LocationStats } from './location-stats';
 import { DeviceStats } from './device-stats';
+import { ReferrerStats } from './referrer-stats';
 import useLocationAnalytics from '@/hooks/useLocationAnalytics';
 import useDeviceAnalytics from '@/hooks/useDeviceAnalytics';
+import useReferrerAnalytics from '@/hooks/useReferrerAnalytics';
 
 export function AnalyticsDashboard() {
   const options = [
@@ -21,8 +23,15 @@ export function AnalyticsDashboard() {
   const [filter, setFilter] = useState('last_hour');
 
   const { data: visitAnalytics } = useAnalytics(filter, currentUser?.handle);
-  const { data: locationAnalytics } = useLocationAnalytics(currentUser?.handle);
-  const { data: deviceAnalytics } = useDeviceAnalytics(currentUser?.handle);
+  const { data: locationAnalytics } = useLocationAnalytics(
+    filter,
+    currentUser?.handle
+  );
+  const { data: deviceAnalytics } = useDeviceAnalytics(filter, currentUser?.handle);
+  const { data: referrerAnalytics } = useReferrerAnalytics(
+    filter,
+    currentUser?.handle
+  );
 
   return (
     <>
@@ -36,9 +45,10 @@ export function AnalyticsDashboard() {
         />
       </div>
       <Chart analytics={visitAnalytics} />
-      <LinkStats />
+      <LinkStats filter={filter} />
       <DeviceStats analytics={deviceAnalytics} />
       <LocationStats analytics={locationAnalytics} />
+      <ReferrerStats analytics={referrerAnalytics} />
     </>
   );
 }

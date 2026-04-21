@@ -3,18 +3,21 @@ import { useQuery } from '@tanstack/react-query';
 import { toast } from 'react-hot-toast';
 
 const useUser = (handle) => {
+  const normalizedHandle =
+    typeof handle === 'string' ? handle.trim().toLowerCase() : handle;
+
   return useQuery({
-    queryKey: ['users', handle],
+    queryKey: ['user', normalizedHandle],
     queryFn: async () => {
-      const response = await axios.get(`/api/users/${handle}`);
+      const response = await axios.get(`/api/users/${normalizedHandle}`);
       return response.data;
     },
-    enabled: handle !== null,
+    enabled: !!normalizedHandle,
     onError: (error) => {
-      console.log(error);
       toast.error(error?.response?.data.message || 'An error occurred');
     },
-    refetchOnWindowFocus: true,
+    staleTime: 60 * 1000,
+    refetchOnWindowFocus: false,
   });
 };
 

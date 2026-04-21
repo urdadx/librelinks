@@ -37,7 +37,7 @@ It has 4 Core Features:
 | **CSS Framework**                           | [Tailwind CSS](https://github.com/tailwindlabs/tailwindcss)                       | Tailwind speeds up development by providing helpful css utilities and removing the need to context switch between jsx and css files.                                             |
 | **Web Framework**                           | [NextJS 13](https://github.com/vercel/next.js)                                    | Next.js supports static site generation and helps build efficient React webpages that support SEO.                                                                               |
 | **Database**                                | [MongoDB & Prisma](https://www.mongodb.com/docs/manual/reference/program/mongod/) | MongoDB is a source-available cross-platform document-oriented database program. Classified as a NoSQL database program, MongoDB uses JSON-like documents with optional schemas. |
-| **Analytics**                               | [Tinybird](https://www.tinybird.co/)                                              | A realtime analytics platform for data and engineering teams.                                                                                                                    |
+| **Analytics**                               | [MongoDB & Prisma](https://www.mongodb.com/docs/manual/reference/program/mongod/) | Stores page visits locally and powers the analytics dashboard from application data.                                                                                             |
 
 ## 📁 Project Structure
 
@@ -57,15 +57,19 @@ You need to have the following env variables in your `.env` file to make the app
 
 `DATABASE_URL` = XXXXXXX
 
+`GITHUB_CLIENT_ID` = XXXXXX
+
+`GITHUB_CLIENT_SECRET` = XXXXXXXX
+
 `GOOGLE_CLIENT_ID` = XXXXXX
 
 `GOOGLE_CLIENT_SECRET` = XXXXXXXX
 
 `NODE_ENV` = development
 
-`NEXTAUTH_JWT_SECRET` = XXXXX
+`BETTER_AUTH_URL` = http://localhost:3000
 
-`NEXTAUTH_SECRET` = XXXXX
+`BETTER_AUTH_SECRET` = XXXXX
 
 Checkout the `.env.example` file to learn how to get started.
 

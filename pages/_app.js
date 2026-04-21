@@ -2,7 +2,6 @@ import '../styles/globals.css';
 import { useRouter } from 'next/router';
 import { Toaster } from 'react-hot-toast';
 import React, { useEffect, useState } from 'react';
-import { SessionProvider } from 'next-auth/react';
 import NProgress from '@/components/utils/nprogress';
 import { Provider } from 'react-wrap-balancer';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
@@ -57,11 +56,9 @@ export default function App({ Component, pageProps }) {
       <Analytics />
       <QueryClientProvider client={queryClient}>
         <Toaster toastOptions={{ duration: 2500 }} position="bottom-center" />
-        <SessionProvider session={pageProps.session}>
-          <Provider>
-            <Component {...pageProps} />
-          </Provider>
-        </SessionProvider>
+        <Provider>
+          <Component {...pageProps} />
+        </Provider>
         <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>
     </>

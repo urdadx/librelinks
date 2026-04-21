@@ -3,16 +3,14 @@ import { useQuery } from '@tanstack/react-query';
 
 const useCurrentUser = () => {
   return useQuery({
-    queryKey: ['users'],
+    queryKey: ['current-user'],
     queryFn: async () => {
       const response = await axios.get('/api/current');
       return response.data;
     },
-    onError: (err) => {
-      console.error(err.message);
-    },
-    refetchOnMount: 'always',
-    refetchOnWindowFocus: 'always',
+    staleTime: 60 * 1000,
+    refetchOnMount: false,
+    refetchOnWindowFocus: false,
   });
 };
 

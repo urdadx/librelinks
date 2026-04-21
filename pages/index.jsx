@@ -4,7 +4,7 @@ import { GithubIcon, GlobeIcon, TwitterIcon } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import Head from 'next/head';
-import { useSession } from 'next-auth/react';
+import { useSession } from '@/lib/auth-client';
 
 export const metadata = {
   title: 'Librelinks',
@@ -13,8 +13,8 @@ export const metadata = {
 };
 
 const Home = () => {
-  const session = useSession();
-  const isAuthenticated = session.status === 'authenticated' ? true : false;
+  const { data: session } = useSession();
+  const isAuthenticated = Boolean(session?.user);
 
   return (
     <>
@@ -212,7 +212,7 @@ const Home = () => {
                 <div className="flex flex-col items-center">
                   <span className="inline-flex rounded-xl shadow">
                     <Link legacyBehavior href="/register">
-                      <a className="inline-flex items-center px-4 py-2 font-medium text-lg gradient-btn border border-transparent rounded-xl text-white w-[190px] h-[50px] justify-center hover:shadow-lg">
+                      <a className="inline-flex items-center px-4 py-2 font-medium text-lg rounded-xl text-white w-[190px] h-[50px] justify-center hover:shadow-lg bg-[linear-gradient(60deg,#f79533,#f37055,#ef4e7b,#1098ad,#07b39b,#6fba82)] bg-[length:300%_300%] transition-all hover:brightness-95">
                         Get started
                       </a>
                     </Link>
@@ -268,7 +268,7 @@ const Home = () => {
                 <GithubIcon color="white" />
               </a>
               <a
-                href="https://urdadx.vercel.app/"
+                href="https://urdadx.com/"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="insta logo"
