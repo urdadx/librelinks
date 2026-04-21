@@ -32,7 +32,7 @@ ENV HUSKY=0
 
 COPY package.json package-lock.json ./
 COPY prisma ./prisma
-RUN npm ci --omit=dev --legacy-peer-deps --no-audit --no-fund && npm cache clean --force
+RUN npm ci --legacy-peer-deps --no-audit --no-fund && npm prune --omit=dev --legacy-peer-deps && npm cache clean --force
 
 COPY --from=builder --chown=node:node /app/.next ./.next
 COPY --from=builder --chown=node:node /app/public ./public
