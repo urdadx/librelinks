@@ -44,7 +44,14 @@ const PreviewMobile = ({ close }) => {
   }, [currentUser, userLinks]);
 
   if (isUserLoading) {
-    return <Loader message={'Loading...'} bgColor="black" textColor="black" />;
+    return (
+      <Loader
+        message={'Loading...'}
+        bgColor="black"
+        textColor="black"
+        fullPage
+      />
+    );
   }
 
   if (!currentUser?.id) {

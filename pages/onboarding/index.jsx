@@ -88,7 +88,11 @@ const Onboarding = () => {
   };
 
   if (isCurrentUserLoading || currentUser?.handle) {
-    return <TinyLoader color="black" size={28} stroke={2} />;
+    return (
+      <div className="flex min-h-screen w-full items-center justify-center">
+        <TinyLoader color="black" size={28} stroke={2} />
+      </div>
+    );
   }
 
   return (

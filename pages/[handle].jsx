@@ -200,7 +200,14 @@ const ProfilePage = () => {
   }, [sourceBio]);
 
   if (isUserLoading) {
-    return <Loader message={'Loading...'} bgColor="black" textColor="black" />;
+    return (
+      <Loader
+        message={'Loading...'}
+        bgColor="black"
+        textColor="black"
+        fullPage
+      />
+    );
   }
 
   if (!fetchedUser?.id) {

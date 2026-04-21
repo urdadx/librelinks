@@ -8,10 +8,15 @@ const Loader = ({
   width,
   height,
   strokeWidth,
+  fullPage = false,
 }) => {
+  const containerClassName = fullPage
+    ? 'flex min-h-screen w-full flex-col items-center justify-center'
+    : 'flex w-full flex-col items-center justify-center';
+
   return (
-    <>
-      <div className="flex justify-center mt-10 mx-auto">
+    <div className={containerClassName}>
+      <div className="mx-auto flex justify-center">
         <Oval
           height={height ? height : 70}
           width={width ? width : 70}
@@ -25,10 +30,10 @@ const Loader = ({
           strokeWidthSecondary={2}
         />
       </div>
-      <div className="flex justify-center mx-auto">
+      <div className="mx-auto flex justify-center">
         <h3 className={`${textColor} font-semibold text-l`}>{message}</h3>
       </div>
-    </>
+    </div>
   );
 };
 

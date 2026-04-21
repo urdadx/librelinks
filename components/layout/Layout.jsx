@@ -25,7 +25,14 @@ const Layout = ({ children }) => {
   }, [requiresOnboarding, router]);
 
   if (isLoading || requiresOnboarding) {
-    return <Loader message={'Loading...'} bgColor="black" textColor="black" />;
+    return (
+      <Loader
+        message={'Loading...'}
+        bgColor="black"
+        textColor="black"
+        fullPage
+      />
+    );
   }
 
   return (
