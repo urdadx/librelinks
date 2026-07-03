@@ -39,7 +39,6 @@ const PLATFORM_ALIASES = {
   youtube: 'youtube',
   youtu: 'youtube',
 };
-
 const PLATFORM_ICONS = {
   discord: FaDiscord,
   facebook: FaFacebook,
@@ -55,13 +54,10 @@ const PLATFORM_ICONS = {
   twitter: TwitterIcon,
   whatsapp: FaWhatsapp,
   youtube: FaYoutube,
-};
-
 export const SocialCards = ({ url, title, color, registerClicks }) => {
   const validColor = removeHashFromHexColor(color);
   const platform = getSocialPlatform(url, title);
   const Icon = PLATFORM_ICONS[platform] || GlobeIcon;
-
   return (
     <a
       onClick={registerClicks}
@@ -75,16 +71,11 @@ export const SocialCards = ({ url, title, color, registerClicks }) => {
       <Icon className="h-[24px] w-[24px] md:h-[28px] md:w-[28px] lg:h-[32px] lg:w-[32px]" />
     </a>
   );
-};
-
 function getSocialPlatform(url, title) {
   const domain = getApexDomain(url);
   const siteName = domain.split('.')[0]?.toLowerCase();
   const normalizedTitle = title?.trim().toLowerCase();
-
-  return (
     PLATFORM_ALIASES[siteName] ||
     PLATFORM_ALIASES[normalizedTitle] ||
     null
-  );
 }
