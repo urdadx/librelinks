@@ -1,3 +1,5 @@
+'use client';
+
 /* eslint-disable @next/next/no-img-element */
 import GithubStar from '@/components/utils/github-star';
 import { GithubIcon, GlobeIcon, TwitterIcon } from 'lucide-react';

@@ -1,3 +1,5 @@
+'use client';
+
 import { useState, useEffect } from 'react';
 import { signIn } from '@/lib/auth-client';
 import LoadingDots from '@/components/utils/loading-dots';

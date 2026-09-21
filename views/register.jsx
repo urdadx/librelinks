@@ -1,12 +1,11 @@
+'use client';
+
 import Link from 'next/link';
 import Form from '@/components/shared/form/form';
 import { Wand } from 'lucide-react';
 import Head from 'next/head';
-import { useRouter } from 'next/router';
 
 export default function Register() {
-  const { route } = useRouter();
-
   return (
     <>
       <Head>
@@ -20,7 +19,7 @@ export default function Register() {
               <Wand color="black" size={30} />
             </Link>
             <h3 className="text-xl font-semibold">
-              {route === '/register' ? 'Create your account' : 'Welcome back'}
+              Create your account
             </h3>
             <p className="text-sm text-gray-500">
               Get started for free. No credit card required

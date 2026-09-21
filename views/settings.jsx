@@ -1,3 +1,5 @@
+'use client';
+
 /* eslint-disable @next/next/no-img-element */
 import { useEffect, useState } from 'react';
 import useCurrentUser from '@/hooks/useCurrentUser';
@@ -6,7 +8,7 @@ import toast from 'react-hot-toast';
 import * as Dialog from '@radix-ui/react-dialog';
 import UploadModal from '@/components/shared/modals/upload-modal';
 import { TinyLoader } from '@/components/utils/tiny-loader';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import Layout from '@/components/layout/Layout';
 import { Balancer } from 'react-wrap-balancer';
@@ -17,7 +19,6 @@ import CustomAlert from '@/components/shared/alerts/custom-alert';
 import useMediaQuery from '@/hooks/use-media-query';
 import { signOut } from '@/lib/auth-client';
 import Head from 'next/head';
-
 const Settings = () => {
   const { data: currentUser } = useCurrentUser();
   const router = useRouter();

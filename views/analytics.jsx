@@ -1,3 +1,5 @@
+'use client';
+
 import { AnalyticsDashboard } from '@/components/core/profile-analytics/dashboard';
 import Layout from '@/components/layout/Layout';
 import Footer from '@/components/layout/footer/footer';

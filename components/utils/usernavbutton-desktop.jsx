@@ -1,7 +1,9 @@
+'use client';
+
 import { UserAvatar } from './avatar';
 import * as Popover from '@radix-ui/react-popover';
 import { signOut, useSession } from '@/lib/auth-client';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 import { toast } from 'react-hot-toast';
 import Link from 'next/link';
 import { User, LogOut, AlertCircle } from 'lucide-react';

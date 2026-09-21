@@ -6,7 +6,7 @@ const SESSION_COOKIE_NAMES = [
   '__Host-better-auth.session_token',
 ];
 
-export default async function middleware(req) {
+export default async function proxy(req) {
   // Get the pathname of the request (e.g. /, /admin)
   const path = req.nextUrl.pathname;
 

@@ -1,3 +1,5 @@
+'use client';
+
 import Link from 'next/link';
 import * as Dialog from '@radix-ui/react-dialog';
 import {
@@ -9,7 +11,7 @@ import {
   GithubIcon,
 } from 'lucide-react';
 import { useSession } from '@/lib/auth-client';
-import { useRouter } from 'next/router';
+import { usePathname } from 'next/navigation';
 import UserAccountNavDesktop from '@/components/utils/usernavbutton-desktop';
 import ShareButton from '@/components/utils/share-button';
 import SiteHeader from './main-nav';
@@ -44,10 +46,10 @@ const items = [
 const Navbar = ({ showName = false, isHomePage = true }) => {
   const { data: session, isPending } = useSession();
   const isAuthenticated = Boolean(session?.user);
-  const router = useRouter();
+  const pathname = usePathname();
   const showShareActions = !isPending && (isAuthenticated || !isHomePage);
 
-  const isActiveRoute = (href) => router.pathname === href;
+  const isActiveRoute = (href) => pathname === href;
 
   return (
     <>

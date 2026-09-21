@@ -1,4 +1,6 @@
-import LinksEditor from '../../components/core/admin-panel/links-editor';
+'use client';
+
+import LinksEditor from '@/components/core/admin-panel/links-editor';
 import Layout from '@/components/layout/Layout';
 import useMediaQuery from '@/hooks/use-media-query';
 import Head from 'next/head';

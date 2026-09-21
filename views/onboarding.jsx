@@ -1,9 +1,11 @@
+'use client';
+
 import { useCallback, useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import axios from 'axios';
 import { useQueryClient } from '@tanstack/react-query';
 import { TinyLoader } from '@/components/utils/tiny-loader';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 import Confetti from 'react-dom-confetti';
 import Balancer from 'react-wrap-balancer';
 import useCurrentUser from '@/hooks/useCurrentUser';

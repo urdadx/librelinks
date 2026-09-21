@@ -1,9 +1,10 @@
+'use client';
+
 /* eslint-disable @next/next/no-img-element */
 import LinkCard from '@/components/core/user-profile/links-card';
 import * as Avatar from '@radix-ui/react-avatar';
 import * as Dialog from '@radix-ui/react-dialog';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
 import { useEffect, useRef, useState } from 'react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
@@ -17,7 +18,6 @@ import Head from 'next/head';
 import { Drawer } from 'vaul';
 import useMediaQuery from '@/hooks/use-media-query';
 import { siteConfig } from '@/config/site';
-import { db } from '@/lib/db';
 
 const LOCAL_LOCATION_FALLBACK = {
   countryCode: 'GH',
@@ -26,51 +26,7 @@ const LOCAL_LOCATION_FALLBACK = {
 
 const DEFAULT_MADE_WITH_URL = 'https://urdadx.com/';
 
-function escapeRegex(value) {
-  return value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-}
-
-async function doesHandleExist(handle) {
-  const existingUser = await db.user.findUnique({
-    where: {
-      handle,
-    },
-    select: {
-      id: true,
-    },
-  });
-
-  if (existingUser?.id) {
-    return true;
-  }
-
-  const matchingUsers = await db.user.aggregateRaw({
-    pipeline: [
-      {
-        $match: {
-          handle: {
-            $regex: `^\\s*${escapeRegex(handle)}\\s*$`,
-            $options: 'i',
-          },
-        },
-      },
-      {
-        $project: {
-          _id: 1,
-        },
-      },
-      {
-        $limit: 1,
-      },
-    ],
-  });
-
-  return typeof matchingUsers[0]?._id === 'string' || !!matchingUsers[0]?._id?.$oid;
-}
-
-const ProfilePage = () => {
-  const { query } = useRouter();
-  const { handle } = query;
+const ProfilePage = ({ handle }) => {
   const normalizedHandle =
     typeof handle === 'string' ? handle.trim().toLowerCase() : undefined;
   const [previewUserOverride, setPreviewUserOverride] = useState(null);
@@ -475,38 +431,3 @@ function getCurrentUrl() {
 }
 
 export default ProfilePage;
-
-export async function getServerSideProps(context) {
-  const incomingHandle = context?.params?.handle;
-
-  if (typeof incomingHandle !== 'string') {
-    return { notFound: true };
-  }
-
-  const canonicalHandle = incomingHandle.trim().toLowerCase();
-
-  if (!canonicalHandle) {
-    return { notFound: true };
-  }
-
-  if (incomingHandle !== canonicalHandle) {
-    const query = { ...context.query };
-    delete query.handle;
-    const searchParams = new URLSearchParams(query).toString();
-
-    return {
-      redirect: {
-        destination: `/${canonicalHandle}${searchParams ? `?${searchParams}` : ''}`,
-        permanent: true,
-      },
-    };
-  }
-
-  const handleExists = await doesHandleExist(canonicalHandle);
-
-  if (!handleExists) {
-    return { notFound: true };
-  }
-
-  return { props: {} };
-}
