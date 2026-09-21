@@ -62,7 +62,7 @@ const PreviewMobile = ({ close }) => {
     <>
       <section
         style={{ background: theme.primary }}
-        className="h-[100vh] w-[100vw] no-scrollbar overflow-auto"
+        className="min-h-[100dvh] w-full no-scrollbar overflow-auto"
       >
         <div className="flex items-center w-full mt-10 flex-col mx-auto max-w-3xl justify-center px-8 lg:mt-16">
           <Avatar.Root
