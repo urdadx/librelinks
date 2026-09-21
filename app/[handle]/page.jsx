@@ -3,18 +3,26 @@ import { db } from '@/lib/db';
 import Profile from '@/views/profile';
 
 async function getUser(handle) {
-  return db.user.findUnique({
-    where: { handle },
-    select: { name: true, bio: true, image: true, handle: true },
-  });
+  try {
+    return await db.user.findUnique({
+      where: { handle },
+      select: { name: true, bio: true, image: true, handle: true },
+    });
+  } catch {
+    return undefined;
+  }
 }
 
 export async function generateMetadata({ params }) {
   const { handle } = await params;
   const user = await getUser(handle.trim().toLowerCase());
 
-  if (!user) {
+  if (user === null) {
     return { title: 'Page Not Found' };
+  }
+
+  if (!user) {
+    return {};
   }
 
   return {
@@ -24,8 +32,9 @@ export async function generateMetadata({ params }) {
   };
 }
 
-export default async function Page({ params }) {
+export default async function Page({ params, searchParams }) {
   const { handle } = await params;
+  const query = await searchParams;
   const canonicalHandle = handle.trim().toLowerCase();
 
   if (!canonicalHandle) {
@@ -33,12 +42,17 @@ export default async function Page({ params }) {
   }
 
   if (handle !== canonicalHandle) {
-    permanentRedirect(`/${canonicalHandle}`);
+    const queryString = new URLSearchParams(query).toString();
+    permanentRedirect(
+      `/${canonicalHandle}${queryString ? `?${queryString}` : ''}`
+    );
   }
 
-  if (!(await getUser(canonicalHandle))) {
+  if ((await getUser(canonicalHandle)) === null) {
     notFound();
   }
 
-  return <Profile handle={canonicalHandle} />;
+  return (
+    <Profile handle={canonicalHandle} isIframe={query.isIframe === 'true'} />
+  );
 }

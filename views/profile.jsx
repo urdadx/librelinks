@@ -26,7 +26,7 @@ const LOCAL_LOCATION_FALLBACK = {
 
 const DEFAULT_MADE_WITH_URL = 'https://urdadx.com/';
 
-const ProfilePage = ({ handle }) => {
+const ProfilePage = ({ handle, isIframe = false }) => {
   const normalizedHandle =
     typeof handle === 'string' ? handle.trim().toLowerCase() : undefined;
   const [previewUserOverride, setPreviewUserOverride] = useState(null);
@@ -105,7 +105,7 @@ const ProfilePage = ({ handle }) => {
   }, [fetchedUser]);
 
   useEffect(() => {
-    if (!normalizedHandle || query.isIframe) {
+    if (!normalizedHandle || isIframe) {
       return;
     }
 
@@ -125,8 +125,7 @@ const ProfilePage = ({ handle }) => {
         if (!isCancelled) {
           window.sessionStorage.setItem(trackingKey, 'tracked');
         }
-      } catch {
-      }
+      } catch {}
     };
 
     trackView();
@@ -134,7 +133,7 @@ const ProfilePage = ({ handle }) => {
     return () => {
       isCancelled = true;
     };
-  }, [normalizedHandle, query.isIframe]);
+  }, [isIframe, normalizedHandle]);
 
   useEffect(() => {
     const checkBioTruncation = () => {
@@ -182,13 +181,23 @@ const ProfilePage = ({ handle }) => {
   const pageTitle = `@${displayUser?.handle || normalizedHandle} | Librelinks`;
   const pageDescription =
     displayUser?.bio ||
-    `${displayUser?.name || `@${displayUser?.handle || normalizedHandle}`}'s Librelinks page.`;
-  const canonicalUrl = `${siteConfig.url}/${displayUser?.handle || normalizedHandle}`;
+    `${
+      displayUser?.name || `@${displayUser?.handle || normalizedHandle}`
+    }'s Librelinks page.`;
+  const canonicalUrl = `${siteConfig.url}/${
+    displayUser?.handle || normalizedHandle
+  }`;
+  const palette = displayUser?.themePalette?.palette || [
+    '#FFFFFF',
+    '#F2F2F2',
+    '#1F2937',
+    '#6170F8',
+  ];
   const theme = {
-    primary: displayUser?.themePalette.palette[0],
-    secondary: displayUser?.themePalette.palette[1],
-    accent: displayUser?.themePalette.palette[2],
-    neutral: displayUser?.themePalette.palette[3],
+    primary: palette[0],
+    secondary: palette[1],
+    accent: palette[2],
+    neutral: palette[3],
   };
 
   return (
