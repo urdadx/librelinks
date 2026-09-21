@@ -1,8 +1,8 @@
-import { PieChart, Tooltip, Pie, Cell } from 'recharts';
+import { Cell, Pie, PieChart, ResponsiveContainer, Tooltip } from 'recharts';
 import useMediaQuery from '@/hooks/use-media-query';
 
 export const DeviceStats = ({ analytics }) => {
-  const COLORS = ['#0088FE', '#00C49F', ' #c84e89', '#FFBB28', '#FF8042'];
+  const COLORS = ['#0088FE', '#00C49F', '#c84e89', '#FFBB28', '#FF8042'];
   const { isMobile } = useMediaQuery();
 
   return (
@@ -49,31 +49,33 @@ export const DeviceStats = ({ analytics }) => {
             </div>
           ))}
         </div>
-        <div className="mx-auto mt-6 w-full md:w-[300px] lg:w-[400px]">
+        <div className="mx-auto mt-6 h-[250px] w-full max-w-[400px]">
           {analytics?.length > 0 ? (
-            <PieChart width={isMobile ? 300 : 400} height={250}>
-              <Tooltip
-                cursor={{ stroke: 'red', strokeWidth: 2 }}
-                formatter={(value, _name, entry) => [
-                  `${value} visits`,
-                  entry?.payload?.device || 'Device',
-                ]}
-              />
-              <Pie
-                dataKey="visits"
-                data={analytics}
-                cx="50%"
-                cy="50%"
-                innerRadius={40}
-              >
-                {analytics?.map((entry, index) => (
-                  <Cell
-                    key={`cell-${index}`}
-                    fill={COLORS[index % COLORS.length]}
-                  />
-                ))}
-              </Pie>
-            </PieChart>
+            <ResponsiveContainer width="100%" height="100%">
+              <PieChart>
+                <Tooltip
+                  formatter={(value, _name, entry) => [
+                    `${value} visits`,
+                    entry?.payload?.device || 'Device',
+                  ]}
+                />
+                <Pie
+                  dataKey="visits"
+                  data={analytics}
+                  cx="50%"
+                  cy="50%"
+                  innerRadius={40}
+                  outerRadius={90}
+                >
+                  {analytics.map(({ device }, index) => (
+                    <Cell
+                      key={device}
+                      fill={COLORS[index % COLORS.length]}
+                    />
+                  ))}
+                </Pie>
+              </PieChart>
+            </ResponsiveContainer>
           ) : (
             <div className="my-6 flex justify-center">
               <h3 className="text-center">No data available</h3>

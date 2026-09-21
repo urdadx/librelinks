@@ -54,7 +54,7 @@
     "react-modern-drawer": "^1.2.0",
     "react-select": "^5.7.3",
     "react-wrap-balancer": "^1.0.0",
-    "recharts": "^2.6.2",
+    "recharts": "^3.10.1",
     "tailwindcss": "3.3.2",
     "vaul": "^0.0.6",
     "zustand": "^4.3.9"
