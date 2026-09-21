@@ -32,9 +32,9 @@ const Chart = ({ analytics }) => {
           )}
           <SimpleChart />
         </div>
-        <div className="">
-          <ResponsiveContainer width="95%" height={300}>
-            {analytics ? (
+        <div className="h-[300px]">
+          {analytics ? (
+            <ResponsiveContainer width="95%" height="100%">
               <BarChart data={analytics}>
                 <CartesianGrid strokeDasharray="3 3" />
                 <XAxis
@@ -56,12 +56,12 @@ const Chart = ({ analytics }) => {
                 <Tooltip />
                 <Bar dataKey="visits" fill="#adfa1d" />
               </BarChart>
-            ) : (
-              <div>
-                <Loader bgColor={'black'} message={'Fetching data'} />
-              </div>
-            )}
-          </ResponsiveContainer>
+            </ResponsiveContainer>
+          ) : (
+            <div className="flex h-full w-full items-center justify-center">
+              <Loader bgColor="black" message="Fetching data" />
+            </div>
+          )}
         </div>
       </div>
     </>
