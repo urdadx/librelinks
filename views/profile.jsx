@@ -109,7 +109,10 @@ const ProfilePage = ({ handle, isIframe = false }) => {
       return;
     }
 
-    const trackingKey = `profile-view:${normalizedHandle}`;
+    const trackingPayload = getBrowserTrackingPayload();
+    const trackingKey = `profile-view:${normalizedHandle}:${
+      trackingPayload.campaignSource || 'unattributed'
+    }`;
     if (window.sessionStorage.getItem(trackingKey)) {
       return;
     }
@@ -118,10 +121,7 @@ const ProfilePage = ({ handle, isIframe = false }) => {
 
     const trackView = async () => {
       try {
-        await axios.post(
-          `/api/users/${normalizedHandle}`,
-          getBrowserTrackingPayload()
-        );
+        await axios.post(`/api/users/${normalizedHandle}`, trackingPayload);
         if (!isCancelled) {
           window.sessionStorage.setItem(trackingKey, 'tracked');
         }
@@ -427,6 +427,9 @@ function getBrowserTrackingPayload() {
     browserDevice,
     browserLocation,
     browserReferrer: document.referrer,
+    campaignSource: new URLSearchParams(window.location.search).get(
+      'utm_source'
+    ),
   };
 }
 
